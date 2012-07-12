@@ -21,6 +21,7 @@ public class core {
     public static Config config = new Config("PluginsforForestry.cfg");
     public static int[] ItemIDs = new int[]{5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320};
     public static boolean isBetaBuild = true;
+    public static final int delay = 25;
 
     public static boolean isClient() {
         return client;

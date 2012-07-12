@@ -29,9 +29,12 @@ public class pluginCore
     {
         try
         {
-            plugins.put("RedPower", new pluginRedpower());
             plugins.put("RedPowerWorld", new pluginRedPowerWorld());
-            plugins.put("EE", new pluginEE());
+
+            if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled")))
+            {
+                plugins.put("EE", new pluginEE());
+            }
         }
         catch (Exception var1)
         {
@@ -83,6 +86,10 @@ public class pluginCore
             if (denLib.convertToBoolean(core.config.getOption("pluginForestry_Enabled")))
             {
                 plugins.put("Forestry", new pluginForestry());
+            }
+
+            if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled")))
+            {
                 plugins.put("IC2", new pluginIC2());
             }
 

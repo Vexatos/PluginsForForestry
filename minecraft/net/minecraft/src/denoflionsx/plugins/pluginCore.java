@@ -43,8 +43,10 @@ public class pluginCore {
              */
             //----------------------------------------------------------
             if (!isRelease) {
-                plugins.put("RedPower", new pluginRedpower());
+                //plugins.put("RedPower", new pluginRedpower());
                 plugins.put("RedPowerWorld", new pluginRedPowerWorld());
+            }
+            if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
                 plugins.put("EE", new pluginEE());
             }
 
@@ -97,17 +99,19 @@ public class pluginCore {
                 plugins.put("MFR", new pluginMineFactoryReloaded());
             }
             if (denLib.convertToBoolean(core.config.getOption("pluginForestry_Enabled"))) {
-                plugins.put("Forestry",new pluginForestry());
-                plugins.put("IC2" , new pluginIC2());
+                plugins.put("Forestry", new pluginForestry());
+            }
+            if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
+                plugins.put("IC2", new pluginIC2());
             }
             if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
                 plugins.put("Buildcraft", new pluginBuildcraft());
             }
             if (denLib.convertToBoolean(core.config.getOption("pluginAdvancedPowerSystems_Enabled"))) {
-                plugins.put("APS", new pluginAdvancedPowerSystems());            
+                plugins.put("APS", new pluginAdvancedPowerSystems());
             }
             ItemStack vac = new ItemStack(metaItem, 1, metaItem.metaMap.get("Milker"));
-            if (plugins.get("Forestry").loaded){
+            if (plugins.get("Forestry").loaded) {
                 Object recipe[] = new Object[]{
                     "PpP",
                     "SgS",

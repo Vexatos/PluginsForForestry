@@ -32,6 +32,9 @@ public class blueswaxModule extends baseModule {
         this.parent.config.addDefault("# Includes Wax Casts, wand of freezing, wax tablets");
         this.parent.config.addDefault("BluesWaxStuff_Enabled=true");
         this.parent.config.addDefault("BluesWaxStuff_ItemID=5317");
+        this.parent.config.addDefault("ThatchedRoof_Enabled=true");
+        this.parent.config.addDefault("ThatchedRoof_BlockID=181");
+        this.parent.config.addDefault("ThatchedRoofSlab_BlockID=185");
     }
 
     @Override
@@ -61,12 +64,14 @@ public class blueswaxModule extends baseModule {
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.lavaStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast_Red")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             //-------------------------------------------------
-            thatch = new waxBlock(185, Material.clay, "Thatch");
-            thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
-            waxBlockItem.names.put(0, "Test 1");
-            thatchslab = new waxSlab(181, Material.clay, "ThatchSlab");
-            thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
-            waxSlabItem.names.put(0, "Thatched Slab");
+            if (this.getOptionBool("ThatchedRoof_Enabled")) {
+                thatch = new waxBlock(this.getOptionInt("ThatchedRoof_BlockID"), Material.clay, "Thatch");
+                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
+                waxBlockItem.names.put(0, "Test 1");
+                thatchslab = new waxSlab(this.getOptionInt("ThatchedRoofSlab_BlockID"), Material.clay, "ThatchSlab");
+                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
+                waxSlabItem.names.put(0, "Thatched Slab");
+            }
             recipes();
         }
     }
@@ -144,21 +149,23 @@ public class blueswaxModule extends baseModule {
                         Character.valueOf('B'), new ItemStack(Item.dyePowder, 1, 12),
                         Character.valueOf('s'), Item.stick});
             RecipeManagers.bottlerManager.addRecipe(10, new LiquidStack(Block.lavaStill.blockID, 1000), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")));
-            Item r[] = new Item[]{Item.wheat, Item.reed, ItemInterface.getItem("mulch").getItem()};
-            int q = 6;
-            for (Item i : r) {
-                ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
-                            "www",
-                            "iii",
-                            "www",
-                            Character.valueOf('w'), ItemInterface.getItem("beeswax"),
-                            Character.valueOf('i'), new ItemStack(i)});
-                ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
-                            "www",
-                            "iii",
-                            "www",
-                            Character.valueOf('w'), ItemInterface.getItem("refractoryWax"),
-                            Character.valueOf('i'), new ItemStack(i)});
+            if (this.getOptionBool("ThatchedRoof_Enabled")) {
+                Item r[] = new Item[]{Item.wheat, Item.reed, ItemInterface.getItem("mulch").getItem()};
+                int q = 6;
+                for (Item i : r) {
+                    ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
+                                "www",
+                                "iii",
+                                "www",
+                                Character.valueOf('w'), ItemInterface.getItem("beeswax"),
+                                Character.valueOf('i'), new ItemStack(i)});
+                    ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
+                                "www",
+                                "iii",
+                                "www",
+                                Character.valueOf('w'), ItemInterface.getItem("refractoryWax"),
+                                Character.valueOf('i'), new ItemStack(i)});
+                }
             }
             ModLoader.addShapelessRecipe(new ItemStack(Block.stone), new Object[]{
                         ItemInterface.getItem("beeswax"),
@@ -244,9 +251,9 @@ public class blueswaxModule extends baseModule {
                             ItemInterface.getItem("royalJelly"),
                             r3[i]});
             }
-            ModLoader.addShapelessRecipe(new ItemStack(Block.stoneBrick,1,2), new Object[]{
-                            ItemInterface.getItem("phosphor"),
-                            new ItemStack(Block.stoneBrick)});
+            ModLoader.addShapelessRecipe(new ItemStack(Block.stoneBrick, 1, 2), new Object[]{
+                        ItemInterface.getItem("phosphor"),
+                        new ItemStack(Block.stoneBrick)});
 
         }
     }

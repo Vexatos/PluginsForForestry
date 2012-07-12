@@ -1,7 +1,5 @@
 package net.minecraft.src.denoflionsx.plugins;
 
-import net.minecraft.src.denoflionsx.denLib.denLib;
-
 public abstract class baseModule{
 
     public pluginBase parent;

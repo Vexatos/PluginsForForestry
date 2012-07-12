@@ -1,7 +1,6 @@
 package net.minecraft.src.denoflionsx.plugins;
 
 import net.minecraft.src.Block;
-import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
@@ -20,7 +19,7 @@ public class pluginLCTrees extends pluginBase {
 
     @Override
     protected void defaults() {
-        //throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override

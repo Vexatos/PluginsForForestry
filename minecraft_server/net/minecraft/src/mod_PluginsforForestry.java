@@ -39,7 +39,7 @@ public class mod_PluginsforForestry extends BaseMod {
 
     @Override
     public boolean onTickInGame(MinecraftServer minecraftServer) {
-        if (!hasPluginsLoaded && count > 100) {
+        if (!hasPluginsLoaded && count > core.delay) {
             core.registerLatePlugins();
             hasPluginsLoaded = true;
             if (core.isBetaBuild) {
