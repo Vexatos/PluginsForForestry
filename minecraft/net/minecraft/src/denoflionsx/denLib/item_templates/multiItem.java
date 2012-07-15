@@ -5,6 +5,7 @@ import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import java.util.HashMap;
 import net.minecraft.src.*;
+import net.minecraft.src.denoflionsx.API.PFFItems;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -73,6 +74,7 @@ public class multiItem extends Item implements ITextureProvider {
         if (core.isClient()) {
             ModLoader.addLocalization(getMetaName(new ItemStack(this, 1, dmg)) + ".name", displayname);
         }
+        PFFItems.registerItem(name, this, dmg);
     }
 
     public void add(String name, int dmg, int texid, String displayname, int stack) {

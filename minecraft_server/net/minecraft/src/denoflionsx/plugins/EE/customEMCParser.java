@@ -4,18 +4,18 @@ import java.util.HashMap;
 
 public class customEMCParser {
     
-    public static HashMap<Integer, HashMap> Values = new HashMap();
+    public HashMap<Integer, HashMap> Values = new HashMap();
     
-    public static void parse(String line){
+    public void parse(String line){
         String[] split = line.split(",");
         int id = Integer.valueOf(split[0]);
         int dmg = Integer.valueOf(split[1]);
         int value = Integer.valueOf(split[2]);
         HashMap<Integer, Integer> temp = new HashMap();
-        if (Values.get(id) != null){
-            temp = Values.get(id);
+        if (this.Values.get(id) != null){
+            temp = this.Values.get(id);
         }
         temp.put(dmg, value);
-        Values.put(id, temp);
+        this.Values.put(id, temp);
     } 
 }

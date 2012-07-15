@@ -59,4 +59,8 @@ public class core {
         denLib.print("[PluginsForForestry]: " + msg);
 
     }
+    
+    public static String BukkitShift(String m){
+        return "net.minecraft.server." + m;
+    }
 }
