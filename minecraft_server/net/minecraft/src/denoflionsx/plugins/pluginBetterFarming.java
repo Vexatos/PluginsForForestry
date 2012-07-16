@@ -114,6 +114,7 @@ public class pluginBetterFarming extends pluginBase {
                         "XMX",
                         "XXX",
                         Character.valueOf('M'), this.items.get("Mint")});
+            addFermenterRecipes.bonus = new Float(this.config.getOption("CitrusJuice_FermenterBonus"));
             addFermenterRecipes.addItem(this.items.get("Mint").getItem(), 150, this);
             LiquidContainerSystem.create(citrusJuice);
         } catch (Exception ex) {
@@ -145,6 +146,7 @@ public class pluginBetterFarming extends pluginBase {
         config.addDefault("CitrusJuice_PercentChanceOfMulch=40");
         config.addDefault("CitrusJuice_MJt=1");
         config.addDefault("CitrusJuice_BurnTime=10000");
+        config.addDefault("CitrusJuice_FermenterBonus=1.5");
         config.writeConfig();
         config.readFile();
 

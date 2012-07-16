@@ -18,6 +18,7 @@ public class addFermenterRecipes
     private static Item applejuice = ItemInterface.getItem("liquidJuice").getItem();
     private static Item honey = ItemInterface.getItem("liquidHoney").getItem();
     private static Item seedoil = ItemInterface.getItem("liquidSeedOil").getItem();
+    public static float bonus = 1.5F;
 
     public static void add(ItemStack var0, float var1)
     {
@@ -49,11 +50,11 @@ public class addFermenterRecipes
 
         if (var2 instanceof pluginBetterFarming)
         {
-            RecipeManagers.fermenterManager.addRecipe(new ItemStack(var0, 1, 0), var1, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+            RecipeManagers.fermenterManager.addRecipe(new ItemStack(var0, 1, 0), var1, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
         }
         else if (((pluginBase)pluginCore.plugins.get("BetterFarming")).loaded)
         {
-            RecipeManagers.fermenterManager.addRecipe(new ItemStack(var0, 1, 0), var1, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+            RecipeManagers.fermenterManager.addRecipe(new ItemStack(var0, 1, 0), var1, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
         }
     }
 

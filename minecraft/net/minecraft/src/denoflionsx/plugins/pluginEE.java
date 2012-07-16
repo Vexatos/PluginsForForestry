@@ -8,8 +8,10 @@ import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
+import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.plugins.EE.Modules.BuildcraftEMCModule;
 import net.minecraft.src.denoflionsx.plugins.EE.Modules.ForestryEMCModule;
+import net.minecraft.src.denoflionsx.plugins.EE.Modules.VanillaValues;
 import net.minecraft.src.denoflionsx.plugins.EE.customEMCParser;
 
 public class pluginEE extends pluginBase {
@@ -17,6 +19,7 @@ public class pluginEE extends pluginBase {
     private static Class EEMaps;
     private static Field alchemicalValues_Field;
     private static HashMap<Integer, HashMap> alchemicalValues = new HashMap();
+    private Config values = new Config("pluginEE_CustomEMCValues.cfg");
 
     public pluginEE() {
         this.name = "pluginEE";
@@ -29,8 +32,17 @@ public class pluginEE extends pluginBase {
     public void register() {
         if (!this.loaded) {
             this.defaults();
-            ForestryEMCModule.load(this);
-            BuildcraftEMCModule.load(this);
+            this.values.writeConfig();
+            this.values.readFile();
+            readEMC(this.values);
+            VanillaValues.assignValues();
+            if (denLib.detect("mod_Forestry")) {
+                ForestryEMCModule.load(this);
+            }
+            if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport")) {
+                BuildcraftEMCModule.load(this);
+            }
+            
             this.runConfig();
             if (this.loaded = init()) {
                 recipes();
@@ -43,6 +55,8 @@ public class pluginEE extends pluginBase {
     protected void defaults() {
         this.config.addDefault("[EE Plugin Options]");
         this.config.addDefault("LoadIntegrationModules=true");
+        this.values.addDefault("[Define Custom EMC Here]");
+        this.values.addDefault("# NameTag=ItemID,Damage Value,EMC Value");
     }
 
     @Override
@@ -166,7 +180,13 @@ public class pluginEE extends pluginBase {
 
     public static int getEEValue(int id, int dmg) {
         hookEE();
+        if (alchemicalValues.get(id) == null){
+            return 0;
+        }
         HashMap<Integer, Integer> h = alchemicalValues.get(id);
+        if (h.get(dmg) == null){
+            return 0;
+        }
         int value = h.get(dmg);
         return value;
     }
@@ -187,8 +207,8 @@ public class pluginEE extends pluginBase {
             //core.print(String.valueOf(z));
             a = a + z;
         }
-        float a2 = (float)a;
-        float div2 = (float)div;
+        float a2 = (float) a;
+        float div2 = (float) div;
         //core.print(String.valueOf(a));
         float f = a2 / div2;
         //core.print(String.valueOf(f));

@@ -14,6 +14,7 @@ public class Config {
     protected ArrayList<String> rawFile = new ArrayList();
     public static final String ConfigDir = "./" + File.separator + "config" + File.separator + "denoflionsx" + File.separator;
     protected String ConfigFile = "";
+    public static boolean verbose = true;
 
     public Config(String c) {
 
@@ -36,23 +37,24 @@ public class Config {
 
     public void setOption(String key, String param) {
 
-        denLib.print("Set Option " + key + " to " + param);
+        if (verbose) {
+            denLib.print("Set Option " + key + " to " + param);
+        }
         Options.put(key, param);
-
     }
 
     public String getOption(String key) {
         String op = Options.get(key);
         if (op != null) {
             return op;
-        }else{
+        } else {
             denLib.print("Attempting to update config file...");
-            for (String s : this.defaults){
-                if (s.contains(key)){
+            for (String s : this.defaults) {
+                if (s.contains(key)) {
                     parseLine(s);
                     op = Options.get(key);
                     new File(this.ConfigFile).delete();
-                    FileWrite.write(this.ConfigFile,this.rawFile);
+                    FileWrite.write(this.ConfigFile, this.rawFile);
                     return op;
                 }
             }

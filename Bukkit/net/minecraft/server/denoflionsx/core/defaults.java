@@ -13,6 +13,7 @@ public class defaults
         core.config.addDefault("pluginIc2_Enabled=true");
         core.config.addDefault("pluginEE_Enabled=true");
         core.config.addDefault("EnableBC2TankIntegration=false");
+        core.config.addDefault("Verbose=true");
         core.config.addDefault("liquidVacuum_ID=" + String.valueOf(5315));
         core.config.writeConfig();
     }

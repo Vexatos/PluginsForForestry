@@ -5,6 +5,7 @@ import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import java.util.HashMap;
 import net.minecraft.src.*;
+import net.minecraft.src.denoflionsx.API.PFFItems;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.forge.ITextureProvider;
 
@@ -12,7 +13,7 @@ public class multiItem extends Item implements ITextureProvider {
 
     protected HashMap<Integer, String> itemMap = new HashMap();
     protected HashMap<Integer, Integer> textureMap = new HashMap();
-    protected HashMap<String, Integer> stackMap = new HashMap();
+    protected HashMap<Integer, Integer> stackMap = new HashMap();
     protected HashMap<Integer, Item> containerMap = new HashMap();
     protected HashMap<Integer, shinyObject> shinyMap = new HashMap();
     public HashMap<String, Integer> metaMap = new HashMap();
@@ -41,7 +42,7 @@ public class multiItem extends Item implements ITextureProvider {
             int dmg = par1ItemStack.getItemDamage();
             String dname = this.itemMap.get(Integer.valueOf(dmg));
             if (dname != null) {
-                this.setMaxStackSize(this.stackMap.get(dname));
+                this.setMaxStackSize(this.stackMap.get(dmg));
                 this.meta = dmg;
                 return dname;
 
@@ -54,6 +55,7 @@ public class multiItem extends Item implements ITextureProvider {
     public void onCreated(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         super.onCreated(par1ItemStack, par2World, par3EntityPlayer);
         this.meta = par1ItemStack.getItemDamage();
+        this.setMaxStackSize(this.stackMap.get(meta));
     }
     
     
@@ -65,7 +67,7 @@ public class multiItem extends Item implements ITextureProvider {
 
     public void add(String name, int dmg, int texid, String displayname) {
         itemMap.put(dmg, "item." + name);
-        stackMap.put("item." + name, 64);
+        stackMap.put(dmg, 64);
         textureMap.put(dmg, texid);
         containerMap.put(dmg, null);
         // Default shinyObject returns normal values.
@@ -73,11 +75,14 @@ public class multiItem extends Item implements ITextureProvider {
         if (core.isClient()) {
             ModLoader.addLocalization(getMetaName(new ItemStack(this, 1, dmg)) + ".name", displayname);
         }
+        
+        // Register with API.
+        PFFItems.registerItem(name, this, dmg);
     }
 
     public void add(String name, int dmg, int texid, String displayname, int stack) {
         add(name, dmg, texid, displayname);
-        stackMap.put("item." + name, stack);
+        stackMap.put(dmg, stack);
     }
 
     public void add(String name, int dmg, int texid, String displayname, int stack, Item con) {

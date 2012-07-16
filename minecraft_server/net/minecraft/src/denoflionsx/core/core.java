@@ -15,12 +15,12 @@ import net.minecraft.src.mod_PluginsforForestry;
  */
 public class core {
 
-    protected static String version = "1.2 Beta 4";
+    protected static String version = "1.2";
     public static final boolean client = false;
     public static boolean isBukkit = false;
     public static Config config = new Config("PluginsforForestry.cfg");
     public static int[] ItemIDs = new int[]{5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320};
-    public static boolean isBetaBuild = true;
+    public static boolean isBetaBuild = false;
     public static final int delay = 25;
 
     public static boolean isClient() {
@@ -48,6 +48,7 @@ public class core {
         
         defaults.setup();
         config.readFile();
+        Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
 
     public static String modVersion() {

@@ -46,6 +46,8 @@ public class pluginIC2 extends pluginBase
         this.config.addDefault("LavaFromUranium=40000");
         this.config.addDefault("ChanceOfGoo=10");
         this.config.addDefault("AmountOfFuelPerFermentation=1000");
+        this.config.addDefault("RadioactiveWaste_MJt=10");
+        this.config.addDefault("RadioactiveWaste_BurnTime=70000");
     }
 
     protected boolean init()
@@ -80,7 +82,7 @@ public class pluginIC2 extends pluginBase
         int var3 = Integer.valueOf(this.config.getOption("AmountOfFuelPerFermentation")).intValue();
         RecipeManagers.squeezerManager.addRecipe(100, new ItemStack[] {(ItemStack)this.items.get("Uranium")}, new LiquidStack(Block.STATIONARY_LAVA, var2), new ItemStack(radioactive, 1, 1), var1);
         addFermenterRecipes.addNew(new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Radioactive Goo")).intValue()), var3, radioactive);
-        FuelManager.bronzeEngineFuel.put(Integer.valueOf(radioactive.id), new EngineBronzeFuel(new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Radioactive Waste")).intValue()), 10, 70000, 1));
+        FuelManager.bronzeEngineFuel.put(Integer.valueOf(radioactive.id), new EngineBronzeFuel(new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Radioactive Waste")).intValue()), this.getOptionInt("RadioactiveWaste_MJt").intValue(), this.getOptionInt("RadioactiveWaste_BurnTime").intValue(), 1));
         RecipeManagers.bottlerManager.addRecipe(10, new LiquidStack(radioactive, 1000), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue()), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Filled Containment Barrel")).intValue()));
         ModLoader.addRecipe(new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue()), new Object[] {"XPX", "PTP", "XPX", 'P', this.items.get("Plates"), 'T', this.blocks.get("Reinforced Glass")});
     }

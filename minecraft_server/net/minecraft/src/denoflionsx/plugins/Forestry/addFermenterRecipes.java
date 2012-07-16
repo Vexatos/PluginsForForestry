@@ -17,6 +17,7 @@ public class addFermenterRecipes {
     private static Item applejuice = ItemInterface.getItem("liquidJuice").getItem();
     private static Item honey = ItemInterface.getItem("liquidHoney").getItem();
     private static Item seedoil = ItemInterface.getItem("liquidSeedOil").getItem();
+    public static float bonus = 1.5f;
 
     public static void add(ItemStack input, float value) {
         for (int i = 0; i < 3; i++) {
@@ -41,10 +42,10 @@ public class addFermenterRecipes {
         RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(seedoil, 1));
         // This little bit is to prevent a potential null pointer if you call this method from within pluginBetterFarming.
         if (t instanceof pluginBetterFarming) {
-            RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+            RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
         } else {
             if (pluginCore.plugins.get("BetterFarming").loaded) {
-                RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+                RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
             }
         }
 

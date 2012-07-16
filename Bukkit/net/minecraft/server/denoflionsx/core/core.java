@@ -9,12 +9,12 @@ import net.minecraft.server.ModLoader;
 
 public class core
 {
-    protected static String version = "1.2 Beta 4";
+    protected static String version = "1.2";
     public static final boolean client = false;
-    public static boolean isBukkit = false;
+    public static boolean isBukkit = true;
     public static Config config = new Config("PluginsforForestry.cfg");
     public static int[] ItemIDs = new int[] {5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320};
-    public static boolean isBetaBuild = true;
+    public static boolean isBetaBuild = false;
     public static final int delay = 25;
 
     public static boolean isClient()
@@ -38,6 +38,7 @@ public class core
         ModLoader.registerTileEntity(TileUniversalSapling.class, "dolxUSapling");
         defaults.setup();
         config.readFile();
+        Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
 
     public static String modVersion()
@@ -48,5 +49,10 @@ public class core
     public static void print(String var0)
     {
         denLib.print("[PluginsForForestry]: " + var0);
+    }
+
+    public static String BukkitShift(String var0)
+    {
+        return "net.minecraft.server." + var0;
     }
 }

@@ -58,38 +58,41 @@ public class LiquidContainerSystem
         }
     }
 
-    public static void createWithOverride(multiItem var0, int var1, ItemStack var2)
+    public static void createWithOverride(multiItem var0, int var1, ItemStack var2, boolean var3)
     {
-        Iterator var3 = var0.metaMap.entrySet().iterator();
+        Iterator var4 = var0.metaMap.entrySet().iterator();
 
-        while (var3.hasNext())
+        while (var4.hasNext())
         {
-            Entry var4 = (Entry)var3.next();
-            String var5 = var4.getKey().toString();
-            Integer var6 = Integer.valueOf(var4.getValue().toString());
-            ItemStack var7 = new ItemStack(var0, 1, var6.intValue());
-            ItemStack var8;
+            Entry var5 = (Entry)var4.next();
+            String var6 = var5.getKey().toString();
+            Integer var7 = Integer.valueOf(var5.getValue().toString());
+            ItemStack var8 = new ItemStack(var0, 1, var7.intValue());
+            ItemStack var9;
 
-            if (var5.contains("Capsule"))
+            if (var6.contains("Capsule") && !var6.contains("_Red"))
             {
-                var8 = ItemInterface.getItem("waxCapsule");
-                genericCap(var0, var7, var8);
+                var9 = ItemInterface.getItem("waxCapsule");
+                genericCapWithOverride(var0, var8, var9, var1);
             }
-            else if (var5.contains("Capsule_Red"))
+            else if (var6.contains("Capsule_Red"))
             {
-                var8 = ItemInterface.getItem("refractoryEmpty");
-                genericCap(var0, var7, var8);
+                var9 = ItemInterface.getItem("refractoryEmpty");
+                genericCapWithOverride(var0, var8, var9, var1);
             }
-            else if (var5.contains("Can"))
+            else if (var6.contains("Can"))
             {
-                var8 = ItemInterface.getItem("canEmpty");
-                genericCap(var0, var7, var8);
+                var9 = ItemInterface.getItem("canEmpty");
+                genericCapWithOverride(var0, var8, var9, var1);
             }
-            else if (var5.contains("Bucket"))
+            else if (var6.contains("Bucket"))
             {
-                bucket(var0, var7);
+                if (!var3)
+                {
+                    bucket(var0, var8);
+                }
             }
-            else if (var5.contains("Bottle"))
+            else if (var6.contains("Bottle"))
             {
                 bottleOverride(var2, var1);
             }
@@ -101,6 +104,13 @@ public class LiquidContainerSystem
         LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(var0.id, bucket), var1, var2, false));
         unpack(var1, var0.id, bucket);
         pack(var2, var1, var0.id, bucket);
+    }
+
+    public static void genericCapWithOverride(multiItem var0, ItemStack var1, ItemStack var2, int var3)
+    {
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(var3, bucket), var1, var2, false));
+        unpack(var1, var3, bucket);
+        pack(var2, var1, var3, bucket);
     }
 
     public static void bucket(multiItem var0, ItemStack var1)

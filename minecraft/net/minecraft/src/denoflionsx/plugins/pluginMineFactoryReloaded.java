@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
@@ -85,10 +86,10 @@ public class pluginMineFactoryReloaded extends pluginBase {
                 milk.add("milkcap", milk.metaMap.get("Milk Capsule"), 17 + 16, "Milk Capsule");
                 milk.add("milkcap_red", milk.metaMap.get("Milk Capsule_Red"), 17 + (16 * 2), "Milk Capsule");
                 if (pluginCore.plugins.get("BetterFarming").loaded) {
-                    LiquidContainerSystem.createWithOverride(milk, this.items.get("Milk").getItem().shiftedIndex, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"));
+                    LiquidContainerSystem.createWithOverride(milk, this.items.get("Milk").itemID, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"), true);
                 } else {
                     milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle");
-                    LiquidContainerSystem.create(milk);
+                    LiquidContainerSystem.createWithOverride(milk, this.items.get("Milk").itemID, API.getItem("milkbottle"), true);
                 }
                 pluginCore.filled[1] = new ItemStack(milk, 1, milk.metaMap.get("Milk Capsule"));
                 pluginCore.filled[2] = new ItemStack(milk, 1, milk.metaMap.get("Milk Can"));
@@ -123,6 +124,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
         if (!pluginCore.plugins.get("BetterFarming").loaded) {
             pluginCore.metaItem.add("milkbottle_depricated", pluginCore.metaItem.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle (Obsolete)");
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(this.items.get("Milk").itemID, pluginCore.bottle), new ItemStack(pluginCore.metaItem, 1, pluginCore.metaItem.metaMap.get("Milk Bottle")), new ItemStack(Item.glassBottle, 1, 0), false));
+            ModLoader.addShapelessRecipe(API.getItem("milkbottle"), new Object[]{API.getItem("milkbottle_depricated")});
         }
         ArrayList<ItemStack> i = new ArrayList();
         i.add(new ItemStack(pluginCore.metaItem, 1, pluginCore.metaItem.metaMap.get("Milk Capsule")));
@@ -134,6 +136,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
         for (ItemStack a : i){
             ModLoader.addShapelessRecipe(new ItemStack(milk,1,milk.metaMap.get("Milk Capsule")), new Object[]{a});
         }
+        
     }
 
     @Override

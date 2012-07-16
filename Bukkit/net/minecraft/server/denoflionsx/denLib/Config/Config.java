@@ -13,6 +13,7 @@ public class Config
     protected ArrayList rawFile = new ArrayList();
     public static final String ConfigDir = "./" + File.separator + "config" + File.separator + "denoflionsx" + File.separator;
     protected String ConfigFile = "";
+    public static boolean verbose = true;
 
     public Config(String var1)
     {
@@ -33,7 +34,11 @@ public class Config
 
     public void setOption(String var1, String var2)
     {
-        denLib.print("Set Option " + var1 + " to " + var2);
+        if (verbose)
+        {
+            denLib.print("Set Option " + var1 + " to " + var2);
+        }
+
         this.Options.put(var1, var2);
     }
 

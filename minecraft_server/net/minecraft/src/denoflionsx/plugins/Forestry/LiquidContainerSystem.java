@@ -46,7 +46,7 @@ public class LiquidContainerSystem {
         }
     }
 
-    public static void createWithOverride(multiItem m, int liquid, ItemStack filledBottle) {
+    public static void createWithOverride(multiItem m, int liquid, ItemStack filledBottle, boolean noBucket) {
 
         Iterator i = m.metaMap.entrySet().iterator();
         while (i.hasNext()) {
@@ -55,17 +55,19 @@ public class LiquidContainerSystem {
             Integer dmg = Integer.valueOf(pairs.getValue().toString());
             ItemStack filled = new ItemStack(m, 1, dmg);
             ItemStack empty;
-            if (name.contains("Capsule")) {
+            if (name.contains("Capsule") && !name.contains("_Red")) {
                 empty = ItemInterface.getItem("waxCapsule");
-                genericCap(m, filled, empty);
+                genericCapWithOverride(m, filled, empty, liquid);
             } else if (name.contains("Capsule_Red")) {
                 empty = ItemInterface.getItem("refractoryEmpty");
-                genericCap(m, filled, empty);
+                genericCapWithOverride(m, filled, empty, liquid);
             } else if (name.contains("Can")) {
                 empty = ItemInterface.getItem("canEmpty");
-                genericCap(m, filled, empty);
+                genericCapWithOverride(m, filled, empty, liquid);
             } else if (name.contains("Bucket")) {
-                bucket(m, filled);
+                if (!noBucket) {
+                    bucket(m, filled);
+                }
             } else if (name.contains("Bottle")) {
                 bottleOverride(filledBottle, liquid);
             }
@@ -76,6 +78,12 @@ public class LiquidContainerSystem {
         LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(m.shiftedIndex, bucket), filled, empty, false));
         unpack(filled, m.shiftedIndex, bucket);
         pack(empty, filled, m.shiftedIndex, bucket);
+    }
+
+    public static void genericCapWithOverride(multiItem m, ItemStack filled, ItemStack empty, int liquid) {
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, bucket), filled, empty, false));
+        unpack(filled, liquid, bucket);
+        pack(empty, filled, liquid, bucket);
     }
 
     public static void bucket(multiItem m, ItemStack filled) {
@@ -111,6 +119,7 @@ public class LiquidContainerSystem {
 
     public static void unpack(ItemStack filled, int liquid, int amount) {
         RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{filled}, new LiquidStack(liquid, amount));
+        //core.print("Registered " + filled.getItem().getItemName() + " " + "to" + " " + Item.itemsList[liquid].getItemName());
     }
 
     public static void pack(ItemStack empty, ItemStack filled, int liquid, int amount) {

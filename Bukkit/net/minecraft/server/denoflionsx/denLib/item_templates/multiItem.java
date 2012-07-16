@@ -1,5 +1,6 @@
 package net.minecraft.server.denoflionsx.denLib.item_templates;
 
+import net.minecraft.server.denoflionsx.API.PFFItems;
 import net.minecraft.server.denoflionsx.core.core;
 import forestry.api.liquids.LiquidContainer;
 import forestry.api.liquids.LiquidManager;
@@ -45,7 +46,7 @@ public class multiItem extends Item implements ITextureProvider
 
             if (var3 != null)
             {
-                this.e(((Integer)this.stackMap.get(var3)).intValue());
+                this.e(((Integer)this.stackMap.get(Integer.valueOf(var2))).intValue());
                 this.meta = var2;
                 return var3;
             }
@@ -61,6 +62,7 @@ public class multiItem extends Item implements ITextureProvider
     {
         super.d(var1, var2, var3);
         this.meta = var1.getData();
+        this.e(((Integer)this.stackMap.get(Integer.valueOf(this.meta))).intValue());
     }
 
     public Item j()
@@ -71,7 +73,7 @@ public class multiItem extends Item implements ITextureProvider
     public void add(String var1, int var2, int var3, String var4)
     {
         this.itemMap.put(Integer.valueOf(var2), "item." + var1);
-        this.stackMap.put("item." + var1, Integer.valueOf(64));
+        this.stackMap.put(Integer.valueOf(var2), Integer.valueOf(64));
         this.textureMap.put(Integer.valueOf(var2), Integer.valueOf(var3));
         this.containerMap.put(Integer.valueOf(var2), (Object)null);
         this.shinyMap.put(Integer.valueOf(var2), new shinyObject());
@@ -80,12 +82,14 @@ public class multiItem extends Item implements ITextureProvider
         {
             ModLoader.addLocalization(this.getMetaName(new ItemStack(this, 1, var2)) + ".name", var4);
         }
+
+        PFFItems.registerItem(var1, this, var2);
     }
 
     public void add(String var1, int var2, int var3, String var4, int var5)
     {
         this.add(var1, var2, var3, var4);
-        this.stackMap.put("item." + var1, Integer.valueOf(var5));
+        this.stackMap.put(Integer.valueOf(var2), Integer.valueOf(var5));
     }
 
     public void add(String var1, int var2, int var3, String var4, int var5, Item var6)

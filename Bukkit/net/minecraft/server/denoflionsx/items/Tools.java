@@ -1,5 +1,6 @@
 package net.minecraft.server.denoflionsx.items;
 
+import net.minecraft.server.denoflionsx.API.API;
 import net.minecraft.server.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.server.denoflionsx.plugins.pluginCore;
 import net.minecraft.server.Block;
@@ -20,14 +21,21 @@ public class Tools extends multiItem
 
     public boolean onLeftClickEntity(ItemStack var1, EntityHuman var2, Entity var3)
     {
-        ItemStack var4 = new ItemStack(pluginCore.metaItem, 1, ((Integer)pluginCore.metaItem.metaMap.get("Milk Bag")).intValue());
-
-        if (var3 instanceof EntityCow)
+        if (!var1.doMaterialsMatch(API.getItem("liquidvacuum")))
         {
-            var2.a(var4.cloneItemStack(), false);
+            return true;
         }
+        else
+        {
+            ItemStack var4 = API.getItem("milkbag");
 
-        return true;
+            if (var3 instanceof EntityCow)
+            {
+                var2.a(var4.cloneItemStack(), false);
+            }
+
+            return true;
+        }
     }
 
     /**

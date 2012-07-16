@@ -43,7 +43,7 @@ public class milkModule extends baseModule
             }
             else
             {
-                LiquidContainerSystem.createWithOverride(milk, milk.id, ((pluginBase)pluginCore.plugins.get("BetterFarming")).get("Milk Bottle"));
+                LiquidContainerSystem.createWithOverride(milk, milk.id, ((pluginBase)pluginCore.plugins.get("BetterFarming")).get("Milk Bottle"), true);
             }
 
             LiquidContainerSystem.registerMilkBucket(milk.id);

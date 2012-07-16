@@ -42,6 +42,9 @@ public class blueswaxModule extends baseModule
         this.parent.config.addDefault("# Includes Wax Casts, wand of freezing, wax tablets");
         this.parent.config.addDefault("BluesWaxStuff_Enabled=true");
         this.parent.config.addDefault("BluesWaxStuff_ItemID=5317");
+        this.parent.config.addDefault("ThatchedRoof_Enabled=true");
+        this.parent.config.addDefault("ThatchedRoof_BlockID=181");
+        this.parent.config.addDefault("ThatchedRoofSlab_BlockID=185");
     }
 
     protected void init()
@@ -69,12 +72,17 @@ public class blueswaxModule extends baseModule
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.STATIONARY_WATER, 1), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Filled Wax Cast")).intValue()), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Wax Cast")).intValue()), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.STATIONARY_LAVA, 1), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Lava Cast")).intValue()), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Refractory Cast")).intValue()), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.STATIONARY_WATER, 1), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Filled Wax Cast_Red")).intValue()), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Refractory Cast")).intValue()), false));
-            thatch = new waxBlock(185, Material.CLAY, "Thatch");
-            thatch.add("thatch", "Thatched Double Slab", 0, new Integer[] {Integer.valueOf(8), Integer.valueOf(8), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9)});
-            waxBlockItem.names.put(Integer.valueOf(0), "Test 1");
-            thatchslab = new waxSlab(181, Material.CLAY, "ThatchSlab");
-            thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[] {Integer.valueOf(8), Integer.valueOf(8), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9)});
-            waxSlabItem.names.put(Integer.valueOf(0), "Thatched Slab");
+
+            if (this.getOptionBool("ThatchedRoof_Enabled"))
+            {
+                thatch = new waxBlock(this.getOptionInt("ThatchedRoof_BlockID").intValue(), Material.CLAY, "Thatch");
+                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[] {Integer.valueOf(8), Integer.valueOf(8), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9)});
+                waxBlockItem.names.put(Integer.valueOf(0), "Test 1");
+                thatchslab = new waxSlab(this.getOptionInt("ThatchedRoofSlab_BlockID").intValue(), Material.CLAY, "ThatchSlab");
+                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[] {Integer.valueOf(8), Integer.valueOf(8), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9), Integer.valueOf(9)});
+                waxSlabItem.names.put(Integer.valueOf(0), "Thatched Slab");
+            }
+
             this.recipes();
         }
     }
@@ -95,16 +103,22 @@ public class blueswaxModule extends baseModule
             ModLoader.addRecipe(new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Refractory Cast")).intValue()), new Object[] {"WWW", "WXW", "WWW", 'W', ItemInterface.getItem("refractoryWax")});
             ModLoader.addRecipe(new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Rod of Freezing")).intValue()), new Object[] {"GIG", "ISI", "BsB", 'G', Block.GLASS, 'I', Item.IRON_INGOT, 'S', Item.SNOW_BALL, 'B', new ItemStack(Item.INK_SACK, 1, 12), 's', Item.STICK});
             RecipeManagers.bottlerManager.addRecipe(10, new LiquidStack(Block.STATIONARY_LAVA.id, 1000), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Refractory Cast")).intValue()), new ItemStack(extrawax, 1, ((Integer)extrawax.metaMap.get("Lava Cast")).intValue()));
-            Item[] var1 = new Item[] {Item.WHEAT, Item.SUGAR_CANE, ItemInterface.getItem("mulch").getItem()};
-            byte var2 = 6;
-            Item[] var3 = var1;
-            int var4 = var1.length;
+            int var4;
+            int var5;
 
-            for (int var5 = 0; var5 < var4; ++var5)
+            if (this.getOptionBool("ThatchedRoof_Enabled"))
             {
-                Item var6 = var3[var5];
-                ModLoader.addRecipe(new ItemStack(thatchslab, var2, 0), new Object[] {"www", "iii", "www", 'w', ItemInterface.getItem("beeswax"), 'i', new ItemStack(var6)});
-                ModLoader.addRecipe(new ItemStack(thatchslab, var2, 0), new Object[] {"www", "iii", "www", 'w', ItemInterface.getItem("refractoryWax"), 'i', new ItemStack(var6)});
+                Item[] var1 = new Item[] {Item.WHEAT, Item.SUGAR_CANE, ItemInterface.getItem("mulch").getItem()};
+                byte var2 = 6;
+                Item[] var3 = var1;
+                var4 = var1.length;
+
+                for (var5 = 0; var5 < var4; ++var5)
+                {
+                    Item var6 = var3[var5];
+                    ModLoader.addRecipe(new ItemStack(thatchslab, var2, 0), new Object[] {"www", "iii", "www", 'w', ItemInterface.getItem("beeswax"), 'i', new ItemStack(var6)});
+                    ModLoader.addRecipe(new ItemStack(thatchslab, var2, 0), new Object[] {"www", "iii", "www", 'w', ItemInterface.getItem("refractoryWax"), 'i', new ItemStack(var6)});
+                }
             }
 
             ModLoader.addShapelessRecipe(new ItemStack(Block.STONE), new Object[] {ItemInterface.getItem("beeswax"), new ItemStack(Block.COBBLESTONE)});
@@ -116,35 +130,34 @@ public class blueswaxModule extends baseModule
             ModLoader.addRecipe(new ItemStack(Item.ARROW), new Object[] {"FXX", "SXX", "BXX", 'F', new ItemStack(Item.FLINT), 'S', new ItemStack(Item.STICK), 'B', ItemInterface.getItem("refractoryWax")});
             ModLoader.addRecipe(new ItemStack(Item.ARROW), new Object[] {"XFX", "XSX", "XBX", 'F', new ItemStack(Item.FLINT), 'S', new ItemStack(Item.STICK), 'B', ItemInterface.getItem("refractoryWax")});
             ModLoader.addRecipe(new ItemStack(Item.ARROW), new Object[] {"XXF", "XXS", "XXB", 'F', new ItemStack(Item.FLINT), 'S', new ItemStack(Item.STICK), 'B', ItemInterface.getItem("refractoryWax")});
-            ItemStack var9 = ItemInterface.getItem("beeswax");
-            ItemStack[] var10 = new ItemStack[] {new ItemStack(Block.SAND), new ItemStack(Block.DIRT), new ItemStack(Block.GRAVEL)};
-            ItemStack[] var11 = var10;
-            int var12 = var10.length;
-            int var7;
-            ItemStack var8;
+            ItemStack var7 = ItemInterface.getItem("beeswax");
+            ItemStack[] var8 = new ItemStack[] {new ItemStack(Block.SAND), new ItemStack(Block.DIRT), new ItemStack(Block.GRAVEL)};
+            ItemStack[] var9 = var8;
+            var4 = var8.length;
+            ItemStack var10;
 
-            for (var7 = 0; var7 < var12; ++var7)
+            for (var5 = 0; var5 < var4; ++var5)
             {
-                var8 = var11[var7];
-                ModLoader.addShapelessRecipe(new ItemStack(Item.CLAY_BALL, 4), new Object[] {var9, var8, var9, var8});
+                var10 = var9[var5];
+                ModLoader.addShapelessRecipe(new ItemStack(Item.CLAY_BALL, 4), new Object[] {var7, var10, var7, var10});
             }
 
-            var9 = ItemInterface.getItem("refractoryWax");
-            var11 = var10;
-            var12 = var10.length;
+            var7 = ItemInterface.getItem("refractoryWax");
+            var9 = var8;
+            var4 = var8.length;
 
-            for (var7 = 0; var7 < var12; ++var7)
+            for (var5 = 0; var5 < var4; ++var5)
             {
-                var8 = var11[var7];
-                ModLoader.addShapelessRecipe(new ItemStack(Item.CLAY_BALL, 4), new Object[] {var9, var8, var9, var8});
+                var10 = var9[var5];
+                ModLoader.addShapelessRecipe(new ItemStack(Item.CLAY_BALL, 4), new Object[] {var7, var10, var7, var10});
             }
 
-            var10 = new ItemStack[] {new ItemStack(Block.MOSSY_COBBLESTONE), new ItemStack(Block.SMOOTH_BRICK, 1, 1)};
-            var11 = new ItemStack[] {new ItemStack(Block.COBBLESTONE), new ItemStack(Block.SMOOTH_BRICK)};
+            var8 = new ItemStack[] {new ItemStack(Block.MOSSY_COBBLESTONE), new ItemStack(Block.SMOOTH_BRICK, 1, 1)};
+            var9 = new ItemStack[] {new ItemStack(Block.COBBLESTONE), new ItemStack(Block.SMOOTH_BRICK)};
 
-            for (var12 = 0; var12 < var10.length; ++var12)
+            for (var4 = 0; var4 < var8.length; ++var4)
             {
-                ModLoader.addShapelessRecipe(var10[var12], new Object[] {ItemInterface.getItem("royalJelly"), var11[var12]});
+                ModLoader.addShapelessRecipe(var8[var4], new Object[] {ItemInterface.getItem("royalJelly"), var9[var4]});
             }
 
             ModLoader.addShapelessRecipe(new ItemStack(Block.SMOOTH_BRICK, 1, 2), new Object[] {ItemInterface.getItem("phosphor"), new ItemStack(Block.SMOOTH_BRICK)});

@@ -131,6 +131,7 @@ public class pluginBetterFarming extends pluginBase
             }
 
             ModLoader.addRecipe((ItemStack)this.items.get("Waterproofing"), new Object[] {"XXX", "XMX", "XXX", 'M', this.items.get("Mint")});
+            addFermenterRecipes.bonus = (new Float(this.config.getOption("CitrusJuice_FermenterBonus"))).floatValue();
             addFermenterRecipes.addItem(((ItemStack)this.items.get("Mint")).getItem(), 150, this);
             LiquidContainerSystem.create(citrusJuice);
         }
@@ -167,6 +168,7 @@ public class pluginBetterFarming extends pluginBase
         this.config.addDefault("CitrusJuice_PercentChanceOfMulch=40");
         this.config.addDefault("CitrusJuice_MJt=1");
         this.config.addDefault("CitrusJuice_BurnTime=10000");
+        this.config.addDefault("CitrusJuice_FermenterBonus=1.5");
         this.config.writeConfig();
         this.config.readFile();
     }

@@ -1,5 +1,6 @@
 package net.minecraft.server.denoflionsx.plugins;
 
+import net.minecraft.server.denoflionsx.API.API;
 import net.minecraft.server.denoflionsx.core.core;
 import net.minecraft.server.denoflionsx.denLib.denLib;
 import net.minecraft.server.denoflionsx.denLib.Config.Config;
@@ -103,12 +104,12 @@ public class pluginMineFactoryReloaded extends pluginBase
 
                 if (((pluginBase)pluginCore.plugins.get("BetterFarming")).loaded)
                 {
-                    LiquidContainerSystem.createWithOverride(milk, ((ItemStack)this.items.get("Milk")).getItem().id, ((pluginBase)pluginCore.plugins.get("BetterFarming")).get("Milk Bottle"));
+                    LiquidContainerSystem.createWithOverride(milk, ((ItemStack)this.items.get("Milk")).id, ((pluginBase)pluginCore.plugins.get("BetterFarming")).get("Milk Bottle"), true);
                 }
                 else
                 {
                     milk.add("milkbottle", ((Integer)milk.metaMap.get("Milk Bottle")).intValue(), 37, "Milk Bottle");
-                    LiquidContainerSystem.create(milk);
+                    LiquidContainerSystem.createWithOverride(milk, ((ItemStack)this.items.get("Milk")).id, API.getItem("milkbottle"), true);
                 }
 
                 pluginCore.filled[1] = new ItemStack(milk, 1, ((Integer)milk.metaMap.get("Milk Capsule")).intValue());
@@ -156,6 +157,7 @@ public class pluginMineFactoryReloaded extends pluginBase
         {
             pluginCore.metaItem.add("milkbottle_depricated", ((Integer)pluginCore.metaItem.metaMap.get("Milk Bottle")).intValue(), 37, "Milk Bottle (Obsolete)");
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(((ItemStack)this.items.get("Milk")).id, pluginCore.bottle), new ItemStack(pluginCore.metaItem, 1, ((Integer)pluginCore.metaItem.metaMap.get("Milk Bottle")).intValue()), new ItemStack(Item.GLASS_BOTTLE, 1, 0), false));
+            ModLoader.addShapelessRecipe(API.getItem("milkbottle"), new Object[] {API.getItem("milkbottle_depricated")});
         }
 
         ArrayList var1 = new ArrayList();

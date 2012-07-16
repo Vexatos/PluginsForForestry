@@ -1,13 +1,12 @@
 package net.minecraft.server.denoflionsx.plugins;
 
 import net.minecraft.server.denoflionsx.core.core;
+import net.minecraft.server.denoflionsx.denLib.denLib;
 import net.minecraft.server.denoflionsx.denLib.Config.Config;
-import net.minecraft.server.denoflionsx.plugins.EE.DefaultForestryValues;
 import net.minecraft.server.denoflionsx.plugins.EE.customEMCParser;
-import net.minecraft.server.denoflionsx.plugins.Forestry.circuitBoards;
-import net.minecraft.server.denoflionsx.plugins.Forestry.tubes;
-import forestry.api.core.ForestryBlock;
-import forestry.api.core.ItemInterface;
+import net.minecraft.server.denoflionsx.plugins.EE.Modules.BuildcraftEMCModule;
+import net.minecraft.server.denoflionsx.plugins.EE.Modules.ForestryEMCModule;
+import net.minecraft.server.denoflionsx.plugins.EE.Modules.VanillaValues;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,7 +16,10 @@ import net.minecraft.server.Item;
 
 public class pluginEE extends pluginBase
 {
-    private static Config recipes;
+    private static Class EEMaps;
+    private static Field alchemicalValues_Field;
+    private static HashMap alchemicalValues = new HashMap();
+    private Config values = new Config("pluginEE_CustomEMCValues.cfg");
 
     public pluginEE()
     {
@@ -32,6 +34,21 @@ public class pluginEE extends pluginBase
         if (!this.loaded)
         {
             this.defaults();
+            this.values.writeConfig();
+            this.values.readFile();
+            readEMC(this.values);
+            VanillaValues.assignValues();
+
+            if (denLib.detect("mod_Forestry"))
+            {
+                ForestryEMCModule.load(this);
+            }
+
+            if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport"))
+            {
+                BuildcraftEMCModule.load(this);
+            }
+
             this.runConfig();
 
             if (this.loaded = this.init())
@@ -42,7 +59,13 @@ public class pluginEE extends pluginBase
         }
     }
 
-    protected void defaults() {}
+    protected void defaults()
+    {
+        this.config.addDefault("[EE Plugin Options]");
+        this.config.addDefault("LoadIntegrationModules=true");
+        this.values.addDefault("[Define Custom EMC Here]");
+        this.values.addDefault("# NameTag=ItemID,Damage Value,EMC Value");
+    }
 
     protected boolean init()
     {
@@ -52,33 +75,9 @@ public class pluginEE extends pluginBase
         }
         else
         {
-            DefaultForestryValues.setup();
-            this.Forestry();
-            Iterator var1 = recipes.Options.entrySet().iterator();
-
-            while (var1.hasNext())
+            if (this.getOptionBool("LoadIntegrationModules"))
             {
-                Entry var2 = (Entry)var1.next();
-                String var3 = var2.getValue().toString();
-                customEMCParser.parse(var3);
-            }
-
-            Iterator var10 = customEMCParser.Values.entrySet().iterator();
-
-            while (var10.hasNext())
-            {
-                Entry var11 = (Entry)var10.next();
-                HashMap var4 = (HashMap)var11.getValue();
-                Integer var5 = Integer.valueOf(var11.getKey().toString());
-                Iterator var6 = var4.entrySet().iterator();
-
-                while (var6.hasNext())
-                {
-                    Entry var7 = (Entry)var6.next();
-                    Integer var8 = Integer.valueOf(var7.getKey().toString());
-                    Integer var9 = Integer.valueOf(var7.getValue().toString());
-                    this.addEMC(var5.intValue(), var8.intValue(), var9.intValue());
-                }
+                this.registerModules();
             }
 
             this.hooked = true;
@@ -86,106 +85,60 @@ public class pluginEE extends pluginBase
         }
     }
 
-    protected void Forestry()
+    public static void readEMC(Config var0)
     {
-        recipes = new Config("pluginEE_CustomEMCValues.cfg");
-        recipes.addDefault("[Define Custom EMC Here]");
-        recipes.addDefault("# NameTag=ItemID,Damage Value,EMC Value");
-        recipes.addDefault("# Forestry Parts");
-        recipes.addDefault("SturdyMachine=" + ItemInterface.getItem("sturdyMachine").getItem().id + "," + 0 + "," + DefaultForestryValues.values.get("Sturdy Machine"));
-        recipes.addDefault("HardenedMachine=" + ItemInterface.getItem("hardenedMachine").id + "," + 0 + "," + DefaultForestryValues.values.get("Hardened Machine"));
-        recipes.addDefault("Fertilizer=" + ItemInterface.getItem("fertilizerCompound").id + "," + 0 + "," + DefaultForestryValues.values.get("Fertilizer"));
-        recipes.addDefault("# Gears");
-        recipes.addDefault("BronzeGear=" + ItemInterface.getItem("gearBronze").getItem().id + "," + 0 + "," + DefaultForestryValues.values.get("Bronze Gear"));
-        recipes.addDefault("CopperGear=" + ItemInterface.getItem("gearCopper").getItem().id + "," + 0 + "," + DefaultForestryValues.values.get("Copper Gear"));
-        recipes.addDefault("TinGear=" + ItemInterface.getItem("gearTin").getItem().id + "," + 0 + "," + DefaultForestryValues.values.get("Tin Gear"));
-        recipes.addDefault("# Electron Tubes");
-        recipes.addDefault("GoldenElectronTube=" + tubes.goldTube.id + "," + tubes.goldTube.getData() + "," + DefaultForestryValues.values.get("Golden Electron Tube"));
-        recipes.addDefault("DiamondElectronTube=" + tubes.diamondTube.id + "," + tubes.diamondTube.getData() + "," + DefaultForestryValues.values.get("Diamond Tube"));
-        recipes.addDefault("TinElectronTube=" + tubes.tinTube.id + "," + tubes.tinTube.getData() + "," + DefaultForestryValues.values.get("Tin Tube"));
-        recipes.addDefault("CopperElectronTube=" + tubes.copperTube.id + "," + tubes.copperTube.getData() + "," + DefaultForestryValues.values.get("Copper Tube"));
-        recipes.addDefault("IronElectronTube=" + tubes.ironTube.id + "," + tubes.ironTube.getData() + "," + DefaultForestryValues.values.get("Iron Tube"));
-        recipes.addDefault("BronzeElectronTube=" + tubes.bronzeTube.id + "," + tubes.bronzeTube.getData() + "," + DefaultForestryValues.values.get("Bronze Tube"));
-        recipes.addDefault("# Circuit Boards");
-        recipes.addDefault("SmallCircuitBoard=" + circuitBoards.smallCircuitBoard.id + "," + circuitBoards.smallCircuitBoard.getData() + "," + DefaultForestryValues.values.get("Small Circuit Board"));
-        recipes.addDefault("MediumCircuitBoard=" + circuitBoards.mediumCircuitBoard.id + "," + circuitBoards.mediumCircuitBoard.getData() + "," + DefaultForestryValues.values.get("Medium Circuit Board"));
-        recipes.addDefault("LargeCircuitBoard=" + circuitBoards.largeCircuitBoard.id + "," + circuitBoards.largeCircuitBoard.getData() + "," + DefaultForestryValues.values.get("Large Circuit Board"));
-        recipes.addDefault("# Engines");
-        recipes.addDefault("BiogasEngine=" + ForestryBlock.engine.id + "," + 0 + "," + DefaultForestryValues.values.get("Biogas Engine"));
-        recipes.addDefault("PeatEngine=" + ForestryBlock.engine.id + "," + 1 + "," + DefaultForestryValues.values.get("Peat Engine"));
-        recipes.addDefault("ElectricalEngine=" + ForestryBlock.engine.id + "," + 2 + "," + DefaultForestryValues.values.get("Electrical Engine"));
-        recipes.addDefault("# Containers");
-        recipes.addDefault("Can=" + ItemInterface.getItem("canEmpty").id + "," + 0 + "," + DefaultForestryValues.values.get("Can"));
-        recipes.addDefault("# Farm Machines");
-        recipes.addDefault("TreeFarm=" + ForestryBlock.planter.id + "," + 0 + "," + DefaultForestryValues.values.get("Tree Farm"));
-        recipes.addDefault("Logger=" + ForestryBlock.harvester.id + "," + 0 + "," + DefaultForestryValues.values.get("Logger"));
-        recipes.addDefault("WheatFarm=" + ForestryBlock.planter.id + "," + 1 + "," + DefaultForestryValues.values.get("Wheat Farm"));
-        recipes.addDefault("Combine=" + ForestryBlock.harvester.id + "," + 1 + "," + DefaultForestryValues.values.get("Combine"));
-        recipes.addDefault("RubberFarm=" + ForestryBlock.planter.id + "," + 2 + "," + DefaultForestryValues.values.get("Tree Farm"));
-        recipes.addDefault("RubberHavester=" + ForestryBlock.harvester.id + "," + 2 + "," + DefaultForestryValues.values.get("Logger"));
-        recipes.addDefault("PumpkinFarm=" + ForestryBlock.planter.id + "," + 3 + "," + DefaultForestryValues.values.get("Pumpkin Farm"));
-        recipes.addDefault("PumpkinHarvester=" + ForestryBlock.harvester.id + "," + 3 + "," + DefaultForestryValues.values.get("Pumpkin Harvester"));
-        recipes.addDefault("PeatBog=" + ForestryBlock.planter.id + "," + 4 + "," + DefaultForestryValues.values.get("Peat Bog"));
-        recipes.addDefault("Turbary=" + ForestryBlock.harvester.id + "," + 4 + "," + DefaultForestryValues.values.get("Turbary"));
-        recipes.addDefault("CactusHarvester=" + ForestryBlock.harvester.id + "," + 5 + "," + DefaultForestryValues.values.get("Cactus Harvester"));
-        recipes.addDefault("MushroomFarm=" + ForestryBlock.planter.id + "," + 5 + "," + DefaultForestryValues.values.get("Mushroom Farm"));
-        recipes.addDefault("MushroomHarvester=" + ForestryBlock.harvester.id + "," + 6 + "," + DefaultForestryValues.values.get("Mushroom Harvester"));
-        recipes.addDefault("SugarcaneHarvester=" + ForestryBlock.harvester.id + "," + 7 + "," + DefaultForestryValues.values.get("Sugar Cane Harvester"));
-        recipes.addDefault("NetherFarm=" + ForestryBlock.planter.id + "," + 6 + "," + DefaultForestryValues.values.get("Nether Farm"));
-        recipes.addDefault("NetherHarvester=" + ForestryBlock.harvester.id + "," + 8 + "," + DefaultForestryValues.values.get("Nether Harvester"));
-        recipes.addDefault("# Factory Machines");
-        recipes.addDefault("Fermenter=" + ForestryBlock.machine.id + "," + 0 + "," + DefaultForestryValues.values.get("Fermenter"));
-        recipes.addDefault("Still=" + ForestryBlock.machine.id + "," + 1 + "," + DefaultForestryValues.values.get("Still"));
-        recipes.addDefault("Bottler=" + ForestryBlock.machine.id + "," + 2 + "," + DefaultForestryValues.values.get("Bottler"));
-        recipes.addDefault("Raintank=" + ForestryBlock.machine.id + "," + 3 + "," + DefaultForestryValues.values.get("Raintank"));
-        recipes.addDefault("BiopowerGenerator=" + ForestryBlock.machine.id + "," + 4 + "," + DefaultForestryValues.values.get("BiopowerGenerator"));
-        recipes.addDefault("Carpenter=" + ForestryBlock.machine.id + "," + 5 + "," + DefaultForestryValues.values.get("Carpenter"));
-        recipes.addDefault("Moistener=" + ForestryBlock.machine.id + "," + 6 + "," + DefaultForestryValues.values.get("Moistener"));
-        recipes.addDefault("Apiary=" + ForestryBlock.machine.id + "," + 7 + "," + DefaultForestryValues.values.get("Apiary"));
-        recipes.addDefault("Centrifuge=" + ForestryBlock.machine.id + "," + 8 + "," + DefaultForestryValues.values.get("Centrifuge"));
-        recipes.addDefault("Squeezer=" + ForestryBlock.machine.id + "," + 9 + "," + DefaultForestryValues.values.get("Squeezer"));
-        recipes.addDefault("ThermionicFabricator=" + ForestryBlock.machine.id + "," + 11 + "," + DefaultForestryValues.values.get("Fabricator"));
-        recipes.addDefault("Beealyzer=" + ItemInterface.getItem("beealyzer").id + "," + 0 + "," + DefaultForestryValues.values.get("Beealzyer"));
-        recipes.addDefault("Analzyer=" + ForestryBlock.mill.id + "," + 4 + "," + DefaultForestryValues.values.get("Analyzer"));
-        recipes.addDefault("# Since the Forester can be crafted from any farm, peat bog was used for the calculation.");
-        recipes.addDefault("Forester=" + ForestryBlock.mill.id + "," + 0 + "," + DefaultForestryValues.values.get("Forester"));
-        recipes.addDefault("Rainmaker=" + ForestryBlock.mill.id + "," + 1 + "," + DefaultForestryValues.values.get("Rainmaker"));
-        recipes.addDefault("Treetap=" + ForestryBlock.mill.id + "," + 2 + "," + DefaultForestryValues.values.get("Treetap"));
-        recipes.addDefault("Apichest=" + ForestryBlock.mill.id + "," + 3 + "," + DefaultForestryValues.values.get("Apichest"));
-        recipes.addDefault("# Mail Stuff");
-        recipes.addDefault("Mailbox=" + ForestryBlock.mill.id + "," + 5 + "," + DefaultForestryValues.values.get("Mailbox"));
-        recipes.addDefault("TradeStation=" + ForestryBlock.mill.id + "," + 6 + "," + DefaultForestryValues.values.get("TradeStation"));
-        recipes.addDefault("StampCollector=" + ForestryBlock.mill.id + "," + 7 + "," + DefaultForestryValues.values.get("StampCollector"));
-        recipes.addDefault("# Forestry Soil");
-        recipes.addDefault("Humus=" + ForestryBlock.soil.id + "," + 0 + "," + DefaultForestryValues.values.get("Humus"));
-        recipes.addDefault("Bog=" + ForestryBlock.soil.id + "," + 1 + "," + DefaultForestryValues.values.get("Bog"));
-        recipes.writeConfig();
-        recipes.readFile();
+        customEMCParser var1 = new customEMCParser();
+        Iterator var2 = var0.Options.entrySet().iterator();
+
+        while (var2.hasNext())
+        {
+            Entry var3 = (Entry)var2.next();
+            String var4 = var3.getValue().toString();
+            var1.parse(var4);
+        }
+
+        Iterator var11 = var1.Values.entrySet().iterator();
+
+        while (var11.hasNext())
+        {
+            Entry var12 = (Entry)var11.next();
+            HashMap var5 = (HashMap)var12.getValue();
+            Integer var6 = Integer.valueOf(var12.getKey().toString());
+            Iterator var7 = var5.entrySet().iterator();
+
+            while (var7.hasNext())
+            {
+                Entry var8 = (Entry)var7.next();
+                Integer var9 = Integer.valueOf(var8.getKey().toString());
+                Integer var10 = Integer.valueOf(var8.getValue().toString());
+                addEMC(var6.intValue(), var9.intValue(), var10.intValue());
+            }
+        }
     }
 
-    protected void addEMC(int var1, int var2, int var3)
+    protected static void addEMC(int var0, int var1, int var2)
     {
         try
         {
             try
             {
-                Class var4 = Class.forName("ee.EEMaps");
-                Field var5 = var4.getField("alchemicalValues");
-                HashMap var6 = (HashMap)var5.get((Object)null);
-                HashMap var7 = new HashMap();
+                EEMaps = Class.forName("ee.EEMaps");
+                alchemicalValues_Field = EEMaps.getField("alchemicalValues");
+                alchemicalValues = (HashMap)alchemicalValues_Field.get((Object)null);
+                HashMap var3 = new HashMap();
 
-                if (var6.get(Integer.valueOf(var1)) != null)
+                if (alchemicalValues.get(Integer.valueOf(var0)) != null)
                 {
-                    var7 = (HashMap)var6.get(Integer.valueOf(var1));
+                    var3 = (HashMap)alchemicalValues.get(Integer.valueOf(var0));
                 }
 
-                var7.put(Integer.valueOf(var2), Integer.valueOf(var3));
-                var6.put(Integer.valueOf(var1), var7);
-                var5.set((Object)null, var6);
+                var3.put(Integer.valueOf(var1), Integer.valueOf(var2));
+                alchemicalValues.put(Integer.valueOf(var0), var3);
+                alchemicalValues_Field.set((Object)null, alchemicalValues);
             }
-            catch (Exception var11)
+            catch (Exception var7)
             {
-                var11.printStackTrace();
+                var7.printStackTrace();
             }
         }
         finally
@@ -198,19 +151,19 @@ public class pluginEE extends pluginBase
     {
         try
         {
-            Class var2 = Class.forName("ee.EEMaps");
-            Field var3 = var2.getField("alchemicalValues");
-            var3.setAccessible(true);
-            HashMap var4 = (HashMap)var3.get((Object)null);
-            HashMap var5 = new HashMap();
-            var5.put(Integer.valueOf(0), Integer.valueOf(0));
-            var4.remove(Integer.valueOf(var1.id));
-            var4.put(Integer.valueOf(var1.id), var5);
-            var3.set((Object)null, var4);
+            EEMaps = Class.forName("ee.EEMaps");
+            Field var2 = EEMaps.getField("alchemicalValues");
+            var2.setAccessible(true);
+            alchemicalValues = (HashMap)var2.get((Object)null);
+            HashMap var3 = new HashMap();
+            var3.put(Integer.valueOf(0), Integer.valueOf(0));
+            alchemicalValues.remove(Integer.valueOf(var1.id));
+            alchemicalValues.put(Integer.valueOf(var1.id), var3);
+            var2.set((Object)null, alchemicalValues);
         }
-        catch (Exception var9)
+        catch (Exception var7)
         {
-            var9.printStackTrace();
+            var7.printStackTrace();
         }
         finally
         {
@@ -222,19 +175,19 @@ public class pluginEE extends pluginBase
     {
         try
         {
-            Class var2 = Class.forName("ee.EEMaps");
-            Field var3 = var2.getField("alchemicalValues");
-            var3.setAccessible(true);
-            HashMap var4 = (HashMap)var3.get((Object)null);
-            HashMap var5 = new HashMap();
-            var5.put(Integer.valueOf(0), Integer.valueOf(0));
-            var4.remove(Integer.valueOf(var1.id));
-            var4.put(Integer.valueOf(var1.id), var5);
-            var3.set((Object)null, var4);
+            EEMaps = Class.forName("ee.EEMaps");
+            Field var2 = EEMaps.getField("alchemicalValues");
+            var2.setAccessible(true);
+            alchemicalValues = (HashMap)var2.get((Object)null);
+            HashMap var3 = new HashMap();
+            var3.put(Integer.valueOf(0), Integer.valueOf(0));
+            alchemicalValues.remove(Integer.valueOf(var1.id));
+            alchemicalValues.put(Integer.valueOf(var1.id), var3);
+            var2.set((Object)null, alchemicalValues);
         }
-        catch (Exception var9)
+        catch (Exception var7)
         {
-            var9.printStackTrace();
+            var7.printStackTrace();
         }
         finally
         {
@@ -261,6 +214,78 @@ public class pluginEE extends pluginBase
         {
             core.print("Killed EE Item " + var1);
         }
+    }
+
+    private static void hookEE()
+    {
+        try
+        {
+            EEMaps = Class.forName("ee.EEMaps");
+            alchemicalValues_Field = EEMaps.getField("alchemicalValues");
+            alchemicalValues = (HashMap)alchemicalValues_Field.get((Object)null);
+        }
+        catch (Exception var1)
+        {
+            var1.printStackTrace();
+        }
+    }
+
+    public static int getEEValue(int var0, int var1)
+    {
+        hookEE();
+
+        if (alchemicalValues.get(Integer.valueOf(var0)) == null)
+        {
+            return 0;
+        }
+        else
+        {
+            HashMap var2 = (HashMap)alchemicalValues.get(Integer.valueOf(var0));
+
+            if (var2.get(Integer.valueOf(var1)) == null)
+            {
+                return 0;
+            }
+            else
+            {
+                int var3 = ((Integer)var2.get(Integer.valueOf(var1))).intValue();
+                return var3;
+            }
+        }
+    }
+
+    public static void forceSetValue(int var0, HashMap var1)
+    {
+        try
+        {
+            hookEE();
+            alchemicalValues.put(Integer.valueOf(var0), var1);
+            alchemicalValues_Field.set((Object)null, alchemicalValues);
+        }
+        catch (Exception var3)
+        {
+            ;
+        }
+    }
+
+    public static int flatten(int[] var0, int var1)
+    {
+        int var2 = 0;
+        int[] var3 = var0;
+        int var4 = var0.length;
+
+        for (int var5 = 0; var5 < var4; ++var5)
+        {
+            int var6 = var3[var5];
+            var2 += var6;
+        }
+
+        float var7 = (float)var2;
+        float var8 = (float)var1;
+        float var9 = var7 / var8;
+        Double var10 = Double.valueOf(Math.ceil((double)var9));
+        var2 = var10.intValue();
+        return var2;
     }
 
     protected void recipes() {}

@@ -40,7 +40,7 @@ public class milkModule extends baseModule {
                 milk.add("bcmilkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle", 64);
                 LiquidContainerSystem.create(milk);
             } else {
-                LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"));
+                LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"), true);
             }
             LiquidContainerSystem.registerMilkBucket(milk.shiftedIndex);
             pluginCore.filled[1] = new ItemStack(milk,1,milk.metaMap.get("Milk Capsule"));

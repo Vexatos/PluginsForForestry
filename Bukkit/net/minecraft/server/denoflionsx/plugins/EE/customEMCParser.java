@@ -4,22 +4,22 @@ import java.util.HashMap;
 
 public class customEMCParser
 {
-    public static HashMap Values = new HashMap();
+    public HashMap Values = new HashMap();
 
-    public static void parse(String var0)
+    public void parse(String var1)
     {
-        String[] var1 = var0.split(",");
-        int var2 = Integer.valueOf(var1[0]).intValue();
-        int var3 = Integer.valueOf(var1[1]).intValue();
-        int var4 = Integer.valueOf(var1[2]).intValue();
-        HashMap var5 = new HashMap();
+        String[] var2 = var1.split(",");
+        int var3 = Integer.valueOf(var2[0]).intValue();
+        int var4 = Integer.valueOf(var2[1]).intValue();
+        int var5 = Integer.valueOf(var2[2]).intValue();
+        HashMap var6 = new HashMap();
 
-        if (Values.get(Integer.valueOf(var2)) != null)
+        if (this.Values.get(Integer.valueOf(var3)) != null)
         {
-            var5 = (HashMap)Values.get(Integer.valueOf(var2));
+            var6 = (HashMap)this.Values.get(Integer.valueOf(var3));
         }
 
-        var5.put(Integer.valueOf(var3), Integer.valueOf(var4));
-        Values.put(Integer.valueOf(var2), var5);
+        var6.put(Integer.valueOf(var4), Integer.valueOf(var5));
+        this.Values.put(Integer.valueOf(var3), var6);
     }
 }

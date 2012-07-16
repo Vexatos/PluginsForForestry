@@ -129,7 +129,6 @@ public class BuildcraftEMCModule extends baseModule {
         values.put("Refinery", (values.get("Redstone Torch") * 2) + (values.get("Tank") * 3) + (values.get("Diamond Gear") * 1));
         
         
-        isTest = true;
         if (isTest) {
             File t = new File(Config.ConfigDir + "pluginEE_BuildcraftEMCValues.cfg");
             if (t.exists()) {

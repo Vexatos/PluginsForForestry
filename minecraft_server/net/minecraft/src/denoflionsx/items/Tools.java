@@ -1,7 +1,7 @@
 package net.minecraft.src.denoflionsx.items;
 
 import net.minecraft.src.*;
-import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
 
@@ -13,7 +13,10 @@ public class Tools extends multiItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        ItemStack bag = new ItemStack(pluginCore.metaItem,1,pluginCore.metaItem.metaMap.get("Milk Bag"));
+        if (!stack.isItemEqual(API.getItem("liquidvacuum"))){
+            return true;
+        }
+        ItemStack bag = API.getItem("milkbag");
         if (entity instanceof EntityCow){
             player.dropPlayerItemWithRandomChoice(bag.copy(), false);
         }
