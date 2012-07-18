@@ -171,8 +171,13 @@ public class BuildcraftEMCModule extends baseModule
         recipes.addDefault("AutoWorkbench=" + this.getBlockID(this.Factory, "autoWorkbenchBlock") + this.d + 0 + this.d + this.values.get("Auto Workbench"));
         recipes.addDefault("Quarry=" + this.getBlockID(this.Factory, "quarryBlock") + this.d + 0 + this.d + this.values.get("Quarry"));
         recipes.addDefault("Filler=" + this.getBlockID(this.Builders, "fillerBlock") + this.d + 0 + this.d + this.values.get("Filler"));
-        recipes.addDefault("Builder=" + this.getBlockID(this.Builders, "builderBlock") + this.d + 0 + this.d + this.values.get("Builder"));
-        recipes.addDefault("TemplateDrawer=" + this.getBlockID(this.Builders, "templateBlock") + this.d + 0 + this.d + this.values.get("Template Drawer"));
+
+        if (!denLib.detect("mod_BuildCraftSilicon"))
+        {
+            recipes.addDefault("Builder=" + this.getBlockID(this.Builders, "builderBlock") + this.d + 0 + this.d + this.values.get("Builder"));
+            recipes.addDefault("TemplateDrawer=" + this.getBlockID(this.Builders, "templateBlock") + this.d + 0 + this.d + this.values.get("Template Drawer"));
+        }
+
         recipes.addDefault("Refinery=" + this.getBlockID(this.Factory, "refineryBlock") + this.d + 0 + this.d + this.values.get("Refinery"));
         recipes.writeConfig();
         recipes.readFile();

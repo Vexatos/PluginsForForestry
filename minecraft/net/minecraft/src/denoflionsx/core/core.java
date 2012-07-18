@@ -15,7 +15,7 @@ import net.minecraft.src.mod_PluginsforForestry;
  */
 public class core {
 
-    protected static String version = "1.2";
+    protected static String version = "1.2c";
     public static final boolean client = true;
     public static boolean isBukkit = false;
     public static Config config = new Config("PluginsforForestry.cfg");

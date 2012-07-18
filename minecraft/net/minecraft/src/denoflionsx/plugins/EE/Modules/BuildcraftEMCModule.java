@@ -70,11 +70,11 @@ public class BuildcraftEMCModule extends baseModule {
         values.put("Diamond Pick", pluginEE.getEEValue(Item.pickaxeDiamond.shiftedIndex, 0));
         values.put("Lapiz", pluginEE.getEEValue(Item.dyePowder.shiftedIndex, 4));
         values.put("Redstone Torch", pluginEE.getEEValue(Block.torchRedstoneActive.blockID, 0));
-        values.put("Ink", pluginEE.getEEValue(Item.dyePowder.shiftedIndex,0));
-        values.put("Chest", pluginEE.getEEValue(Block.chest.blockID,0));
-        values.put("Yellow", pluginEE.getEEValue(Item.dyePowder.shiftedIndex,11));
-        values.put("Paper", pluginEE.getEEValue(Item.paper.shiftedIndex,0));
-        
+        values.put("Ink", pluginEE.getEEValue(Item.dyePowder.shiftedIndex, 0));
+        values.put("Chest", pluginEE.getEEValue(Block.chest.blockID, 0));
+        values.put("Yellow", pluginEE.getEEValue(Item.dyePowder.shiftedIndex, 11));
+        values.put("Paper", pluginEE.getEEValue(Item.paper.shiftedIndex, 0));
+
         // Gears
         values.put("Wooden Gear", (values.get("Stick") * 4));
         values.put("Stone Gear", (values.get("Cobblestone") * 4) + values.get("Wooden Gear"));
@@ -97,7 +97,7 @@ public class BuildcraftEMCModule extends baseModule {
         values.put("Tank", (values.get("Glass")) * 8);
         values.put("Marker", (values.get("Redstone Torch")) + (values.get("Lapiz")));
         values.put("Template", (values.get("Paper") * 8) + (values.get("Ink")));
-        
+
         // Pipes
         int temp[] = new int[]{values.get("Wood Plank"), values.get("Wood Plank"), values.get("Glass")};
         int woodpipe = pluginEE.flatten(temp, 8);
@@ -124,11 +124,11 @@ public class BuildcraftEMCModule extends baseModule {
         values.put("Auto Workbench", (values.get("Workbench")) + (values.get("Wooden Gear") * 4));
         values.put("Quarry", (values.get("Iron Gear") * 3) + (values.get("Gold Gear") * 2) + (values.get("Redstone")) + (values.get("Diamond Gear") * 2) + (values.get("Diamond Pick")));
         values.put("Filler", (values.get("Gold Gear") * 2) + (values.get("Yellow") * 2) + (values.get("Ink") * 2) + (values.get("Chest")) + (values.get("Workbench") + (values.get("Marker"))));
-        values.put("Builder",(values.get("Filler") - (values.get("Gold Gear") * 2)) + (values.get("Diamond Gear") * 2));
+        values.put("Builder", (values.get("Filler") - (values.get("Gold Gear") * 2)) + (values.get("Diamond Gear") * 2));
         values.put("Template Drawer", (values.get("Builder") - (values.get("Chest"))) + (values.get("Template")));
         values.put("Refinery", (values.get("Redstone Torch") * 2) + (values.get("Tank") * 3) + (values.get("Diamond Gear") * 1));
-        
-        
+
+
         if (isTest) {
             File t = new File(Config.ConfigDir + "pluginEE_BuildcraftEMCValues.cfg");
             if (t.exists()) {
@@ -155,8 +155,8 @@ public class BuildcraftEMCModule extends baseModule {
         recipes.addDefault("# Parts");
         recipes.addDefault("Waterproof=" + getItemID(Transport, waterproof) + d + 0 + d + values.get("Waterproof"));
         recipes.addDefault("Tank=" + getBlockID(Factory, "tankBlock") + d + 0 + d + values.get("Tank"));
-        recipes.addDefault("Marker=" + getBlockID(Builders,"markerBlock") + d + 0 + d + values.get("Marker"));
-        recipes.addDefault("Template=" + getItemID(Builders,"templateItem") + d + 0 + d + values.get("Template"));
+        recipes.addDefault("Marker=" + getBlockID(Builders, "markerBlock") + d + 0 + d + values.get("Marker"));
+        recipes.addDefault("Template=" + getItemID(Builders, "templateItem") + d + 0 + d + values.get("Template"));
         recipes.addDefault("# Pipes");
         recipes.addDefault("WoodPipe=" + getItemID(Transport, "pipeItemsWood") + d + 0 + d + values.get("Wood Pipe"));
         recipes.addDefault("CobblestonePipe=" + getItemID(Transport, "pipeItemsCobblestone") + d + 0 + d + values.get("Cobblestone Pipe"));
@@ -177,12 +177,14 @@ public class BuildcraftEMCModule extends baseModule {
         recipes.addDefault("GoldenConductivePipe=" + getItemID(Transport, "pipePowerGold") + d + 0 + d + values.get("Golden Conductive Pipe"));
         recipes.addDefault("# Machines");
         recipes.addDefault("MiningWell=" + getBlockID(Factory, "miningWellBlock") + d + 0 + d + values.get("Mining Well"));
-        recipes.addDefault("Pump=" + getBlockID(Factory,"pumpBlock") + d + 0 + d + values.get("Pump"));
-        recipes.addDefault("AutoWorkbench=" + getBlockID(Factory,"autoWorkbenchBlock") + d + 0 + d + values.get("Auto Workbench"));
-        recipes.addDefault("Quarry=" + getBlockID(Factory,"quarryBlock") + d + 0 + d + values.get("Quarry"));
+        recipes.addDefault("Pump=" + getBlockID(Factory, "pumpBlock") + d + 0 + d + values.get("Pump"));
+        recipes.addDefault("AutoWorkbench=" + getBlockID(Factory, "autoWorkbenchBlock") + d + 0 + d + values.get("Auto Workbench"));
+        recipes.addDefault("Quarry=" + getBlockID(Factory, "quarryBlock") + d + 0 + d + values.get("Quarry"));
         recipes.addDefault("Filler=" + getBlockID(Builders, "fillerBlock") + d + 0 + d + values.get("Filler"));
-        recipes.addDefault("Builder=" + getBlockID(Builders, "builderBlock") + d + 0 + d + values.get("Builder"));
-        recipes.addDefault("TemplateDrawer=" + getBlockID(Builders,"templateBlock") + d + 0 + d + values.get("Template Drawer"));
+        if (!denLib.detect("mod_BuildCraftSilicon")) {
+            recipes.addDefault("Builder=" + getBlockID(Builders, "builderBlock") + d + 0 + d + values.get("Builder"));
+            recipes.addDefault("TemplateDrawer=" + getBlockID(Builders, "templateBlock") + d + 0 + d + values.get("Template Drawer"));
+        }
         recipes.addDefault("Refinery=" + getBlockID(Factory, "refineryBlock") + d + 0 + d + values.get("Refinery"));
         recipes.writeConfig();
         recipes.readFile();
