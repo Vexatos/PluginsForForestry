@@ -42,8 +42,15 @@ public class API {
     
     public static boolean isPluginLoaded(String name) {
         boolean loaded;
+        String Package = API.class.getPackage().toString();
+        String expectedSSP = "package denoflionsx.API";
+        String pluginCore_Class = "denoflionsx.plugins.pluginCore";
+        if (!Package.equals(expectedSSP)){
+            // If this fires we're probably on bukkit.
+            pluginCore_Class = "net.minecraft.server." + pluginCore_Class;
+        }
         try {
-            Class pluginCore = Class.forName("denoflionsx.plugins.pluginCore");
+            Class pluginCore = Class.forName(pluginCore_Class);
             Method isPluginAlive = pluginCore.getMethod("isPluginAlive", new Class[]{String.class});
             String l = isPluginAlive.invoke(null, name).toString();
             if (l.toLowerCase().equals("true")) {

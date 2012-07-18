@@ -24,14 +24,23 @@ public class API
 
     public static boolean isPluginLoaded(String var0)
     {
+        String var2 = API.class.getPackage().toString();
+        String var3 = "package denoflionsx.API";
+        String var4 = "denoflionsx.plugins.pluginCore";
+
+        if (!var2.equals(var3))
+        {
+            var4 = "net.minecraft.server." + var4;
+        }
+
         try
         {
-            Class var2 = Class.forName("denoflionsx.plugins.pluginCore");
-            Method var3 = var2.getMethod("isPluginAlive", new Class[] {String.class});
-            String var4 = var3.invoke((Object)null, new Object[] {var0}).toString();
+            Class var5 = Class.forName(var4);
+            Method var6 = var5.getMethod("isPluginAlive", new Class[] {String.class});
+            String var7 = var6.invoke((Object)null, new Object[] {var0}).toString();
             boolean var1;
 
-            if (var4.toLowerCase().equals("true"))
+            if (var7.toLowerCase().equals("true"))
             {
                 var1 = true;
             }
@@ -42,9 +51,9 @@ public class API
 
             return var1;
         }
-        catch (Exception var5)
+        catch (Exception var8)
         {
-            var5.printStackTrace();
+            var8.printStackTrace();
             return false;
         }
     }
