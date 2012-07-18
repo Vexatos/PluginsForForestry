@@ -58,7 +58,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
             RecipeManagers.bottlerManager.addRecipe(5, new LiquidStack(this.items.get("Milk").getItem(), 1000), ItemInterface.getItem("canEmpty"), new ItemStack(pluginCore.metaItem.shiftedIndex, 1, pluginCore.metaItem.metaMap.get("Milk Can")));
             RecipeManagers.bottlerManager.addRecipe(5, new LiquidStack(this.items.get("Milk").getItem(), 1000), ItemInterface.getItem("waxCapsule"), new ItemStack(pluginCore.metaItem.shiftedIndex, 1, pluginCore.metaItem.metaMap.get("Milk Capsule")));
             RecipeManagers.bottlerManager.addRecipe(5, new LiquidStack(this.items.get("Milk").getItem(), 1000), ItemInterface.getItem("refractoryEmpty"), new ItemStack(pluginCore.metaItem.shiftedIndex, 1, pluginCore.metaItem.metaMap.get("Milk Capsule_Red")));
-            if (!pluginCore.plugins.get("BetterFarming").loaded) {
+            if (!API.isPluginLoaded("BetterFarming")) {
                 RecipeManagers.bottlerManager.addRecipe(5, new LiquidStack(this.items.get("Milk").getItem(), 1000), new ItemStack(Item.glassBottle, 1, 0), this.items.get("Milk Bottle"));
             } else {
                 RecipeManagers.bottlerManager.addRecipe(5, new LiquidStack(this.items.get("Milk").getItem(), 1000), new ItemStack(Item.glassBottle, 1, 0), pluginCore.plugins.get("BetterFarming").get("Milk Bottle"));

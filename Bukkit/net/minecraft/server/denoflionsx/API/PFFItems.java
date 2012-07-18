@@ -7,7 +7,6 @@ import net.minecraft.server.ItemStack;
 public class PFFItems
 {
     public static HashMap registeredItems = new HashMap();
-    private static final boolean verbose = false;
 
     public static void registerItem(String var0, Item var1, int var2)
     {

@@ -130,4 +130,16 @@ public class pluginCore
             var2.printStackTrace();
         }
     }
+
+    public static boolean isPluginAlive(String var0)
+    {
+        boolean var1 = false;
+
+        if (plugins.get(var0) != null)
+        {
+            var1 = ((pluginBase)plugins.get(var0)).loaded;
+        }
+
+        return var1;
+    }
 }

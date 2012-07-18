@@ -158,4 +158,12 @@ public class pluginCore {
         }
 
     }
+    
+    public static boolean isPluginAlive(String name){
+        boolean loaded = false;
+        if (plugins.get(name) != null){
+            loaded = plugins.get(name).loaded;
+        }
+        return loaded;
+    }
 }

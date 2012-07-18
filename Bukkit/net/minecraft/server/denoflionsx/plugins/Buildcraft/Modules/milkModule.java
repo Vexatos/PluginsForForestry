@@ -1,5 +1,6 @@
 package net.minecraft.server.denoflionsx.plugins.Buildcraft.Modules;
 
+import net.minecraft.server.denoflionsx.API.API;
 import net.minecraft.server.denoflionsx.denLib.denLib;
 import net.minecraft.server.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.server.denoflionsx.plugins.baseModule;
@@ -36,7 +37,7 @@ public class milkModule extends baseModule
             milk.add("bcmilkcan", ((Integer)milk.metaMap.get("Milk Can")).intValue(), 17, "Milk Can", 64);
             milk.add("bcmilkcap_red", ((Integer)milk.metaMap.get("Milk Capsule_Red")).intValue(), 49, "Milk Capsule", 64);
 
-            if (!((pluginBase)pluginCore.plugins.get("BetterFarming")).loaded)
+            if (!API.isPluginLoaded("BetterFarming"))
             {
                 milk.add("bcmilkbottle", ((Integer)milk.metaMap.get("Milk Bottle")).intValue(), 37, "Milk Bottle", 64);
                 LiquidContainerSystem.create(milk);

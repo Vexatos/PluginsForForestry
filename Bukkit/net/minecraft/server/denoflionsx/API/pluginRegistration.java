@@ -1,28 +1,10 @@
 package net.minecraft.server.denoflionsx.API;
 
 import java.lang.reflect.Method;
-import net.minecraft.server.ItemStack;
 
-public class API
+public class pluginRegistration
 {
-    public static final boolean verbose = false;
-
-    public static ItemStack getItem(String var0)
-    {
-        ItemStack var1 = (ItemStack)PFFItems.registeredItems.get(var0);
-
-        if (var1 != null)
-        {
-            return var1;
-        }
-        else
-        {
-            System.out.println("Unable to retrieve item: " + var0 + " from Plugins for Forestry!");
-            return null;
-        }
-    }
-
-    public static boolean isPluginLoaded(String var0)
+    public static boolean checkPlugin(String var0)
     {
         try
         {
