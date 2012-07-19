@@ -49,7 +49,9 @@ public class pluginCore {
             if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
                 plugins.put("EE", new pluginEE());
             }
-
+            if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))){
+                plugins.put("Updater", new pluginUpdater());
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

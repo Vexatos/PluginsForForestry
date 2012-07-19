@@ -26,7 +26,6 @@ public class pluginForestry extends pluginBase
     {
         if (!this.detect())
         {
-            core.print(this.mod + " not found!");
             return this.hooked;
         }
         else

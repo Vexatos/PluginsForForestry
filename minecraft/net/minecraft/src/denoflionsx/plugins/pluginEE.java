@@ -34,16 +34,25 @@ public class pluginEE extends pluginBase {
             this.defaults();
             this.values.writeConfig();
             this.values.readFile();
-            readEMC(this.values);
-            VanillaValues.assignValues();
-            if (denLib.detect("mod_Forestry")) {
-                ForestryEMCModule.load(this);
+            if (!detect()) {
+                // Extra safety check to drop out of this plugin if
+                // EE is missing.
+                core.print("EE not found! Aborting EMC assignment tasks.");
+                this.config.setOption("LoadIntegrationModules", "false");
+                this.config.setOption("LoadCustomEMCValuesFile", "false");
             }
-            if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport")) {
-                BuildcraftEMCModule.load(this);
+            if (this.getOptionBool("LoadCustomEMCValuesFile")) {
+                readEMC(this.values);
             }
-            
-            this.runConfig();
+            if (this.getOptionBool("LoadIntegrationModules")) {
+                VanillaValues.assignValues();
+                if (denLib.detect("mod_Forestry")) {
+                    ForestryEMCModule.load(this);
+                }
+                if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport")) {
+                    BuildcraftEMCModule.load(this);
+                }
+            }
             if (this.loaded = init()) {
                 recipes();
                 core.print(this.name + " loaded!");
@@ -54,6 +63,7 @@ public class pluginEE extends pluginBase {
     @Override
     protected void defaults() {
         this.config.addDefault("[EE Plugin Options]");
+        this.config.addDefault("LoadCustomEMCValuesFile=true");
         this.config.addDefault("LoadIntegrationModules=true");
         this.values.addDefault("[Define Custom EMC Here]");
         this.values.addDefault("# NameTag=ItemID,Damage Value,EMC Value");
@@ -180,11 +190,11 @@ public class pluginEE extends pluginBase {
 
     public static int getEEValue(int id, int dmg) {
         hookEE();
-        if (alchemicalValues.get(id) == null){
+        if (alchemicalValues.get(id) == null) {
             return 0;
         }
         HashMap<Integer, Integer> h = alchemicalValues.get(id);
-        if (h.get(dmg) == null){
+        if (h.get(dmg) == null) {
             return 0;
         }
         int value = h.get(dmg);

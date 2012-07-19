@@ -30,7 +30,6 @@ public class pluginLCTrees extends pluginBase {
     @Override
     protected boolean init() {
         if (!detect()) {
-            core.print(this.mod + " not found!");
             return this.hooked;
         }
         this.addBlock(mod,"newSap","Cherry Sapling",1);

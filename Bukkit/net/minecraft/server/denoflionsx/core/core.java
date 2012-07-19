@@ -9,7 +9,7 @@ import net.minecraft.server.ModLoader;
 
 public class core
 {
-    protected static String version = "1.2c";
+    protected static String version = "1.2d";
     public static final boolean client = false;
     public static boolean isBukkit = true;
     public static Config config = new Config("PluginsforForestry.cfg");

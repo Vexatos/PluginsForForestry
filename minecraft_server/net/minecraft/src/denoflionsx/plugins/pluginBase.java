@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 
@@ -80,7 +81,11 @@ public abstract class pluginBase {
     }
 
     protected boolean detect() {
-        return denLib.detect(this.mod);
+        boolean d = denLib.detect(this.mod);
+        if (!d){
+            core.print(this.mod + " not found!");
+        }
+        return d;
     }
 
     protected abstract void recipes();

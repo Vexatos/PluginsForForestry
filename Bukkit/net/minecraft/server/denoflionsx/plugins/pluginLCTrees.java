@@ -1,6 +1,5 @@
 package net.minecraft.server.denoflionsx.plugins;
 
-import net.minecraft.server.denoflionsx.core.core;
 import net.minecraft.server.denoflionsx.denLib.Config.Config;
 import net.minecraft.server.denoflionsx.plugins.LCTrees.cropLCTreesProvider;
 import forestry.api.cultivation.CropProviders;
@@ -30,7 +29,6 @@ public class pluginLCTrees extends pluginBase
     {
         if (!this.detect())
         {
-            core.print(this.mod + " not found!");
             return this.hooked;
         }
         else

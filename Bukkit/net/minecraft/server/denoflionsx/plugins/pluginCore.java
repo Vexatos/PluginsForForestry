@@ -35,6 +35,11 @@ public class pluginCore
             {
                 plugins.put("EE", new pluginEE());
             }
+
+            if (denLib.convertToBoolean(core.config.getOption("UpdateCheck")))
+            {
+                plugins.put("Updater", new pluginUpdater());
+            }
         }
         catch (Exception var1)
         {

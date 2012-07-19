@@ -44,7 +44,7 @@ public class pluginUpdater extends pluginBase {
             String msg = "[PluginsforForestry]: New Version " + this.compare.getOption("Version") + " available!";
             core.print(msg);
             if (core.isClient()){
-                ModLoader.getMinecraftInstance().thePlayer.addChatMessage(msg);
+                //ModLoader.getMinecraftInstance().thePlayer.addChatMessage(msg);
             }
         }
         }catch(Exception ex){

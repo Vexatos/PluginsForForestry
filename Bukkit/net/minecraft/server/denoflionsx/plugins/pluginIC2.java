@@ -23,6 +23,7 @@ public class pluginIC2 extends pluginBase
     public pluginIC2()
     {
         this.name = "pluginIC2";
+        this.mod = "mod_IC2";
         this.config = new Config(this.name + ".cfg");
         this.register();
     }
@@ -37,12 +38,18 @@ public class pluginIC2 extends pluginBase
             if (this.loaded = this.init())
             {
                 this.recipes();
+
+                if (this.hooked)
+                {
+                    core.print(this.name + " loaded!");
+                }
             }
         }
     }
 
     protected void defaults()
     {
+        this.config.addDefault("RadioactiveWaste_ItemID=" + core.ItemIDs[6]);
         this.config.addDefault("LavaFromUranium=40000");
         this.config.addDefault("ChanceOfGoo=10");
         this.config.addDefault("AmountOfFuelPerFermentation=1000");
@@ -52,27 +59,34 @@ public class pluginIC2 extends pluginBase
 
     protected boolean init()
     {
-        if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled")))
+        if (!this.detect())
         {
-            this.addItem("Uranium", Items.getItem("uraniumIngot"));
-            this.addItem("Scrap", Items.getItem("scrap"));
-            this.addBlock("Reinforced Stone", Items.getItem("reinforcedStone"));
-            this.addBlock("Reinforced Glass", Items.getItem("reinforcedGlass"));
-            this.addItem("Plates", Items.getItem("advancedAlloy"));
-            radioactive = new multiItem(core.ItemIDs[6], "radioactivestuff");
-            radioactive.metaMap.put("Radioactive Waste", Integer.valueOf(0));
-            radioactive.metaMap.put("Radioactive Goo", Integer.valueOf(1));
-            radioactive.metaMap.put("Containment Barrel", Integer.valueOf(2));
-            radioactive.metaMap.put("Filled Containment Barrel", Integer.valueOf(3));
-            radioactive.add("radioactivewaste", ((Integer)radioactive.metaMap.get("Radioactive Waste")).intValue(), 10, "Radioactive Waste");
-            radioactive.add("radioactivegoo", ((Integer)radioactive.metaMap.get("Radioactive Goo")).intValue(), 26, "Radioactive Goo", true);
-            radioactive.add("containmentbarrel", ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue(), 11, "Containment Barrel", 1);
-            radioactive.add("filledcontainmentbarrel", ((Integer)radioactive.metaMap.get("Filled Containment Barrel")).intValue(), 27, "Filled Containment Barrel", 1, true);
-            LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(radioactive.id, 1000), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Filled Containment Barrel")).intValue()), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue()), true));
-            this.hooked = true;
+            return false;
         }
+        else
+        {
+            if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled")))
+            {
+                this.addItem("Uranium", Items.getItem("uraniumIngot"));
+                this.addItem("Scrap", Items.getItem("scrap"));
+                this.addBlock("Reinforced Stone", Items.getItem("reinforcedStone"));
+                this.addBlock("Reinforced Glass", Items.getItem("reinforcedGlass"));
+                this.addItem("Plates", Items.getItem("advancedAlloy"));
+                radioactive = new multiItem(this.getOptionInt("RadioactiveWaste_ItemID").intValue(), "radioactivestuff");
+                radioactive.metaMap.put("Radioactive Waste", Integer.valueOf(0));
+                radioactive.metaMap.put("Radioactive Goo", Integer.valueOf(1));
+                radioactive.metaMap.put("Containment Barrel", Integer.valueOf(2));
+                radioactive.metaMap.put("Filled Containment Barrel", Integer.valueOf(3));
+                radioactive.add("radioactivewaste", ((Integer)radioactive.metaMap.get("Radioactive Waste")).intValue(), 10, "Radioactive Waste");
+                radioactive.add("radioactivegoo", ((Integer)radioactive.metaMap.get("Radioactive Goo")).intValue(), 26, "Radioactive Goo", true);
+                radioactive.add("containmentbarrel", ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue(), 11, "Containment Barrel", 1);
+                radioactive.add("filledcontainmentbarrel", ((Integer)radioactive.metaMap.get("Filled Containment Barrel")).intValue(), 27, "Filled Containment Barrel", 1, true);
+                LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(radioactive.id, 1000), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Filled Containment Barrel")).intValue()), new ItemStack(radioactive, 1, ((Integer)radioactive.metaMap.get("Containment Barrel")).intValue()), true));
+                this.hooked = true;
+            }
 
-        return this.hooked;
+            return this.hooked;
+        }
     }
 
     protected void recipes()

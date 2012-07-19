@@ -22,6 +22,7 @@ public class pluginIC2 extends pluginBase {
 
     public pluginIC2() {
         this.name = "pluginIC2";
+        this.mod = "mod_IC2";
         this.config = new Config(this.name + ".cfg");
         register();
     }
@@ -33,12 +34,16 @@ public class pluginIC2 extends pluginBase {
             this.runConfig();
             if (loaded = init()) {
                 recipes();
+                if (this.hooked) {
+                    core.print(this.name + " loaded!");
+                }
             }
         }
     }
 
     @Override
     protected void defaults() {
+        this.config.addDefault("RadioactiveWaste_ItemID=" + core.ItemIDs[6]);
         this.config.addDefault("LavaFromUranium=" + (1000000 / 20) * (100 - 20) / 100);
         this.config.addDefault("ChanceOfGoo=" + 10);
         this.config.addDefault("AmountOfFuelPerFermentation=" + 1000);
@@ -48,13 +53,16 @@ public class pluginIC2 extends pluginBase {
 
     @Override
     protected boolean init() {
+        if (!detect()) {
+            return false;
+        }
         if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
             this.addItem("Uranium", Items.getItem("uraniumIngot"));
             this.addItem("Scrap", Items.getItem("scrap"));
             this.addBlock("Reinforced Stone", Items.getItem("reinforcedStone"));
             this.addBlock("Reinforced Glass", Items.getItem("reinforcedGlass"));
             this.addItem("Plates", Items.getItem("advancedAlloy"));
-            radioactive = new multiItem(core.ItemIDs[6], "radioactivestuff");
+            radioactive = new multiItem(this.getOptionInt("RadioactiveWaste_ItemID"), "radioactivestuff");
             radioactive.metaMap.put("Radioactive Waste", 0);
             radioactive.metaMap.put("Radioactive Goo", 1);
             radioactive.metaMap.put("Containment Barrel", 2);

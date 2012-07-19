@@ -36,20 +36,33 @@ public class pluginEE extends pluginBase
             this.defaults();
             this.values.writeConfig();
             this.values.readFile();
-            readEMC(this.values);
-            VanillaValues.assignValues();
 
-            if (denLib.detect("mod_Forestry"))
+            if (!this.detect())
             {
-                ForestryEMCModule.load(this);
+                core.print("EE not found! Aborting EMC assignment tasks.");
+                this.config.setOption("LoadIntegrationModules", "false");
+                this.config.setOption("LoadCustomEMCValuesFile", "false");
             }
 
-            if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport"))
+            if (this.getOptionBool("LoadCustomEMCValuesFile"))
             {
-                BuildcraftEMCModule.load(this);
+                readEMC(this.values);
             }
 
-            this.runConfig();
+            if (this.getOptionBool("LoadIntegrationModules"))
+            {
+                VanillaValues.assignValues();
+
+                if (denLib.detect("mod_Forestry"))
+                {
+                    ForestryEMCModule.load(this);
+                }
+
+                if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport"))
+                {
+                    BuildcraftEMCModule.load(this);
+                }
+            }
 
             if (this.loaded = this.init())
             {
@@ -62,6 +75,7 @@ public class pluginEE extends pluginBase
     protected void defaults()
     {
         this.config.addDefault("[EE Plugin Options]");
+        this.config.addDefault("LoadCustomEMCValuesFile=true");
         this.config.addDefault("LoadIntegrationModules=true");
         this.values.addDefault("[Define Custom EMC Here]");
         this.values.addDefault("# NameTag=ItemID,Damage Value,EMC Value");

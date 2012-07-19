@@ -6,7 +6,7 @@ import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Trees.TileUniversalSapling;
 import net.minecraft.src.denoflionsx.plugins.IC2.TileEntityMachine;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
-//import net.minecraft.src.forge.MinecraftForgeClient;
+////import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.mod_PluginsforForestry;
 
 /*
@@ -15,7 +15,7 @@ import net.minecraft.src.mod_PluginsforForestry;
  */
 public class core {
 
-    protected static String version = "1.2";
+    protected static String version = "1.2d";
     public static final boolean client = false;
     public static boolean isBukkit = false;
     public static Config config = new Config("PluginsforForestry.cfg");

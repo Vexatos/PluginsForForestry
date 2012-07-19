@@ -37,7 +37,6 @@ public class pluginBetterFarming extends pluginBase {
     protected boolean init() {
 
         if (!detect()) {
-            core.print(mod + " not found!");
             return hooked;
         }
 

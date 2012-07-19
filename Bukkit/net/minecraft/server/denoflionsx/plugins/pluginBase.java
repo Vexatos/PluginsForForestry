@@ -1,5 +1,6 @@
 package net.minecraft.server.denoflionsx.plugins;
 
+import net.minecraft.server.denoflionsx.core.core;
 import net.minecraft.server.denoflionsx.denLib.denLib;
 import net.minecraft.server.denoflionsx.denLib.Config.Config;
 import java.util.ArrayList;
@@ -97,7 +98,14 @@ public abstract class pluginBase
 
     protected boolean detect()
     {
-        return denLib.detect(this.mod);
+        boolean var1 = denLib.detect(this.mod);
+
+        if (!var1)
+        {
+            core.print(this.mod + " not found!");
+        }
+
+        return var1;
     }
 
     protected abstract void recipes();

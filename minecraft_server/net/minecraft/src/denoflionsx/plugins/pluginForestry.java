@@ -8,9 +8,9 @@ import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.blueswaxModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.peatModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.solidfuelModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.RefineryHack;
-import net.minecraft.src.denoflionsx.plugins.Forestry.StillHack;
 import net.minecraft.src.denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.stillModule;
 
 public class pluginForestry extends pluginBase {
 
@@ -24,7 +24,6 @@ public class pluginForestry extends pluginBase {
     @Override
     protected boolean init() {
         if (!detect()) {
-            core.print(mod + " not found!");
             return hooked;
         }
         try {
@@ -32,9 +31,6 @@ public class pluginForestry extends pluginBase {
                 // If BC3 is detected forcefully disable the Refinery hack.
                 config.setOption("BiomassInRefinery", "false");
             }     
-            if (denLib.convertToBoolean(config.getOption("StillFix"))) {
-                StillHack.engage();
-            }
             if (denLib.convertToBoolean(config.getOption("BiomassInRefinery"))) {
                 RefineryHack.engage();
             }
@@ -63,6 +59,7 @@ public class pluginForestry extends pluginBase {
     public void register() {
         if (!loaded) {
             this.defaults();
+            stillModule.load(this);
             peatModule.load(this);
             blueswaxModule.load(this);
             solidfuelModule.load(this);
@@ -76,15 +73,6 @@ public class pluginForestry extends pluginBase {
     @Override
     protected void defaults() {
         config.addDefault("[Forestry Options]");
-        config.addDefault("# These options are for the Forestry Still");
-        config.addDefault("# StillFix removes SirSengir's Still recipe that has a hardcoded 10 -> 3 ratio...");
-        config.addDefault("# ...and substitutes my own with configurable ratio.");
-        config.addDefault("# If StillFix is disabled the PerCast options are not used.");
-        config.addDefault("StillFix=true");
-        config.addDefault("Still_BiomassPerCast=10");
-        config.addDefault("Still_BiofuelPerCast=5");
-        config.addDefault("# This sets the still's speed. Mim value is 1.");
-        config.addDefault("Still_WorkCycles=100");
         config.addDefault("BiofuelInBiogas=true");
         config.addDefault("BiofuelMJt=5");
         config.addDefault("BiofuelBurnTime=40000");

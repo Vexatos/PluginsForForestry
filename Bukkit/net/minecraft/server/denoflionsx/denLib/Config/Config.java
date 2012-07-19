@@ -105,4 +105,12 @@ public class Config
             denLib.print("Wrote config file: " + this.ConfigFile);
         }
     }
+
+    public void deleteConfig()
+    {
+        if ((new File(this.ConfigFile)).exists())
+        {
+            (new File(this.ConfigFile)).delete();
+        }
+    }
 }

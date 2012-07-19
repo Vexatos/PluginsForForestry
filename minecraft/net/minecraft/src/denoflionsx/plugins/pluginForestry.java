@@ -24,7 +24,6 @@ public class pluginForestry extends pluginBase {
     @Override
     protected boolean init() {
         if (!detect()) {
-            core.print(mod + " not found!");
             return hooked;
         }
         try {
