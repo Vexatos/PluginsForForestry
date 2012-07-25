@@ -16,6 +16,7 @@ public class defaults {
         core.config.addDefault("EnableBC2TankIntegration=false");
         core.config.addDefault("Verbose=true");
         core.config.addDefault("UpdateCheck=true");
+        core.config.addDefault("WoodenBucketWorksInNether=false");
         core.config.addDefault("liquidVacuum_ID=" + String.valueOf(5312 + 3));
         core.config.writeConfig();
     }
