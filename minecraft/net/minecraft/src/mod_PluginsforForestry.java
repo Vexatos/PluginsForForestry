@@ -1,9 +1,13 @@
 package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.src.denoflionsx.GUIs.baseGUI;
 import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.forge.IGuiHandler;
+import net.minecraft.src.forge.MinecraftForge;
+import net.minecraft.src.forge.NetworkMod;
 
-public class mod_PluginsforForestry extends BaseMod {
+public class mod_PluginsforForestry extends NetworkMod implements IGuiHandler{
 
     /*
      * This program is free software. It comes without any warranty, to the
@@ -15,11 +19,22 @@ public class mod_PluginsforForestry extends BaseMod {
     public static final String texture = "/denoflionsx/spritesheet.png";
     public static boolean hasPluginsLoaded = false;
     public static int count = 0;
+    public static BaseMod instance;
 
     public mod_PluginsforForestry() {
         ModLoader.setInGameHook(this, true, true);
+        instance = this;
+        MinecraftForge.setGuiHandler(this, this);
     }
 
+    @Override
+    public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+        if (ID == 1){
+            return new baseGUI(player);
+        }
+        return null;
+    }
+    
     @Override
     public void load() {
         core.runCoreFunctions();

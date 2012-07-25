@@ -19,6 +19,7 @@ import net.minecraft.src.ic2.api.Items;
 public class pluginIC2 extends pluginBase {
 
     public static multiItem radioactive;
+    //public static Block block;
 
     public pluginIC2() {
         this.name = "pluginIC2";
@@ -72,6 +73,9 @@ public class pluginIC2 extends pluginBase {
             radioactive.add("containmentbarrel", radioactive.metaMap.get("Containment Barrel"), 11, "Containment Barrel", 1);
             radioactive.add("filledcontainmentbarrel", radioactive.metaMap.get("Filled Containment Barrel"), 11 + 16, "Filled Containment Barrel", 1, true);
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(radioactive.shiftedIndex, 1000), new ItemStack(radioactive, 1, radioactive.metaMap.get("Filled Containment Barrel")), new ItemStack(radioactive, 1, radioactive.metaMap.get("Containment Barrel")), true));
+            //block = new BlockMachine(3333,Material.clay).setBlockName("Test");
+            //ModLoader.registerBlock(block);
+            //ModLoader.addName(block,"Test Block");
             this.hooked = true;
         }
         return this.hooked;

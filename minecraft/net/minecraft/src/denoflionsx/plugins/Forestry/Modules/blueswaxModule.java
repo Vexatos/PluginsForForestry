@@ -52,6 +52,7 @@ public class blueswaxModule extends baseModule {
             extrawax.metaMap.put("Rod of Freezing", 7);
             extrawax.metaMap.put("Test", 8);
             //-------------------------------------------------
+            extrawax.add("waxplaceholder", 0, 15, "PLACEHOLDER");
             extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), 15, "Wax Tablet");
             extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), 15 - 1, "Wax Cast");
             extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), 15 - 2, "Filled Wax Cast");

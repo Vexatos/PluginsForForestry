@@ -50,6 +50,7 @@ public class solidfuelModule extends baseModule {
             solidfuel.metaMap.put("RESERVED DO NOT USE", 0);
             solidfuel.metaMap.put("Solid Biofuel", 1);
             //----------------------------------------------
+            solidfuel.add("solidplaceholder",0, 23 + 2, "PLACEHOLDER");
             solidfuel.add("solidbiofuelbar", solidfuel.metaMap.get("Solid Biofuel"), 23 + 2, "Biofuel" + this.suffix, this.isShiny);
         }
         recipes();

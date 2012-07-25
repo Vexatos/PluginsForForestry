@@ -1,7 +1,7 @@
 package net.minecraft.src.denoflionsx.plugins.IC2;
 
 import net.minecraft.src.*;
-import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.denoflionsx.GUIs.baseGUI;
 
 public class BlockMachine extends BlockContainer{
     
@@ -19,11 +19,7 @@ public class BlockMachine extends BlockContainer{
 
     @Override
     public boolean blockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer) {
-        TileEntityMachine t = (TileEntityMachine)par1World.getBlockTileEntity(par2, par3, par4);
-        String msg = String.valueOf(t.getStoredEU());
-        core.print("stored eu: " + msg);
-        msg = String.valueOf(t.getStoredLiquid());
-        core.print("stored liquid: " + msg);
-        return super.blockActivated(par1World, par2, par3, par4, par5EntityPlayer);
+        par5EntityPlayer.openGui(mod_PluginsforForestry.instance, 1, par1World, par2, par3, par4);
+        return true;
     }     
 }

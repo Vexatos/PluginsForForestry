@@ -8,6 +8,8 @@ public class shinyObject {
     private EnumRarity rare = EnumRarity.common;
 
     public shinyObject() {
+        this.isShiny = false;
+        this.rare = EnumRarity.common;
     }
 
     public shinyObject(boolean param1, EnumRarity param2) {
