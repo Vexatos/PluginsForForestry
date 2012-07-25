@@ -2,6 +2,8 @@ package net.minecraft.src.denoflionsx.items;
 
 import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
 
@@ -13,16 +15,15 @@ public class Tools extends multiItem {
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-        if (!stack.isItemEqual(API.getItem("liquidvacuum"))){
+        if (!stack.isItemEqual(API.getItem("liquidvacuum"))) {
             return true;
         }
         ItemStack bag = API.getItem("milkbag");
-        if (entity instanceof EntityCow){
+        if (entity instanceof EntityCow) {
             player.dropPlayerItemWithRandomChoice(bag.copy(), false);
         }
         return true;
     }
-
 
 //    @Override
 //    public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7) {
@@ -37,7 +38,6 @@ public class Tools extends multiItem {
 //        }
 //        return true;
 //    }
-    
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         //float var4 = 1.0F;
@@ -81,10 +81,14 @@ public class Tools extends multiItem {
                 ++var13;
             }
             if (par2World.isAirBlock(var13, var14, var15) || par2World.getBlockMaterial(var13, var14, var15) == Material.water) {
-                par2World.setBlockAndMetadataWithNotify(var13, var14, var15, Block.waterMoving.blockID, 0);
+                if (!denLib.convertToBoolean(core.config.getOption("WoodenBucketWorksInNether")) && par2World.worldProvider.isHellWorld){
+                    // Water is eaten.
+                }else{
+                  par2World.setBlockAndMetadataWithNotify(var13, var14, var15, Block.waterMoving.blockID, 0);  
+                }   
                 return new ItemStack(this, 1, this.metaMap.get("Wooden Bucket"));
             }
-        }else if (par1ItemStack.isItemEqual(new ItemStack(pluginCore.metaItem,1,pluginCore.metaItem.metaMap.get("Milker")))){
+        } else if (par1ItemStack.isItemEqual(new ItemStack(pluginCore.metaItem, 1, pluginCore.metaItem.metaMap.get("Milker")))) {
 //            core.print("" + var12.typeOfHit.name());
 //            if (var12.entityHit instanceof EntityCow){
 //                ItemStack bag = new ItemStack(pluginCore.metaItem,1,pluginCore.metaItem.metaMap.get("Milk Bag"));
