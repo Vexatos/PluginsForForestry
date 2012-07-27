@@ -65,6 +65,7 @@ public class pluginEE extends pluginBase {
         this.config.addDefault("[EE Plugin Options]");
         this.config.addDefault("LoadCustomEMCValuesFile=true");
         this.config.addDefault("LoadIntegrationModules=true");
+        //-----------------------------------------------------
         this.values.addDefault("[Define Custom EMC Here]");
         this.values.addDefault("# NameTag=ItemID,Damage Value,EMC Value");
     }

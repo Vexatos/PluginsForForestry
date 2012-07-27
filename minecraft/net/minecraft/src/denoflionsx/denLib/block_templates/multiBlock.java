@@ -32,7 +32,22 @@ public class multiBlock extends Block implements ITextureProvider {
     @Override
     public int getBlockTextureFromSideAndMetadata(int par1, int par2) {
         Integer map[] = this.textureMap.get(par2);
-        Integer tex = map[par1];
+        // Attempted fix for NPE. 
+        // I think the crash has something to do with multipaged chests...
+        // ...from other mods.
+        Integer tex = 0;
+        if (map[par1] != null) {
+            // Set texture as normal.
+            tex = map[par1];
+        } else {
+            // Attempt to find any valid texture.
+            for (Integer i : map) {
+                if (i != null) {
+                    tex = i;
+                    break;
+                }
+            }
+        }
         return tex;
     }
 
