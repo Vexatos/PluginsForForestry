@@ -3,7 +3,7 @@ package net.minecraft.src.denoflionsx.plugins.Forestry.Modules;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.core.core;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
+import net.minecraft.src.denoflionsx.items.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.solidfuel.barObject;
 import net.minecraft.src.denoflionsx.plugins.baseModule;
 import net.minecraft.src.denoflionsx.plugins.pluginBase;
@@ -12,6 +12,8 @@ import forestry.api.fuels.EngineCopperFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
+import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.denLib.denLib;
 
 public class solidfuelModule extends baseModule {
 
@@ -83,7 +85,7 @@ public class solidfuelModule extends baseModule {
         items.add(ItemInterface.getItem("pollen"));
         ArrayList<Object[]> recipes = makeRecipes(b, items);
         if (this.getOptionBool("SugaryPeat_Enabled")) {
-            baseBar = new ItemStack(peatModule.sugarypeat, 1, peatModule.sugarypeat.metaMap.get("Sugary Peat"));
+            baseBar = API.getItem(denLib.toLowerCaseNoSpaces("Sugary Peat Bar"));
         } else {
             baseBar = ItemInterface.getItem("peat");
         }

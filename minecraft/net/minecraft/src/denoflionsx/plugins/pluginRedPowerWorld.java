@@ -11,21 +11,12 @@ import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.plugins.Redpower.cropFlaxProvider;
 
 public class pluginRedPowerWorld extends pluginBase {
-    
-    //------------------------------------------------
-    // THIS PLUGIN IS DISABLED IN ALL PUBLIC RELEASES!
-    //------------------------------------------------
-    // This plugin is for my personal use. I will not
-    // enable it for public releases because I never 
-    // got permission from Elorram to relect into her code.
-    //------------------------------------------------
 
     protected String theClass = "RedPowerWorld";
 
     public pluginRedPowerWorld() {
         this.mod = "mod_RedPowerCore";
         this.name = "pluginRedPowerWorld";
-        this.isLate = true;
         if (core.isBukkit){
             theClass = "net.minecraft.server." + theClass;
         }
@@ -62,12 +53,9 @@ public class pluginRedPowerWorld extends pluginBase {
 
     @Override
     protected void recipes() {
-
         FlowerManager.plainFlowers.add(this.blocks.get("Indigo Flower"));
         RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Flax Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, 100));
         CropProviders.cerealCrops.add(new cropFlaxProvider(Item.silk, this.items.get("Flax Seeds").getItem(), this.getBlock("Flax"),4, new int[]{3,3}));
-        
-
     }
 
     @Override
@@ -82,7 +70,7 @@ public class pluginRedPowerWorld extends pluginBase {
 
     @Override
     protected void defaults() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
     
     

@@ -2,7 +2,6 @@ package net.minecraft.src.denoflionsx.items;
 
 import java.util.ArrayList;
 import net.minecraft.src.*;
-import net.minecraft.src.denoflionsx.denLib.block_templates.multiBlock;
 
 public class waxSlab extends multiBlock {
 

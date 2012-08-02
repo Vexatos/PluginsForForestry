@@ -3,7 +3,6 @@ package net.minecraft.src.denoflionsx.items;
 import java.util.HashMap;
 import java.util.List;
 import net.minecraft.src.*;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.blueswaxModule;
 
 public class waxCast extends multiItem {

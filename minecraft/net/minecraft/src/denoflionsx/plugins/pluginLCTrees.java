@@ -13,7 +13,6 @@ public class pluginLCTrees extends pluginBase {
         this.mod = "mod_LCTrees";
         this.name = "pluginLCTrees";
         this.config = new Config("pluginLCTrees.cfg");
-        this.isBeta = true;
         this.register();
     }
 
@@ -34,11 +33,6 @@ public class pluginLCTrees extends pluginBase {
         }
         this.addBlock(mod,"newSap","Cherry Sapling",1);
         this.addBlock(mod,"newLogs","Cherry Log",1);
-        if (this.isBeta) {
-            ModLoader.addRecipe(this.blocks.get("Cherry Sapling"), "D", Character.valueOf('D'), Block.dirt);
-            ModLoader.addRecipe(this.blocks.get("Cherry Log"),"S",Character.valueOf('S'),this.blocks.get("Cherry Sapling"));
-            CropProviders.arborealCrops.add(new cropLCTreesProvider(this.getBlock("Cherry Sapling"),null,new int[]{this.blocks.get("Cherry Sapling").itemID},this.blocks.get("Cherry Sapling").getItemDamage()));
-        }
         
         return this.hooked;
     }

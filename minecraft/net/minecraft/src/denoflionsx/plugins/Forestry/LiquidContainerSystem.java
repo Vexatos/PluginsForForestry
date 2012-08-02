@@ -6,7 +6,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
+import net.minecraft.src.denoflionsx.items.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.BC2.addLiquidBC2;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.BC3.addLiquidBC3;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;

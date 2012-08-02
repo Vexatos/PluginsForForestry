@@ -3,7 +3,6 @@ package net.minecraft.src.denoflionsx.items;
 import java.util.Random;
 import net.minecraft.src.Material;
 import net.minecraft.src.ModLoader;
-import net.minecraft.src.denoflionsx.denLib.block_templates.multiBlock;
 
 public class waxBlock extends multiBlock{
     

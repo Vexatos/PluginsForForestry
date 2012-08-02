@@ -10,7 +10,11 @@ import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.solidfuelModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.RefineryHack;
 import net.minecraft.src.denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
-import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.stillModule;
+import forestry.api.fuels.EngineBronzeFuel;
+import forestry.api.fuels.FuelManager;
+import forestry.api.liquids.LiquidStack;
+import forestry.api.recipes.RecipeManagers;
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.*;
 
 public class pluginForestry extends pluginBase {
 
@@ -30,7 +34,7 @@ public class pluginForestry extends pluginBase {
             if (denLib.detect("mod_BuildCraftSilicon")) {
                 // If BC3 is detected forcefully disable the Refinery hack.
                 config.setOption("BiomassInRefinery", "false");
-            }     
+            }
             if (denLib.convertToBoolean(config.getOption("BiomassInRefinery"))) {
                 RefineryHack.engage();
             }
@@ -53,6 +57,12 @@ public class pluginForestry extends pluginBase {
             addFermenterRecipes.addItem(Item.sugar, 200, this);
             addFermenterRecipes.add(ItemInterface.getItem("liquidSeedOil"), 1.5F);
         }
+        if (denLib.convertToBoolean(this.config.getOption("StillFix"))) {
+            RecipeManagers.stillManager.addRecipe(Integer.valueOf(this.config.getOption("Still_WorkCycles")), new LiquidStack(ItemInterface.getItem("liquidBiomass").getItem(), Integer.valueOf(this.config.getOption("Still_BiomassPerCast"))), new LiquidStack(ItemInterface.getItem("liquidBiofuel").getItem(), Integer.valueOf(this.config.getOption("Still_BiofuelPerCast"))));
+        }
+        if (denLib.convertToBoolean(this.config.getOption("BiofuelInBiogas"))) {
+            FuelManager.bronzeEngineFuel.put(Integer.valueOf(ItemInterface.getItem("liquidBiofuel").itemID), new EngineBronzeFuel(ItemInterface.getItem("liquidBiofuel"), Integer.valueOf(this.config.getOption("BiofuelMJt")), Integer.valueOf(this.config.getOption("BiofuelBurnTime")), 1));
+        }
     }
 
     @Override
@@ -63,6 +73,7 @@ public class pluginForestry extends pluginBase {
             peatModule.load(this);
             blueswaxModule.load(this);
             solidfuelModule.load(this);
+            extraFuelsModule.load(this);
             this.runConfig();
             if (loaded = init()) {
                 recipes();

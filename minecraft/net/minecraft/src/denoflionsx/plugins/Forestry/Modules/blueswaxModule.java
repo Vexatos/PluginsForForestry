@@ -10,12 +10,14 @@ import forestry.api.liquids.LiquidContainer;
 import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
+import net.minecraft.src.denoflionsx.denLib.Colors;
 
 public class blueswaxModule extends baseModule {
 
     public static waxCast extrawax;
     public static waxBlock thatch;
     public static waxSlab thatchslab;
+    private int WaxCastPerCraft;
 
     public blueswaxModule(pluginBase parent) {
         super(parent);
@@ -35,6 +37,7 @@ public class blueswaxModule extends baseModule {
         this.parent.config.addDefault("ThatchedRoof_Enabled=true");
         this.parent.config.addDefault("ThatchedRoof_BlockID=181");
         this.parent.config.addDefault("ThatchedRoofSlab_BlockID=185");
+        this.addDefault("WaxCast_AmountPerCraft=" + 1);
     }
 
     @Override
@@ -52,25 +55,27 @@ public class blueswaxModule extends baseModule {
             extrawax.metaMap.put("Rod of Freezing", 7);
             extrawax.metaMap.put("Test", 8);
             //-------------------------------------------------
-            extrawax.add("waxplaceholder", 0, 15, "PLACEHOLDER");
-            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), 15, "Wax Tablet");
-            extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), 15 - 1, "Wax Cast");
-            extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), 15 - 2, "Filled Wax Cast");
-            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), 30, "Refractory Cast");
-            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), 29, "Filled Wax Cast");
-            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), 28, "Lava Cast");
-            extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), 31, "Rod of Freezing", 1);
-            extrawax.add("test", extrawax.metaMap.get("Test"), 12, "Test (Ignore Me)");
+            int toShift = 15;
+            extrawax.add("waxplaceholder", 0, Placeholder.Sprite.RADICAL_EDWARD.getIndex(), "PLACEHOLDER");
+            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), Colors.shiftRow(toShift,7), "Wax Tablet");
+            extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), Colors.shiftRow(toShift,0), "Wax Cast");
+            extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), Colors.shiftRow(toShift,1), "Filled Wax Cast");
+            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), Colors.shiftRow(toShift,2), "Refractory Cast");
+            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), Colors.shiftRow(toShift,3), "Filled Wax Cast");
+            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), Colors.shiftRow(toShift,4), "Lava Cast");
+            extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift,5), "Rod of Freezing", 1);
+            //extrawax.add("test", extrawax.metaMap.get("Test"), 12, "Test (Ignore Me)");
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.lavaStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast_Red")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             //-------------------------------------------------
             if (this.getOptionBool("ThatchedRoof_Enabled")) {
                 thatch = new waxBlock(this.getOptionInt("ThatchedRoof_BlockID"), Material.clay, "Thatch");
-                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
+                int faces1[] = new int[]{Colors.shiftRow(3, 7),Colors.shiftRow(4, 7)};
+                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
                 waxBlockItem.names.put(0, "Test 1");
                 thatchslab = new waxSlab(this.getOptionInt("ThatchedRoofSlab_BlockID"), Material.clay, "ThatchSlab");
-                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{8, 8, 9, 9, 9, 9});
+                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
                 waxSlabItem.names.put(0, "Thatched Slab");
             }
             recipes();
@@ -82,6 +87,7 @@ public class blueswaxModule extends baseModule {
         //--------------------------
         // BLUE'S BEES WAX STUFF
         //--------------------------
+        this.WaxCastPerCraft = this.getOptionInt("WaxCast_AmountPerCraft");
         if (denLib.convertToBoolean(this.parent.config.getOption("BluesWaxStuff_Enabled"))) {
             ModLoader.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
                         "XSX",
@@ -130,12 +136,12 @@ public class blueswaxModule extends baseModule {
                         "PPP",
                         Character.valueOf('P'), Block.planks,
                         Character.valueOf('T'), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet"))});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), new Object[]{
+            ModLoader.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Wax Cast")), new Object[]{
                         "WWW",
                         "WXW",
                         "WWW",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), new Object[]{
+            ModLoader.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Refractory Cast")), new Object[]{
                         "WWW",
                         "WXW",
                         "WWW",

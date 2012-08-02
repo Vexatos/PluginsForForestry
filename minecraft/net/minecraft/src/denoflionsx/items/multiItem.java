@@ -1,4 +1,4 @@
-package net.minecraft.src.denoflionsx.denLib.item_templates;
+package net.minecraft.src.denoflionsx.items;
 
 import forestry.api.liquids.LiquidContainer;
 import forestry.api.liquids.LiquidManager;

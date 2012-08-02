@@ -2,7 +2,7 @@ package net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules;
 
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
+import net.minecraft.src.denoflionsx.items.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Forestry.LiquidContainerSystem;
 import net.minecraft.src.denoflionsx.plugins.baseModule;
 import net.minecraft.src.denoflionsx.plugins.pluginBase;

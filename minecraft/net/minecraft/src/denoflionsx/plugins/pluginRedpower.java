@@ -10,19 +10,11 @@ import forestry.api.fuels.FuelManager;
 
 public class pluginRedpower extends pluginBase {
 
-    //------------------------------------------------
-    // THIS PLUGIN IS DISABLED IN ALL PUBLIC RELEASES!
-    //------------------------------------------------
-    // This plugin is for my personal use. I will not
-    // enable it for public releases because I never 
-    // got permission from Elorram to relect into her code.
-    //------------------------------------------------
     protected String theClass = "RedPowerBase";
 
     public pluginRedpower() {
         this.mod = "mod_RedPowerCore";
         this.name = "pluginRedpower";
-        this.isLate = true;
         if (core.isBukkit){
             theClass = "net.minecraft.server." + theClass;
         }
@@ -58,11 +50,6 @@ public class pluginRedpower extends pluginBase {
     @Override
     protected void recipes() {
         FuelManager.copperEngineFuel.put(this.items.get("Nikolite").itemID, new EngineCopperFuel(this.items.get("Nikolite"), 1, 5000));
-        ModLoader.addRecipe(new ItemStack(Item.dyePowder, 1, 4), new Object[]{
-                    "XXX",
-                    "XIX",
-                    "XXX",
-                    Character.valueOf('I'), this.items.get("Indigo Dye")});
     }
 
     @Override
@@ -77,6 +64,6 @@ public class pluginRedpower extends pluginBase {
 
     @Override
     protected void defaults() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

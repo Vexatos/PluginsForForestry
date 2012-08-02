@@ -1,7 +1,6 @@
 package net.minecraft.src.denoflionsx.plugins.IC2;
 
 import net.minecraft.src.*;
-import net.minecraft.src.denoflionsx.GUIs.baseGUI;
 
 public class BlockMachine extends BlockContainer{
     

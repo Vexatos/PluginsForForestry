@@ -6,7 +6,7 @@ import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
+import net.minecraft.src.denoflionsx.items.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;

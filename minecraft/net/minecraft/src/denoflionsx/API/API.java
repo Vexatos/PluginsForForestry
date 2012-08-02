@@ -28,6 +28,7 @@ public class API {
         ItemStack I = PFFItems.registeredItems.get(s);
 
         if (I != null) {
+            System.out.println("Loaded item " + s + " from API");
             return I;
         } else {
             System.out.println("Unable to retrieve item: " + s + " from Plugins for Forestry!");

@@ -10,6 +10,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.items.Tools;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.TankManager;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.goldGear;
@@ -32,24 +33,13 @@ public class pluginCore {
     public static void registerLatePlugins() {
 
         try {
-            //----------------------------------------------------------
-                /*
-             * These two plugins are removed from public releases because I fear
-             * Elorram. The source files are removed as well, so uncommenting
-             * them won't do anything. These two plugins make Flax seeds work in
-             * the squeezer, add indigo flowers to the bee flower list, and give
-             * nikolite some practical uses since it tends to pile up in
-             * ridiculous quantites.
-             */
-            //----------------------------------------------------------
-            if (!isRelease) {
-                //plugins.put("RedPower", new pluginRedpower());
+            if (denLib.convertToBoolean(core.config.getOption("pluginRedPower_Enabled"))) {
                 plugins.put("RedPowerWorld", new pluginRedPowerWorld());
             }
             if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
                 plugins.put("EE", new pluginEE());
             }
-            if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))){
+            if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))) {
                 plugins.put("Updater", new pluginUpdater());
             }
         } catch (Exception ex) {
@@ -80,12 +70,12 @@ public class pluginCore {
         metaItem.metaMap.put("Filled Wooden Bucket", 12);
         metaItem.metaMap.put("Debug Tool", 13);
         metaItem.metaMap.put("Milk Bag", 14);
-        metaItem.add("liquidvacuum", metaItem.metaMap.get("Milker"), 2, "Liquid Vacuum", 1);
-        metaItem.add("woodenbucket", metaItem.metaMap.get("Wooden Bucket"), 46, "Wooden Bucket", 1);
-        metaItem.add("filledwoodenbucket", metaItem.metaMap.get("Filled Wooden Bucket"), 45, "Filled Wooden Bucket", 1);
-        metaItem.add("milkbag", metaItem.metaMap.get("Milk Bag"), 7, "Milk Bag");
+        metaItem.add("liquidvacuum", metaItem.metaMap.get("Milker"), Colors.shiftRow(3, 2), "Liquid Vacuum", 1);
+        metaItem.add("woodenbucket", metaItem.metaMap.get("Wooden Bucket"), Colors.shiftRow(3,1), "Wooden Bucket", 1);
+        metaItem.add("filledwoodenbucket", metaItem.metaMap.get("Filled Wooden Bucket"), Colors.shiftRow(4,1), "Filled Wooden Bucket", 1);
+        metaItem.add("milkbag", metaItem.metaMap.get("Milk Bag"), Colors.shiftRow(4,2), "Milk Bag");
         if (debugmode) {
-            metaItem.add("debugtool", metaItem.metaMap.get("Debug Tool"), 4, "Debug Tool", 1);
+            metaItem.add("debugtool", metaItem.metaMap.get("Debug Tool"), Colors.shiftRow(15, 6), "Debug Tool", 1);
             ModLoader.addRecipe(new ItemStack(metaItem, 1, metaItem.metaMap.get("Debug Tool")), new Object[]{
                         "XXX",
                         "XDX",
@@ -160,10 +150,10 @@ public class pluginCore {
         }
 
     }
-    
-    public static boolean isPluginAlive(String name){
+
+    public static boolean isPluginAlive(String name) {
         boolean loaded = false;
-        if (plugins.get(name) != null){
+        if (plugins.get(name) != null) {
             loaded = plugins.get(name).loaded;
         }
         return loaded;

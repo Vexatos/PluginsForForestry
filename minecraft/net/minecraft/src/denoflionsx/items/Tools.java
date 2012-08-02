@@ -4,7 +4,6 @@ import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.denLib.item_templates.multiItem;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
 
 public class Tools extends multiItem {

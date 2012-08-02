@@ -5,7 +5,6 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.plugins.pluginBetterFarming;
-import net.minecraft.src.denoflionsx.plugins.pluginCore;
 import forestry.api.core.ItemInterface;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
@@ -43,10 +42,10 @@ public class addFermenterRecipes {
         RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, 1.5F, new LiquidStack(biomass, 1), new LiquidStack(seedoil, 1));
         // This little bit is to prevent a potential null pointer if you call this method from within pluginBetterFarming.
         if (t instanceof pluginBetterFarming) {
-            RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+            RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(API.getItem("citrusjuice").getItem(), 1));
         } else {
             if (API.isPluginLoaded("BetterFarming")) {
-                RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+                RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(API.getItem("citrusjuice").getItem(), 1));
             }
         }
 
@@ -58,7 +57,7 @@ public class addFermenterRecipes {
         RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(honey, 1));
         RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(seedoil, 1));
         if (API.isPluginLoaded("BetterFarming")) {
-            RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(pluginBetterFarming.citrusJuice, 1));
+            RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(API.getItem("citrusjuice").getItem(), 1));
         }
     }
 }

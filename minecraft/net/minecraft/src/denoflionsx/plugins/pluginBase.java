@@ -19,9 +19,7 @@ public abstract class pluginBase {
     protected String name = "";
     public boolean loaded = false;
     protected boolean hooked = false;
-    protected boolean isBeta = false;
     protected boolean hasModules = false;
-    public boolean isLate = false;
 
     public pluginBase() {
         
