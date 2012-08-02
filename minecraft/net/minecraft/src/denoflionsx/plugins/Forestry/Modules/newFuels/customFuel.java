@@ -24,7 +24,7 @@ public class customFuel {
     private int itemID = 0;
     private int isSafeFuel = 1;
     private int color = Colors.Values.WHITE.getColor();
-    public static int numOfContainers = 7;
+    public static int numOfContainers = 6;
     private int redCapMeta = 3;
 
     public customFuel(String name, int MJt, int burnTime, int textures[], int ItemID, int color) {

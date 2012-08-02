@@ -48,7 +48,7 @@ public class multiItem extends Item implements ITextureProvider {
 
             }
         }
-        return "";
+        return this.itemMap.get(0);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class multiItem extends Item implements ITextureProvider {
         return -1;
     }
 
-    @Override public EnumRarity getRarity(ItemStack par1ItemStack) {return this.shinyMap.get(par1ItemStack.getItemDamage()).getRare();}
+    @Override public EnumRarity getRarity(ItemStack par1ItemStack) {if (this.shinyMap.get(par1ItemStack.getItemDamage()) != null){return this.shinyMap.get(par1ItemStack.getItemDamage()).getRare();}else{return new shinyObject().getRare();}}
 
     @Override public boolean hasEffect(ItemStack par1ItemStack) {return this.shinyMap.get(par1ItemStack.getItemDamage()).getShiny();}
 
