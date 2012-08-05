@@ -14,6 +14,7 @@ import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.denLib.denLib;
+import net.minecraft.src.denoflionsx.items.Placeholder;
 
 public class solidfuelModule extends baseModule {
 
@@ -52,7 +53,7 @@ public class solidfuelModule extends baseModule {
             solidfuel.metaMap.put("RESERVED DO NOT USE", 0);
             solidfuel.metaMap.put("Solid Biofuel", 1);
             //----------------------------------------------
-            solidfuel.add("solidplaceholder",0, 23 + 2, "PLACEHOLDER");
+            solidfuel.add("solidplaceholder",0, Placeholder.Sprite.RADICAL_EDWARD.getIndex(), "PLACEHOLDER");
             solidfuel.add("solidbiofuelbar", solidfuel.metaMap.get("Solid Biofuel"), 23 + 2, "Biofuel" + this.suffix, this.isShiny);
         }
         recipes();

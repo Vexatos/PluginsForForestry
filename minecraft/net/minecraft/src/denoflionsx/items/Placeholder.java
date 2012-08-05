@@ -10,7 +10,7 @@ public class Placeholder {
         
         int index;
         private Sprite(){
-            this.index = Colors.shiftRow(15, 15);
+            this.index = Colors.shiftRow(0, 0);
         }
 
         public int getIndex() {

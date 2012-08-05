@@ -21,21 +21,43 @@ public class Colors {
         // Blue insists Salmon is a color. Looks pink to me.
         // Her response: haters gonna hate.
 
-        WHITE, PINK(255, 95, 194), BROWN(42, 26, 15), LIGHTBROWN(132, 107, 89),
-        SALMON(247, 158, 145), ORANGE(252, 208, 132), LIME(201, 255, 55);
+        WHITE, PINK(255, 77, 83), BROWN(42, 26, 15), LIGHTBROWN(132, 107, 89),
+        SALMON(247, 158, 145), ORANGE(255, 181, 41), LIME(201, 255, 55);
         private int color = 0;
+        private int r = 0;
+        private int b = 0;
+        private int g = 0;
 
         private Values(int red, int green, int blue) {
             color = convertRBG(red, green, blue);
+            r = red;
+            b = blue;
+            g = green;
         }
 
         private Values() {
             // This makes white.
             color = convertRBG(255, 255, 255);
+            r = 255;
+            b = 255;
+            g = 255;
         }
 
         public int getColor() {
             return color;
         }
+
+        public int getB() {
+            return b;
+        }
+
+        public int getG() {
+            return g;
+        }
+
+        public int getR() {
+            return r;
+        }
+        
     }
 }

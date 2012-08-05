@@ -71,8 +71,8 @@ public class pluginForestry extends pluginBase {
             this.defaults();
             stillModule.load(this);
             peatModule.load(this);
-            blueswaxModule.load(this);
-            solidfuelModule.load(this);
+            //blueswaxModule.load(this);
+            //solidfuelModule.load(this);
             extraFuelsModule.load(this);
             this.runConfig();
             if (loaded = init()) {

@@ -87,7 +87,11 @@ public class denLib {
     }
     
     public static String toLowerCaseNoSpaces(String s){
-        return s.toLowerCase().replaceAll("\\s", "");
+        return toNoSpaces(s).toLowerCase();
+    }
+    
+    public static String toNoSpaces(String s){
+        return s.replaceAll("\\s", "");
     }
 
     public static void classSnoop(String param1) {

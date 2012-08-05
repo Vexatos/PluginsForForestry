@@ -15,6 +15,7 @@ public class milkModule extends baseModule {
 
     public static multiItem milk;
     public static boolean disableBCMilk = false;
+    //public static ItemIDManager IDs = new ItemIDManager(2);
 
     public milkModule(pluginBase parent) {
         super(parent);
@@ -36,14 +37,11 @@ public class milkModule extends baseModule {
             milk.add("bcmilkcap_red", milk.metaMap.get("Milk Capsule_Red"), (1 + 16 + 16 + 16), "Milk Capsule", 64);
             if (!API.isPluginLoaded("BetterFarming")) {
                 milk.add("bcmilkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle", 64);
-                LiquidContainerSystem.create(milk);
+                LiquidContainerSystem.createWithOverride(milk,milk.shiftedIndex,API.getItem("mcmilkbottle"),true);
             } else {
                 LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"), true);
             }
             LiquidContainerSystem.registerMilkBucket(milk.shiftedIndex);
-            pluginCore.filled[1] = new ItemStack(milk,1,milk.metaMap.get("Milk Capsule"));
-            pluginCore.filled[2] = new ItemStack(milk,1,milk.metaMap.get("Milk Can"));
-            pluginCore.filled[3] = new ItemStack(milk,1,milk.metaMap.get("Milk Capsule_Red"));
             recipes();
         }
     }

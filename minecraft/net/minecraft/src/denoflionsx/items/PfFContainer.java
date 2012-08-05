@@ -7,7 +7,7 @@ import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFue
 public class PfFContainer extends multiItem {
 
     private boolean multiPass = true;
-    private HashMap<Integer, Integer> renderColors = new HashMap();
+    protected HashMap<Integer, Integer> renderColors = new HashMap();
 
     public PfFContainer(int par1, String name) {
         super(par1, name);
@@ -19,11 +19,9 @@ public class PfFContainer extends multiItem {
 
     public void setAllRenderColor(int color) {
         for (int i = 0; i != customFuel.numOfContainers; i++) {
-            if (i == 0) {
-                renderColors.put(i, Colors.Values.WHITE.getColor());
-            } else {
-                renderColors.put(i, color);
-            }
+
+            renderColors.put(i, color);
+
         }
     }
 

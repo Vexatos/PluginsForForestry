@@ -9,12 +9,12 @@ import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.multiItem;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.BC2.addLiquidBC2;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.BC3.addLiquidBC3;
-import net.minecraft.src.denoflionsx.plugins.pluginCore;
 import forestry.api.core.ItemInterface;
 import forestry.api.liquids.LiquidContainer;
 import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
+import net.minecraft.src.denoflionsx.API.API;
 
 public class LiquidContainerSystem {
 
@@ -42,6 +42,9 @@ public class LiquidContainerSystem {
                 bucket(m, filled);
             } else if (name.contains("Bottle")) {
                 bottle(m, filled);
+            } else if (name.contains("Barrel")){
+                empty = API.getItem("barrel");
+                barrel(m, empty,filled);
             }
         }
     }
@@ -105,30 +108,46 @@ public class LiquidContainerSystem {
 
     public static void bottle(multiItem m, ItemStack filled) {
         ItemStack empty = new ItemStack(Item.glassBottle);
-        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(m.shiftedIndex, pluginCore.bottle), filled, empty, false));
-        unpack(filled, m.shiftedIndex, pluginCore.bottle);
-        pack(empty, filled, m.shiftedIndex, pluginCore.bottle);
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(m.shiftedIndex, EnumContainers.Containers.BOTTLE.getQuantity()), filled, empty, false));
+        unpack(filled, m.shiftedIndex, EnumContainers.Containers.BOTTLE.getQuantity());
+        pack(empty, filled, m.shiftedIndex, EnumContainers.Containers.BOTTLE.getQuantity());
+    }
+    
+    public static void barrel(multiItem m, ItemStack empty, ItemStack filled){
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(m.shiftedIndex,EnumContainers.Containers.BARREL.getQuantity()),filled,empty,false));
+        unpack(filled,m.shiftedIndex,EnumContainers.Containers.BARREL.getQuantity());
+        pack(empty,filled,m.shiftedIndex,EnumContainers.Containers.BARREL.getQuantity());
+    }
+    
+    public static void barrelOverride(ItemStack empty, ItemStack filled, int liquid){
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid,EnumContainers.Containers.BARREL.getQuantity()),filled,empty,false));
+        unpack(filled,liquid,EnumContainers.Containers.BARREL.getQuantity());
+        pack(empty,filled,liquid,EnumContainers.Containers.BARREL.getQuantity());
     }
 
     public static void bottleOverride(ItemStack filled, int liquid) {
         ItemStack empty = new ItemStack(Item.glassBottle);
-        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, pluginCore.bottle), filled, empty, false));
-        unpack(filled, liquid, pluginCore.bottle);
-        pack(empty, filled, liquid, pluginCore.bottle);
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, EnumContainers.Containers.BOTTLE.getQuantity()), filled, empty, false));
+        unpack(filled, liquid, EnumContainers.Containers.BOTTLE.getQuantity());
+        pack(empty, filled, liquid, EnumContainers.Containers.BOTTLE.getQuantity());
     }
 
     public static void unpack(ItemStack filled, int liquid, int amount) {
         RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{filled}, new LiquidStack(liquid, amount));
-        //core.print("Registered " + filled.getItem().getItemName() + " " + "to" + " " + Item.itemsList[liquid].getItemName());
     }
 
     public static void pack(ItemStack empty, ItemStack filled, int liquid, int amount) {
         RecipeManagers.bottlerManager.addRecipe(10, new LiquidStack(liquid, amount), empty, filled);
     }
+    
+    public static void unpackBucket(ItemStack filled, int liquid, int amount){
+        RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{filled}, new LiquidStack(liquid, amount),new ItemStack(Item.bucketEmpty),100);
+    }
 
     public static void registerMilkBucket(int liquid) {
-        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, bucket), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketMilk), true));
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, bucket), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketEmpty), true));
         pack(new ItemStack(Item.bucketEmpty), new ItemStack(Item.bucketMilk), liquid, bucket);
-        unpack(new ItemStack(Item.bucketMilk), liquid, bucket);
+        unpackBucket(new ItemStack(Item.bucketMilk), liquid, bucket);
+        addLiquidBC2.add(liquid, Item.bucketMilk);
     }
 }

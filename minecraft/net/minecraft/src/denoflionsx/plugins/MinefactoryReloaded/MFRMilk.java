@@ -4,10 +4,12 @@ import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.items.PfFContainer;
 import net.minecraft.src.denoflionsx.plugins.Forestry.EnumContainers.Containers;
 import net.minecraft.src.denoflionsx.plugins.Forestry.LiquidContainerSystem;
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
 
 public class MFRMilk{
   
@@ -17,10 +19,12 @@ public class MFRMilk{
     private int burnTime = 0;
     private int isSafeFuel = 0;
     private int itemID = 0;
+    private int itemID2 = 0;
     private String name = "Milk";
     private PfFContainer fuel = null;
+    private customFuelSolid fuelSolid = null;
 
-    public MFRMilk(int itemID,ItemStack milk, ItemStack bfbottle, int mJt, int burntime, boolean issafe) {
+    public MFRMilk(ItemIDManager itemID,ItemStack milk, ItemStack bfbottle, int mJt, int burntime, boolean issafe) {
         
         this.milk = milk;
         this.betterFarmingMilkBottle = bfbottle;
@@ -31,7 +35,8 @@ public class MFRMilk{
         }else{
             this.isSafeFuel = 2;
         }
-        this.itemID = itemID;
+        this.itemID = itemID.getItemIDs().get(0);
+        this.itemID2 = itemID.getItemIDs().get(1);
         create();
     }
     
@@ -61,7 +66,8 @@ public class MFRMilk{
             LiquidContainerSystem.createWithOverride(fuel, this.milk.itemID, API.getItem("milkbottle"), true);
         }
         fuel.setAllRenderColor(Colors.Values.WHITE.getColor());
-        FuelManager.bronzeEngineFuel.put(this.milk.itemID,new EngineBronzeFuel(this.milk,this.mJt,this.burnTime,this.isSafeFuel));  
+        FuelManager.bronzeEngineFuel.put(this.milk.itemID,new EngineBronzeFuel(this.milk,this.mJt,this.burnTime,this.isSafeFuel));
+        fuelSolid = new customFuelSolid(this.itemID2,this.name,this.mJt,this.burnTime,Containers.BAR.getTexture(),true,Colors.Values.WHITE.getColor());
     }
 
 }

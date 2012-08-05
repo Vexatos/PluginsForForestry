@@ -42,9 +42,7 @@ public class mod_PluginsforForestry extends NetworkMod implements IGuiHandler{
 
     @Override
     public void modsLoaded() {
-
         core.registerEarlyPlugins();
-
     }
 
     @Override
@@ -52,6 +50,11 @@ public class mod_PluginsforForestry extends NetworkMod implements IGuiHandler{
         return "after:*";
     }
 
+    @Override
+    public int addFuel(int id, int metadata) {
+        return core.addFuel(id, metadata);
+    }
+    
     @Override
     public boolean onTickInGame(float var1, Minecraft var2) {
         if (!hasPluginsLoaded && count > core.delay) {

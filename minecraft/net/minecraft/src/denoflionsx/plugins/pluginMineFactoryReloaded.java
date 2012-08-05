@@ -2,6 +2,7 @@ package net.minecraft.src.denoflionsx.plugins;
 
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.milkModule;
@@ -12,6 +13,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
 
     protected String theClass = "powercrystals.minefactoryreloaded.MineFactoryReloadedCore";
     public static MFRMilk milk;
+    private ItemIDManager IDs = new ItemIDManager(2);
 
     public pluginMineFactoryReloaded() {
         this.name = "pluginMineFactoryReloaded";
@@ -45,10 +47,10 @@ public class pluginMineFactoryReloaded extends pluginBase {
         this.addItem(this.theClass, "milkItem", "Milk", 0);
         if (API.isPluginLoaded("BetterFarming")){
             this.addItem("Milk Bottle",pluginCore.plugins.get("BetterFarming").get("Milk Bottle"));
-            milk = new MFRMilk(this.getOptionInt("MilkContainers_ItemID"),this.get("Milk"),this.get("Milk Bottle"),this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
+            milk = new MFRMilk(this.IDs,this.get("Milk"),this.get("Milk Bottle"),this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
         }else{
             ItemStack n = null;
-            milk = new MFRMilk(this.getOptionInt("MilkContainers_ItemID"),this.get("Milk"),n,this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
+            milk = new MFRMilk(this.IDs,this.get("Milk"),n,this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
         }
         this.hooked = true;
         return this.hooked;
@@ -82,7 +84,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
         config.addDefault("[MineFactoryReloaded Options]");
         config.addDefault("MineFactory_MilkMJt=1");
         config.addDefault("MineFactory_MilkBurnTime=40000");
-        config.addDefault("MilkContainers_ItemID=" + String.valueOf(core.ItemIDs[8]));
+        config.addDefault("MilkContainers_ItemID=" + IDs.getItemIDs().get(0));
         config.addDefault("# If you think Milk is OP, change the next option to true");
         config.addDefault("MineFactory_MilkLosesHeat=false");
         config.writeConfig();

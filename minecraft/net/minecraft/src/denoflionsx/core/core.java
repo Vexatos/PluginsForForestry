@@ -1,11 +1,12 @@
 package net.minecraft.src.denoflionsx.core;
 
+import cpw.mods.fml.client.FMLTextureFX;
 import java.util.ArrayList;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.plugins.Forestry.Trees.TileUniversalSapling;
-import net.minecraft.src.denoflionsx.plugins.IC2.TileEntityMachine;
+import net.minecraft.src.denoflionsx.items.Containers.ContainerBarrel;
+import net.minecraft.src.denoflionsx.plugins.Forestry.LiquidFXHook;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
 import net.minecraft.src.forge.MinecraftForgeClient;
 import net.minecraft.src.mod_PluginsforForestry;
@@ -22,8 +23,9 @@ public class core {
     public static Config config = new Config("PluginsforForestry.cfg");
     public static int[] ItemIDs;
     public static ArrayList<Integer> ItemIDs_New = new ArrayList();
-    public static boolean isBetaBuild = false;
+    public static boolean isBetaBuild = true;
     public static final int delay = 25;
+    public static ArrayList<FMLTextureFX> fx = new ArrayList();
 
     public static boolean isClient() {
         return client;
@@ -39,6 +41,9 @@ public class core {
     public static void registerEarlyPlugins() {
 
         pluginCore.registerEarlyPlugins();
+        for (FMLTextureFX f : fx){
+            ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
+        }
 
     }
     
@@ -64,13 +69,22 @@ public class core {
             count++;
         }
     }
+    
+    public static void registerItems(){
+        ContainerBarrel.Barrel();
+    }
+    
+    public static int addFuel(int id, int meta){
+        return PfFFuelManager.getValue(id);
+    }
 
     // This function runs first.
     public static void runCoreFunctions() {
         depricatedItemID();
+        registerItems();
         MinecraftForgeClient.preloadTexture(mod_PluginsforForestry.texture);
-        ModLoader.registerTileEntity(TileEntityMachine.class, "dolxMachine");
-        ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
+        //ModLoader.registerTileEntity(TileEntityMachine.class, "dolxMachine");
+       //ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
         
         defaults.setup();
         config.readFile();
@@ -90,4 +104,8 @@ public class core {
     public static String BukkitShift(String m){
         return "net.minecraft.server." + m;
     }
+   
 }
+
+
+

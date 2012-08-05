@@ -3,12 +3,12 @@ package net.minecraft.src.denoflionsx.plugins;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
-import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.quarryModule;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.TankManager;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.goldGear;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
+import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.milkModule;
 
 public class pluginBuildcraft extends pluginBase {
 
@@ -24,7 +24,7 @@ public class pluginBuildcraft extends pluginBase {
     public void register() {
         if (!loaded) {
             this.defaults();
-            milkModule.load(this);
+            //milkModule.load(this);
             quarryModule.load(this);
             this.runConfig();
             if (loaded = init()) {

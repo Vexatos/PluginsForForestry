@@ -10,18 +10,19 @@ import net.minecraft.src.denoflionsx.plugins.BetterFarming.*;
 import net.minecraft.src.denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
-import forestry.api.fuels.EngineBronzeFuel;
-import forestry.api.fuels.FuelManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
+import net.minecraft.src.denoflionsx.plugins.Core.EnumLiquidTextures;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
 
 public class pluginBetterFarming extends pluginBase {
 
     public static customFuel citrusJuice;
     protected String Class = "";
+    private ItemIDManager IDs_CitrusJuice = new ItemIDManager(2);
 
     public pluginBetterFarming() {
         mod = "mod_BetterFarming";
@@ -61,9 +62,9 @@ public class pluginBetterFarming extends pluginBase {
         this.addBlock(Class, "mintCrop", "Mint Crop", 0);
         this.addItem(BCT, "pipeWaterproof", "Waterproofing", 0);
 
-        if (denLib.convertToBoolean(config.getOption("CitrusJuice_Enabled"))) {
-            citrusJuice = new customFuel("Citrus Juice",this.getOptionInt("CitrusJuice_MJt"),this.getOptionInt("CitrusJuice_BurnTime"),customFuel.populateSprites(4),this.getOptionInt("CitrusJuice_ItemID"),Colors.Values.SALMON.getColor());
-        }
+
+        citrusJuice = new customFuel("Citrus Juice", 1, 10000, customFuel.populateSprites(EnumLiquidTextures.Liquids.CITRUSJUICE.getIndex()), this.IDs_CitrusJuice, Colors.Values.SALMON.getColor(), this);
+
         hooked = true;
         if (hooked) {
             core.print(getName() + " Loaded!");
@@ -88,7 +89,6 @@ public class pluginBetterFarming extends pluginBase {
                 RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(this.items.get("Lemon").getItem())}, new LiquidStack(citrus.itemID, s2, 0), new ItemStack(ItemInterface.getItem("mulch").getItem()), s3);
                 RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{new ItemStack(this.items.get("Orange").getItem())}, new LiquidStack(citrus.itemID, s2, 0), new ItemStack(ItemInterface.getItem("mulch").getItem()), s3);
                 addFermenterRecipes.add(citrus, 1.5F);
-                FuelManager.bronzeEngineFuel.put(citrusJuice.getFuel().shiftedIndex, new EngineBronzeFuel(citrus, this.getOptionInt("CitrusJuice_MJt"), this.getOptionInt("CitrusJuice_BurnTime"), 1));
             }
             if (denLib.convertToBoolean(config.getOption("ForestryIntegration"))) {
                 growHook.engage();
@@ -128,12 +128,8 @@ public class pluginBetterFarming extends pluginBase {
         config.addDefault("ForestryIntegration=true");
         config.addDefault("# These options are for Citrus Juice");
         config.addDefault("# Citrus Juice is made with BetterFarming fruit in a squeezer");
-        config.addDefault("CitrusJuice_Enabled=true");
-        config.addDefault("CitrusJuice_ItemID=5313");
         config.addDefault("CitrusJuice_AmountPerSqueeze=200");
         config.addDefault("CitrusJuice_PercentChanceOfMulch=40");
-        config.addDefault("CitrusJuice_MJt=1");
-        config.addDefault("CitrusJuice_BurnTime=10000");
         config.addDefault("CitrusJuice_FermenterBonus=1.5");
         config.writeConfig();
         config.readFile();

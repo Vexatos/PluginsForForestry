@@ -32,8 +32,13 @@ public class multiItem extends Item implements ITextureProvider {
 
     @Override
     public String getItemNameIS(ItemStack par1ItemStack) {
-
-        return getMetaName(par1ItemStack);
+        ItemStack p;
+        if (par1ItemStack == null){
+            p = new ItemStack(this,1,0);
+        }else{
+            p = par1ItemStack;
+        }
+        return getMetaName(p);
 
     }
 
@@ -48,7 +53,7 @@ public class multiItem extends Item implements ITextureProvider {
 
             }
         }
-        return this.itemMap.get(0);
+        return "";
     }
 
     @Override

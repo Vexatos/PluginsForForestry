@@ -10,16 +10,9 @@ public class API {
     // Use this to access PFF items from outside the modules/plugins.
     // This method expects a string that matches the internal name of the item.
     // Make sure your mod loads after PFF to ensure the HashMap is populated!
-    // Liquid Peat: liquidpeat, peatcap, peatcan, peatcap_red, peatbucket, peatbottle.
-    // Sugary Peat: liquidsugarypeat, sugarypeatcap, sugarypeatcan, sugarypeatcap_red, sugarypeatbucket, sugarypeatbottle, sugarypeat.
-    // Blue's Wax Stuff: waxtablet, waxcast, filledwaxcast, waxcast_red, wascastfilled_red, waxcastlava_red, rodoffreezing.
-    // Solid Fuel Module: solidbiofuelbar.
-    // Buildcraft Milk Module: bcliquidmilk, bcmilkcap, bcmilkcan, bcmilkcap_red, bcmilkbottle.
-    // Citrus Juice: citrusjuice, citruscap, citruscan, citruscap_red, citrusbucket, citrusbottle.
-    // Radioactive Waste: radioactivewaste, radioactivegoo, containmentbarrel, filledcontainmentbarrel.
-    // Core: liquidvacuum, woodenbucket, filledwoodenbucket, milkbag.
-    // APS: heavywatercap, heavywatercan, heavywatercap_red.
-    // Obsolete: milkcan_depricated, milkcap_depricated, milkcap_red_depricated, milkbottle_depricated.
+    
+    // All internal item names are just the display name with no capital letters or spaces.
+    // So 'Rod of Freezing' would be 'rodoffreezing'. etc.
     
     // Be sure to check for nulls in case an item has been disabled by the user!
     
@@ -28,7 +21,7 @@ public class API {
         ItemStack I = PFFItems.registeredItems.get(s);
 
         if (I != null) {
-            System.out.println("Loaded item " + s + " from API");
+            //System.out.println("Loaded item " + s + " from API");
             return I;
         } else {
             System.out.println("Unable to retrieve item: " + s + " from Plugins for Forestry!");
