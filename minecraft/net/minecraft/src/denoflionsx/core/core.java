@@ -1,16 +1,15 @@
 package net.minecraft.src.denoflionsx.core;
 
 import cpw.mods.fml.client.FMLTextureFX;
-import net.minecraft.src.forge.ICraftingHandler;
 import java.util.ArrayList;
 import net.minecraft.src.*;
+import net.minecraft.src.denoflionsx.Achievements.PfFAchievement;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.Containers.Containers;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemIronRing;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
-import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
 /*
@@ -41,32 +40,44 @@ public class core {
     public static void registerEarlyPlugins() {
         registerItemsEnum();
         pluginCore.registerEarlyPlugins();
-        for (FMLTextureFX f : fx){
-            ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
-        }
-
+        registerFX();
+        PfFAchievement.registerAchievements();
     }
     
-    public static int addFuel(int id, int meta){
+    public static void giveBetaTesterAchievement(EntityPlayer player){
+        PfFAchievement.Achievements.BETA.grantAchievement(player);
+    }
+    
+    public static void giveInstallAchievement(EntityPlayer player){
+        PfFAchievement.Achievements.PFF.grantAchievement(player);
+    }
+
+    public static int addFuel(int id, int meta) {
         return PfFFuelManager.getValue(id);
+    }
+
+    public static void registerFX() {
+        for (FMLTextureFX f : fx) {
+            ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
+        }
     }
 
     // This function runs first.
     public static void runCoreFunctions() {
         MinecraftForgeClient.preloadTexture(mod_PluginsforForestry.texture);
         //ModLoader.registerTileEntity(TileEntityMachine.class, "dolxMachine");
-       //ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
+        //ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
         defaults.setup();
         config.readFile();
         Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
-    
-    public static void registerItemsEnum(){
+
+    public static void registerItemsEnum() {
         Containers.Container.values();
         ItemBlacksmithHammer.BlacksmithHammer();
         ItemIronRing.IronRing();
     }
-    
+
     public static String modVersion() {
         return version;
     }
@@ -76,12 +87,8 @@ public class core {
         denLib.print("[PluginsForForestry]: " + msg);
 
     }
-    
-    public static String BukkitShift(String m){
+
+    public static String BukkitShift(String m) {
         return "net.minecraft.server." + m;
     }
-   
 }
-
-
-
