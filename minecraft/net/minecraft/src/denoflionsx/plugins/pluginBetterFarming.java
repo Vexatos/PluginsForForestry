@@ -22,7 +22,7 @@ public class pluginBetterFarming extends pluginBase {
 
     public static customFuel citrusJuice;
     protected String Class = "";
-    private ItemIDManager IDs_CitrusJuice = new ItemIDManager(2);
+    private ItemIDManager IDs_CitrusJuice = new ItemIDManager(2,"CitrusJuice");
 
     public pluginBetterFarming() {
         mod = "mod_BetterFarming";

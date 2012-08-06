@@ -63,7 +63,7 @@ public class blueswaxModule extends baseModule {
             extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), Colors.shiftRow(toShift,2), "Refractory Cast");
             extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), Colors.shiftRow(toShift,3), "Filled Wax Cast");
             extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), Colors.shiftRow(toShift,4), "Lava Cast");
-            extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift,5), "Rod of Freezing", 1);
+            extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift,5), "Rod of Freezing");
             //extrawax.add("test", extrawax.metaMap.get("Test"), 12, "Test (Ignore Me)");
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.lavaStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));

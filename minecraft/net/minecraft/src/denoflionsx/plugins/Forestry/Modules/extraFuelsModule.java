@@ -13,8 +13,8 @@ public class extraFuelsModule extends baseModule {
     public static customFuel melonJuice;
     private boolean isPumpkinJuiceEnabled = false;
     private boolean isMelonJuiceEnabled = false;
-    private ItemIDManager IDs_PumpkinJuice = new ItemIDManager(2);
-    private ItemIDManager IDs_MelonJuice = new ItemIDManager(2);
+    private ItemIDManager IDs_PumpkinJuice = new ItemIDManager(2,"PumpkinJuice");
+    private ItemIDManager IDs_MelonJuice = new ItemIDManager(2,"MelonJuice");
 
     public extraFuelsModule(pluginBase parent) {
         super(parent);

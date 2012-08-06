@@ -1,5 +1,8 @@
 package net.minecraft.src.denoflionsx.items;
 
+import forestry.api.liquids.LiquidContainer;
+import forestry.api.liquids.LiquidManager;
+import forestry.api.liquids.LiquidStack;
 import java.util.HashMap;
 import java.util.List;
 import net.minecraft.src.*;
@@ -39,6 +42,36 @@ public class waxCast extends multiItem {
             par2World.setBlockAndMetadataWithNotify(coords[0], coords[1], coords[2], blueswaxModule.thatch.blockID, 0);
         }
         return par1ItemStack;
+    }
+    
+     public ItemStack customContainer(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        MovingObjectPosition obj = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
+        if (obj == null) {
+            return par1ItemStack;
+        }
+        HashMap<String, Integer> coords = new HashMap();
+        coords.put("x", obj.blockX);
+        coords.put("y", obj.blockY);
+        coords.put("z", obj.blockZ);
+        coords.put("id", par2World.getBlockId(coords.get("x"), coords.get("y"), coords.get("z")));
+        coords.put("meta", par2World.getBlockMetadata(coords.get("x"), coords.get("y"), coords.get("z")));
+        LiquidContainer liq = LiquidManager.getEmptyContainer(par1ItemStack, new LiquidStack(coords.get("id"), 1));
+        if (liq == null) {
+            return par1ItemStack;
+        }
+        int index = invSearch(liq.filled, par3EntityPlayer);
+        if (index != -1) {
+            --par1ItemStack.stackSize;
+            ++par3EntityPlayer.inventory.getStackInSlot(index).stackSize;
+            par2World.setBlockAndMetadataWithNotify(coords.get("x"), coords.get("y"), coords.get("z"), 0, 0);
+            return par1ItemStack;
+        } else {
+            --par1ItemStack.stackSize;
+            int empty = emptySpace(par3EntityPlayer);
+            par3EntityPlayer.inventory.setInventorySlotContents(empty, new ItemStack(liq.filled.getItem(), 1, liq.filled.getItemDamage()));
+            par2World.setBlockAndMetadataWithNotify(coords.get("x"), coords.get("y"), coords.get("z"), 0, 0);
+            return par1ItemStack;
+        }
     }
 
     public void tooltips(ItemStack par1ItemStack, List par2List) {

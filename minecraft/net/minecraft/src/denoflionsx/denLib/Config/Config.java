@@ -34,6 +34,19 @@ public class Config {
         }
 
     }
+    
+    public int getOptionInt(String key){
+        return Integer.valueOf(this.getOption(key));
+    }
+    
+    public boolean getOptionBool(String key){
+        String value = this.getOption(key);
+        if (denLib.toLowerCaseNoSpaces(value).equals("true")){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
     public void setOption(String key, String param) {
 
@@ -60,6 +73,10 @@ public class Config {
             }
         }
         return "";
+    }
+    
+    public String getOptionNoUpdate(String key){
+        return Options.get(key);
     }
 
     public void parseLine(String line) {

@@ -7,6 +7,7 @@ import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.items.PfFContainer;
+import net.minecraft.src.denoflionsx.items.Placeholder;
 import net.minecraft.src.denoflionsx.plugins.Forestry.EnumContainers.Containers;
 import net.minecraft.src.denoflionsx.plugins.Forestry.LiquidContainerSystem;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
@@ -51,13 +52,15 @@ public class MFRMilk{
         fuel.metaMap.put(this.name + " Bucket",4);
         fuel.metaMap.put(this.name + " Bottle",5);
         fuel.metaMap.put(this.name + " Cell",6);
+        fuel.metaMap.put(this.name + " Barrel",7);
         
-        fuel.add("milkplaceholder",fuel.metaMap.get(this.name),0,"PLACEHOLDER");
+        fuel.add("milkplaceholder",fuel.metaMap.get(this.name),Placeholder.Sprite.RADICAL_EDWARD.getIndex(),"PLACEHOLDER");
         fuel.add("milkcapsule",fuel.metaMap.get(this.name + " Capsule"),Containers.CAPSULE.getTexture(),this.name + " Capsule");
         fuel.add("milkcan",fuel.metaMap.get(this.name + " Can"),Containers.CAN.getTexture(),this.name + " Can");
         fuel.add("milkcapsule_red",fuel.metaMap.get(this.name + " Capsule_Red"),Containers.CAPSULE_RED.getTexture(),this.name + " Capsule");
         fuel.add("milkbucketplaceholder",fuel.metaMap.get(this.name + " Bucket"),0,"PLACEHOLDER");
         fuel.add("milkcell",fuel.metaMap.get(this.name + " Cell"),Containers.CELL.getTexture(),this.name + " Cell");
+        fuel.add("milkbarrel",fuel.metaMap.get(this.name + " Barrel"),Containers.BARREL.getTexture(),this.name + " Barrel");
         if (this.betterFarmingMilkBottle != null){
             fuel.add("milkbottleplaceholder",fuel.metaMap.get(this.name + " Bottle"),0,"PLACEHOLDER");
             LiquidContainerSystem.createWithOverride(fuel, this.milk.itemID, this.betterFarmingMilkBottle, true);
@@ -67,7 +70,7 @@ public class MFRMilk{
         }
         fuel.setAllRenderColor(Colors.Values.WHITE.getColor());
         FuelManager.bronzeEngineFuel.put(this.milk.itemID,new EngineBronzeFuel(this.milk,this.mJt,this.burnTime,this.isSafeFuel));
-        fuelSolid = new customFuelSolid(this.itemID2,this.name,this.mJt,this.burnTime,Containers.BAR.getTexture(),true,Colors.Values.WHITE.getColor());
+        fuelSolid = new customFuelSolid(this.itemID2,this.name,this.mJt,this.burnTime,Containers.BAR.getTexture(),false,Colors.Values.WHITE.getColor());
     }
 
 }

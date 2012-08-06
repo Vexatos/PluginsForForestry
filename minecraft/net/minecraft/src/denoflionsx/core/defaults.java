@@ -1,8 +1,6 @@
 package net.minecraft.src.denoflionsx.core;
 
 public class defaults {
-    
-    public static ItemIDManager ID = new ItemIDManager(1);
 
     public static void setup() {
 
@@ -20,7 +18,6 @@ public class defaults {
         core.config.addDefault("Verbose=true");
         core.config.addDefault("UpdateCheck=true");
         core.config.addDefault("WoodenBucketWorksInNether=false");
-        core.config.addDefault("liquidVacuum_ID=" + ID.getItemIDs().get(0));
         core.config.writeConfig();
     }
 }

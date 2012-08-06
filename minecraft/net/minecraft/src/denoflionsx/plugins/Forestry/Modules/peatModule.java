@@ -19,8 +19,8 @@ public class peatModule extends baseModule {
     public static customFuel liquidpeat;
     public static customFuel sugarypeat;
     public static customFuelSolid sugarypeatsolid;
-    private ItemIDManager IDs_Peat = new ItemIDManager(2);
-    private ItemIDManager IDs_SugaryPeat = new ItemIDManager(2);
+    private ItemIDManager IDs_Peat = new ItemIDManager(2,"Peat");
+    private ItemIDManager IDs_SugaryPeat = new ItemIDManager(2,"SugaryPeat");
 
     public peatModule(pluginBase parent) {
         super(parent);

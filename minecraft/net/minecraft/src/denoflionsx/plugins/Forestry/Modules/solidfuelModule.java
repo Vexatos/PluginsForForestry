@@ -35,7 +35,7 @@ public class solidfuelModule extends baseModule {
     protected void defaults() {
         this.addDefault("# These options are for the Solid Fuel Module");
         this.addDefault("solidfuelModule_Enabled=true");
-        this.addDefault("solidfuel_ItemID=" + String.valueOf(core.ItemIDs[7]));
+        //this.addDefault("solidfuel_ItemID=" + String.valueOf(core.ItemIDs[7]));
         this.addDefault("solidfuel_InternalName=solidfuel");
         this.addDefault("solidfuel_isShiny=true");
         this.addDefault("solidfuel_Suffix=Infused Bar");

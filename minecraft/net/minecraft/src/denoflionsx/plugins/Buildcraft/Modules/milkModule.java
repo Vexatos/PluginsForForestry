@@ -32,11 +32,11 @@ public class milkModule extends baseModule {
             milk.metaMap.put("Milk Bottle", 4);
             milk.metaMap.put("Milk Cell", 5);
             milk.add("bcliquidmilk", milk.metaMap.get("Milk"), 1, "Milk");
-            milk.add("bcmilkcap", milk.metaMap.get("Milk Capsule"), 33, "Milk Capsule", 64);
-            milk.add("bcmilkcan", milk.metaMap.get("Milk Can"), 1 + 16, "Milk Can", 64);
-            milk.add("bcmilkcap_red", milk.metaMap.get("Milk Capsule_Red"), (1 + 16 + 16 + 16), "Milk Capsule", 64);
+            milk.add("bcmilkcap", milk.metaMap.get("Milk Capsule"), 33, "Milk Capsule");
+            milk.add("bcmilkcan", milk.metaMap.get("Milk Can"), 1 + 16, "Milk Can");
+            milk.add("bcmilkcap_red", milk.metaMap.get("Milk Capsule_Red"), (1 + 16 + 16 + 16), "Milk Capsule");
             if (!API.isPluginLoaded("BetterFarming")) {
-                milk.add("bcmilkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle", 64);
+                milk.add("bcmilkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle");
                 LiquidContainerSystem.createWithOverride(milk,milk.shiftedIndex,API.getItem("mcmilkbottle"),true);
             } else {
                 LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, pluginCore.plugins.get("BetterFarming").get("Milk Bottle"), true);

@@ -11,7 +11,7 @@ import net.minecraft.src.ic2.api.Items;
 public class pluginIC2 extends pluginBase {
 
     public static customFuel radioactive;
-    private ItemIDManager ids = new ItemIDManager(2);
+    private ItemIDManager ids = new ItemIDManager(2,"LiquidUranium");
     //public static Block block;
 
     public pluginIC2() {
@@ -37,7 +37,7 @@ public class pluginIC2 extends pluginBase {
 
     @Override
     protected void defaults() {
-        this.config.addDefault("RadioactiveWaste_ItemID=" + core.ItemIDs[6]);
+        //this.config.addDefault("RadioactiveWaste_ItemID=" + core.ItemIDs[6]);
         this.config.addDefault("LavaFromUranium=" + (1000000 / 20) * (100 - 20) / 100);
         this.config.addDefault("ChanceOfGoo=" + 10);
         this.config.addDefault("AmountOfFuelPerFermentation=" + 1000);

@@ -33,6 +33,10 @@ public class pluginUpdater extends pluginBase {
 
     @Override
     protected boolean init() {
+        if (core.isBetaBuild){
+            core.print("Update check cancelled. Beta build detected.");
+            return false;
+        }
         try{
         core.print("Checking for updates...");
         this.compare.deleteConfig();

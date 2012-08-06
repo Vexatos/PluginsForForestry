@@ -2,6 +2,7 @@ package net.minecraft.src.denoflionsx.denLib;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.security.MessageDigest;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -85,12 +86,29 @@ public class denLib {
             return false;
         }
     }
-    
-    public static String toLowerCaseNoSpaces(String s){
+
+    public static String toLowerCaseNoSpaces(String s) {
         return toNoSpaces(s).toLowerCase();
     }
-    
-    public static String toNoSpaces(String s){
+
+    public static String Hash(String tag) {
+        byte[] bytes = tag.getBytes();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] md5 = md.digest(bytes);
+            String hash = "";
+            for (byte b : md5) {
+                hash = hash + String.valueOf(b);
+            }
+            hash = hash.replace("-", "");
+            tag = hash;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return tag;
+    }
+
+    public static String toNoSpaces(String s) {
         return s.replaceAll("\\s", "");
     }
 
@@ -102,16 +120,16 @@ public class denLib {
             print("Class: " + param1);
             print("--------------------");
             Method[] m = c.getDeclaredMethods();
-            Field[] f =c.getDeclaredFields();
+            Field[] f = c.getDeclaredFields();
             print("Defined Methods");
             print("--------------------");
-            for (int i = 0; i < m.length; i++){
+            for (int i = 0; i < m.length; i++) {
                 print(m[i].getName());
             }
             print("--------------------");
             print("Defined Fields");
             print("--------------------");
-            for (int i = 0; i < f.length; i++){
+            for (int i = 0; i < f.length; i++) {
                 print(f[i].getName());
             }
             print("--------------------");

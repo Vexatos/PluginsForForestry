@@ -3,7 +3,6 @@ package net.minecraft.src.denoflionsx.plugins;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
-import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import net.minecraft.src.denoflionsx.plugins.MinefactoryReloaded.MFRMilk;
@@ -13,7 +12,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
 
     protected String theClass = "powercrystals.minefactoryreloaded.MineFactoryReloadedCore";
     public static MFRMilk milk;
-    private ItemIDManager IDs = new ItemIDManager(2);
+    private ItemIDManager IDs = new ItemIDManager(2,"MFRMilk");
 
     public pluginMineFactoryReloaded() {
         this.name = "pluginMineFactoryReloaded";
