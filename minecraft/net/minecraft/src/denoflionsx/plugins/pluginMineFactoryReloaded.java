@@ -1,7 +1,9 @@
 package net.minecraft.src.denoflionsx.plugins;
 
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.API.PFFItems;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.plugins.Buildcraft.Modules.milkModule;
@@ -44,6 +46,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
             return this.hooked;
         }
         this.addItem(this.theClass, "milkItem", "Milk", 0);
+        PFFItems.registerItem("milk",this.get("Milk").getItem());
         if (API.isPluginLoaded("BetterFarming")){
             this.addItem("Milk Bottle",pluginCore.plugins.get("BetterFarming").get("Milk Bottle"));
             milk = new MFRMilk(this.IDs,this.get("Milk"),this.get("Milk Bottle"),this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));

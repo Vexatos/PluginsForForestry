@@ -73,6 +73,9 @@ public class LiquidContainerSystem {
                 }
             } else if (name.contains("Bottle")) {
                 bottleOverride(filledBottle, liquid);
+            } else if (name.contains("Barrel")){
+                empty = API.getItem(denLib.toLowerCaseNoSpaces(name));
+                barrelOverride(empty,filled,liquid);
             }
         }
     }

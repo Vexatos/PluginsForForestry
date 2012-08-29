@@ -59,6 +59,7 @@ public class ItemBlacksmithHammer extends Item {
     public static enum BlacksmithHammer {
 
         HAMMER();
+        
         private ItemIDManager ID;
         private ItemBlacksmithHammer hammer;
         private int id;

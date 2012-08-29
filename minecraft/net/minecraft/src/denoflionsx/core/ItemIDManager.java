@@ -20,7 +20,7 @@ public class ItemIDManager {
 
     public ItemIDManager(int numberOfIds, String tag) {
         if (!hasDefault) {
-            File f = new File(Config.ConfigDir + configFile);
+            File f = new File(usedIDs.getConfigFile());
             if (f.exists()) {
                 alreadyExisted = true;
             }

@@ -6,12 +6,15 @@ import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import net.minecraft.src.denoflionsx.plugins.IC2.UraniumGoo;
 import net.minecraft.src.ic2.api.Items;
 
 public class pluginIC2 extends pluginBase {
 
     public static customFuel radioactive;
     private ItemIDManager ids = new ItemIDManager(2,"LiquidUranium");
+    private ItemIDManager gooids = new ItemIDManager(1,"UraniumGoo");
+    public static UraniumGoo goo;
     //public static Block block;
 
     public pluginIC2() {
@@ -50,13 +53,9 @@ public class pluginIC2 extends pluginBase {
         }
         if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
             this.addItem("Uranium", Items.getItem("uraniumIngot"));
-            this.addItem("Scrap", Items.getItem("scrap"));
-            this.addBlock("Reinforced Stone", Items.getItem("reinforcedStone"));
-            this.addBlock("Reinforced Glass", Items.getItem("reinforcedGlass"));
-            this.addItem("Plates", Items.getItem("advancedAlloy"));
-            
-            radioactive = new customFuel("Liquid Uranium",10,70000,customFuel.populateSprites(2),ids,Colors.Values.LIME.getColor(),this);
-            
+            this.addItem("uraniumCell",Items.getItem("uraniumCell"));
+            radioactive = new customFuel("Radioactive Waste",10,70000,customFuel.populateSprites(2),ids,Colors.Values.LIME.getColor(),this);
+            goo = new UraniumGoo(gooids.getItemIDs().get(0),denLib.toLowerCaseNoSpaces("Uranium Goo"));
             this.hooked = true;
         }
         return this.hooked;

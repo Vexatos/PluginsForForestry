@@ -2,8 +2,10 @@ package net.minecraft.src.denoflionsx.plugins.MinefactoryReloaded;
 
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
+import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.API.PFFItems;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.items.PfFContainer;
@@ -68,6 +70,7 @@ public class MFRMilk{
             fuel.add("milkbottle",fuel.metaMap.get(this.name + " Bottle"),Containers.BOTTLE.getTexture(),this.name + " Bottle");
             LiquidContainerSystem.createWithOverride(fuel, this.milk.itemID, API.getItem("milkbottle"), true);
         }
+        PFFItems.registerItem("milkbucket",Item.bucketMilk);
         fuel.setAllRenderColor(Colors.Values.WHITE.getColor());
         FuelManager.bronzeEngineFuel.put(this.milk.itemID,new EngineBronzeFuel(this.milk,this.mJt,this.burnTime,this.isSafeFuel));
         fuelSolid = new customFuelSolid(this.itemID2,this.name,this.mJt,this.burnTime,Containers.BAR.getTexture(),false,Colors.Values.WHITE.getColor());

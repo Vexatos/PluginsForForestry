@@ -130,7 +130,7 @@ public class BuildcraftEMCModule extends baseModule {
 
 
         if (isTest) {
-            File t = new File(Config.ConfigDir + "pluginEE_BuildcraftEMCValues.cfg");
+            File t = new File(recipes.ConfigDir + "pluginEE_BuildcraftEMCValues.cfg");
             if (t.exists()) {
                 t.delete();
             }

@@ -17,7 +17,6 @@ public class defaults {
         core.config.addDefault("EnableBC2TankIntegration=false");
         core.config.addDefault("Verbose=true");
         core.config.addDefault("UpdateCheck=true");
-        core.config.addDefault("WoodenBucketWorksInNether=false");
         core.config.writeConfig();
     }
 }

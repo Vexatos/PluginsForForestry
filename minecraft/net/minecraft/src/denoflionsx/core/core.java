@@ -43,14 +43,6 @@ public class core {
         registerFX();
         PfFAchievement.registerAchievements();
     }
-    
-    public static void giveBetaTesterAchievement(EntityPlayer player){
-        PfFAchievement.Achievements.BETA.grantAchievement(player);
-    }
-    
-    public static void giveInstallAchievement(EntityPlayer player){
-        PfFAchievement.Achievements.PFF.grantAchievement(player);
-    }
 
     public static int addFuel(int id, int meta) {
         return PfFFuelManager.getValue(id);

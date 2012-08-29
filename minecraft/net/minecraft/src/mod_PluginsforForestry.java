@@ -58,24 +58,6 @@ public class mod_PluginsforForestry extends NetworkMod implements IGuiHandler {
     }
 
     @Override
-    public void onItemPickup(EntityPlayer player, ItemStack item) {
-        super.onItemPickup(player, item);
-        if (!PfFAchievement.Achievements.PFF.isAchievementGranted()) {
-            core.giveInstallAchievement(player);
-        }
-        if (!PfFAchievement.Achievements.BETA.isAchievementGranted() && core.isBetaBuild) {
-            core.giveBetaTesterAchievement(player);
-        }
-        if (PfFAchievement.hasItemAchievement) {
-            for (PfFAchievement p : PfFAchievement.itemAchievements) {
-                if (item.getItem() == p.theItemStack.getItem()) {
-                    player.addStat(p, 1);
-                }
-            }
-        }
-    }
-
-    @Override
     public boolean onTickInGame(float var1, Minecraft var2) {
         if (!hasPluginsLoaded && count > core.delay) {
             core.registerLatePlugins();

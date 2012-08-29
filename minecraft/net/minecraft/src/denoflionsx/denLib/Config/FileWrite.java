@@ -11,7 +11,7 @@ public class FileWrite {
             FileWriter outFile = new FileWriter(file);
             PrintWriter out = new PrintWriter(outFile);
             Iterator t = w.iterator();
-            while (t.hasNext()){
+            while (t.hasNext()) {
                 out.println(t.next().toString());
             }
             out.close();

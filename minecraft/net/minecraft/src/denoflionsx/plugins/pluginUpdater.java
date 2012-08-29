@@ -40,7 +40,7 @@ public class pluginUpdater extends pluginBase {
         try{
         core.print("Checking for updates...");
         this.compare.deleteConfig();
-        saveUrl(Config.ConfigDir + "PFFVersion.cfg",vfile);
+        saveUrl(compare.ConfigDir + "PFFVersion.cfg",vfile);
         this.compare.readFile();
         if (core.modVersion().equals(this.compare.getOption("Version"))){
             core.print("PFF is up to date!");

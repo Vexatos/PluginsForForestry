@@ -10,21 +10,20 @@ public class pluginCore {
      * This is the core file for plugins. plugins are managed here.
      * registerPlugins is called by the main core.
      */
-    
     public static final boolean isRelease = false;
     public static final boolean debugmode = false;
     public static HashMap<String, pluginBase> plugins = new HashMap();
 
-    public static void registerLatePlugins() {  
-            if (denLib.convertToBoolean(core.config.getOption("pluginRedPower_Enabled"))) {
-                plugins.put("RedPowerWorld", new pluginRedPowerWorld());
-            }
-            if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
-                plugins.put("EE", new pluginEE());
-            }
-            if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))) {
-                plugins.put("Updater", new pluginUpdater());
-            }
+    public static void registerLatePlugins() {
+        if (denLib.convertToBoolean(core.config.getOption("pluginRedPower_Enabled"))) {
+            plugins.put("RedPowerWorld", new pluginRedPowerWorld());
+        }
+        if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
+            plugins.put("EE", new pluginEE());
+        }
+        if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))) {
+            plugins.put("Updater", new pluginUpdater());
+        }
     }
 
     public static void registerEarlyPlugins() {
@@ -46,6 +45,7 @@ public class pluginCore {
         if (denLib.convertToBoolean(core.config.getOption("pluginAdvancedPowerSystems_Enabled"))) {
             //plugins.put("APS", new pluginAdvancedPowerSystems());
         }
+        plugins.put("CoreItems", new pluginCoreItems());
     }
 
     public static boolean isPluginAlive(String name) {
