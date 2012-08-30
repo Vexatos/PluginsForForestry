@@ -1,5 +1,8 @@
 package net.minecraft.src.denoflionsx.plugins.Core;
 
+import forestry.api.liquids.LiquidContainer;
+import forestry.api.liquids.LiquidManager;
+import forestry.api.liquids.LiquidStack;
 import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.items.multiItem;
 
@@ -12,6 +15,7 @@ public class WoodenBucket extends multiItem{
         this.setMaxStackSize(1);
         this.metaMap.put("Wooden Bucket",0);
         this.metaMap.put("Filled Wooden Bucket",1);
+        LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill,1000),new ItemStack(this,1,1),new ItemStack(this,1,0),true));
     }
     
     @Override
