@@ -34,5 +34,8 @@ public class Containers {
             core.config.addDefault(tag2 + "_ItemID=" + ID.getItemIDs().get(0));
             this.id = core.config.getOptionInt(tag2 + "_ItemID");
         }
+        public static void register(){
+            Containers.Container.values();
+        }
     }
 }

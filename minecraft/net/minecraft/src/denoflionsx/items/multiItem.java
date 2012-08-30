@@ -42,7 +42,6 @@ public class multiItem extends Item implements ITextureProvider {
             String dname = this.itemMap.get(Integer.valueOf(dmg));
             if (dname != null) {
                 return dname;
-
             }
         }
         return "";
@@ -56,7 +55,6 @@ public class multiItem extends Item implements ITextureProvider {
         if (core.isClient()) {
             ModLoader.addLocalization(getMetaName(new ItemStack(this, 1, dmg)) + ".name", displayname);
         }
-        
         // Register with API.
         PFFItems.registerItem(name, this, dmg);
     }

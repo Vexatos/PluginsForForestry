@@ -58,13 +58,7 @@ public class customFuelSolid {
             containers.add(item);
         }
         for (ItemStack i : containers){
-            int amount = 1;
-            ModLoader.addRecipe(new ItemStack(this.fuel,amount,0),new Object[]{
-                "AAA",
-                "ACA",
-                "AAA",
-                Character.valueOf('A'),ash,
-                Character.valueOf('C'),i});
+            ModLoader.addShapelessRecipe(API.getItem(this.nameLowerCaseNoSpaces), new Object[]{API.getItem("infusionbar"),i});
         }
     }
 }

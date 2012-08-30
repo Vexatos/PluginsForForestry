@@ -1,8 +1,6 @@
 package net.minecraft.src.denoflionsx.plugins;
 
 import forestry.api.core.ItemInterface;
-import forestry.api.liquids.LiquidStack;
-import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -15,6 +13,7 @@ import net.minecraft.src.denoflionsx.plugins.Core.EnumToolTextures;
 import net.minecraft.src.denoflionsx.plugins.Core.LiquidVacuum;
 import net.minecraft.src.denoflionsx.plugins.Core.MilkBag;
 import net.minecraft.src.denoflionsx.plugins.Core.WoodenBucket;
+import net.minecraft.src.denoflionsx.plugins.Forestry.SqueezerWrapper;
 import net.minecraft.src.denoflionsx.plugins.Forestry.pipette;
 
 public class pluginCoreItems extends pluginBase {
@@ -45,7 +44,7 @@ public class pluginCoreItems extends pluginBase {
 
     @Override
     protected void recipes() {
-        RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{API.getItem("milkbag")}, new LiquidStack(API.getItem("milk").getItem(), 1000));
+        SqueezerWrapper.add(API.getItem("milkbag"), new ItemStack(Item.leather), 10, API.getItem("milk"), 1000);
         ModLoader.addRecipe(API.getItem("liquidvacuum"), new Object[]{
                     "PpP",
                     "MbM",

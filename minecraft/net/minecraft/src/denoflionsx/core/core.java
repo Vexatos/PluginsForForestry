@@ -7,6 +7,7 @@ import net.minecraft.src.denoflionsx.Achievements.PfFAchievement;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.Containers.Containers;
+import net.minecraft.src.denoflionsx.items.Containers.InfusionBar;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemIronRing;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
@@ -65,9 +66,10 @@ public class core {
     }
 
     public static void registerItemsEnum() {
-        Containers.Container.values();
+        Containers.Container.register();
         ItemBlacksmithHammer.BlacksmithHammer();
         ItemIronRing.IronRing();
+        InfusionBar.recipe();
     }
 
     public static String modVersion() {

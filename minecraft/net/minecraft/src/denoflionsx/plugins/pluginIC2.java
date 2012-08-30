@@ -1,11 +1,15 @@
 package net.minecraft.src.denoflionsx.plugins;
 
+import net.minecraft.src.Block;
+import net.minecraft.src.ItemStack;
+import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import net.minecraft.src.denoflionsx.plugins.Forestry.SqueezerWrapper;
 import net.minecraft.src.denoflionsx.plugins.IC2.UraniumGoo;
 import net.minecraft.src.ic2.api.Items;
 
@@ -63,6 +67,8 @@ public class pluginIC2 extends pluginBase {
 
     @Override
     protected void recipes() {
+        SqueezerWrapper.add(this.get("Uranium"), API.getItem(goo.ItemnameLowerCaseNoSpaces), this.config.getOptionInt("ChanceOfGoo"),new ItemStack(Block.lavaStill),this.config.getOptionInt("LavaFromUranium"));
+        SqueezerWrapper.add(this.get("uraniumCell"), API.getItem(goo.ItemnameLowerCaseNoSpaces));
     }
         
 }

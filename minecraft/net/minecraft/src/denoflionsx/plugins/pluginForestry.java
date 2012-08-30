@@ -4,9 +4,7 @@ import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
-import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.blueswaxModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.peatModule;
-import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.solidfuelModule;
 import net.minecraft.src.denoflionsx.plugins.Forestry.RefineryHack;
 import net.minecraft.src.denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
@@ -71,8 +69,6 @@ public class pluginForestry extends pluginBase {
             this.defaults();
             stillModule.load(this);
             peatModule.load(this);
-            //blueswaxModule.load(this);
-            //solidfuelModule.load(this);
             extraFuelsModule.load(this);
             this.runConfig();
             if (loaded = init()) {
