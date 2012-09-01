@@ -43,9 +43,8 @@ public class customFuelSolid {
         PfFFuelManager.addFuel(fuel.shiftedIndex, customFuel.convertToEUTotal(this.MJt, this.BurnTime));
         recipe();
     }
-    
-    private void recipe(){
-        ItemStack ash = ItemInterface.getItem("ash");
+
+    private void recipe() {
         ArrayList<ItemStack> containers = new ArrayList();
         ArrayList<String> container_names = new ArrayList();
         container_names.add("Capsule");
@@ -53,12 +52,14 @@ public class customFuelSolid {
         container_names.add("Capsule_Red");
         container_names.add("Bucket");
         container_names.add("Cell");
-        for (String s : container_names){
+        for (String s : container_names) {
             ItemStack item = API.getItem(this.liquidNameLowerCaseNoSpaces + denLib.toLowerCaseNoSpaces(s));
-            containers.add(item);
+            if (item != null) {
+                containers.add(item);
+            }
         }
-        for (ItemStack i : containers){
-            ModLoader.addShapelessRecipe(API.getItem(this.nameLowerCaseNoSpaces), new Object[]{API.getItem("infusionbar"),i});
+        for (ItemStack i : containers) {
+            ModLoader.addShapelessRecipe(API.getItem(this.nameLowerCaseNoSpaces), new Object[]{API.getItem("infusionbar"), i});
         }
     }
 }

@@ -15,6 +15,7 @@ import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.ic2.api.Items;
 
 public class LiquidContainerSystem {
 
@@ -45,6 +46,9 @@ public class LiquidContainerSystem {
             } else if (name.contains("Barrel")){
                 empty = API.getItem("barrel");
                 barrel(m, empty,filled);
+            } else if (name.contains("Cell")){
+                empty = Items.getItem("cell");
+                genericCap(m, filled, empty);
             }
         }
     }
@@ -60,13 +64,13 @@ public class LiquidContainerSystem {
             ItemStack empty;
             if (name.contains("Capsule") && !name.contains("_Red")) {
                 empty = ItemInterface.getItem("waxCapsule");
-                genericCapWithOverride(m, filled, empty, liquid);
+                genericCapWithOverride(filled, empty, liquid);
             } else if (name.contains("Capsule_Red")) {
                 empty = ItemInterface.getItem("refractoryEmpty");
-                genericCapWithOverride(m, filled, empty, liquid);
+                genericCapWithOverride(filled, empty, liquid);
             } else if (name.contains("Can")) {
                 empty = ItemInterface.getItem("canEmpty");
-                genericCapWithOverride(m, filled, empty, liquid);
+                genericCapWithOverride(filled, empty, liquid);
             } else if (name.contains("Bucket")) {
                 if (!noBucket) {
                     bucket(m, filled);
@@ -76,6 +80,9 @@ public class LiquidContainerSystem {
             } else if (name.contains("Barrel")){
                 empty = API.getItem(denLib.toLowerCaseNoSpaces(name));
                 barrelOverride(empty,filled,liquid);
+            } else if (name.contains("Cell")){
+                empty = Items.getItem("cell");
+                genericCapWithOverride(filled, empty, liquid);
             }
         }
     }
@@ -86,7 +93,7 @@ public class LiquidContainerSystem {
         pack(empty, filled, m.shiftedIndex, bucket);
     }
 
-    public static void genericCapWithOverride(multiItem m, ItemStack filled, ItemStack empty, int liquid) {
+    public static void genericCapWithOverride(ItemStack filled, ItemStack empty, int liquid) {
         LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, bucket), filled, empty, false));
         unpack(filled, liquid, bucket);
         pack(empty, filled, liquid, bucket);

@@ -13,6 +13,7 @@ import forestry.api.fuels.FuelManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.*;
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.solidfuel.solidfuelModule;
 
 public class pluginForestry extends pluginBase {
 
@@ -70,6 +71,7 @@ public class pluginForestry extends pluginBase {
             stillModule.load(this);
             peatModule.load(this);
             extraFuelsModule.load(this);
+            solidfuelModule.load(this);
             this.runConfig();
             if (loaded = init()) {
                 recipes();

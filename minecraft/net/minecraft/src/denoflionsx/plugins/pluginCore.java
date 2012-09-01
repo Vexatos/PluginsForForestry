@@ -42,10 +42,8 @@ public class pluginCore {
         if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
             plugins.put("Buildcraft", new pluginBuildcraft());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginAdvancedPowerSystems_Enabled"))) {
-            //plugins.put("APS", new pluginAdvancedPowerSystems());
-        }
         plugins.put("CoreItems", new pluginCoreItems());
+        //plugins.put("BluesFood",new pluginbluesFood());
     }
 
     public static boolean isPluginAlive(String name) {

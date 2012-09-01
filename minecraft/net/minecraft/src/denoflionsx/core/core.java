@@ -10,6 +10,7 @@ import net.minecraft.src.denoflionsx.items.Containers.Containers;
 import net.minecraft.src.denoflionsx.items.Containers.InfusionBar;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemIronRing;
+import net.minecraft.src.denoflionsx.plugins.BluesFood.ItemFoods;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
 import net.minecraft.src.forge.MinecraftForgeClient;
 
@@ -58,6 +59,7 @@ public class core {
     // This function runs first.
     public static void runCoreFunctions() {
         MinecraftForgeClient.preloadTexture(mod_PluginsforForestry.texture);
+        MinecraftForgeClient.preloadTexture(ItemFoods.spritesheet);
         //ModLoader.registerTileEntity(TileEntityMachine.class, "dolxMachine");
         //ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
         defaults.setup();
