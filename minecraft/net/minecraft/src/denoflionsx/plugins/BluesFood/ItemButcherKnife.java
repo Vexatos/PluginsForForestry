@@ -21,7 +21,7 @@ public class ItemButcherKnife extends ItemFoodTool {
             return this.maxDamage;
         }
     }
-
+    
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
         super.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);

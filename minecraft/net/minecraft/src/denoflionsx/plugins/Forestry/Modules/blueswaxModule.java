@@ -1,5 +1,6 @@
 package net.minecraft.src.denoflionsx.plugins.Forestry.Modules;
 
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.bluesWax.waxCast;
 import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.*;
@@ -10,13 +11,19 @@ import forestry.api.liquids.LiquidContainer;
 import forestry.api.liquids.LiquidManager;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
+import net.minecraft.src.denoflionsx.core.Crafting;
+import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
+import net.minecraft.src.denoflionsx.plugins.Forestry.Modules.bluesWax.ItemRodofFreezing;
 
 public class blueswaxModule extends baseModule {
 
+    private ItemIDManager wax = new ItemIDManager(1,"ExtraWax");
+    private ItemIDManager rod = new ItemIDManager(1,"RodofFreezing");
     public static waxCast extrawax;
-    public static waxBlock thatch;
-    public static waxSlab thatchslab;
+    public static ItemRodofFreezing Rod;
+//    public static waxBlock thatch;
+//    public static waxSlab thatchslab;
     private int WaxCastPerCraft;
 
     public blueswaxModule(pluginBase parent) {
@@ -33,10 +40,8 @@ public class blueswaxModule extends baseModule {
         this.parent.config.addDefault("# These options are for Blue's Wax Stuff");
         this.parent.config.addDefault("# Includes Wax Casts, wand of freezing, wax tablets");
         this.parent.config.addDefault("BluesWaxStuff_Enabled=true");
-        this.parent.config.addDefault("BluesWaxStuff_ItemID=5317");
-        this.parent.config.addDefault("ThatchedRoof_Enabled=true");
-        this.parent.config.addDefault("ThatchedRoof_BlockID=181");
-        this.parent.config.addDefault("ThatchedRoofSlab_BlockID=185");
+        this.parent.config.addDefault("BluesWaxStuff_ItemID=" + wax.getItemIDs().get(0));
+        this.parent.config.addDefault("RodOfFreezing_ItemID=" + rod.getItemIDs().get(0));
         this.addDefault("WaxCast_AmountPerCraft=" + 1);
     }
 
@@ -57,27 +62,28 @@ public class blueswaxModule extends baseModule {
             //-------------------------------------------------
             int toShift = 15;
             extrawax.add("waxplaceholder", 0, Placeholder.Sprite.RADICAL_EDWARD.getIndex(), "PLACEHOLDER");
-            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), Colors.shiftRow(toShift,7), "Wax Tablet");
-            extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), Colors.shiftRow(toShift,0), "Wax Cast");
-            extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), Colors.shiftRow(toShift,1), "Filled Wax Cast");
-            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), Colors.shiftRow(toShift,2), "Refractory Cast");
-            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), Colors.shiftRow(toShift,3), "Filled Wax Cast");
-            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), Colors.shiftRow(toShift,4), "Lava Cast");
-            extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift,5), "Rod of Freezing");
+            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), Colors.shiftRow(toShift, 7), "Wax Tablet");
+            extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), Colors.shiftRow(toShift, 0), "Wax Cast");
+            extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), Colors.shiftRow(toShift, 1), "Filled Wax Cast");
+            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), Colors.shiftRow(toShift, 2), "Refractory Cast");
+            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), Colors.shiftRow(toShift, 3), "Filled Wax Cast");
+            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), Colors.shiftRow(toShift, 4), "Lava Cast");
+            //extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift, 5), "Rod of Freezing");
             //extrawax.add("test", extrawax.metaMap.get("Test"), 12, "Test (Ignore Me)");
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.lavaStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             LiquidManager.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast_Red")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             //-------------------------------------------------
-            if (this.getOptionBool("ThatchedRoof_Enabled")) {
-                thatch = new waxBlock(this.getOptionInt("ThatchedRoof_BlockID"), Material.clay, "Thatch");
-                int faces1[] = new int[]{Colors.shiftRow(3, 7),Colors.shiftRow(4, 7)};
-                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
-                waxBlockItem.names.put(0, "Test 1");
-                thatchslab = new waxSlab(this.getOptionInt("ThatchedRoofSlab_BlockID"), Material.clay, "ThatchSlab");
-                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
-                waxSlabItem.names.put(0, "Thatched Slab");
-            }
+//            if (this.getOptionBool("ThatchedRoof_Enabled")) {
+//                thatch = new waxBlock(this.getOptionInt("ThatchedRoof_BlockID"), Material.clay, "Thatch");
+//                int faces1[] = new int[]{Colors.shiftRow(3, 7), Colors.shiftRow(4, 7)};
+//                thatch.add("thatch", "Thatched Double Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
+//                waxBlockItem.names.put(0, "Test 1");
+//                thatchslab = new waxSlab(this.getOptionInt("ThatchedRoofSlab_BlockID"), Material.clay, "ThatchSlab");
+//                thatchslab.add("thatchslab", "Thatched Slab", 0, new Integer[]{faces1[0], faces1[0], faces1[1], faces1[1], faces1[1], faces1[1]});
+//                waxSlabItem.names.put(0, "Thatched Slab");
+//            }
+            Rod = new ItemRodofFreezing(this.parent.config.getOptionInt("RodOfFreezing_ItemID"));
             recipes();
         }
     }
@@ -89,98 +95,89 @@ public class blueswaxModule extends baseModule {
         //--------------------------
         this.WaxCastPerCraft = this.getOptionInt("WaxCast_AmountPerCraft");
         if (denLib.convertToBoolean(this.parent.config.getOption("BluesWaxStuff_Enabled"))) {
-            ModLoader.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
                         "XSX",
                         "XBX",
                         "XBX",
                         Character.valueOf('S'), Item.silk,
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")
                     });
-            ModLoader.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
                         "SXX",
                         "BXX",
                         "BXX",
                         Character.valueOf('S'), Item.silk,
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")
                     });
-            ModLoader.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
                         "XXS",
                         "XXB",
                         "XXB",
                         Character.valueOf('S'), Item.silk,
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")
                     });
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "WWX",
                         "WWX",
                         "XXX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XXX",
                         "WWX",
                         "WWX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XWW",
                         "XWW",
                         "XXX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XXX",
                         "XWW",
                         "XWW",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(Block.bookShelf, 1, 0), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Block.bookShelf, 1, 0), new Object[]{
                         "PPP",
                         "TTT",
                         "PPP",
                         Character.valueOf('P'), Block.planks,
                         Character.valueOf('T'), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet"))});
-            ModLoader.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Wax Cast")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Wax Cast")), new Object[]{
                         "WWW",
                         "WXW",
                         "WWW",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Refractory Cast")), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Refractory Cast")), new Object[]{
                         "WWW",
                         "WXW",
                         "WWW",
                         Character.valueOf('W'), ItemInterface.getItem("refractoryWax")});
-            ModLoader.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Rod of Freezing")), new Object[]{
-                        "GIG",
-                        "ISI",
-                        "BsB",
-                        Character.valueOf('G'), Block.glass,
-                        Character.valueOf('I'), Item.ingotIron,
-                        Character.valueOf('S'), Item.snowball,
-                        Character.valueOf('B'), new ItemStack(Item.dyePowder, 1, 12),
-                        Character.valueOf('s'), Item.stick});
             RecipeManagers.bottlerManager.addRecipe(10, new LiquidStack(Block.lavaStill.blockID, 1000), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")));
-            if (this.getOptionBool("ThatchedRoof_Enabled")) {
-                Item r[] = new Item[]{Item.wheat, Item.reed, ItemInterface.getItem("mulch").getItem()};
-                int q = 6;
-                for (Item i : r) {
-                    ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
-                                "www",
-                                "iii",
-                                "www",
-                                Character.valueOf('w'), ItemInterface.getItem("beeswax"),
-                                Character.valueOf('i'), new ItemStack(i)});
-                    ModLoader.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
-                                "www",
-                                "iii",
-                                "www",
-                                Character.valueOf('w'), ItemInterface.getItem("refractoryWax"),
-                                Character.valueOf('i'), new ItemStack(i)});
-                }
-            }
-            ModLoader.addShapelessRecipe(new ItemStack(Block.stone), new Object[]{
+//            if (this.getOptionBool("ThatchedRoof_Enabled")) {
+//                Item r[] = new Item[]{Item.wheat, Item.reed, ItemInterface.getItem("mulch").getItem()};
+//                int q = 6;
+//                for (Item i : r) {
+//                    Crafting.MODE.FML.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
+//                                "www",
+//                                "iii",
+//                                "www",
+//                                Character.valueOf('w'), ItemInterface.getItem("beeswax"),
+//                                Character.valueOf('i'), new ItemStack(i)});
+//                    Crafting.MODE.FML.addRecipe(new ItemStack(thatchslab, q, 0), new Object[]{
+//                                "www",
+//                                "iii",
+//                                "www",
+//                                Character.valueOf('w'), ItemInterface.getItem("refractoryWax"),
+//                                Character.valueOf('i'), new ItemStack(i)});
+//                }
+//            }
+            Crafting.MODE.FML.addShapelessRecipe(new ItemStack(Block.stone), new Object[]{
                         ItemInterface.getItem("beeswax"),
                         new ItemStack(Block.cobblestone)});
-            ModLoader.addShapelessRecipe(new ItemStack(Block.waterlily), new Object[]{
+            Crafting.MODE.FML.addShapelessRecipe(new ItemStack(Block.waterlily), new Object[]{
                         new ItemStack(Item.wheat),
                         ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(Item.blazeRod), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.blazeRod), new Object[]{
                         "RGR",
                         "PSP",
                         "RGR",
@@ -188,42 +185,42 @@ public class blueswaxModule extends baseModule {
                         Character.valueOf('G'), new ItemStack(Item.lightStoneDust),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('P'), ItemInterface.getItem("phosphor")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "FXX",
                         "SXX",
                         "BXX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "XFX",
                         "XSX",
                         "XBX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "XXF",
                         "XXS",
                         "XXB",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "FXX",
                         "SXX",
                         "BXX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("refractoryWax")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "XFX",
                         "XSX",
                         "XBX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("refractoryWax")});
-            ModLoader.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            Crafting.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
                         "XXF",
                         "XXS",
                         "XXB",
@@ -235,7 +232,7 @@ public class blueswaxModule extends baseModule {
                 new ItemStack(Block.dirt),
                 new ItemStack(Block.gravel)};
             for (ItemStack i : r2) {
-                ModLoader.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[]{
+                Crafting.MODE.FML.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[]{
                             b,
                             i,
                             b,
@@ -243,7 +240,7 @@ public class blueswaxModule extends baseModule {
             }
             b = ItemInterface.getItem("refractoryWax");
             for (ItemStack i : r2) {
-                ModLoader.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[]{
+                Crafting.MODE.FML.addShapelessRecipe(new ItemStack(Item.clay, 4), new Object[]{
                             b,
                             i,
                             b,
@@ -254,11 +251,11 @@ public class blueswaxModule extends baseModule {
             ItemStack r3[] = new ItemStack[]{new ItemStack(Block.cobblestone),
                 new ItemStack(Block.stoneBrick)};
             for (int i = 0; i < r2.length; i++) {
-                ModLoader.addShapelessRecipe(r2[i], new Object[]{
+                Crafting.MODE.FML.addShapelessRecipe(r2[i], new Object[]{
                             ItemInterface.getItem("royalJelly"),
                             r3[i]});
             }
-            ModLoader.addShapelessRecipe(new ItemStack(Block.stoneBrick, 1, 2), new Object[]{
+            Crafting.MODE.FML.addShapelessRecipe(new ItemStack(Block.stoneBrick, 1, 2), new Object[]{
                         ItemInterface.getItem("phosphor"),
                         new ItemStack(Block.stoneBrick)});
 

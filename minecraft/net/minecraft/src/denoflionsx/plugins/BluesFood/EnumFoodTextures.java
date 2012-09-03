@@ -9,8 +9,6 @@ public class EnumFoodTextures {
         BUTTER_LIQUID(Colors.shiftRow(15, 0)),
         BUTCHER_KNIFE(Colors.shiftRow(0, 1)),
         TOMATO(Colors.shiftRow(1, 1)),
-        CARROT(Colors.shiftRow(2, 1)),
-        POTATO(Colors.shiftRow(3, 1)),
         CORN(Colors.shiftRow(4, 1)),
         BUTTER_ITEM(Colors.shiftRow(15, 1)),
         FRIED_EGG(Colors.shiftRow(0, 2)),

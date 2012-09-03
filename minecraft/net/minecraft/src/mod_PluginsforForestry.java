@@ -1,10 +1,9 @@
 package net.minecraft.src;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.denoflionsx.Achievements.PfFAchievement;
-import net.minecraft.src.denoflionsx.GUIs.baseGUI;
 import net.minecraft.src.denoflionsx.core.BetaQuotes;
 import net.minecraft.src.denoflionsx.core.core;
+import net.minecraft.src.denoflionsx.plugins.BluesFood.MachineOven;
 import net.minecraft.src.forge.IGuiHandler;
 import net.minecraft.src.forge.MinecraftForge;
 import net.minecraft.src.forge.NetworkMod;
@@ -32,7 +31,7 @@ public class mod_PluginsforForestry extends NetworkMod implements IGuiHandler {
     @Override
     public Object getGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == 1) {
-            return new baseGUI(player);
+            return new MachineOven.GUIOven(player, (MachineOven.TileEntityOven) world.getBlockTileEntity(x, y, z));
         }
         return null;
     }

@@ -18,9 +18,7 @@ public class ItemFoodTool extends Item implements ITextureProvider {
         this.pew = pew;
         this.name = name;
         this.texture = texture;
-        if (core.isClient()) {
-            ModLoader.addLocalization("item." + denLib.toLowerCaseNoSpaces(name) + ".name", name);
-        }
+        core.addName(name);
         this.setMaxStackSize(1);
     }
 

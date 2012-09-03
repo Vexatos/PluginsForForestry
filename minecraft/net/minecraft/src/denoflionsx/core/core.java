@@ -1,18 +1,19 @@
 package net.minecraft.src.denoflionsx.core;
 
 import cpw.mods.fml.client.FMLTextureFX;
+import cpw.mods.fml.common.registry.FMLRegistry;
 import java.util.ArrayList;
 import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.Achievements.PfFAchievement;
+import net.minecraft.src.denoflionsx.MachineTemplate.baseTileEntity;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.Containers.Containers;
 import net.minecraft.src.denoflionsx.items.Containers.InfusionBar;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import net.minecraft.src.denoflionsx.items.CraftingTools.ItemIronRing;
-import net.minecraft.src.denoflionsx.plugins.BluesFood.ItemFoods;
+import net.minecraft.src.denoflionsx.plugins.BluesFood.MachineOven;
 import net.minecraft.src.denoflionsx.plugins.pluginCore;
-import net.minecraft.src.forge.MinecraftForgeClient;
 
 /*
  * Main core file. This file passes everything we need to load on to the mod
@@ -58,13 +59,16 @@ public class core {
 
     // This function runs first.
     public static void runCoreFunctions() {
-        MinecraftForgeClient.preloadTexture(mod_PluginsforForestry.texture);
-        MinecraftForgeClient.preloadTexture(ItemFoods.spritesheet);
-        //ModLoader.registerTileEntity(TileEntityMachine.class, "dolxMachine");
-        //ModLoader.registerTileEntity(TileUniversalSapling.class,"dolxUSapling");
+        PreloadTextureManager.Preload();
+        registerTileEntites();
         defaults.setup();
         config.readFile();
         Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
+    }
+
+    public static void registerTileEntites() {
+        FMLRegistry.registerTileEntity(baseTileEntity.class, "dolBaseEntity");
+        FMLRegistry.registerTileEntity(MachineOven.TileEntityOven.class, "dolBlueOven");
     }
 
     public static void registerItemsEnum() {
@@ -82,6 +86,14 @@ public class core {
 
         denLib.print("[PluginsForForestry]: " + msg);
 
+    }
+
+    public static String addName(String name) {
+        if (isClient()) {
+            return denLib.addName(name);
+        } else {
+            return "";
+        }
     }
 
     public static String BukkitShift(String m) {

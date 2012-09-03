@@ -4,11 +4,7 @@ import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
 import net.minecraft.src.denoflionsx.items.Placeholder;
-import net.minecraft.src.denoflionsx.items.multiItem;
-import net.minecraft.src.denoflionsx.plugins.BluesFood.EnumFoodTextures;
-import net.minecraft.src.denoflionsx.plugins.BluesFood.ItemButcherKnife;
-import net.minecraft.src.denoflionsx.plugins.BluesFood.ItemFoodRaw;
-import net.minecraft.src.denoflionsx.plugins.BluesFood.ItemFoods;
+import net.minecraft.src.denoflionsx.plugins.BluesFood.*;
 
 public class pluginbluesFood extends pluginBase {
 
@@ -17,6 +13,7 @@ public class pluginbluesFood extends pluginBase {
     ItemFoods food;
     ItemFoodRaw rawfood;
     ItemIDManager foodid = new ItemIDManager(2, "Food");
+    MachineOven oven = new MachineOven();
 
     public pluginbluesFood() {
         this.name = "pluginbluesFood";

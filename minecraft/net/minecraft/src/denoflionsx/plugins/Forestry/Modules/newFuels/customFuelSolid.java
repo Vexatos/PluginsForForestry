@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.Crafting;
 import net.minecraft.src.denoflionsx.core.PfFFuelManager;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.denoflionsx.items.PfFBar;
@@ -59,7 +60,7 @@ public class customFuelSolid {
             }
         }
         for (ItemStack i : containers) {
-            ModLoader.addShapelessRecipe(API.getItem(this.nameLowerCaseNoSpaces), new Object[]{API.getItem("infusionbar"), i});
+            Crafting.MODE.FML.addShapelessRecipe(API.getItem(this.nameLowerCaseNoSpaces), new Object[]{API.getItem("infusionbar"), i});
         }
     }
 }

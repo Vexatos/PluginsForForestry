@@ -3,6 +3,7 @@ package net.minecraft.src.denoflionsx.plugins.BluesFood;
 import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
+import net.minecraft.src.denoflionsx.core.PreloadTextureManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.denLib;
 import net.minecraft.src.forge.ITextureProvider;

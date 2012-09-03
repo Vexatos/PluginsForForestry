@@ -5,6 +5,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.Crafting;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.denLib;
@@ -41,13 +42,13 @@ public class ItemIronRing extends multiItem {
 
         private void recipes() {
             ItemStack hammer = API.getItem("blacksmithhammer");
-            ModLoader.addRecipe(new ItemStack(this.ring, this.amount, this.ring.metaMap.get(this.name)),
+            Crafting.MODE.FML.addRecipe(new ItemStack(this.ring, this.amount, this.ring.metaMap.get(this.name)),
                     new Object[]{"XIX",
                         "IHI",
                         "XIX",
                         Character.valueOf('H'), hammer,
                         Character.valueOf('I'), Item.ingotIron});
-            ModLoader.addRecipe(API.getItem("barrel"),new Object[]{
+            Crafting.MODE.FML.addRecipe(API.getItem("barrel"),new Object[]{
                 "PRP",
                 "PGP",
                 "PRP",

@@ -9,6 +9,7 @@ import net.minecraft.src.denoflionsx.plugins.BetterFarming.cropCustomProvider;
 import net.minecraft.src.denoflionsx.plugins.baseModule;
 import net.minecraft.src.denoflionsx.plugins.pluginBase;
 import forestry.api.cultivation.CropProviders;
+import net.minecraft.src.denoflionsx.core.Crafting;
 
 public class saplingModule extends baseModule {
 
@@ -23,7 +24,7 @@ public class saplingModule extends baseModule {
         sap = new BlockUniversalSapling(135);
         ModLoader.registerBlock(sap);
         ModLoader.addName(sap, "Universal Sapling");
-        ModLoader.addRecipe(new ItemStack(sap, 1, 2), new Object[]{
+        Crafting.MODE.FML.addRecipe(new ItemStack(sap, 1, 2), new Object[]{
                     "XXX",
                     "DXX",
                     "XXX",

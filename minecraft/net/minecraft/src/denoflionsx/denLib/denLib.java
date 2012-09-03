@@ -9,7 +9,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 
 public class denLib {
-
+    
     public static boolean detect(String mod) {
         return ModLoader.isModLoaded(mod);
     }
@@ -110,6 +110,11 @@ public class denLib {
 
     public static String toNoSpaces(String s) {
         return s.replaceAll("\\s", "");
+    }
+
+    public static String addName(String name) {
+            ModLoader.addLocalization("item." + denLib.toLowerCaseNoSpaces(name) + ".name", name);
+            return "item." + denLib.toLowerCaseNoSpaces(name);
     }
 
     public static void classSnoop(String param1) {

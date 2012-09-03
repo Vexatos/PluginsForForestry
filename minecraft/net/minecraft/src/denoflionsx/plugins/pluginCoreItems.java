@@ -6,6 +6,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.Crafting;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.denLib.Config.Config;
@@ -45,7 +46,7 @@ public class pluginCoreItems extends pluginBase {
     @Override
     protected void recipes() {
         SqueezerWrapper.add(API.getItem("milkbag"), new ItemStack(Item.leather), 10, API.getItem("milk"), 1000);
-        ModLoader.addRecipe(API.getItem("liquidvacuum"), new Object[]{
+        Crafting.MODE.FML.addRecipe(API.getItem("liquidvacuum"), new Object[]{
                     "PpP",
                     "MbM",
                     "GBG",
@@ -55,7 +56,7 @@ public class pluginCoreItems extends pluginBase {
                     Character.valueOf('b'), new ItemStack(Item.glassBottle),
                     Character.valueOf('G'), ItemInterface.getItem("gearBronze"),
                     Character.valueOf('B'), new ItemStack(Item.bucketEmpty)});
-        ModLoader.addRecipe(API.getItem("woodenbucket"), new Object[]{
+        Crafting.MODE.FML.addRecipe(API.getItem("woodenbucket"), new Object[]{
                     "WXW",
                     "XWX",
                     "XXX",

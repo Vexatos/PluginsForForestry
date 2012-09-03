@@ -3,6 +3,7 @@ package net.minecraft.src.denoflionsx.items.CraftingTools;
 import net.minecraft.src.*;
 import net.minecraft.src.denoflionsx.API.API;
 import net.minecraft.src.denoflionsx.API.PFFItems;
+import net.minecraft.src.denoflionsx.core.Crafting;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.core.core;
 import net.minecraft.src.denoflionsx.plugins.Core.EnumToolTextures;
@@ -77,7 +78,7 @@ public class ItemBlacksmithHammer extends Item {
         }
         
         private void recipes(){
-            ModLoader.addRecipe(API.getItem("blacksmithhammer"),new Object[]{
+            Crafting.MODE.FML.addRecipe(API.getItem("blacksmithhammer"),new Object[]{
             "XBX",
             "III",
             "XSX",

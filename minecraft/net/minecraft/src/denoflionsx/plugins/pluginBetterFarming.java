@@ -13,6 +13,7 @@ import forestry.api.cultivation.CropProviders;
 import forestry.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.denoflionsx.API.API;
+import net.minecraft.src.denoflionsx.core.Crafting;
 import net.minecraft.src.denoflionsx.core.ItemIDManager;
 import net.minecraft.src.denoflionsx.denLib.Colors;
 import net.minecraft.src.denoflionsx.plugins.Core.EnumLiquidTextures;
@@ -98,7 +99,7 @@ public class pluginBetterFarming extends pluginBase {
                 CropProviders.arborealCrops.add(new cropCustomProvider(this.getBlock("Lemon Tree"), new ItemStack(this.items.get("Lemon").getItem(), 1, 0), new int[]{this.items.get("Lemon Seeds").itemID, this.items.get("Lemon").itemID}));
                 CropProviders.cerealCrops.add(new cropCustomSeedProvider(this.items.get("Mint").getItem(), this.items.get("Mint Seeds").getItem(), this.getBlock("Mint Crop"), 5));
             }
-            ModLoader.addRecipe(this.items.get("Waterproofing"), new Object[]{
+            Crafting.MODE.FML.addRecipe(this.items.get("Waterproofing"), new Object[]{
                         "XXX",
                         "XMX",
                         "XXX",
