@@ -5,11 +5,13 @@ import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import net.minecraft.client.Minecraft;
 import denoflionsx.core.BetaQuotes;
 import denoflionsx.core.core;
 
 @Mod( modid = "mod_PluginsforForestry", name="Plugins for Forestry", version="1.3Dev")
+@NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class mod_PluginsforForestry{
 
     /*
