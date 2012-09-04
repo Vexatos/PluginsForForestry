@@ -65,7 +65,4 @@ public class API {
         return loaded;
     }
     
-    public static void addOvenRecipe(ItemStack output, ItemStack tool, ItemStack[] grid){
-        OvenRecipeManager.addRecipe(output, tool, grid);
-    }
 }

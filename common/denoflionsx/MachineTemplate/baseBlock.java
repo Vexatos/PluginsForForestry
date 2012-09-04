@@ -4,6 +4,7 @@ import denoflionsx.core.FMLWrapper;
 import java.util.Random;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
+import denoflionsx.mod_PluginsforForestry;
 
 public class baseBlock extends BlockContainer {
 
@@ -50,6 +51,12 @@ public class baseBlock extends BlockContainer {
         return true;
     }
 
+    @Override
+    public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+        par5EntityPlayer.openGui(mod_PluginsforForestry.instance,0,par1World,par2,par3,par4);
+        return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
+    }
+    
     @Override
     public boolean hasTileEntity(int metadata) {
         return true;

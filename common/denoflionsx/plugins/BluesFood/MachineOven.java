@@ -1,17 +1,18 @@
 package denoflionsx.plugins.BluesFood;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import java.util.ArrayList;
-import net.minecraft.src.*;
 import denoflionsx.API.OvenRecipeManager;
 import denoflionsx.API.OvenRecipeManager.OvenRecipe;
+import java.util.ArrayList;
+import net.minecraft.src.*;
 import denoflionsx.MachineTemplate.*;
 import denoflionsx.core.core;
+import denoflionsx.mod_PluginsforForestry;
 
 public class MachineOven {
 
     public static final String gui = "/denoflionsx/oven_food_gui.png";
-    public BlockOven oven = new BlockOven(181, "Blue Oven");
+    public BlockOven oven = new BlockOven(3333, "Blue Oven");
+    public static final int gui_id = 0;
 
     public MachineOven() {
     }
@@ -31,15 +32,19 @@ public class MachineOven {
         public TileEntity createNewTileEntity(World world, int metadata) {
             return this.tile = new TileEntityOven(12);
         }
-        
-        
+
+        @Override
+        public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer, int par6, float par7, float par8, float par9) {
+            par5EntityPlayer.openGui(mod_PluginsforForestry.instance, gui_id, par1World, par2, par3, par4);
+            return true;
+        }
     }
 
     public static class TileEntityOven extends baseTileEntity {
 
         public static final int slotnum = 12;
-        public static final int CookTime = (5 * 20);
-        public static final boolean debug = true;
+        public static final boolean debug = false;
+        private int cookTime;
         private ItemStack output = null;
         private boolean hasRecipe = false;
         private int burntime;
@@ -47,10 +52,12 @@ public class MachineOven {
         private int progress;
 
         static {
-            ItemStack n = null;
-            OvenRecipeManager.addRecipe(new ItemStack(Item.cake), new ItemStack(Item.ingotIron), new ItemStack[]{new ItemStack(Item.bucketMilk), n, n,
-                        n, n, n,
-                        n, n, n});
+            ArrayList<ItemStack> test = new ArrayList();
+            test.add(new ItemStack(Item.appleGold));
+            for (int i = 0; i > 8; i++){
+                test.add(null);
+            }
+            OvenRecipeManager.addRecipe(new ItemStack(Item.appleGold), test);
         }
 
         public TileEntityOven(int slots) {
@@ -89,22 +96,18 @@ public class MachineOven {
 
         @Override
         public void onInventoryChanged() {
-            ItemStack[] grid;
-            grid = getCraftingGrid();
-            OvenRecipe r = OvenRecipeManager.findMatchingRecipe(this.getTool(), grid);
-            if (r == null) {
-                this.hasRecipe = false;
-            } else {
-                this.output = r.getOutput();
-                this.hasRecipe = true;
-            }
             this.inventoryChangedSinceLastCheck = true;
+            this.progress = 0;
+            if (this.hasRecipe = OvenRecipeManager.isRecipe(this.getCraftingGrid())){
+                OvenRecipe r = OvenRecipeManager.getRecipeResult(this.getCraftingGrid());
+                this.output = r.getOutput();
+                this.cookTime = r.getCookTime();
+            }
         }
 
         public static int getBurnTime(ItemStack i) {
             if (i != null) {
-                return 60;
-                //return FMLCommonHandler.instance().(i.getItem().shiftedIndex, i.getItemDamageForDisplay());
+                return TileEntityFurnace.getItemBurnTime(i);
             } else {
                 return 0;
             }
@@ -118,49 +121,51 @@ public class MachineOven {
             }
         }
 
+        public ItemStack getFuel() {
+            return this.inventory[10];
+        }
+
+        public void useFuel() {
+            this.burntime = this.getBurnTime(this.getFuel());
+            this.getFuel().stackSize--;
+        }
+
         public ItemStack getTool() {
             return this.inventory[9];
         }
 
         public boolean hasTool() {
-            if (this.inventory[9] != null) {
+            if (this.getTool() != null) {
                 return true;
             } else {
                 return false;
             }
         }
 
+        public void setOutput(ItemStack item) {
+            this.inventory[11] = item.copy();
+        }
+
         @Override
         public void updateEntity() {
-            if (this.inventoryChangedSinceLastCheck) {
-                this.progress = 0;
-                this.inventoryChangedSinceLastCheck = false;
-            }
-            if (this.burntime == 0 && this.output != null && this.hasRecipe) {
-                if (this.hasFuel() && this.hasTool()) {
-                    this.burntime = getBurnTime(this.inventory[10]);
-                    this.inventory[10].stackSize--;
+            if (this.burntime == 0 && this.hasRecipe) {
+                if (this.hasFuel()) {
+                    this.useFuel();
                 }
-            } else if (this.burntime > 0 && this.hasRecipe) {
-                this.progress++;
-                if (this.progress >= CookTime) {
-                    for (int i = 0; i != 8; i++) {
-                        if (this.inventory[i] != null) {
-                            if (this.inventory[i].stackSize == 1) {
-                                this.inventory[i].stackSize = 0;
-                            } else {
-                                this.inventory[i].stackSize--;
+            } else {
+                if (this.hasRecipe){
+                    this.progress++;
+                    if (this.progress >= this.cookTime){
+                        for (int i = 0; i > 8; i++){
+                            if (this.inventory[i] != null){
+                                this.decrStackSize(i, 1);
                             }
                         }
+                        this.setOutput(this.output);
                     }
-                    this.inventory[11] = this.output.copy();
-                } else {
-                    this.progress++;
                 }
                 this.burntime--;
             }
-
-
         }
 
         @Override
@@ -193,6 +198,7 @@ public class MachineOven {
             map.add(new CoordObject(9, 75, 17));
             map.add(new CoordObject(10, 75, 53));
             map.add(new CoordObject(11, 138, 35));
+            baseGUIHandler.slotMap.put(gui_id, map);
         }
 
         public GUIOven(EntityPlayer player, baseTileEntity tile) {

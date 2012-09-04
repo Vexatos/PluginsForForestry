@@ -6,8 +6,10 @@ import cpw.mods.fml.common.Mod.PostInit;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import net.minecraft.client.Minecraft;
 import denoflionsx.core.BetaQuotes;
+import denoflionsx.core.PfFGUIHandler;
 import denoflionsx.core.core;
 
 @Mod( modid = "mod_PluginsforForestry", name="Plugins for Forestry", version="1.3Dev")
@@ -24,13 +26,16 @@ public class mod_PluginsforForestry{
     public static final String texture = "/denoflionsx/spritesheet.png";
     public static boolean hasPluginsLoaded = false;
     public static int count = 0;
+    public static mod_PluginsforForestry instance;
    
     public mod_PluginsforForestry() {
+        instance = this;
     }
 
     @Init
     public void load(FMLInitializationEvent event) {
         core.runCoreFunctions();
+        NetworkRegistry.instance().registerGuiHandler(this, new PfFGUIHandler());
     }
 
     @PostInit

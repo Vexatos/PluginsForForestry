@@ -4,7 +4,6 @@ import forestry.api.core.ItemInterface;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
 import denoflionsx.API.API;
 import denoflionsx.core.FMLWrapper;
 import denoflionsx.core.ItemIDManager;

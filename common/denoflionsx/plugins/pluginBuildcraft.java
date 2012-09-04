@@ -36,7 +36,7 @@ public class pluginBuildcraft extends pluginBase {
 
     @Override
     protected boolean detect() {
-        return denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport");
+        return denLib.detect("BuildCraft|Core") && denLib.detect("BuildCraft|Transport");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class pluginBuildcraft extends pluginBase {
         goldGear.setup();
         String BCE = "BuildCraftEnergy";
         if (core.isBukkit) {
-            BCE = "net.minecraft.server." + BCE;
+            BCE = "buildcraft." + BCE;
         }
         this.addBlock(BCE, "oilStill", "Oil", 0);
         this.addItem(BCE, "fuel", "Fuel", 0);

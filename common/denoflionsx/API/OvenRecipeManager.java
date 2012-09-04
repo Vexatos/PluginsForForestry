@@ -1,68 +1,118 @@
 package denoflionsx.API;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import net.minecraft.src.ItemStack;
-import denoflionsx.core.core;
 
 public class OvenRecipeManager {
-
-    public static ArrayList<OvenRecipe> recipes = new ArrayList();
-
-    public static void addRecipe(ItemStack output, ItemStack tool, ItemStack[] grid) {
-        recipes.add(new OvenRecipe(output, tool, grid));
+    
+    private static ArrayList<OvenRecipe> recipes = new ArrayList();
+    
+    public static void addRecipe(ItemStack output, ItemStack[] recipe, int burnTime){
+        recipes.add(new OvenRecipe(output,recipe,burnTime));
     }
-
-    public static OvenRecipe findMatchingRecipe(ItemStack tool, ItemStack[] grid) {
-        for (OvenRecipe r : recipes) {
-            if (r.doesRecipeMatch(tool, grid)) {
+    
+    public static void addRecipe(ItemStack output, ItemStack[] recipe){
+        recipes.add(new OvenRecipe(output,recipe,OvenRecipe.defaultTime));
+    }
+    
+    public static void addRecipe(ItemStack output, ArrayList<ItemStack> recipe, int burnTime){
+        recipes.add(new OvenRecipe(output,recipe,burnTime));
+    }
+    
+    public static void addRecipe(ItemStack output, ArrayList<ItemStack> recipe){
+        recipes.add(new OvenRecipe(output,recipe,OvenRecipe.defaultTime));
+    }
+    
+    public static boolean isRecipe(ItemStack[] grid){
+        return checkRecipe(grid);
+    }
+    
+    public static boolean isRecipe(ArrayList<ItemStack> grid){
+        return checkRecipe(toArray(grid));
+    }
+    
+    public static OvenRecipe getRecipeResult(ItemStack[] grid){
+        return getOutput(grid);
+    }
+    
+    public static OvenRecipe getRecipeResult(ArrayList<ItemStack> grid){
+        return getOutput(toArray(grid));
+    }
+    
+    private static OvenRecipe getOutput(ItemStack[] grid){
+        for (OvenRecipe r : recipes){
+            if (r.isRecipeEqual(grid)){
                 return r;
             }
         }
         return null;
     }
-
-    public static OvenRecipe findMatchingRecipe(ItemStack[] grid) {
-        return findMatchingRecipe(null, grid);
+    
+    private static boolean checkRecipe(ItemStack[] grid){
+        for (OvenRecipe r : recipes){
+            if (r.isRecipeEqual(grid)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static ItemStack[] toArray(ArrayList<ItemStack> list){
+        return list.toArray(new ItemStack[]{});
     }
 
-    public static class OvenRecipe {
-
+    public static class OvenRecipe{
+        
         private ItemStack output;
-        private ItemStack tool;
-        private ItemStack[] grid = new ItemStack[9];
+        private ItemStack[] recipe = new ItemStack[9];
+        private int cookTime;
+        private static final int defaultTime = (2 * 20);
 
-        public OvenRecipe(ItemStack output, ItemStack tool, ItemStack[] grid) {
+        public OvenRecipe(ItemStack output, ItemStack[] recipe, int cookTime) {
             this.output = output;
-            this.grid = grid;
+            this.recipe = recipe;
+            this.cookTime = cookTime;
+        }
+        
+        public OvenRecipe(ItemStack output, ItemStack[] recipe){
+            this.output = output;
+            this.recipe = recipe;
+            this.cookTime = defaultTime;
+        }
+        
+        public OvenRecipe(ItemStack output, ArrayList<ItemStack> recipe, int cookTime){
+            this.output = output;
+            this.recipe = toArray(recipe);
+            this.cookTime = cookTime;
+        }
+        
+        public OvenRecipe(ItemStack output, ArrayList<ItemStack> recipe){
+            this.output = output;
+            this.recipe = toArray(recipe);
+            this.cookTime = defaultTime;
+        }
+        
+        public boolean isRecipeEqual(ItemStack[] recipe){
+            return Arrays.equals(this.recipe,recipe);
+        }
+        
+        public boolean isRecipeEqual(ArrayList<ItemStack> recipe){
+            return Arrays.equals(this.recipe,toArray(recipe));
         }
 
-        public boolean doesRecipeMatch(ItemStack tool, ItemStack[] test) {
-            int i = 0;
-            int matches = 0;
-            for (ItemStack z : this.grid){
-                if (z == test[i]){
-                    matches++;
-                }
-                i++;
-            }
-            core.print("" + matches);
-            if (matches == 8){
-                return true;
-            }else{
-                return false;
-            }
-        }
-
-        public boolean doesRecipeMatch(ItemStack[] test) {
-            return doesRecipeMatch(null, grid);
+        public int getCookTime() {
+            return cookTime;
         }
 
         public ItemStack getOutput() {
             return output;
         }
 
-        public ItemStack getTool() {
-            return tool;
+        public ItemStack[] getRecipe() {
+            return recipe;
         }
+        
     }
+    
 }
