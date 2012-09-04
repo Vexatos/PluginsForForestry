@@ -1,0 +1,14 @@
+[hammer achiev];
+# All internal config lines MUST end with a semi-colon!;
+# Achievement for crafting blacksmith hammer.;
+id=2;
+name=Stop - Hammer time!;
+desc=Crafted a blacksmith hammer.;
+icon=blacksmithhammer;
+iscrafting=true;
+isttem=false;
+isspecial=false;
+itemtrigger=blacksmithhammer;
+xcoord=2;
+ycoord=0;
+required=0;
