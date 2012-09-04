@@ -5,7 +5,7 @@ import net.minecraft.src.ItemStack;
 
 public class API {
 
-    public static final boolean verbose = false;
+    public static final boolean verbose = true;
 
     // Use this to access PFF items from outside the modules/plugins.
     // This method expects a string that matches the internal name of the item.

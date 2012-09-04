@@ -103,16 +103,6 @@ public class LiquidContainerSystem {
         LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(m.shiftedIndex, bucket), filled, empty, true));
         unpack(filled, m.shiftedIndex, bucket);
         pack(empty, filled, m.shiftedIndex, bucket);
-        if (denLib.detect("mod_BuildCraftSilicon")) {
-            addLiquidBC3.add(m.shiftedIndex, filled);
-        } else {
-            if (denLib.detect("mod_BuildCraftCore")) {
-                if (denLib.convertToBoolean(core.config.getOption("EnableBC2TankIntegration"))) {
-                    addLiquidBC2.add(m.shiftedIndex, filled.getItem());
-                }
-
-            }
-        }
     }
 
     public static void bottle(multiItem m, ItemStack filled) {
@@ -157,6 +147,5 @@ public class LiquidContainerSystem {
         LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid, bucket), new ItemStack(Item.bucketMilk), new ItemStack(Item.bucketEmpty), true));
         pack(new ItemStack(Item.bucketEmpty), new ItemStack(Item.bucketMilk), liquid, bucket);
         unpackBucket(new ItemStack(Item.bucketMilk), liquid, bucket);
-        addLiquidBC2.add(liquid, Item.bucketMilk);
     }
 }

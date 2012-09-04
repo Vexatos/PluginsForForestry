@@ -24,7 +24,7 @@ public class pluginBuildcraft extends pluginBase {
     public void register() {
         if (!loaded) {
             this.defaults();
-            //milkModule.load(this);
+            milkModule.load(this);
             quarryModule.load(this);
             this.runConfig();
             if (loaded = init()) {
@@ -59,9 +59,9 @@ public class pluginBuildcraft extends pluginBase {
         }
         TankManager.setup();
         goldGear.setup();
-        String BCE = "BuildCraftEnergy";
+        String BCE = "buildcraft.BuildCraftEnergy";
         if (core.isBukkit) {
-            BCE = "buildcraft." + BCE;
+            
         }
         this.addBlock(BCE, "oilStill", "Oil", 0);
         this.addItem(BCE, "fuel", "Fuel", 0);

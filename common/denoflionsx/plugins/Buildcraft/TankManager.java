@@ -45,7 +45,7 @@ public class TankManager {
 
     public static void setup() {
         if (!core.isBukkit) {
-            TankBlock = denLib.getBlock("BuildCraftFactory", "tankBlock");
+            TankBlock = denLib.getBlock("buildcraft.BuildCraftFactory", "tankBlock");
         } else {
             TankBlock = denLib.getBlock("net.minecraft.server.BuildCraftFactory", "tankBlock");
         }

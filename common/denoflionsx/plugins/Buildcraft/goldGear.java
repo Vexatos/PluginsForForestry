@@ -10,7 +10,7 @@ public class goldGear {
 
     public static void setup() {
         if (!core.isBukkit) {
-            goldGear = denLib.getItem("BuildCraftCore", "goldGearItem");
+            goldGear = denLib.getItem("buildcraft.BuildCraftCore", "goldGearItem");
         } else {
             goldGear = denLib.getItem("net.minecraft.server.BuildCraftCore", "goldGearItem");
         }
