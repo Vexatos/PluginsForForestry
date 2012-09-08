@@ -3,6 +3,8 @@ package denoflionsx.plugins;
 import denoflionsx.core.core;
 
 public class pluginAdvancedPowerSystems extends pluginBase {
+    
+    // This is pretty much complete junk now.
 
     public pluginAdvancedPowerSystems() {
         this.mod = "mod_BuildcraftAPS";

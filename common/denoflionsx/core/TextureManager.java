@@ -3,7 +3,6 @@ package denoflionsx.core;
 import denoflionsx.mod_PluginsforForestry;
 import denoflionsx.plugins.BluesFood.ItemFoods;
 import denoflionsx.plugins.BluesFood.MachineOven;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class TextureManager {
 
@@ -18,7 +17,7 @@ public class TextureManager {
         OVEN_GUI(MachineOven.gui);
 
         private SPRITESHEETS(String sheet){
-            MinecraftForgeClient.preloadTexture(sheet);
+            mod_PluginsforForestry.proxy.preloadTexture(sheet);
         }
     }
 }

@@ -4,7 +4,6 @@ import buildcraft.api.liquids.LiquidStack;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.pluginBetterFarming;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;

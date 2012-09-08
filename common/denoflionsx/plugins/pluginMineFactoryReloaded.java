@@ -1,10 +1,11 @@
 package denoflionsx.plugins;
 
-import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import denoflionsx.API.API;
 import denoflionsx.API.PFFItems;
+import denoflionsx.core.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
+import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import denoflionsx.plugins.MinefactoryReloaded.MFRMilk;
@@ -12,13 +13,13 @@ import denoflionsx.plugins.MinefactoryReloaded.MFRMilk;
 
 public class pluginMineFactoryReloaded extends pluginBase {
 
-    protected String theClass = "powercrystals.minefactoryreloaded.MineFactoryReloadedCore";
+    protected String theClass = EnumModIDs.MODS.MFR.gettheClass();
     public static MFRMilk milk;
     private ItemIDManager IDs = new ItemIDManager(2,"MFRMilk");
 
     public pluginMineFactoryReloaded() {
         this.name = "pluginMineFactoryReloaded";
-        this.mod = "mod_MineFactory";
+        this.mod = EnumModIDs.MODS.MFR.getID();
         this.config = new Config(this.name + ".cfg");
         this.register();
     }
@@ -54,6 +55,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
             ItemStack n = null;
             milk = new MFRMilk(this.IDs,this.get("Milk"),n,this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
         }
+        core.print(this.name + " loaded!");
         this.hooked = true;
         return this.hooked;
     }

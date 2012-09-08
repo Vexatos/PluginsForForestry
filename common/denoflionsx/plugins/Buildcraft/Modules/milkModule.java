@@ -10,11 +10,13 @@ import denoflionsx.plugins.pluginCore;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import denoflionsx.API.API;
+import denoflionsx.core.ItemIDManager;
 
 public class milkModule extends baseModule {
 
     public static multiItem milk;
     public static boolean disableBCMilk = false;
+    public ItemIDManager id = new ItemIDManager(1,"PfFMilk");
     //public static ItemIDManager IDs = new ItemIDManager(2);
 
     public milkModule(pluginBase parent) {
@@ -64,7 +66,7 @@ public class milkModule extends baseModule {
         this.parent.config.addDefault("# These options are for an alternative to Minefactory for tankable milk.");
         this.parent.config.addDefault("# These options do nothing if the MFR plugin is on");
         this.parent.config.addDefault("MilkInTanks=true");
-        this.parent.config.addDefault("Milk_ItemID=5314");
+        this.parent.config.addDefault("Milk_ItemID=" + id.getItemIDs().get(0));
         this.parent.config.addDefault("MilkInBiogas=true");
         this.parent.config.addDefault("MilkMJt=1");
         this.parent.config.addDefault("MilkBurnTime=40000");

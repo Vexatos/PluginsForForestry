@@ -43,7 +43,8 @@ public class pluginCore {
             plugins.put("Buildcraft", new pluginBuildcraft());
         }
         plugins.put("CoreItems", new pluginCoreItems());
-        plugins.put("BluesFood",new pluginbluesFood());
+        //plugins.put("BluesFood",new pluginbluesFood());
+        plugins.put("FarmCraftory", new pluginFarmCraftory());
     }
 
     public static boolean isPluginAlive(String name) {

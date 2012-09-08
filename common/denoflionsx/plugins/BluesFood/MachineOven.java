@@ -1,11 +1,8 @@
 package denoflionsx.plugins.BluesFood;
 
-import denoflionsx.API.OvenRecipeManager;
-import denoflionsx.API.OvenRecipeManager.OvenRecipe;
 import java.util.ArrayList;
 import net.minecraft.src.*;
 import denoflionsx.MachineTemplate.*;
-import denoflionsx.core.core;
 import denoflionsx.mod_PluginsforForestry;
 
 public class MachineOven {
@@ -43,21 +40,26 @@ public class MachineOven {
     public static class TileEntityOven extends baseTileEntity {
 
         public static final int slotnum = 12;
-        public static final boolean debug = false;
+        public static final boolean debug = true;
         private int cookTime;
         private ItemStack output = null;
         private boolean hasRecipe = false;
         private int burntime;
         private boolean inventoryChangedSinceLastCheck = false;
         private int progress;
+        private static ItemStack[] testRecipe = new ItemStack[9];
 
         static {
-            ArrayList<ItemStack> test = new ArrayList();
-            test.add(new ItemStack(Item.appleGold));
-            for (int i = 0; i > 8; i++){
-                test.add(null);
-            }
-            OvenRecipeManager.addRecipe(new ItemStack(Item.appleGold), test);
+            ItemStack n = null;
+            testRecipe[0] = new ItemStack(Item.appleRed);
+            testRecipe[1] = n;
+            testRecipe[2] = n;
+            testRecipe[3] = n;
+            testRecipe[4] = n;
+            testRecipe[5] = n;
+            testRecipe[6] = n;
+            testRecipe[7] = n;
+            testRecipe[8] = n;
         }
 
         public TileEntityOven(int slots) {
@@ -70,39 +72,35 @@ public class MachineOven {
         }
 
         public ItemStack[] getCraftingGrid() {
-            ItemStack[] grid = new ItemStack[9];
-            int i = 0;
-            for (ItemStack a : this.inventory) {
-                if (i < 8) {
-                    if (a != null) {
-                        grid[i] = a;
-                    } else {
-                        ItemStack n = null;
-                        grid[i] = n;
-                    }
-                }
-                i++;
-            }
-
-            if (debug) {
-                // What is in the crafting grid?
-                core.print("--------------------------------------");
-                core.print(grid[0] + " " + grid[1] + " " + grid[2]);
-                core.print(grid[3] + " " + grid[4] + " " + grid[5]);
-                core.print(grid[6] + " " + grid[7] + " " + grid[8]);
-            }
-            return grid;
+            ItemStack[] r = new ItemStack[9];
+            System.arraycopy(this.inventory, 0, r, 0, 8);
+            return r;
         }
 
         @Override
         public void onInventoryChanged() {
             this.inventoryChangedSinceLastCheck = true;
             this.progress = 0;
-            if (this.hasRecipe = OvenRecipeManager.isRecipe(this.getCraftingGrid())){
-                OvenRecipe r = OvenRecipeManager.getRecipeResult(this.getCraftingGrid());
-                this.output = r.getOutput();
-                this.cookTime = r.getCookTime();
+            if (!this.isOvenEmpty()) {
+                if (this.getStackInSlot(0).isItemEqual(testRecipe[0])){
+                    this.hasRecipe = true;
+                    this.output = new ItemStack(Item.appleGold);
+                    this.burntime = (2 * 20);
+                }
+            }else{
+                this.hasRecipe = false;
             }
+        }
+
+        public boolean isOvenEmpty() {
+            for (int i = 1; i > 9; i++){
+                if (this.getStackInSlot(i - 1) != null){
+                    return false;
+                }else{
+                    continue;
+                }
+            }
+            return true;
         }
 
         public static int getBurnTime(ItemStack i) {
@@ -122,16 +120,24 @@ public class MachineOven {
         }
 
         public ItemStack getFuel() {
-            return this.inventory[10];
+            return this.inventory[this.getFuelSlot()];
+        }
+        
+        public int getFuelSlot(){
+            return 10;
         }
 
         public void useFuel() {
             this.burntime = this.getBurnTime(this.getFuel());
-            this.getFuel().stackSize--;
+            this.decrStackSize(this.getFuelSlot(), 1);
+        }
+        
+        public int getToolSlot(){
+            return 9;
         }
 
         public ItemStack getTool() {
-            return this.inventory[9];
+            return this.getStackInSlot(this.getToolSlot());
         }
 
         public boolean hasTool() {
@@ -141,9 +147,13 @@ public class MachineOven {
                 return false;
             }
         }
+        
+        public int getOutputSlot(){
+            return 11;
+        }
 
         public void setOutput(ItemStack item) {
-            this.inventory[11] = item.copy();
+            this.setInventorySlotContents(this.getOutputSlot(), this.output.copy());
         }
 
         @Override
@@ -153,11 +163,11 @@ public class MachineOven {
                     this.useFuel();
                 }
             } else {
-                if (this.hasRecipe){
+                if (this.hasRecipe) {
                     this.progress++;
-                    if (this.progress >= this.cookTime){
-                        for (int i = 0; i > 8; i++){
-                            if (this.inventory[i] != null){
+                    if (this.progress >= this.cookTime) {
+                        for (int i = 0; i > 8; i++) {
+                            if (this.inventory[i] != null) {
                                 this.decrStackSize(i, 1);
                             }
                         }

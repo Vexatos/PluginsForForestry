@@ -1,5 +1,7 @@
 package denoflionsx.items;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import java.util.HashMap;
 import net.minecraft.src.*;
 import denoflionsx.API.PFFItems;
@@ -66,7 +68,7 @@ public class multiItem extends Item{
 
     public void setShiny(int dmg, boolean t) {
         if (t) {
-            this.shinyMap.put(dmg, new shinyObject(true, EnumRarity.epic));
+            this.shinyMap.put(dmg, new shinyObject(true));
         } else {
             this.shinyMap.put(dmg, new shinyObject());
         }
@@ -93,8 +95,7 @@ public class multiItem extends Item{
         return -1;
     }
 
-    @Override public EnumRarity getRarity(ItemStack par1ItemStack) {if (this.shinyMap.get(par1ItemStack.getItemDamage()) != null){return this.shinyMap.get(par1ItemStack.getItemDamage()).getRare();}else{return new shinyObject().getRare();}}
-
+    @SideOnly(Side.CLIENT)
     @Override public boolean hasEffect(ItemStack par1ItemStack) {if (this.shinyMap.get(par1ItemStack.getItemDamage()) != null){return this.shinyMap.get(par1ItemStack.getItemDamage()).getShiny();}else{return new shinyObject().getShiny();}}
 
     @Override

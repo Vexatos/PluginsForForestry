@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import net.minecraft.client.Minecraft;
 import denoflionsx.denLib.denLib;
 
 public class Config {
@@ -14,11 +13,11 @@ public class Config {
     public HashMap<String, String> Options = new HashMap();
     protected ArrayList<String> defaults = new ArrayList();
     protected ArrayList<String> rawFile = new ArrayList();
-    public String ConfigDir = Minecraft.getMinecraftDir() + File.separator + "config" + File.separator + "denoflionsx" + File.separator;
+    public static String ConfigDir;
     protected String ConfigFile = "";
     protected boolean isStream = false;
     protected InputStream is = null;
-    public static boolean verbose = true;
+    public static boolean verbose = false;
 
     public Config(String c) {
         this.ConfigFile = ConfigDir + c;
@@ -78,10 +77,6 @@ public class Config {
     }
 
     public void setOption(String key, String param) {
-
-        if (verbose) {
-            denLib.print("Set Option " + key + " to " + param);
-        }
         Options.put(key, param);
     }
 

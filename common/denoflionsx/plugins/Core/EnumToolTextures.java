@@ -13,7 +13,8 @@ public class EnumToolTextures {
         WOODENBUCKET_FULL(Colors.shiftRow(4,1)),
         MILKBAG(Colors.shiftRow(4,2)),
         URANIUMGOO(Colors.shiftRow(3,3)),
-        RODOFREEZING(Colors.shiftRow(15,5));
+        RODOFREEZING(Colors.shiftRow(15,5)),
+        DEBUGSTICK(Colors.shiftRow(15,6));
         
         private int index;
         

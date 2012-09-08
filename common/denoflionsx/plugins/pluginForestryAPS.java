@@ -19,16 +19,16 @@ public class pluginForestryAPS extends pluginBase{
 
     @Override
     protected void defaults() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
     @Override
     protected boolean init() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
     @Override
     protected void recipes() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 }

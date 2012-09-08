@@ -20,7 +20,7 @@ public class extraFuelsModule extends baseModule {
     private ItemIDManager IDs_PumpkinJuice = new ItemIDManager(2,"PumpkinJuice");
     private ItemIDManager IDs_MelonJuice = new ItemIDManager(2,"MelonJuice");
     private ItemStack pumpkin = new ItemStack(Block.pumpkin);
-    private ItemStack melon = new ItemStack(Item.melon);
+    private ItemStack melon = new ItemStack(Block.melon);
 
     public extraFuelsModule(pluginBase parent) {
         super(parent);
@@ -46,8 +46,8 @@ public class extraFuelsModule extends baseModule {
 
     @Override
     protected void recipes() {
-        SqueezerWrapper.add(pumpkin, new LiquidStack(API.getItem("pumpkinjuice").itemID,1000));
-        SqueezerWrapper.add(melon, new LiquidStack(API.getItem("melonjuice").itemID,1000));
+        SqueezerWrapper.add(pumpkin, new LiquidStack(API.getItem("pumpkinjuice").itemID,this.getOptionInt("PumpkinJuice_AmountPerSqueeze")));
+        SqueezerWrapper.add(melon, new LiquidStack(API.getItem("melonjuice").itemID,this.getOptionInt("MelonJuice_AmountPerSqueeze")));
     }
 
     public static void load(pluginBase parent) {

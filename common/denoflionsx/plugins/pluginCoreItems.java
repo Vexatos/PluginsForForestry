@@ -9,10 +9,7 @@ import denoflionsx.core.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
-import denoflionsx.plugins.Core.EnumToolTextures;
-import denoflionsx.plugins.Core.LiquidVacuum;
-import denoflionsx.plugins.Core.MilkBag;
-import denoflionsx.plugins.Core.WoodenBucket;
+import denoflionsx.plugins.Core.*;
 import denoflionsx.plugins.Forestry.SqueezerWrapper;
 import denoflionsx.plugins.Forestry.pipette;
 
@@ -23,6 +20,7 @@ public class pluginCoreItems extends pluginBase {
     LiquidVacuum lv;
     MilkBag mb;
     WoodenBucket wb;
+    
 
     public pluginCoreItems() {
         this.name = "pluginCoreItems";
@@ -44,7 +42,7 @@ public class pluginCoreItems extends pluginBase {
 
     @Override
     protected void recipes() {
-        SqueezerWrapper.add(API.getItem("milkbag"), new ItemStack(Item.leather), 10, API.getItem("milk"), 1000);
+        SqueezerWrapper.add(API.getItem("milkbag"), new ItemStack(Item.leather), 10, API.getItem("milk"), this.config.getOptionInt("MilkBag_AmountPerSqueeze"));
         FMLWrapper.MODE.FML.addRecipe(API.getItem("liquidvacuum"), new Object[]{
                     "PpP",
                     "MbM",
@@ -76,6 +74,9 @@ public class pluginCoreItems extends pluginBase {
             wb.add("woodenbucket", wb.metaMap.get("Wooden Bucket"), EnumToolTextures.ToolTextures.WOODENBUCKET_EMPTY.getIndex(), "Wooden Bucket");
             wb.add("filledwoodenbucket", wb.metaMap.get("Filled Wooden Bucket"), EnumToolTextures.ToolTextures.WOODENBUCKET_FULL.getIndex(), "Filled Wooden Bucket");
             WoodenBucket.bucketWorksInNether = this.config.getOptionBool("bucketWorksInNether");
+            if (core.isBetaBuild){
+                ItemDebugStick.Debug.create();
+            }
         }
         return this.hooked;
     }
@@ -86,6 +87,7 @@ public class pluginCoreItems extends pluginBase {
         this.config.addDefault("LiquidVacuum_Enabled=" + "true");
         this.config.addDefault("LiquidVacuum_ItemID=" + IDs.getItemIDs().get(0));
         this.config.addDefault("MilkBag_ItemID=" + IDs.getItemIDs().get(1));
+        this.config.addDefault("MilkBag_AmountPerSqueeze=" + 1000);
         this.config.addDefault("WoodenBucket_Enabled=" + "true");
         this.config.addDefault("WoodenBucket_ItemID=" + woodenbucketIDs.getItemIDs().get(0));
         this.config.addDefault("bucketWorksInNether=" + "false");

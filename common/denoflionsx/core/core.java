@@ -1,9 +1,5 @@
 package denoflionsx.core;
 
-import cpw.mods.fml.client.FMLTextureFX;
-import java.util.ArrayList;
-import net.minecraft.src.*;
-import denoflionsx.Achievements.PfFAchievement;
 import denoflionsx.MachineTemplate.baseTileEntity;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
@@ -11,6 +7,7 @@ import denoflionsx.items.Containers.Containers;
 import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import denoflionsx.items.CraftingTools.ItemIronRing;
+import denoflionsx.mod_PluginsforForestry;
 import denoflionsx.plugins.BluesFood.MachineOven;
 import denoflionsx.plugins.pluginCore;
 
@@ -23,13 +20,12 @@ public class core {
     protected static String version = "1.2d";
     public static final boolean client = true;
     public static boolean isBukkit = false;
-    public static Config config = new Config("PluginsforForestry.cfg");
+    public static Config config;
     public static boolean isBetaBuild = true;
     public static final int delay = 25;
-    public static ArrayList<FMLTextureFX> fx = new ArrayList();
 
     public static boolean isClient() {
-        return client;
+        return mod_PluginsforForestry.proxy.isClient();
     }
 
     // This is for plugins that need to load after
@@ -43,7 +39,7 @@ public class core {
         registerItemsEnum();
         pluginCore.registerEarlyPlugins();
         registerFX();
-        PfFAchievement.registerAchievements();
+        mod_PluginsforForestry.proxy.registerAchievements();
     }
 
     public static int addFuel(int id, int meta) {
@@ -51,13 +47,13 @@ public class core {
     }
 
     public static void registerFX() {
-        for (FMLTextureFX f : fx) {
-            ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
-        }
+        mod_PluginsforForestry.proxy.registerFX();
     }
 
     // This function runs first.
     public static void runCoreFunctions() {
+        Config.ConfigDir = mod_PluginsforForestry.proxy.getConfigDir();
+        config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();
         registerTileEntites();
         defaults.setup();

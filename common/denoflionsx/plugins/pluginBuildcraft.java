@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.core.EnumModIDs;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
@@ -15,7 +16,7 @@ public class pluginBuildcraft extends pluginBase {
     public pluginBuildcraft() {
 
         this.name = "pluginBuildcraft";
-        this.mod = "mod_BuildCraftCore";
+        this.mod = EnumModIDs.MODS.BUILDCRAFT_CORE.getID();
         this.config = new Config(this.name + ".cfg");
         this.register();
     }
@@ -36,7 +37,7 @@ public class pluginBuildcraft extends pluginBase {
 
     @Override
     protected boolean detect() {
-        return denLib.detect("BuildCraft|Core") && denLib.detect("BuildCraft|Transport");
+        return denLib.detect(this.mod) && denLib.detect(EnumModIDs.MODS.BUILDCRAFT_TRANSPORT.getID());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class pluginBuildcraft extends pluginBase {
         }
         TankManager.setup();
         goldGear.setup();
-        String BCE = "buildcraft.BuildCraftEnergy";
+        String BCE = EnumModIDs.MODS.BUILDCRAFT_ENERGY.gettheClass();
         if (core.isBukkit) {
             
         }

@@ -6,6 +6,7 @@ import forestry.api.fuels.FuelManager;
 import forestry.api.fuels.GeneratorFuel;
 import net.minecraft.src.ItemStack;
 import denoflionsx.API.API;
+import denoflionsx.Proxy.ProxyClient;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Colors;
@@ -15,7 +16,6 @@ import denoflionsx.mod_PluginsforForestry;
 import denoflionsx.plugins.Core.EnumLiquidTextures;
 import denoflionsx.plugins.Forestry.EnumContainers;
 import denoflionsx.plugins.Forestry.LiquidContainerSystem;
-import denoflionsx.plugins.Forestry.LiquidFXHook;
 import denoflionsx.plugins.pluginBase;
 
 // This class is to automate the creation of basic fuel liquids and the
@@ -47,7 +47,7 @@ public class customFuel {
 
     public customFuel(String name, int MJt, int burnTime, int textures[], ItemIDManager ItemIDs, int color, pluginBase parent) {
 
-        if (name.equals("")){
+        if (name.equals("")) {
             name = "Unnamed Liquid";
         }
         this.name = name;
@@ -106,17 +106,19 @@ public class customFuel {
         fuelStack = API.getItem(internalNames[0]);
         LiquidContainerSystem.create(fuel);
         int colors[] = new int[3];
-        for (Colors.Values A : Colors.Values.values()){
-            if (A.getColor() == this.color){
+        for (Colors.Values A : Colors.Values.values()) {
+            if (A.getColor() == this.color) {
                 colors[0] = A.getR();
                 colors[1] = A.getG();
                 colors[2] = A.getB();
             }
         }
         EnumLiquidTextures.Liquids Liquid = EnumLiquidTextures.Liquids.CITRUSJUICE.find(textures[0]);
-        core.fx.add(LiquidFXHook.addTexture(colors[0],Liquid.getR(),colors[1],Liquid.getB(),colors[2],Liquid.getG(),this.textures[0],mod_PluginsforForestry.texture));
+        if (core.isClient()){
+              ProxyClient.fx.add(mod_PluginsforForestry.proxy.addLiquidFX(colors[0], Liquid.getR(), colors[1], Liquid.getB(), colors[2], Liquid.getG(), this.textures[0], mod_PluginsforForestry.texture));      
+        }
         FuelManager.bronzeEngineFuel.put(fuelStack.itemID, new EngineBronzeFuel(fuelStack, this.MJt, this.burnTime, this.isSafeFuel));
-        GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), convertToEU(this.MJt,this.burnTime), 1));
+        GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), convertToEU(this.MJt, this.burnTime), 1));
         fuelSolid = new customFuelSolid(this.ID2, this.name, this.MJt2, this.burnTime2, EnumContainers.Containers.BAR.getTexture(), false, this.color);
     }
 
@@ -171,7 +173,7 @@ public class customFuel {
     }
 
     public static int convertToEU(int MJt, int burnTime) {
-        int totalEU = convertToEUTotal(MJt,burnTime);
+        int totalEU = convertToEUTotal(MJt, burnTime);
         int EUs = totalEU / 60;
         int EUt = EUs / 20;
         return EUt;

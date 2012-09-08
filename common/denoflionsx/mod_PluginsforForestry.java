@@ -3,18 +3,18 @@ package denoflionsx;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraft.client.Minecraft;
-import denoflionsx.core.BetaQuotes;
+import denoflionsx.Proxy.Proxy;
 import denoflionsx.core.PfFGUIHandler;
 import denoflionsx.core.core;
 
-@Mod( modid = "mod_PluginsforForestry", name="Plugins for Forestry", version="1.3Dev")
+@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3Dev")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
-public class mod_PluginsforForestry{
+public class mod_PluginsforForestry {
 
     /*
      * This program is free software. It comes without any warranty, to the
@@ -27,7 +27,9 @@ public class mod_PluginsforForestry{
     public static boolean hasPluginsLoaded = false;
     public static int count = 0;
     public static mod_PluginsforForestry instance;
-   
+    @SidedProxy(clientSide = "denoflionsx.Proxy.ProxyClient", serverSide = "denoflionsx.Proxy.ProxyServer")
+    public static Proxy proxy;
+
     public mod_PluginsforForestry() {
         instance = this;
     }
@@ -43,33 +45,14 @@ public class mod_PluginsforForestry{
         core.registerEarlyPlugins();
     }
 
-    
     public String getPriorities() {
         return "after:*";
     }
 
-    
     public int addFuel(int id, int metadata) {
         return core.addFuel(id, metadata);
     }
 
-    
-    public boolean onTickInGame(float var1, Minecraft var2) {
-        if (!hasPluginsLoaded && count > core.delay) {
-            core.registerLatePlugins();
-            hasPluginsLoaded = true;
-            if (core.isBetaBuild) {
-                BetaQuotes.setup();
-                core.print(BetaQuotes.getRandomQuote());
-            }
-            count = 0;
-        } else {
-            count++;
-        }
-        return true;
-    }
-
-    
     public String getVersion() {
         return core.modVersion();
     }

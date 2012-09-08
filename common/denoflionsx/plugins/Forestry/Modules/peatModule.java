@@ -11,8 +11,11 @@ import denoflionsx.API.API;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.denLib.Colors;
 import denoflionsx.plugins.Core.EnumLiquidTextures;
+import denoflionsx.plugins.Forestry.FermenterHelper;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
+import denoflionsx.plugins.Railcraft.CokeOvenRecipeHelper;
+import net.minecraft.src.Item;
 
 public class peatModule extends baseModule {
 
@@ -47,11 +50,13 @@ public class peatModule extends baseModule {
         //----------------------------
         if (denLib.convertToBoolean(this.parent.config.getOption("LiquidPeat_Enabled"))) {
             RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{ItemInterface.getItem("peat")}, new LiquidStack(API.getItem("liquidpeat").itemID, Integer.valueOf(this.parent.config.getOption("LiquidPeat_AmountPerSqueeze")), 0), ItemInterface.getItem("ash"), Integer.valueOf(this.parent.config.getOption("LiquidPeat_PercentChanceOfAsh")));
+            CokeOvenRecipeHelper.add(new CokeOvenRecipeHelper.Recipe(ItemInterface.getItem("peat"),ItemInterface.getItem("ash") , API.getItem("liquidpeat"), this.getOptionInt("LiquidPeat_AmountPerSqueeze"), 10 * 10));
         }
         //--------------------------
         // SUGARY PEAT STUFF
         //--------------------------
         if (denLib.convertToBoolean(this.parent.config.getOption("SugaryPeat_Enabled"))) {
+            FermenterHelper.add(new ItemStack(Item.sugar), API.getItem("liquidpeat"), 250, API.getItem("sugarypeat"), 250, 1.0f);
             RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{API.getItem(denLib.toLowerCaseNoSpaces("Sugary Peat Bar"))}, new LiquidStack(API.getItem(denLib.toLowerCaseNoSpaces("Sugary Peat Bar")).getItem(), Integer.valueOf(this.parent.config.getOption("SugaryPeat_Liquid_AmountPerSqueeze"))));
         }
     }
@@ -61,7 +66,6 @@ public class peatModule extends baseModule {
 
         //--------------------------------------------
         liquidpeat = new customFuel("Liquid Peat", 1, 20000, customFuel.populateSprites(EnumLiquidTextures.Liquids.PEAT.getIndex()), IDs_Peat, Colors.Values.BROWN.getColor(), this.parent);
-
 
         sugarypeat = new customFuel("Sugary Peat", 2, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.SUGARYPEAT.getIndex()), IDs_SugaryPeat, Colors.Values.LIGHTBROWN.getColor(), this.parent);
 

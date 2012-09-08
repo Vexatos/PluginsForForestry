@@ -14,7 +14,6 @@ public class AchievementReg {
     public AchievementReg registerAchievements() {
         ArrayList<String> MasterList = list.dumpValues();
         for (String s : MasterList) {
-            core.print(s);
             Config achievement = new Config(getClass().getResourceAsStream(s));
             int ID = achievement.getOptionInt("id");
             String name = achievement.getOption("name");

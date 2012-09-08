@@ -1,7 +1,5 @@
 package denoflionsx.plugins.Buildcraft.Modules;
 
-import java.lang.reflect.Field;
-import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
@@ -24,18 +22,8 @@ public class quarryModule extends baseModule {
     @Override
     protected void init() {
         if (denLib.convertToBoolean(this.parent.config.getOption("quarryModule_Enabled"))) {
-            try {
-                max = Integer.valueOf(this.parent.config.getOption("QuarryMaxBuffer"));
-                Class TileQuarry = Class.forName(c);
-                Field EnergyField = TileQuarry.getField(f);
-                int MAX_ENERGY = EnergyField.getInt(null);
-                EnergyField.setInt(null, max);
-            } catch (Exception ex) {
-                core.print("Failed to hook BC quarry.");
-                ex.printStackTrace();
-            } finally {
-                //core.print("BC quarry speed increased!");
-            }
+            max = Integer.valueOf(this.parent.config.getOption("QuarryMaxBuffer"));
+            denLib.ReflectionHelper.setStaticInt(c, f, max);
         }
     }
 
@@ -52,8 +40,5 @@ public class quarryModule extends baseModule {
 
     @Override
     protected void recipes() {
-        
     }
-    
-    
 }

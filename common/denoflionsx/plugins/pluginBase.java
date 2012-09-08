@@ -13,12 +13,13 @@ public abstract class pluginBase {
 
     public Config config = null;
     protected String mod = "";
+    protected String modid = "";
+    protected boolean hooked = false;
     public Map<String, ItemStack> items = new HashMap();
     public Map<String, ItemStack> blocks = new HashMap();
     protected ArrayList<baseModule> modules = new ArrayList();
     protected String name = "";
     public boolean loaded = false;
-    protected boolean hooked = false;
     protected boolean hasModules = false;
 
     public pluginBase() {
@@ -35,6 +36,14 @@ public abstract class pluginBase {
     
     public void addItem(String mod, String field, String name, int meta) {
         this.items.put(name, new ItemStack(denLib.getItem(mod, field), 1, meta));
+    }
+    
+    public void addItem(String field, String name){
+        this.items.put(name,new ItemStack(denLib.getItem(this.mod,field),1,0));
+    }
+    
+    public void addItem(String field){
+        this.items.put(field,new ItemStack(denLib.getItem(this.mod,field),1,0));
     }
     
     public Block getBlock(String name){
