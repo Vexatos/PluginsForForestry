@@ -1,5 +1,6 @@
 package denoflionsx.plugins.Buildcraft;
 
+import denoflionsx.core.EnumModIDs;
 import java.lang.reflect.Method;
 import net.minecraft.src.Block;
 import net.minecraft.src.TileEntity;
@@ -45,7 +46,7 @@ public class TankManager {
 
     public static void setup() {
         if (!core.isBukkit) {
-            TankBlock = denLib.getBlock("buildcraft.BuildCraftFactory", "tankBlock");
+            TankBlock = denLib.getBlock(EnumModIDs.MODS.BUILDCRAFT_FACTORY.gettheClass(), "tankBlock");
         } else {
             TankBlock = denLib.getBlock("net.minecraft.server.BuildCraftFactory", "tankBlock");
         }

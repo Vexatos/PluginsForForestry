@@ -1,6 +1,7 @@
 package denoflionsx.plugins;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.PfFManagers;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
 import denoflionsx.core.core;
@@ -29,23 +30,17 @@ public class pluginForestry extends pluginBase {
         if (!detect()) {
             return hooked;
         }
-        try {
-            if (denLib.detect("mod_BuildCraftSilicon")) {
-                // If BC3 is detected forcefully disable the Refinery hack.
-                config.setOption("BiomassInRefinery", "false");
-            }
-            if (denLib.convertToBoolean(config.getOption("BiomassInRefinery"))) {
-                RefineryHack.engage();
-            }
-            this.registerModules();
-            hooked = true;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            hooked = false;
-        } finally {
-            if (hooked) {
-                core.print(getName() + " Loaded!");
-            }
+        if (this.config.getOptionBool("WoodenBucketIntegration")) {
+            PfFManagers.ItemManager.registerItem("seedoil", ItemInterface.getItem("liquidSeedOil"));
+            PfFManagers.ItemManager.registerItem("applejuice", ItemInterface.getItem("liquidJuice"));
+            PfFManagers.ItemManager.registerItem("honey", ItemInterface.getItem("liquidHoney"));
+            PfFManagers.ItemManager.registerItem("biomass", ItemInterface.getItem("liquidBiomass"));
+            PfFManagers.ItemManager.registerItem("biofuel", ItemInterface.getItem("liquidBiofuel"));
+        }
+        this.registerModules();
+        hooked = true;
+        if (hooked) {
+            core.print(getName() + " Loaded!");
         }
         return hooked;
     }
@@ -86,10 +81,6 @@ public class pluginForestry extends pluginBase {
         config.addDefault("BiofuelInBiogas=true");
         config.addDefault("BiofuelMJt=5");
         config.addDefault("BiofuelBurnTime=40000");
-        config.addDefault("# These options are for the Buildcraft Refinery");
-        config.addDefault("# THIS OPTION WILL DISABLE OIL IN THE REFINERY UNLESS YOU INSTALL MY REFINERY PATCH!");
-        config.addDefault("BiomassInRefinery=false");
-        config.addDefault("BiomassPerBiofuel=2");
-
+        config.addDefault("WoodenBucketIntegration=" + "true");
     }
 }

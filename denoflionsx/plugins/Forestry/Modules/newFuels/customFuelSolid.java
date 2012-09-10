@@ -6,6 +6,7 @@ import forestry.api.fuels.FuelManager;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 import denoflionsx.core.FMLWrapper;
+import denoflionsx.core.FuelHandler;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFBar;
 
@@ -38,7 +39,7 @@ public class customFuelSolid {
         fuel.add(this.nameLowerCaseNoSpaces, fuel.metaMap.get(this.name), this.texture, this.name + " Bar", this.isShiny);
         fuel.addRenderColor(0, this.color);
         FuelManager.copperEngineFuel.put(fuel.shiftedIndex, new EngineCopperFuel(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), this.MJt, this.BurnTime));
-        PfFManagers.SolidFuelManager.addFuel(this.fuel.shiftedIndex, 6000);
+        FuelHandler.values.put(this.fuel.shiftedIndex, 6000);
         recipe();
     }
 

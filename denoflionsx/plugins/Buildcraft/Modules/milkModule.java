@@ -2,7 +2,6 @@ package denoflionsx.plugins.Buildcraft.Modules;
 
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.denLib;
-import denoflionsx.items.multiItem;
 import denoflionsx.plugins.Forestry.LiquidContainerSystem;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
@@ -12,10 +11,13 @@ import forestry.api.fuels.FuelManager;
 import denoflionsx.API.API;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
+import denoflionsx.denLib.Colors;
+import denoflionsx.items.PfFContainer;
+import denoflionsx.plugins.Forestry.EnumContainers.Containers;
 
 public class milkModule extends baseModule {
 
-    public static multiItem milk;
+    public static PfFContainer milk;
     public static boolean disableBCMilk = false;
     public ItemIDManager id = new ItemIDManager(1,"PfFMilk");
     //public static ItemIDManager IDs = new ItemIDManager(2);
@@ -27,7 +29,7 @@ public class milkModule extends baseModule {
     @Override
     protected void init() {
         if (denLib.convertToBoolean(this.parent.config.getOption("MilkInTanks")) && !disableBCMilk) {
-            milk = new multiItem(Integer.valueOf(this.parent.config.getOption("Milk_ItemID")), "liquidmilk");
+            milk = new PfFContainer(Integer.valueOf(this.parent.config.getOption("Milk_ItemID")), "liquidmilk");
             milk.metaMap.put("Milk", 0);
             milk.metaMap.put("Milk Capsule", 1);
             milk.metaMap.put("Milk Can", 2);
@@ -35,16 +37,17 @@ public class milkModule extends baseModule {
             milk.metaMap.put("Milk Bottle", 4);
             milk.metaMap.put("Milk Cell", 5);
             milk.add("milk", milk.metaMap.get("Milk"), 1, "Milk");
-            milk.add("milkcap", milk.metaMap.get("Milk Capsule"), 33, "Milk Capsule");
-            milk.add("milkcan", milk.metaMap.get("Milk Can"), 1 + 16, "Milk Can");
-            milk.add("milkcap_red", milk.metaMap.get("Milk Capsule_Red"), (1 + 16 + 16 + 16), "Milk Capsule");
+            milk.add("milkcap", milk.metaMap.get("Milk Capsule"), Containers.CAPSULE.getTexture(), "Milk Capsule");
+            milk.add("milkcan", milk.metaMap.get("Milk Can"), Containers.CAN.getTexture(), "Milk Can");
+            milk.add("milkcap_red", milk.metaMap.get("Milk Capsule_Red"), Containers.CAPSULE_RED.getTexture(), "Milk Capsule");
             if (!API.isPluginLoaded("BetterFarming")) {
-                milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), 20 + 16 + 1, "Milk Bottle");
+                milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), Containers.BOTTLE.getTexture(), "Milk Bottle");
                 LiquidContainerSystem.createWithOverride(milk,milk.shiftedIndex,PfFManagers.ItemManager.getItem("milkbottle"),true);
             } else {
                 LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, PluginRegistry.plugins.get("BetterFarming").get("Milk Bottle"), true);
             }
             LiquidContainerSystem.registerMilkBucket(milk.shiftedIndex);
+            milk.setAllRenderColor(Colors.Values.WHITE.getColor());
             recipes();
         }
     }

@@ -9,7 +9,7 @@ import net.minecraft.src.ItemStack;
 public class MushroomBag extends ItemFoods {
 
     public MushroomBag(int par1) {
-        super(par1, EnumToolTextures.ToolTextures.MUSHROOMBAG.getIndex(), 3, 0.6f, "mushroombag");
+        super(par1, EnumToolTextures.ToolTextures.MUSHROOMBAG.getIndex(), 6, 0.6f, "mushroombag");
         core.addName("Bag O' Soup");
         PfFManagers.ItemManager.registerItem("mushroombag", new ItemStack(this));
     }
@@ -31,7 +31,7 @@ public class MushroomBag extends ItemFoods {
 
     @Override
     public int getHealAmount() {
-        return 3;
+        return 6;
     }
 
     @Override

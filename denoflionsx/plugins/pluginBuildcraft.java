@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.API.PfFManagers;
 import denoflionsx.core.EnumModIDs;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
@@ -67,6 +68,10 @@ public class pluginBuildcraft extends pluginBase {
         }
         this.addBlock(BCE, "oilStill", "Oil", 0);
         this.addItem(BCE, "fuel", "Fuel", 0);
+        if (this.config.getOptionBool("WoodenBucketIntegration")){
+            PfFManagers.ItemManager.registerItem("oil",this.getBlockItemStack("Oil"));
+            PfFManagers.ItemManager.registerItem("fuel",this.get("Fuel"));
+        }
         this.hooked = true;
         return this.hooked;
     }
@@ -80,6 +85,7 @@ public class pluginBuildcraft extends pluginBase {
         config.addDefault("OilInBiogas=true");
         config.addDefault("OilMJt=2");
         config.addDefault("OilBurntime=10000");
+        config.addDefault("WoodenBucketIntegration=" + "true");
 
     }
 }

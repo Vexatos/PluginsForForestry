@@ -2,8 +2,8 @@ package denoflionsx.core;
 
 import denoflionsx.API.PfFManagers;
 import denoflionsx.MachineTemplate.baseTileEntity;
+import denoflionsx.Managers.PfFExtractorTargetManager;
 import denoflionsx.Managers.PfFItemManager;
-import denoflionsx.Managers.PfFSolidFuelManager;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.Containers.Containers;
@@ -49,7 +49,7 @@ public class core {
     
     public static void setupManagers(){
         PfFManagers.ItemManager = new PfFItemManager();
-        PfFManagers.SolidFuelManager = new PfFSolidFuelManager();
+        PfFManagers.ExtractorTargetManager = new PfFExtractorTargetManager();
     }
 
     public static void registerFX() {

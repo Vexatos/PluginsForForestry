@@ -42,9 +42,14 @@ public class PluginRegistry {
         if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
             plugins.put("Buildcraft", new pluginBuildcraft());
         }
+        if (core.config.getOptionBool("pluginFarmCraftory_Enabled")) {
+            plugins.put("FarmCraftory", new pluginFarmCraftory());
+        }
+        if (core.config.getOptionBool("pluginRailcraft_Enabled")) {
+            plugins.put("Railcraft", new pluginRailcraft());
+        }
         plugins.put("CoreItems", new pluginCoreItems());
         //plugins.put("BluesFood",new pluginbluesFood());
-        plugins.put("FarmCraftory", new pluginFarmCraftory());
     }
 
     public static boolean isPluginAlive(String name) {

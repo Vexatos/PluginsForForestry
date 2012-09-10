@@ -15,7 +15,8 @@ public class EnumToolTextures {
         URANIUMGOO(Colors.shiftRow(3,3)),
         RODOFREEZING(Colors.shiftRow(15,5)),
         DEBUGSTICK(Colors.shiftRow(15,6)),
-        MUSHROOMBAG(Colors.shiftRow(4,3));
+        MUSHROOMBAG(Colors.shiftRow(4,3)),
+        EXTRACTOR(Colors.shiftRow(4,6));
         
         private int index;
         

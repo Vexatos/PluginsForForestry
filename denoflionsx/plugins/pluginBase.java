@@ -50,6 +50,10 @@ public abstract class pluginBase {
         return Block.blocksList[this.blocks.get(name).itemID];
     }
     
+    public ItemStack getBlockItemStack(String name){
+        return this.blocks.get(name);
+    }
+    
     public boolean getOptionBool(String key){
         return denLib.convertToBoolean(this.config.getOption(key));
     }
