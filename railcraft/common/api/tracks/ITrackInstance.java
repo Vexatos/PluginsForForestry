@@ -6,7 +6,6 @@ import net.minecraft.src.EntityMinecart;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
 import railcraft.common.api.core.INetworkedObject;
 
 /**
@@ -100,22 +99,6 @@ public interface ITrackInstance extends INetworkedObject
     public int getZ();
 
     public float getExplosionResistance(double srcX, double srcY, double srcZ, Entity exploder);
-
-    /**
-     * Used to override normal track placement.
-     * If false is returned, normal rail placement rules are used.
-     *
-     * Used by tracks such as the Suspended Track.
-     *
-     * Warning: This is called before the TileEntity is set.
-     *
-     * @param world The World
-     * @param i x-Coord
-     * @param j y-Coord
-     * @param k z-Coord
-     * @return true if the rail can placed at the specified location, false to use standard placement rules
-     */
-    public boolean canPlaceRailAt(World world, int i, int j, int k);
 
     /**
      * Return true if the rail can make corners.

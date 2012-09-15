@@ -5,10 +5,10 @@ import denoflionsx.API.PfFManagers;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
-import denoflionsx.plugins.Core.EnumLiquidTextures;
+import denoflionsx.Enums.Colors;
+import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
-import denoflionsx.plugins.Forestry.SqueezerWrapper;
+import denoflionsx.plugins.Forestry.SqueezerHelper;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
 
@@ -45,8 +45,10 @@ public class extraFuelsModule extends baseModule {
 
     @Override
     protected void recipes() {
-        SqueezerWrapper.add(pumpkin, new LiquidStack(PfFManagers.ItemManager.getItem("pumpkinjuice").itemID,this.getOptionInt("PumpkinJuice_AmountPerSqueeze")));
-        SqueezerWrapper.add(melon, new LiquidStack(PfFManagers.ItemManager.getItem("melonjuice").itemID,this.getOptionInt("MelonJuice_AmountPerSqueeze")));
+        SqueezerHelper.add(pumpkin, new LiquidStack(PfFManagers.ItemManager.getItem("pumpkinjuice").itemID,this.getOptionInt("PumpkinJuice_AmountPerSqueeze")));
+        SqueezerHelper.add(melon, new LiquidStack(PfFManagers.ItemManager.getItem("melonjuice").itemID,this.getOptionInt("MelonJuice_AmountPerSqueeze")));
+        PfFManagers.ContainerManager.addLiquid("Pumpkin Juice", PfFManagers.ItemManager.getItem("pumpkinjuice"), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE.toString()));
+        PfFManagers.ContainerManager.addLiquid("Melon Juice", PfFManagers.ItemManager.getItem("melonjuice"), PfFManagers.ColorManager.getColor(Colors.Values.PINK.toString()));
     }
 
     public static void load(pluginBase parent) {

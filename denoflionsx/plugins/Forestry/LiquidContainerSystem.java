@@ -1,5 +1,6 @@
 package denoflionsx.plugins.Forestry;
 
+import denoflionsx.Enums.EnumContainers;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import java.util.Iterator;
@@ -103,7 +104,7 @@ public class LiquidContainerSystem {
     
     public static void bucketWithOverride(ItemStack filledBucket, ItemStack liquid, ItemStack empty){
         LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(liquid.itemID,bucket),filledBucket,empty));
-        unpack(filledBucket,liquid.itemID,bucket);
+        unpackBucketOverride(filledBucket,liquid.itemID,bucket,empty);
         pack(empty,filledBucket,liquid.itemID,bucket);
     }
 
@@ -143,6 +144,10 @@ public class LiquidContainerSystem {
     
     public static void unpackBucket(ItemStack filled, int liquid, int amount){
         RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{filled}, new LiquidStack(liquid, amount),new ItemStack(Item.bucketEmpty),100);
+    }
+    
+    public static void unpackBucketOverride(ItemStack filled, int liquid, int amount, ItemStack bucket){
+       RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{filled}, new LiquidStack(liquid, amount),bucket,100); 
     }
 
     public static void registerMilkBucket(int liquid) {

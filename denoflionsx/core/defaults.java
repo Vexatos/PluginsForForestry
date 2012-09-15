@@ -16,6 +16,7 @@ public class defaults {
         core.config.addDefault("pluginRedPower_Enabled=true");
         core.config.addDefault("pluginFarmCraftory_Enabled=true");
         core.config.addDefault("pluginRailcraft_Enabled=true");
+        core.config.addDefault("pluginBlueFood_Enabled=true");
         core.config.addDefault("EnableBC2TankIntegration=false");
         core.config.addDefault("Verbose=true");
         core.config.addDefault("UpdateCheck=true");

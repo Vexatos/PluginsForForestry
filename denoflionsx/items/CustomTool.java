@@ -3,8 +3,8 @@ package denoflionsx.items;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
-import denoflionsx.mod_PluginsforForestry;
-import denoflionsx.plugins.Core.EnumToolTextures;
+import denoflionsx.PluginsforForestry;
+import denoflionsx.Enums.EnumToolTextures;
 import net.minecraft.src.Block;
 import net.minecraft.src.EnumToolMaterial;
 import net.minecraft.src.ItemStack;
@@ -42,7 +42,7 @@ public class CustomTool extends ItemTool{
 
     @Override
     public String getTextureFile() {
-        return mod_PluginsforForestry.texture;
+        return PluginsforForestry.texture;
     }
 
 }

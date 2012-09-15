@@ -48,24 +48,6 @@ public final class TrackSpec
         this.instanceClass = instanceClass;
     }
 
-    /**
-     * This is what the user see when they look at a Track item.
-     *
-     * May be called once per language.
-     *
-     * @param lang
-     * @param name
-     */
-    public void setTrackName(String lang, String name)
-    {
-        nameMap.put(lang, name);
-    }
-
-    public String getTrackName(String lang)
-    {
-        return nameMap.get(lang);
-    }
-
     public String getTrackTag()
     {
         return tag;

@@ -1,40 +1,69 @@
 package denoflionsx.Managers;
 
-import denoflionsx.API.IPfFItemRegistry;
+import denoflionsx.API.Interfaces.IPfFItemManager;
+import denoflionsx.core.core;
+import java.util.ArrayList;
 import java.util.HashMap;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
-public class PfFItemManager implements IPfFItemRegistry{
+public class PfFItemManager implements IPfFItemManager {
 
     public static HashMap<String, ItemStack> registeredItems = new HashMap();
 
     @Override
     public void registerItem(String s, ItemStack i) {
-        registeredItems.put(s,i);
+        registeredItems.put(s, i);
+    }
+
+    @Override
+    public ArrayList<ItemStack> getAllContainersForLiquid(String liquid) {
+        ArrayList<ItemStack> stacks = new ArrayList();
+        for (ItemStack i : registeredItems.values()){
+            String itemName = i.getItem().getItemNameIS(i);
+            if (itemName.contains(liquid)){
+                stacks.add(i);
+            }
+        }
+        stacks.remove(0);
+        return stacks;
+    }
+
+    @Override
+    public ItemStack getNewItemStack(String s, int amount) {
+        ItemStack i = getItem(s);
+        Item item = i.getItem();
+        int meta = i.getItemDamage();
+        return new ItemStack(item,amount,meta);
     }
 
     @Override
     public void registerItem(String s, Item i, int dmg) {
-        registerItem(s,new ItemStack(i,dmg));
+        registerItem(s, new ItemStack(i, 1, dmg));
     }
 
     @Override
     public void registerItem(String s, Item i) {
-        registerItem(s,i,0);
+        registerItem(s, i, 0);
     }
-    
+
     @Override
     public ItemStack getItem(String s) {
-        ItemStack I = registeredItems.get(s);
+        ItemStack I = getItemQuietly(s);
         if (I != null) {
-            ItemStack t;
-            int id = I.itemID;
-            int meta = I.getItemDamage();
-            t = new ItemStack(id,1,meta);
-            return t.copy();
+            return I;
         } else {
             System.out.println("Unable to retrieve item: " + s + " from Plugins for Forestry!");
+            return null;
+        }
+    }
+
+    @Override
+    public ItemStack getItemQuietly(String s) {
+        ItemStack I = registeredItems.get(s);
+        if (I != null) {
+            return I.copy();
+        } else {
             return null;
         }
     }
@@ -46,11 +75,24 @@ public class PfFItemManager implements IPfFItemRegistry{
     @Override
     public boolean doesItemExist(String s) {
         ItemStack I = registeredItems.get(s);
-        if (I != null){
+        if (I != null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
+    @Override
+    public void dumpItemsToConsole() {
+        String div = "---------------------";
+        core.print(div);
+        core.print("Starting PfF item dump...");
+        core.print(div);
+        for (ItemStack i : registeredItems.values()){
+            core.print(i.getItemName());
+        }
+        core.print(div);
+        core.print("End PfF item dump");
+        core.print(div);
+    }
 }

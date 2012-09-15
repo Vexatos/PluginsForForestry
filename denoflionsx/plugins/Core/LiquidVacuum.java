@@ -1,5 +1,6 @@
 package denoflionsx.plugins.Core;
 
+import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.API.PfFManagers;
 import net.minecraft.src.Entity;
 import net.minecraft.src.EntityCow;
@@ -21,6 +22,7 @@ public class LiquidVacuum extends multiItem {
         this.setMaxStackSize(1);
         this.metaMap.put("Liquid Vacuum", 0);
         this.add("liquidvacuum", 0, EnumToolTextures.ToolTextures.LIQUIDVACUUM.getIndex(), "Liquid Vacuum");
+        this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
     @Override

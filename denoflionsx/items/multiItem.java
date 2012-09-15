@@ -6,7 +6,11 @@ import denoflionsx.API.PfFManagers;
 import java.util.HashMap;
 import net.minecraft.src.*;
 import denoflionsx.core.core;
-import denoflionsx.mod_PluginsforForestry;
+import denoflionsx.PluginsforForestry;
+import denoflionsx.denLib.FMLWrapper;
+import denoflionsx.denLib.denLib;
+import java.util.ArrayList;
+import java.util.List;
 
 public class multiItem extends Item {
 
@@ -20,6 +24,7 @@ public class multiItem extends Item {
         this.setHasSubtypes(true);
         this.setItemName(name);
         this.setMaxDamage(0);
+        this.setTabToDisplayOn(CreativeTabs.tabMisc);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class multiItem extends Item {
         return getMetaName(p);
 
     }
-    
+
     public String getMetaName(ItemStack par1ItemStack) {
         if (par1ItemStack != null) {
             int dmg = par1ItemStack.getItemDamage();
@@ -53,16 +58,27 @@ public class multiItem extends Item {
         return "";
     }
 
+    public void add(String name, int dmg, int texid) {
+        add(denLib.toLowerCaseNoSpaces(name), dmg, texid, name);
+    }
+
     public void add(String name, int dmg, int texid, String displayname) {
         itemMap.put(dmg, "item." + name);
         textureMap.put(dmg, texid);
         // Default shinyObject returns normal values.
         shinyMap.put(dmg, new shinyObject());
-        if (core.isClient()) {
-            ModLoader.addLocalization(getMetaName(new ItemStack(this, 1, dmg)) + ".name", displayname);
+        if (core.isClient()){
+            FMLWrapper.MODE.FML.addName("item." + name + ".name", displayname);
         }
         // Register with API.
         PfFManagers.ItemManager.registerItem(name, this, dmg);
+    }
+
+    @Override
+    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
+        for (String name : this.itemMap.values()){
+            par3List.add(PfFManagers.ItemManager.getItem(denLib.removeDotItemFromName(name)));
+        }
     }
 
     public void add(String name, int dmg, int texid, String displayname, boolean shiny) {
@@ -111,6 +127,6 @@ public class multiItem extends Item {
 
     @Override
     public String getTextureFile() {
-        return mod_PluginsforForestry.texture;
+        return PluginsforForestry.texture;
     }
 }

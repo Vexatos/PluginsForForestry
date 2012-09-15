@@ -30,34 +30,28 @@ public class pluginEE extends pluginBase {
 
     @Override
     public void register() {
-        if (!this.loaded) {
-            this.defaults();
-            this.values.writeConfig();
-            this.values.readFile();
-            if (!detect()) {
-                // Extra safety check to drop out of this plugin if
-                // EE is missing.
-                core.print("EE not found! Aborting EMC assignment tasks.");
-                this.config.setOption("LoadIntegrationModules", "false");
-                this.config.setOption("LoadCustomEMCValuesFile", "false");
+        this.values.writeConfig();
+        this.values.readFile();
+        if (!detect()) {
+            // Extra safety check to drop out of this plugin if
+            // EE is missing.
+            core.print("EE not found! Aborting EMC assignment tasks.");
+            this.config.setOption("LoadIntegrationModules", "false");
+            this.config.setOption("LoadCustomEMCValuesFile", "false");
+        }
+        if (this.getOptionBool("LoadCustomEMCValuesFile")) {
+            readEMC(this.values);
+        }
+        if (this.getOptionBool("LoadIntegrationModules")) {
+            VanillaValues.assignValues();
+            if (denLib.detect("mod_Forestry")) {
+                ForestryEMCModule.load(this);
             }
-            if (this.getOptionBool("LoadCustomEMCValuesFile")) {
-                readEMC(this.values);
-            }
-            if (this.getOptionBool("LoadIntegrationModules")) {
-                VanillaValues.assignValues();
-                if (denLib.detect("mod_Forestry")) {
-                    ForestryEMCModule.load(this);
-                }
-                if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport")) {
-                    BuildcraftEMCModule.load(this);
-                }
-            }
-            if (this.loaded = init()) {
-                recipes();
-                core.print(this.name + " loaded!");
+            if (denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport") && denLib.detect("mod_BuildCraftCore") && denLib.detect("mod_BuildCraftTransport")) {
+                BuildcraftEMCModule.load(this);
             }
         }
+        super.register();
     }
 
     @Override

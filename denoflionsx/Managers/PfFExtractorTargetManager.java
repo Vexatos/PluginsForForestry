@@ -1,12 +1,12 @@
 
 package denoflionsx.Managers;
 
-import denoflionsx.API.IPfFExtractorTargetRegistry;
+import denoflionsx.API.Interfaces.IPfFExtractorManager;
 import java.util.HashMap;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 
-public class PfFExtractorTargetManager implements IPfFExtractorTargetRegistry{
+public class PfFExtractorTargetManager implements IPfFExtractorManager{
 
     private static HashMap<Integer, Target> targets = new HashMap();
     

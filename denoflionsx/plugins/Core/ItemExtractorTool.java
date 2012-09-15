@@ -1,5 +1,6 @@
 package denoflionsx.plugins.Core;
 
+import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.items.CustomTool;
@@ -13,6 +14,7 @@ public class ItemExtractorTool extends CustomTool {
 
     public ItemExtractorTool(int id) {
         super(id, EnumToolTextures.ToolTextures.EXTRACTOR, "Extractor Tool", ConfigMaxDamage);
+        this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
     @Override

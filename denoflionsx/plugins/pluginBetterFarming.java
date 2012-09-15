@@ -12,10 +12,10 @@ import denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
 import forestry.api.recipes.RecipeManagers;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
-import denoflionsx.plugins.Core.EnumLiquidTextures;
+import denoflionsx.Enums.Colors;
+import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
 
 public class pluginBetterFarming extends pluginBase {
@@ -103,20 +103,11 @@ public class pluginBetterFarming extends pluginBase {
                         "XMX",
                         "XXX",
                         Character.valueOf('M'), this.items.get("Mint")});
-            addFermenterRecipes.bonus = new Float(this.config.getOption("CitrusJuice_FermenterBonus"));
+            addFermenterRecipes.bonus = this.getOptionFloat("CitrusJuice_FermenterBonus");
             addFermenterRecipes.addItem(this.items.get("Mint").getItem(), 150, this);
+            PfFManagers.ContainerManager.addLiquid("Citrus Juice",PfFManagers.ItemManager.getItem("citrusjuice"), PfFManagers.ColorManager.getColor(Colors.Values.SALMON.name()));
         } catch (Exception ex) {
             ex.printStackTrace();
-        }
-    }
-
-    @Override
-    public void register() {
-        if (!loaded) {
-            defaults();
-            if (loaded = init()) {
-                recipes();
-            }
         }
     }
 

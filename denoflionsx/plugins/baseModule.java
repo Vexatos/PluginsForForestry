@@ -3,6 +3,8 @@ package denoflionsx.plugins;
 public abstract class baseModule{
 
     public pluginBase parent;
+    public boolean hasRegistered = false;
+    public boolean hasLoaded = false;
 
     public baseModule(pluginBase parent) {
         this.parent = parent;
@@ -10,6 +12,12 @@ public abstract class baseModule{
     }
     
     public void register(){
+        if (hasRegistered){
+            return;
+        }
+        if (!hasRegistered){
+            hasRegistered = true;
+        }
         this.defaults();
         this.parent.modules.add(this);
     }
@@ -24,6 +32,10 @@ public abstract class baseModule{
     
     public boolean getOptionBool(String key){
         return this.parent.getOptionBool(key);
+    }
+    
+    public float getOptionFloat(String key){
+        return this.parent.getOptionFloat(key);
     }
     
     public Integer getOptionInt(String key){

@@ -10,7 +10,7 @@ public class FuelHandler implements IFuelHandler{
 
     @Override
     public int getBurnTime(ItemStack fuel) {
-        if (values.get(fuel.itemID) != null){
+        if (values.get(fuel.itemID) != null && fuel.getItemDamage() == 0){
             return values.get(fuel.itemID);
         }else{
             return 0;

@@ -6,7 +6,7 @@ package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
 import denoflionsx.Achievements.PfFAchievement;
-import denoflionsx.mod_PluginsforForestry;
+import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.Forestry.LiquidFXHook;
 import java.io.File;
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class ProxyClient extends Proxy {
     }
 
     @Override
-    public void openGUI(mod_PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
+    public void openGUI(PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
         super.openGUI(p, pl, world, id, x, y, z);
     }
 

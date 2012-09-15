@@ -34,6 +34,10 @@ public class denLib {
     public static ItemStack getItemStack(String mod, String name) {
         return ReflectionHelper.getItemStack(mod, name);
     }
+    
+    public static String removeDotItemFromName(String name){
+        return name.substring(5);
+    }
 
     public static Block getBlock(String mod, String name) {
         return ReflectionHelper.getBlock(mod, name);
@@ -84,7 +88,7 @@ public class denLib {
     }
 
     public static String addName(String name) {
-        ModLoader.addLocalization("item." + denLib.toLowerCaseNoSpaces(name) + ".name", name);
+        FMLWrapper.MODE.FML.addName(name);
         return "item." + denLib.toLowerCaseNoSpaces(name);
     }
 
@@ -122,6 +126,26 @@ public class denLib {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        }
+        
+        public static Class getClass(String name){
+            Class c = null;
+            try{
+                c = Class.forName(name);
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+            return c;
+        }
+        
+        public static Field getField(String field, Class c){
+            Field f = null;
+            try{
+                f = c.getDeclaredField(field);
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+            return f;
         }
 
         public static int getStaticInt(String theClass, String theField) {

@@ -49,7 +49,9 @@ public class PluginRegistry {
             plugins.put("Railcraft", new pluginRailcraft());
         }
         plugins.put("CoreItems", new pluginCoreItems());
-        //plugins.put("BluesFood",new pluginbluesFood());
+        if (core.config.getOptionBool("pluginBlueFood_Enabled")) {
+            plugins.put("BluesFood", new pluginBlueFood());
+        }
     }
 
     public static boolean isPluginAlive(String name) {

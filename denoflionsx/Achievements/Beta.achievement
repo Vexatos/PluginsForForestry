@@ -9,5 +9,5 @@ iscrafting=false;
 isttem=true;
 itemtrigger=any;
 xcoord=1;
-ycoord=0;
+ycoord=-1;
 required=-1;

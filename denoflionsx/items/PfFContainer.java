@@ -1,7 +1,7 @@
 package denoflionsx.items;
 
 import java.util.HashMap;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
 
 public class PfFContainer extends multiItem {
@@ -28,7 +28,11 @@ public class PfFContainer extends multiItem {
     @Override
     public int getColorFromDamage(int par1, int par2) {
         if (par2 > 0) {
-            return this.renderColors.get(par1);
+            if (this.renderColors.get(par1) != null) {
+                return this.renderColors.get(par1);
+            }else{
+                return Colors.Values.WHITE.getColor();
+            }
         } else {
             return Colors.Values.WHITE.getColor();
         }

@@ -1,9 +1,10 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.core.EnumModIDs;
-import denoflionsx.core.core;
+import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.denLib.Config.Config;
+import denoflionsx.plugins.Railcraft.Modules.OreCrushmodule;
 import railcraft.common.api.core.items.ItemRegistry;
 
 public class pluginRailcraft extends pluginBase {
@@ -17,14 +18,10 @@ public class pluginRailcraft extends pluginBase {
 
     @Override
     public void register() {
-        if (!this.loaded) {
-            this.defaults();
-            this.runConfig();
-            if (this.loaded = this.init()) {
-                this.recipes();
-                core.print(this.name + " loaded!");
-            }
+        if (!loaded){
+            OreCrushmodule.load(this);
         }
+        super.register();
     }
 
     @Override
@@ -37,10 +34,6 @@ public class pluginRailcraft extends pluginBase {
     protected boolean init() {
         this.hooked = true;
         this.addItem("Creosote", ItemRegistry.getItem("liquid.creosote.liquid", 1));
-        if (this.config.getOptionBool("CreosoteOilInWoodenBucket")){
-            // Add Creosote oil to my ItemManager so that WoodenBucketFuel can query for it.
-            PfFManagers.ItemManager.registerItem("creosoteoil", this.get("Creosote"));
-        }
         PfFManagers.ExtractorTargetManager.addItemStack(ItemRegistry.getItem("machine.beta.tank.iron.gauge", 1));
         //ItemRegistry.printItemTags();
         return this.hooked;
@@ -48,5 +41,8 @@ public class pluginRailcraft extends pluginBase {
 
     @Override
     protected void recipes() {
+        if (this.config.getOptionBool("CreosoteOilInWoodenBucket")){
+            PfFManagers.ContainerManager.addLiquid("Creosote Oil", this.get("Creosote"), PfFManagers.ColorManager.getColor(Colors.Values.OIL.toString()));
+        }
     }
 }

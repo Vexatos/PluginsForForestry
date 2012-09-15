@@ -31,11 +31,15 @@ public class cropTreeProviderDummy implements ICropProvider{
 
     @Override
     public boolean isCrop(World world, int x, int y, int z) {
+//        if (world.getBlockId(x, y, z) != 0){
+//           core.print("Looking for " + this.tree.getFruitItem().getItem().getItemNameIS(this.tree.getFruitItem()) + ". Found " + Block.blocksList[world.getBlockId(x, y, z)].getBlockName()); 
+//        }
+        
         return this.tree.isFruit(world.getBlockId(x,y,z));
     }
 
     @Override
     public boolean isGermling(ItemStack germling) {
-        return this.tree.isSapling(germling);
+        return false;
     }
 }

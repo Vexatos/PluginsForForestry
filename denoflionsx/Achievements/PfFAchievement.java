@@ -1,5 +1,6 @@
 package denoflionsx.Achievements;
 
+import denoflionsx.denLib.FMLWrapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.minecraft.src.*;
@@ -19,7 +20,7 @@ public class PfFAchievement extends Achievement {
     public static void registerAchievements(){
         AchievementReg reg = new AchievementReg().registerAchievements();
         AchievementPage PluginsforForestry = new AchievementPage("Plugins for Forestry",(PfFAchievement[]) achievements.values().toArray(new PfFAchievement[achievements.size()]));
-        
+        FMLWrapper.MODE.FML.addAchievementPage(PluginsforForestry);
     }
     
     public PfFAchievement(int par1, String par2Str, int par3, int par4, ItemStack par5ItemStack, Achievement par6Achievement, String name, String desc, boolean isItemAchievement, boolean isCraftingAchievement, boolean isSpecial, ItemStack target) {

@@ -1,7 +1,7 @@
 
 package denoflionsx.items;
 
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 
 public class Placeholder {
     

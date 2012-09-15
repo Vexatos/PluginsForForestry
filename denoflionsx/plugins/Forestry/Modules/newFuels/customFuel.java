@@ -9,12 +9,12 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.Proxy.ProxyClient;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFContainer;
-import denoflionsx.mod_PluginsforForestry;
-import denoflionsx.plugins.Core.EnumLiquidTextures;
-import denoflionsx.plugins.Forestry.EnumContainers;
+import denoflionsx.PluginsforForestry;
+import denoflionsx.Enums.EnumLiquidTextures;
+import denoflionsx.Enums.EnumContainers;
 import denoflionsx.plugins.Forestry.LiquidContainerSystem;
 import denoflionsx.plugins.pluginBase;
 
@@ -38,7 +38,7 @@ public class customFuel {
     private int burnTime2 = 0;
     private int isSafeFuel = 1;
     private int color = Colors.Values.WHITE.getColor();
-    public static int numOfContainers = 7;
+    public static int numOfContainers = 6;
     private int redCapMeta = 3;
     private pluginBase parent;
     // Peat's MJ value divided by EU value.
@@ -70,7 +70,6 @@ public class customFuel {
         textures[3] = EnumContainers.Containers.CAPSULE_RED.getTexture();
         textures[4] = EnumContainers.Containers.BOTTLE.getTexture();
         textures[5] = EnumContainers.Containers.CELL.getTexture();
-        textures[6] = EnumContainers.Containers.BARREL.getTexture();
         return textures;
     }
 
@@ -90,14 +89,21 @@ public class customFuel {
             // This is basically hardcoding meta values.
             String e = externalNames[i];
             String e2 = internalNames[i];
-            if (i == this.redCapMeta) {
-                e = e + "_Red";
-                e2 = e2 + "_red";
+            String d = e;
+            if (d.toLowerCase().contains("_red")) {
+                String dd[] = d.split("_");
+                for (String wat : dd) {
+                    if (!wat.equals("Red")) {
+                        d = wat;
+                        //core.print(e2 + " | " + e + " | " + d);
+                    }
+                }
             }
             // Meta map isn't really useful here, but the LiquidContainerSystem 
             // still uses it, so we have to properly populate it.
             fuel.metaMap.put(e, i);
-            fuel.add(e2, fuel.metaMap.get(e), textures[i], externalNames[i]);
+            //core.print(d);
+            fuel.add(e2, fuel.metaMap.get(e), textures[i], d);
         }
         ItemStack fuelStack;
         fuel.setAllRenderColor(this.color);
@@ -113,7 +119,7 @@ public class customFuel {
         }
         EnumLiquidTextures.Liquids Liquid = EnumLiquidTextures.Liquids.CITRUSJUICE.find(textures[0]);
         if (core.isClient()) {
-            ProxyClient.fx.add(mod_PluginsforForestry.proxy.addLiquidFX(colors[0], Liquid.getR(), colors[1], Liquid.getB(), colors[2], Liquid.getG(), this.textures[0], mod_PluginsforForestry.texture));
+            ProxyClient.fx.add(PluginsforForestry.proxy.addLiquidFX(colors[0], Liquid.getR(), colors[1], Liquid.getB(), colors[2], Liquid.getG(), this.textures[0], PluginsforForestry.texture));
         }
         FuelManager.bronzeEngineFuel.put(fuelStack.itemID, new EngineBronzeFuel(fuelStack, this.MJt, this.burnTime, this.isSafeFuel));
         GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), convertToEU(this.MJt, this.burnTime), 1));
@@ -160,11 +166,9 @@ public class customFuel {
         externalNames[0] = externalBase;
         externalNames[1] = externalBase + " Capsule";
         externalNames[2] = externalBase + " Can";
-        externalNames[3] = externalNames[1];
+        externalNames[3] = externalBase + " Capsule_Red";
         externalNames[4] = externalBase + " Bottle";
         externalNames[5] = externalBase + " Cell";
-        externalNames[6] = externalBase + " Barrel";
-
         return externalNames;
 
     }

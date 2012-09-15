@@ -23,43 +23,46 @@ public abstract class pluginBase {
     protected boolean hasModules = false;
 
     public pluginBase() {
-        
     }
 
     public void addBlock(String mod, String field, String name, int meta) {
         this.blocks.put(name, new ItemStack(denLib.getBlock(mod, field), 1, meta));
     }
 
-    public void addBlock(String name, ItemStack i){
+    public void addBlock(String name, ItemStack i) {
         this.blocks.put(name, i);
     }
-    
+
     public void addItem(String mod, String field, String name, int meta) {
         this.items.put(name, new ItemStack(denLib.getItem(mod, field), 1, meta));
     }
-    
-    public void addItem(String field, String name){
-        this.items.put(name,new ItemStack(denLib.getItem(this.mod,field),1,0));
+
+    public void addItem(String field, String name) {
+        this.items.put(name, new ItemStack(denLib.getItem(this.mod, field), 1, 0));
     }
-    
-    public void addItem(String field){
-        this.items.put(field,new ItemStack(denLib.getItem(this.mod,field),1,0));
+
+    public void addItem(String field) {
+        this.items.put(field, new ItemStack(denLib.getItem(this.mod, field), 1, 0));
     }
-    
-    public Block getBlock(String name){
+
+    public Block getBlock(String name) {
         return Block.blocksList[this.blocks.get(name).itemID];
     }
-    
-    public ItemStack getBlockItemStack(String name){
+
+    public ItemStack getBlockItemStack(String name) {
         return this.blocks.get(name);
     }
-    
-    public boolean getOptionBool(String key){
-        return denLib.convertToBoolean(this.config.getOption(key));
+
+    public boolean getOptionBool(String key) {
+        return this.config.getOptionBool(key);
     }
     
-    public Integer getOptionInt(String key){
-        return Integer.valueOf(this.config.getOption(key));
+    public float getOptionFloat(String key){
+        return this.config.getOptionFloat(key);
+    }
+
+    public Integer getOptionInt(String key) {
+        return this.config.getOptionInt(key);
     }
 
     public void addItem(String name, ItemStack i) {
@@ -77,8 +80,11 @@ public abstract class pluginBase {
     public void register() {
         if (!this.loaded) {
             this.defaults();
+            this.runConfig();
             if (this.loaded = this.init()) {
                 this.recipes();
+                this.registerModules();
+                core.print(this.name + " loaded!");
             }
         }
     }
@@ -86,14 +92,17 @@ public abstract class pluginBase {
     public void registerModules() {
         if (this.hasModules) {
             for (baseModule b : this.modules) {
-                b.init();
+                if (!b.hasLoaded) {
+                    b.init();
+                    b.hasLoaded = true;
+                }
             }
         }
     }
 
     protected boolean detect() {
         boolean d = denLib.detect(this.mod);
-        if (!d){
+        if (!d) {
             core.print(this.mod + " not found!");
         }
         return d;

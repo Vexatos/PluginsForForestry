@@ -4,12 +4,12 @@ import denoflionsx.API.PfFManagers;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.multiItem;
-import denoflionsx.plugins.Core.EnumToolTextures;
+import denoflionsx.Enums.EnumToolTextures;
 
 public class ItemIronRing extends multiItem {
 

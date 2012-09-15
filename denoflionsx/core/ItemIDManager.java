@@ -11,7 +11,7 @@ public class ItemIDManager {
 
     public static int baseID;
     public static int currentID;
-    public static String configFile = "ItemIDRegistry.cfg";
+    public static final String configFile = "ItemIDRegistry.cfg";
     public static Config usedIDs = new Config(configFile);
     public static boolean hasDefault = false;
     public static boolean alreadyExisted = false;

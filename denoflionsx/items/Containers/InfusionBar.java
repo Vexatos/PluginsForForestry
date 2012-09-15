@@ -3,7 +3,7 @@ package denoflionsx.items.Containers;
 import denoflionsx.API.PfFManagers;
 import forestry.api.core.ItemInterface;
 import net.minecraft.src.ItemStack;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 
 public class InfusionBar {
     

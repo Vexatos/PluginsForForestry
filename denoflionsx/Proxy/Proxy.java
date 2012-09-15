@@ -1,7 +1,7 @@
 package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
-import denoflionsx.mod_PluginsforForestry;
+import denoflionsx.PluginsforForestry;
 import java.io.File;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.World;
@@ -11,7 +11,7 @@ public class Proxy {
     public void preloadTexture(String texture) {
     }
 
-    public void openGUI(mod_PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
+    public void openGUI(PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
         pl.openGui(p, id, world, x, y, z);
     }
 

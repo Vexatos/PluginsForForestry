@@ -350,12 +350,6 @@ public abstract class TrackInstanceBase implements ITrackInstance
         return tileEntity.zCoord;
     }
 
-    @Override
-    public boolean canPlaceRailAt(World world, int i, int j, int k)
-    {
-        return false;
-    }
-
     /**
      * Return true if the rail can make corners.
      * Used by placement logic.

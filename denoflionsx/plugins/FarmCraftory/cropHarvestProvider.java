@@ -1,6 +1,6 @@
 package denoflionsx.plugins.FarmCraftory;
 
-import denoflionsx.core.EnumModIDs;
+import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops;
 import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops.PlantObject;

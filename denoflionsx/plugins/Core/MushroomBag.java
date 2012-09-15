@@ -1,8 +1,9 @@
 package denoflionsx.plugins.Core;
 
+import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.core;
-import denoflionsx.mod_PluginsforForestry;
+import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.BluesFood.ItemFoods;
 import net.minecraft.src.ItemStack;
 
@@ -26,7 +27,7 @@ public class MushroomBag extends ItemFoods {
 
     @Override
     public String getTextureFile() {
-        return mod_PluginsforForestry.texture;
+        return PluginsforForestry.texture;
     }
 
     @Override

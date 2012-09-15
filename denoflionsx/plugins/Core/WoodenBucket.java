@@ -1,7 +1,6 @@
 package denoflionsx.plugins.Core;
 
 import buildcraft.api.liquids.LiquidStack;
-import denoflionsx.denLib.Colors;
 import denoflionsx.items.multiItem;
 import net.minecraft.src.*;
 import denoflionsx.plugins.Forestry.LiquidContainer;
@@ -31,6 +30,14 @@ public class WoodenBucket extends multiItem{
         if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Wooden Bucket")))) {
             if (par2World.getBlockMaterial(var13, var14, var15) == Material.water && par2World.getBlockMetadata(var13, var14, var15) == 0) {
                 par2World.setBlockWithNotify(var13, var14, var15, 0);
+                if (par1ItemStack.stackSize > 1){
+                    par1ItemStack.stackSize--;
+                    if (!par3EntityPlayer.inventory.addItemStackToInventory(new ItemStack(this, 1, this.metaMap.get("Filled Wooden Bucket")))){
+                        par3EntityPlayer.dropPlayerItemWithRandomChoice(new ItemStack(this, 1, this.metaMap.get("Filled Wooden Bucket")), false);
+                        return par1ItemStack;
+                    }
+                    return par1ItemStack;
+                }
                 return new ItemStack(this, 1, this.metaMap.get("Filled Wooden Bucket"));
             }
         } else if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Filled Wooden Bucket")))) {

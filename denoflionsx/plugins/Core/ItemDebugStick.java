@@ -1,8 +1,10 @@
 package denoflionsx.plugins.Core;
 
+import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.items.multiItem;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
@@ -11,6 +13,7 @@ public class ItemDebugStick extends multiItem {
 
     public ItemDebugStick(int par1, String name) {
         super(par1, name);
+        this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
     @Override

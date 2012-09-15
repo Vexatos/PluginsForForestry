@@ -2,7 +2,7 @@ package denoflionsx.plugins.IC2;
 
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.multiItem;
-import denoflionsx.plugins.Core.EnumToolTextures;
+import denoflionsx.Enums.EnumToolTextures;
 
 public class UraniumGoo extends multiItem{
     

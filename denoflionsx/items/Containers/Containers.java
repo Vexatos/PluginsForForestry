@@ -4,7 +4,7 @@ import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.multiItem;
-import denoflionsx.plugins.Forestry.EnumContainers;
+import denoflionsx.Enums.EnumContainers;
 
 public class Containers {
 

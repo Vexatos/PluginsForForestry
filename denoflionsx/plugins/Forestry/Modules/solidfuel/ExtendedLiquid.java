@@ -3,7 +3,7 @@ package denoflionsx.plugins.Forestry.Modules.solidfuel;
 
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import denoflionsx.plugins.Forestry.EnumContainers;
+import denoflionsx.Enums.EnumContainers;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
 
 public class ExtendedLiquid {

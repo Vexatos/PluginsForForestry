@@ -53,16 +53,6 @@ public class pluginRedpower extends pluginBase {
     }
 
     @Override
-    public void register() {
-        if (!loaded) {
-            if (loaded = init()) {
-                recipes();
-                core.print(getName() + " Loaded!");
-            }
-        }
-    }
-
-    @Override
     protected void defaults() {
         
     }

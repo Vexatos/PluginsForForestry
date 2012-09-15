@@ -1,10 +1,9 @@
 package denoflionsx.plugins.Forestry.Modules.solidfuel;
 
 import forestry.api.core.ItemInterface;
-import denoflionsx.API.API;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;

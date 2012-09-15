@@ -16,7 +16,7 @@ public class FileWrite {
             }
             out.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            //write(file,w);
         }
     }
 }

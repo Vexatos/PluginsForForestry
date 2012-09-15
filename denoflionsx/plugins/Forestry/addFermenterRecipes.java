@@ -7,7 +7,7 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.plugins.pluginBetterFarming;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
-import denoflionsx.API.API;
+import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 
 public class addFermenterRecipes {
@@ -43,7 +43,7 @@ public class addFermenterRecipes {
         if (t instanceof pluginBetterFarming) {
             RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(PfFManagers.ItemManager.getItem("citrusjuice").getItem(), 1));
         } else {
-            if (API.isPluginLoaded("BetterFarming")) {
+            if (PfFAPI.isPluginLoaded("BetterFarming")) {
                 RecipeManagers.fermenterManager.addRecipe(new ItemStack(s, 1, 0), value, bonus, new LiquidStack(biomass, 1), new LiquidStack(PfFManagers.ItemManager.getItem("citrusjuice").getItem(), 1));
             }
         }
@@ -55,7 +55,7 @@ public class addFermenterRecipes {
         RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(applejuice, 1));
         RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(honey, 1));
         RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(seedoil, 1));
-        if (API.isPluginLoaded("BetterFarming")) {
+        if (PfFAPI.isPluginLoaded("BetterFarming")) {
             RecipeManagers.fermenterManager.addRecipe(fermented, qty, 1.5F, new LiquidStack(product, 1), new LiquidStack(PfFManagers.ItemManager.getItem("citrusjuice").getItem(), 1));
         }
     }

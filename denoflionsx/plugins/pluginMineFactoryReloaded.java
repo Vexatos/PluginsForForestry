@@ -1,21 +1,19 @@
 package denoflionsx.plugins;
 
 import net.minecraft.src.ItemStack;
-import denoflionsx.API.API;
+import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.core.EnumModIDs;
+import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import denoflionsx.plugins.MinefactoryReloaded.MFRMilk;
-
 
 public class pluginMineFactoryReloaded extends pluginBase {
 
     protected String theClass = EnumModIDs.MODS.MFR.gettheClass();
     public static MFRMilk milk;
-    private ItemIDManager IDs = new ItemIDManager(2,"MFRMilk");
+    private ItemIDManager IDs = new ItemIDManager(2, "MFRMilk");
 
     public pluginMineFactoryReloaded() {
         this.name = "pluginMineFactoryReloaded";
@@ -27,35 +25,31 @@ public class pluginMineFactoryReloaded extends pluginBase {
     @Override
     public void register() {
         if (!loaded) {
-            defaults();
-            if (loaded = init()) {
-                recipes();
-                // Disable Buildcraft milk system if MFR is on.
+            if (this.detect()){
                 milkModule.disableBCMilk = true;
             }
         }
+        super.register();
     }
 
     @Override
     protected void recipes() {
-
     }
 
     @Override
     protected boolean init() {
-        if (!detect()){
+        if (!detect()) {
             return this.hooked;
         }
         this.addItem(this.theClass, "milkItem", "Milk", 0);
-        PfFManagers.ItemManager.registerItem("milk",this.get("Milk").getItem());
-        if (API.isPluginLoaded("BetterFarming")){
-            this.addItem("Milk Bottle",PluginRegistry.plugins.get("BetterFarming").get("Milk Bottle"));
-            milk = new MFRMilk(this.IDs,this.get("Milk"),this.get("Milk Bottle"),this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
-        }else{
+        PfFManagers.ItemManager.registerItem("milk", this.get("Milk").getItem());
+        if (PfFAPI.isPluginLoaded("BetterFarming")) {
+            this.addItem("Milk Bottle", PluginRegistry.plugins.get("BetterFarming").get("Milk Bottle"));
+            milk = new MFRMilk(this.IDs, this.get("Milk"), this.get("Milk Bottle"), this.getOptionInt("MineFactory_MilkMJt"), this.getOptionInt("MineFactory_MilkBurnTime"), this.getOptionBool("MineFactory_MilkLosesHeat"));
+        } else {
             ItemStack n = null;
-            milk = new MFRMilk(this.IDs,this.get("Milk"),n,this.getOptionInt("MineFactory_MilkMJt"),this.getOptionInt("MineFactory_MilkBurnTime"),this.getOptionBool("MineFactory_MilkLosesHeat"));
+            milk = new MFRMilk(this.IDs, this.get("Milk"), n, this.getOptionInt("MineFactory_MilkMJt"), this.getOptionInt("MineFactory_MilkBurnTime"), this.getOptionBool("MineFactory_MilkLosesHeat"));
         }
-        core.print(this.name + " loaded!");
         this.hooked = true;
         return this.hooked;
     }
@@ -82,7 +76,6 @@ public class pluginMineFactoryReloaded extends pluginBase {
 //        }
 //        
 //    }
-
     @Override
     protected void defaults() {
         config.addDefault("[MineFactoryReloaded Options]");

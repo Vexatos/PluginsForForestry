@@ -1,6 +1,6 @@
 package denoflionsx.plugins.Buildcraft;
 
-import denoflionsx.core.EnumModIDs;
+import denoflionsx.Enums.EnumModIDs;
 import net.minecraft.src.Item;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;

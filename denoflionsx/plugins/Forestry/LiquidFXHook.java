@@ -7,7 +7,7 @@ import denoflionsx.core.core;
 public class LiquidFXHook {
 
     public static Class TextureLiquidsFX;
-    public static String c = "forestry.core.render.TextureLiquidsFX";
+    public static final String c = "forestry.core.render.TextureLiquidsFX";
     public static boolean hooked = false;
 
     public static void setup() {
@@ -31,7 +31,6 @@ public class LiquidFXHook {
             tex = (FMLTextureFX) make.newInstance(rMin, rMax, gMin, gMax, bMin, bMax, iconIndex, textureFile);
         } catch (Exception ex) {
             ex.printStackTrace();
-
         }
         return tex;
     }

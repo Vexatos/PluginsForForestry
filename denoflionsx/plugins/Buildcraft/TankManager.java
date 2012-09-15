@@ -1,6 +1,6 @@
 package denoflionsx.plugins.Buildcraft;
 
-import denoflionsx.core.EnumModIDs;
+import denoflionsx.Enums.EnumModIDs;
 import java.lang.reflect.Method;
 import net.minecraft.src.Block;
 import net.minecraft.src.TileEntity;

@@ -1,17 +1,17 @@
 package denoflionsx.core;
 
+import denoflionsx.Enums.TextureManager;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.MachineTemplate.baseTileEntity;
-import denoflionsx.Managers.PfFExtractorTargetManager;
-import denoflionsx.Managers.PfFItemManager;
+import denoflionsx.Enums.Colors;
+import denoflionsx.Managers.*;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.Containers.Containers;
 import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import denoflionsx.items.CraftingTools.ItemIronRing;
-import denoflionsx.mod_PluginsforForestry;
-import denoflionsx.plugins.BluesFood.MachineOven;
+import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.Buildcraft.Modules.FurnaceModule.TileEntityLavaFurnace;
 import denoflionsx.plugins.PluginRegistry;
 
@@ -21,15 +21,14 @@ import denoflionsx.plugins.PluginRegistry;
  */
 public class core {
 
-    protected static String version = "1.2d";
-    public static final boolean client = true;
+    protected static String version = "1.3Dev";
     public static boolean isBukkit = false;
     public static Config config;
     public static boolean isBetaBuild = true;
     public static final int delay = 25;
-
+    
     public static boolean isClient() {
-        return mod_PluginsforForestry.proxy.isClient();
+        return PluginsforForestry.proxy.isClient();
     }
 
     // This is for plugins that need to load after
@@ -43,27 +42,37 @@ public class core {
         registerItemsEnum();
         PluginRegistry.registerEarlyPlugins();
         registerFX();
-        mod_PluginsforForestry.proxy.registerAchievements();
+        PluginsforForestry.proxy.registerAchievements();
         registerSolidFuelHandler();
     }
-    
-    public static void setupManagers(){
+
+    public static void setupManagers() {
+        PfFManagers.ColorManager = new PfFColorManager();
         PfFManagers.ItemManager = new PfFItemManager();
         PfFManagers.ExtractorTargetManager = new PfFExtractorTargetManager();
+        PfFManagers.ContainerManager = new PfFContainerManager();
+        PfFManagers.ButcherKnifeManager = new PfFButcherKnifeManager();
+    }
+    
+    public static void RegisterColors(){
+        for (Colors.Values v : Colors.Values.values()){
+            PfFManagers.ColorManager.addColor(v.toString(),v.getR(),v.getG(),v.getB());
+        }
     }
 
     public static void registerFX() {
-        mod_PluginsforForestry.proxy.registerFX();
+        PluginsforForestry.proxy.registerFX();
     }
-    
-    public static void registerSolidFuelHandler(){
+
+    public static void registerSolidFuelHandler() {
         FMLWrapper.MODE.FML.registerFuelHandler(new FuelHandler());
     }
 
     // This function runs first.
     public static void runCoreFunctions() {
         setupManagers();
-        Config.ConfigDir = mod_PluginsforForestry.proxy.getConfigDir();
+        RegisterColors();
+        Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();
         registerTileEntites();
@@ -73,8 +82,6 @@ public class core {
     }
 
     public static void registerTileEntites() {
-        FMLWrapper.MODE.FML.registerTileEntity(baseTileEntity.class, "dolBaseEntity");
-        FMLWrapper.MODE.FML.registerTileEntity(MachineOven.TileEntityOven.class, "dolBlueOven");
         FMLWrapper.MODE.FML.registerTileEntity(TileEntityLavaFurnace.class, "dolLavaFurnace");
     }
 

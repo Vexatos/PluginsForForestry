@@ -1,9 +1,10 @@
 package denoflionsx.plugins.BluesFood;
 
+import denoflionsx.API.Enums.EnumAnimals;
 import net.minecraft.src.*;
-import denoflionsx.API.API;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.denLib.denLib;
+import java.util.ArrayList;
 
 public class ItemButcherKnife extends ItemFoodTool {
 
@@ -15,20 +16,24 @@ public class ItemButcherKnife extends ItemFoodTool {
     @Override
     public int getDamageVsEntity(Entity par1Entity) {
         // If entity is an animal kick it's ass in one shot.
-        if (par1Entity instanceof EntityAnimal) {
-            return (this.maxDamage * 5);
+        if (EnumAnimals.getMatchingEnum(par1Entity) != EnumAnimals.ANIMALS.NULL) {
+            return (this.pew * 5);
         } else {
-            return this.maxDamage;
+            return this.pew;
         }
     }
-    
+
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLiving par2EntityLiving, EntityLiving par3EntityLiving) {
         super.hitEntity(par1ItemStack, par2EntityLiving, par3EntityLiving);
         // If entity is an animal give us some extra loot!
-        if (par2EntityLiving instanceof EntityAnimal) {
+        EnumAnimals.ANIMALS a = EnumAnimals.getMatchingEnum(par2EntityLiving);
+        if (a != EnumAnimals.ANIMALS.NULL) {
             EntityPlayer player = (EntityPlayer) par3EntityLiving;
-            player.dropPlayerItemWithRandomChoice(PfFManagers.ItemManager.getItem("milkbag").copy(), false);
+            ArrayList<ItemStack> bonus = PfFManagers.ButcherKnifeManager.getBonusDropTable(a);
+            for (ItemStack b : bonus) {
+                player.dropPlayerItem(b.copy());
+            }
         }
         return true;
     }

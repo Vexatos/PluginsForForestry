@@ -5,7 +5,7 @@ import forestry.api.fuels.EngineCopperFuel;
 import forestry.api.fuels.FuelManager;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.FuelHandler;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFBar;
@@ -51,7 +51,7 @@ public class customFuelSolid {
         container_names.add("Capsule_Red");
         container_names.add("Cell");
         for (String s : container_names) {
-            ItemStack item = PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces + denLib.toLowerCaseNoSpaces(s));
+            ItemStack item = PfFManagers.ItemManager.getItemQuietly(this.liquidNameLowerCaseNoSpaces + denLib.toLowerCaseNoSpaces(s));
             if (item != null) {
                 containers.add(item);
             }

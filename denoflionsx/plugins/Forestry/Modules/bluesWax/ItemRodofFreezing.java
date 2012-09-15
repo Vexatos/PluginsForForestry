@@ -1,10 +1,12 @@
 package denoflionsx.plugins.Forestry.Modules.bluesWax;
 
+import denoflionsx.API.PfFManagers;
 import java.util.List;
 import net.minecraft.src.*;
 import denoflionsx.core.core;
-import denoflionsx.mod_PluginsforForestry;
-import denoflionsx.plugins.Core.EnumToolTextures;
+import denoflionsx.PluginsforForestry;
+import denoflionsx.Enums.EnumToolTextures;
+import denoflionsx.denLib.denLib;
 
 public class ItemRodofFreezing extends Item{
     
@@ -14,6 +16,8 @@ public class ItemRodofFreezing extends Item{
         super(par1);
         this.setMaxStackSize(1);
         this.name = core.addName("Rod of Freezing");
+        PfFManagers.ItemManager.registerItem(denLib.toLowerCaseNoSpaces("Rod of Freezing"), this);
+        this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
     @Override
@@ -47,6 +51,6 @@ public class ItemRodofFreezing extends Item{
 
     @Override
     public String getTextureFile() {
-        return mod_PluginsforForestry.texture;
+        return PluginsforForestry.texture;
     }
 }

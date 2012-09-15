@@ -1,7 +1,8 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.core.EnumModIDs;
+import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
@@ -25,16 +26,10 @@ public class pluginBuildcraft extends pluginBase {
     @Override
     public void register() {
         if (!loaded) {
-            this.defaults();
             milkModule.load(this);
             quarryModule.load(this);
-           // LavaFurnacemodule.load(this);
-            this.runConfig();
-            if (loaded = init()) {
-                this.recipes();
-                core.print(this.name + " loaded!");
-            }
         }
+        super.register();
     }
 
     @Override
@@ -50,28 +45,26 @@ public class pluginBuildcraft extends pluginBase {
         if (denLib.convertToBoolean(config.getOption("OilInBiogas"))) {
             FuelManager.bronzeEngineFuel.put(Integer.valueOf(this.blocks.get("Oil").itemID), new EngineBronzeFuel(this.blocks.get("Oil"), Integer.valueOf(config.getOption("OilMJt")), Integer.valueOf(config.getOption("FuelBurnTime")), 1));
         }
-
+        if (this.config.getOptionBool("WoodenBucketIntegration")) {
+            PfFManagers.ContainerManager.addLiquid("Oil", this.getBlockItemStack("Oil"), PfFManagers.ColorManager.getColor(Colors.Values.BLACK.toString()));
+            PfFManagers.ContainerManager.addLiquid("Fuel", this.get("Fuel"), PfFManagers.ColorManager.getColor(Colors.Values.PISS.toString()));
+        }
         this.registerModules();
 
     }
 
     @Override
     protected boolean init() {
-        if (!detect()){
+        if (!detect()) {
             return false;
         }
         TankManager.setup();
         goldGear.setup();
         String BCE = EnumModIDs.MODS.BUILDCRAFT_ENERGY.gettheClass();
         if (core.isBukkit) {
-            
         }
         this.addBlock(BCE, "oilStill", "Oil", 0);
         this.addItem(BCE, "fuel", "Fuel", 0);
-        if (this.config.getOptionBool("WoodenBucketIntegration")){
-            PfFManagers.ItemManager.registerItem("oil",this.getBlockItemStack("Oil"));
-            PfFManagers.ItemManager.registerItem("fuel",this.get("Fuel"));
-        }
         this.hooked = true;
         return this.hooked;
     }

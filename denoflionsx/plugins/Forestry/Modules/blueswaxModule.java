@@ -1,7 +1,7 @@
 package denoflionsx.plugins.Forestry.Modules;
 
-import buildcraft.api.liquids.LiquidManager;
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.PfFManagers;
 import denoflionsx.plugins.Forestry.Modules.bluesWax.waxCast;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
@@ -10,17 +10,20 @@ import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
+import denoflionsx.Enums.EnumDyeColors;
+import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.plugins.Forestry.LiquidContainer;
 import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
+import denoflionsx.plugins.Forestry.Modules.bluesWax.EnumCastTextures;
 import denoflionsx.plugins.Forestry.Modules.bluesWax.ItemRodofFreezing;
 
 public class blueswaxModule extends baseModule {
 
-    private ItemIDManager wax = new ItemIDManager(1,"ExtraWax");
-    private ItemIDManager rod = new ItemIDManager(1,"RodofFreezing");
+    private ItemIDManager wax = new ItemIDManager(1, "ExtraWax");
+    private ItemIDManager rod = new ItemIDManager(1, "RodofFreezing");
     public static waxCast extrawax;
     public static ItemRodofFreezing Rod;
 //    public static waxBlock thatch;
@@ -61,17 +64,16 @@ public class blueswaxModule extends baseModule {
             extrawax.metaMap.put("Rod of Freezing", 7);
             extrawax.metaMap.put("Test", 8);
             //-------------------------------------------------
-            int toShift = 15;
             extrawax.add("waxplaceholder", 0, Placeholder.Sprite.RADICAL_EDWARD.getIndex(), "PLACEHOLDER");
-            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), Colors.shiftRow(toShift, 7), "Wax Tablet");
-            extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), Colors.shiftRow(toShift, 0), "Wax Cast");
-            extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), Colors.shiftRow(toShift, 1), "Filled Wax Cast");
-            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), Colors.shiftRow(toShift, 2), "Refractory Cast");
-            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), Colors.shiftRow(toShift, 3), "Filled Wax Cast");
-            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), Colors.shiftRow(toShift, 4), "Lava Cast");
+            extrawax.add("waxtablet", extrawax.metaMap.get("Wax Tablet"), EnumToolTextures.ToolTextures.WAXTABLET.getIndex(), "Wax Tablet");
+            //extrawax.add("waxcast", extrawax.metaMap.get("Wax Cast"), Colors.shiftRow(toShift, 0), "Wax Cast");
+            //extrawax.add("filledwaxcast", extrawax.metaMap.get("Filled Wax Cast"), Colors.shiftRow(toShift, 1), "Filled Wax Cast");
+            extrawax.add("waxcast_red", extrawax.metaMap.get("Refractory Cast"), EnumCastTextures.REFRACTORY.getIndex(), "Refractory Cast");
+            extrawax.add("wascastfilled_red", extrawax.metaMap.get("Filled Wax Cast_Red"), EnumCastTextures.WATER.getIndex(), "Filled Wax Cast");
+            extrawax.add("waxcastlava_red", extrawax.metaMap.get("Lava Cast"), EnumCastTextures.LAVA.getIndex(), "Lava Cast");
             //extrawax.add("rodoffreezing", extrawax.metaMap.get("Rod of Freezing"), Colors.shiftRow(toShift, 5), "Rod of Freezing");
             //extrawax.add("test", extrawax.metaMap.get("Test"), 12, "Test (Ignore Me)");
-            LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), false));
+            //LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Cast")), false));
             LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.lavaStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Lava Cast")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(Block.waterStill, 1), new ItemStack(extrawax, 1, extrawax.metaMap.get("Filled Wax Cast_Red")), new ItemStack(extrawax, 1, extrawax.metaMap.get("Refractory Cast")), false));
             //-------------------------------------------------
@@ -143,11 +145,11 @@ public class blueswaxModule extends baseModule {
                         "PPP",
                         Character.valueOf('P'), Block.planks,
                         Character.valueOf('T'), new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet"))});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Wax Cast")), new Object[]{
-                        "WWW",
-                        "WXW",
-                        "WWW",
-                        Character.valueOf('W'), ItemInterface.getItem("beeswax")});
+//            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Wax Cast")), new Object[]{
+//                        "WWW",
+//                        "WXW",
+//                        "WWW",
+//                        Character.valueOf('W'), ItemInterface.getItem("beeswax")});
             FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.WaxCastPerCraft, extrawax.metaMap.get("Refractory Cast")), new Object[]{
                         "WWW",
                         "WXW",
@@ -260,7 +262,26 @@ public class blueswaxModule extends baseModule {
                         ItemInterface.getItem("phosphor"),
                         new ItemStack(Block.stoneBrick)});
 
+            newRecipes();
         }
     }
     //--------------------------
+
+    private void newRecipes() {
+        FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getNewItemStack("waxcast_red", WaxCastPerCraft), new Object[]{
+                    "WWW",
+                    "WDW",
+                    "WWW",
+                    Character.valueOf('W'), ItemInterface.getItem("beeswax"),
+                    Character.valueOf('D'), EnumDyeColors.DYES.RED.getDye()});
+        FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces("Rod of Freezing")), new Object[]{
+                    "LSS",
+                    "lGS",
+                    "IlL",
+                    Character.valueOf('L'), EnumDyeColors.DYES.BLUE.getDye(),
+                    Character.valueOf('S'), new ItemStack(Item.snowball),
+                    Character.valueOf('l'), EnumDyeColors.DYES.LIGHTBLUE.getDye(),
+                    Character.valueOf('G'), new ItemStack(Block.blockGold),
+                    Character.valueOf('I'), new ItemStack(Item.ingotIron)});
+    }
 }

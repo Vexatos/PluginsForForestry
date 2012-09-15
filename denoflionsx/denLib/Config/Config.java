@@ -61,10 +61,18 @@ public class Config {
 
     public int getOptionInt(String key) {
         String op = this.getOption(key);
-        if (op.equals("")){
+        if (op.equals("")) {
             op = "0";
         }
         return Integer.valueOf(op);
+    }
+    
+    public float getOptionFloat(String key){
+        String op = this.getOption(key);
+        if (op.equals("")){
+            op = "0";
+        }
+        return Float.valueOf(op);
     }
 
     public boolean getOptionBool(String key) {
@@ -148,15 +156,25 @@ public class Config {
             new File(this.ConfigFile).delete();
         }
     }
-    
-    public ArrayList<String> dumpValues(){
+
+    public ArrayList<String> dumpValues() {
         // This dumps all values without the keys.
         // Good for uses where the key is arbitrary.
         Iterator i = this.Options.entrySet().iterator();
         ArrayList<String> values = new ArrayList();
-        while (i.hasNext()){
+        while (i.hasNext()) {
             Map.Entry pairs = (Map.Entry) i.next();
             values.add(pairs.getValue().toString());
+        }
+        return values;
+    }
+
+    public ArrayList<String> dumpKeys() {
+        Iterator i = this.Options.entrySet().iterator();
+        ArrayList<String> values = new ArrayList();
+        while (i.hasNext()) {
+            Map.Entry pairs = (Map.Entry) i.next();
+            values.add(pairs.getKey().toString());
         }
         return values;
     }

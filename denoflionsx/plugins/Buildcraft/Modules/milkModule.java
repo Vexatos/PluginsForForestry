@@ -8,12 +8,12 @@ import denoflionsx.plugins.pluginBase;
 import denoflionsx.plugins.PluginRegistry;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
-import denoflionsx.API.API;
+import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 import denoflionsx.items.PfFContainer;
-import denoflionsx.plugins.Forestry.EnumContainers.Containers;
+import denoflionsx.Enums.EnumContainers.Containers;
 
 public class milkModule extends baseModule {
 
@@ -40,7 +40,7 @@ public class milkModule extends baseModule {
             milk.add("milkcap", milk.metaMap.get("Milk Capsule"), Containers.CAPSULE.getTexture(), "Milk Capsule");
             milk.add("milkcan", milk.metaMap.get("Milk Can"), Containers.CAN.getTexture(), "Milk Can");
             milk.add("milkcap_red", milk.metaMap.get("Milk Capsule_Red"), Containers.CAPSULE_RED.getTexture(), "Milk Capsule");
-            if (!API.isPluginLoaded("BetterFarming")) {
+            if (!PfFAPI.isPluginLoaded("BetterFarming")) {
                 milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), Containers.BOTTLE.getTexture(), "Milk Bottle");
                 LiquidContainerSystem.createWithOverride(milk,milk.shiftedIndex,PfFManagers.ItemManager.getItem("milkbottle"),true);
             } else {
@@ -63,6 +63,7 @@ public class milkModule extends baseModule {
             }
             FuelManager.bronzeEngineFuel.put(milk.shiftedIndex, new EngineBronzeFuel(new ItemStack(milk), Integer.valueOf(this.parent.config.getOption("MilkMJt")), Integer.valueOf(this.parent.config.getOption("MilkBurnTime")), b));
         }
+        PfFManagers.ContainerManager.addLiquid("Milk", PfFManagers.ItemManager.getItem("milk"), PfFManagers.ColorManager.getColor(Colors.Values.WHITE.toString()));
     }
 
     @Override

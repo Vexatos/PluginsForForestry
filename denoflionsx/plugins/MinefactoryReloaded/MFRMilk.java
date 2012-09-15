@@ -4,13 +4,13 @@ import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import denoflionsx.API.API;
+import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.denLib.Colors;
+import denoflionsx.Enums.Colors;
 import denoflionsx.items.PfFContainer;
 import denoflionsx.items.Placeholder;
-import denoflionsx.plugins.Forestry.EnumContainers.Containers;
+import denoflionsx.Enums.EnumContainers.Containers;
 import denoflionsx.plugins.Forestry.LiquidContainerSystem;
 import denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
 

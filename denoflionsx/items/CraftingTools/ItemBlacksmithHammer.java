@@ -2,22 +2,20 @@ package denoflionsx.items.CraftingTools;
 
 import net.minecraft.src.*;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.core.FMLWrapper;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
-import denoflionsx.mod_PluginsforForestry;
-import denoflionsx.plugins.Core.EnumToolTextures;
+import denoflionsx.PluginsforForestry;
+import denoflionsx.Enums.EnumToolTextures;
 
 public class ItemBlacksmithHammer extends Item {
 
     public ItemBlacksmithHammer(int par1) {
         super(par1);
-        this.setTextureFile(mod_PluginsforForestry.texture);
+        this.setTextureFile(PluginsforForestry.texture);
         this.setMaxDamage(10);
         this.setMaxStackSize(1);
-        if (core.client) {
-            ModLoader.addLocalization("item.BlacksmithHammer.name", "Blacksmith Hammer");
-        }
+        core.addName("Blacksmith Hammer");
         PfFManagers.ItemManager.registerItem("blacksmithhammer", this);
     }
 
@@ -28,7 +26,7 @@ public class ItemBlacksmithHammer extends Item {
 
     @Override
     public String getItemNameIS(ItemStack par1ItemStack) {
-        return "item.BlacksmithHammer";
+        return "item.blacksmithhammer";
     }
 
     @Override

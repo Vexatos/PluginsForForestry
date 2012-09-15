@@ -1,10 +1,11 @@
 package denoflionsx.plugins.BluesFood;
 
+import denoflionsx.API.PfFManagers;
 import net.minecraft.src.ItemFood;
 import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
+import net.minecraft.src.CreativeTabs;
 
 public class ItemFoods extends ItemFood{
     
@@ -15,11 +16,11 @@ public class ItemFoods extends ItemFood{
 
     public ItemFoods(int par1, int texture, int par2, float par3, String name) {
         super(par1, par2, par3, false);
-        if (core.isClient()){
-            ModLoader.addLocalization("item." + denLib.toLowerCaseNoSpaces(name) + ".name", name);
-        }
+        core.addName(name);
         this.name = name;
         this.texture = texture;
+        PfFManagers.ItemManager.registerItem(denLib.toLowerCaseNoSpaces(name), this);
+        this.setTabToDisplayOn(CreativeTabs.tabFood);
     }
 
     @Override
@@ -30,7 +31,7 @@ public class ItemFoods extends ItemFood{
     @Override
     public String getItemNameIS(ItemStack par1ItemStack) {
         return "item." + denLib.toLowerCaseNoSpaces(name);
-    }
+    } 
     
     @Override
     public String getTextureFile() {
