@@ -19,14 +19,27 @@ public class PfFItemManager implements IPfFItemManager {
     @Override
     public ArrayList<ItemStack> getAllContainersForLiquid(String liquid) {
         ArrayList<ItemStack> stacks = new ArrayList();
-        for (ItemStack i : registeredItems.values()){
+        for (ItemStack i : registeredItems.values()) {
             String itemName = i.getItem().getItemNameIS(i);
-            if (itemName.contains(liquid)){
-                stacks.add(i);
+            if (itemName.contains(liquid) && !itemName.contains(" Bar")) {
+                if (i.getItemDamage() != 0) {
+                    stacks.add(i);
+                }
             }
         }
-        stacks.remove(0);
         return stacks;
+    }
+
+    @Override
+    public ArrayList<ItemStack> getContainersForLiquidNoBarrel(String liquid) {
+        ArrayList<ItemStack> stacks = getAllContainersForLiquid(liquid);
+        ArrayList<ItemStack> copy = new ArrayList();
+        for (ItemStack i : stacks) {
+            if (!i.getItem().getItemNameIS(i).toLowerCase().contains("barrel")) {
+                copy.add(i);
+            }
+        }
+        return copy;
     }
 
     @Override
@@ -34,7 +47,7 @@ public class PfFItemManager implements IPfFItemManager {
         ItemStack i = getItem(s);
         Item item = i.getItem();
         int meta = i.getItemDamage();
-        return new ItemStack(item,amount,meta);
+        return new ItemStack(item, amount, meta).copy();
     }
 
     @Override
@@ -88,7 +101,7 @@ public class PfFItemManager implements IPfFItemManager {
         core.print(div);
         core.print("Starting PfF item dump...");
         core.print(div);
-        for (ItemStack i : registeredItems.values()){
+        for (ItemStack i : registeredItems.values()) {
             core.print(i.getItemName());
         }
         core.print(div);

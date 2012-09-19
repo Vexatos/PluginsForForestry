@@ -6,6 +6,9 @@ public class PfFAPI {
 
     public static final boolean verbose = false;
     
+    // Reflect into my plugin core and invoke the method to find out if the
+    // plugin in question is loaded.
+    
     public static boolean isPluginLoaded(String name) {
         boolean loaded;
         String Package = PfFAPI.class.getPackage().toString();

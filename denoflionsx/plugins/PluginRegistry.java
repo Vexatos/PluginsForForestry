@@ -37,7 +37,7 @@ public class PluginRegistry {
             plugins.put("Forestry", new pluginForestry());
         }
         if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
-//            plugins.put("IC2", new pluginIC2());
+           plugins.put("IC2", new pluginIC2());
         }
         if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
             plugins.put("Buildcraft", new pluginBuildcraft());
@@ -52,6 +52,7 @@ public class PluginRegistry {
         if (core.config.getOptionBool("pluginBlueFood_Enabled")) {
             plugins.put("BluesFood", new pluginBlueFood());
         }
+        plugins.put("Pams",new pluginPam());
     }
 
     public static boolean isPluginAlive(String name) {

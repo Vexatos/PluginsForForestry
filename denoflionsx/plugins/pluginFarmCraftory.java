@@ -1,6 +1,8 @@
 package denoflionsx.plugins;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.PfFManagers;
+import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.plugins.FarmCraftory.Crops.Crop;
@@ -10,7 +12,6 @@ import denoflionsx.plugins.FarmCraftory.Crops.Tree;
 import denoflionsx.plugins.FarmCraftory.Modules.Liquidmodule;
 import denoflionsx.plugins.FarmCraftory.cropHarvest;
 import denoflionsx.plugins.Forestry.SqueezerHelper;
-import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
 
 public class pluginFarmCraftory extends pluginBase {
@@ -57,11 +58,11 @@ public class pluginFarmCraftory extends pluginBase {
         if (this.config.getOptionBool("ForestryIntegration")) {
             for (EnumCrops.SINGLE s : EnumCrops.SINGLE.values()) {
                 CropProviders.cerealCrops.add(new Crop(s));
-                SqueezerHelper.add(s.getPlant().getSeed(), new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, amount));
+                SqueezerHelper.add(s.getPlant().getSeed(), new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, amount));
             }
             for (EnumCrops.MULTI s : EnumCrops.MULTI.values()) {
                 CropProviders.cerealCrops.add(new CropMulti(s));
-                SqueezerHelper.add(s.getPlant().getSeed(), new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, amount));
+                SqueezerHelper.add(s.getPlant().getSeed(), new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, amount));
             }
             for (EnumCrops.TREE s : EnumCrops.TREE.values()) {
                 CropProviders.poaleCrops.add(new Tree(s));

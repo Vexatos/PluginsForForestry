@@ -1,6 +1,7 @@
 package denoflionsx.plugins;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.Enums.EnumForestryLiquids;
 import forestry.api.apiculture.FlowerManager;
 import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
@@ -54,7 +55,7 @@ public class pluginRedPowerWorld extends pluginBase {
     @Override
     protected void recipes() {
         FlowerManager.plainFlowers.add(this.blocks.get("Indigo Flower"));
-        RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Flax Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, 100));
+        RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Flax Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, 100));
         CropProviders.cerealCrops.add(new cropFlaxProvider(Item.silk, this.items.get("Flax Seeds").getItem(), this.getBlock("Flax"),4, new int[]{3,3}));
     }
 

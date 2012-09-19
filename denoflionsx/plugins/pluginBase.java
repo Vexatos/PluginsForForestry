@@ -56,8 +56,8 @@ public abstract class pluginBase {
     public boolean getOptionBool(String key) {
         return this.config.getOptionBool(key);
     }
-    
-    public float getOptionFloat(String key){
+
+    public float getOptionFloat(String key) {
         return this.config.getOptionFloat(key);
     }
 
@@ -103,7 +103,7 @@ public abstract class pluginBase {
     protected boolean detect() {
         boolean d = denLib.detect(this.mod);
         if (!d) {
-            core.print(this.mod + " not found!");
+            //core.print(this.mod + " not found!");
         }
         return d;
     }
@@ -115,7 +115,9 @@ public abstract class pluginBase {
     protected abstract void defaults();
 
     protected void runConfig() {
-        this.config.writeConfig();
-        this.config.readFile();
+        if (this.config != null) {
+            this.config.writeConfig();
+            this.config.readFile();
+        }
     }
 }

@@ -1,20 +1,22 @@
 package denoflionsx.plugins;
 
+import denoflionsx.plugins.Forestry.Modules.StillModule.stillModule;
+import denoflionsx.plugins.Forestry.Modules.ExtraFuelsModule.extraFuelsModule;
+import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Enums.EnumForestryLiquids;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
-import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
-import denoflionsx.plugins.Forestry.Modules.peatModule;
+import denoflionsx.plugins.Forestry.Modules.PeatModule.peatModule;
 import denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.recipes.RecipeManagers;
-import denoflionsx.plugins.Forestry.Modules.*;
-import denoflionsx.plugins.Forestry.Modules.solidfuel.solidfuelModule;
+import denoflionsx.plugins.Forestry.Modules.SolidFuelModule.solidfuelModule;
 
 public class pluginForestry extends pluginBase {
 
@@ -30,13 +32,6 @@ public class pluginForestry extends pluginBase {
         if (!detect()) {
             return hooked;
         }
-        if (this.config.getOptionBool("WoodenBucketIntegration")) {
-            this.addItem("Seed Oil", ItemInterface.getItem("liquidSeedOil"));
-            this.addItem("Apple Juice", ItemInterface.getItem("liquidJuice"));
-            this.addItem("Honey", ItemInterface.getItem("liquidHoney"));
-            this.addItem("Biomass", ItemInterface.getItem("liquidBiomass"));
-            this.addItem("Biofuel", ItemInterface.getItem("liquidBiofuel"));
-        }
         this.registerModules();
         hooked = true;
         return hooked;
@@ -45,21 +40,21 @@ public class pluginForestry extends pluginBase {
     @Override
     protected void recipes() {
         if (true) {
-            addFermenterRecipes.addItem(Item.sugar, 200, this);
-            addFermenterRecipes.add(ItemInterface.getItem("liquidSeedOil"), 1.5F);
+            PfFManagers.FermenterManager.addItem(new ItemStack(Item.sugar), 200);
+            PfFManagers.FermenterManager.registerPfFLiquid(EnumForestryLiquids.SEEDOIL.getLiquid(), 1.5f);
         }
         if (denLib.convertToBoolean(this.config.getOption("StillFix"))) {
             RecipeManagers.stillManager.addRecipe(Integer.valueOf(this.config.getOption("Still_WorkCycles")), new LiquidStack(ItemInterface.getItem("liquidBiomass").getItem(), Integer.valueOf(this.config.getOption("Still_BiomassPerCast"))), new LiquidStack(ItemInterface.getItem("liquidBiofuel").getItem(), Integer.valueOf(this.config.getOption("Still_BiofuelPerCast"))));
         }
         if (denLib.convertToBoolean(this.config.getOption("BiofuelInBiogas"))) {
-            FuelManager.bronzeEngineFuel.put(Integer.valueOf(ItemInterface.getItem("liquidBiofuel").itemID), new EngineBronzeFuel(ItemInterface.getItem("liquidBiofuel"), Integer.valueOf(this.config.getOption("BiofuelMJt")), Integer.valueOf(this.config.getOption("BiofuelBurnTime")), 1));
+            FuelManager.bronzeEngineFuel.put(Integer.valueOf(EnumForestryLiquids.BIOFUEL.getLiquid().itemID), new EngineBronzeFuel(ItemInterface.getItem("liquidBiofuel"), Integer.valueOf(this.config.getOption("BiofuelMJt")), Integer.valueOf(this.config.getOption("BiofuelBurnTime")), 1));
         }
         if (this.config.getOptionBool("WoodenBucketIntegration")) {
-            PfFManagers.ContainerManager.addLiquid("Seed Oil", this.get("Seed Oil"), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
-            PfFManagers.ContainerManager.addLiquid("Apple Juice", this.get("Apple Juice"), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
-            PfFManagers.ContainerManager.addLiquid("Honey", this.get("Honey"), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
-            PfFManagers.ContainerManager.addLiquid("Biomass", this.get("Biomass"), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
-            PfFManagers.ContainerManager.addLiquid("Biofuel", this.get("Biofuel"), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
+            PfFManagers.ContainerManager.addLiquid("Seed Oil", EnumForestryLiquids.SEEDOIL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
+            PfFManagers.ContainerManager.addLiquid("Apple Juice", EnumForestryLiquids.APPLEJUICE.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Honey", EnumForestryLiquids.HONEY.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
         }
     }
 
@@ -70,7 +65,7 @@ public class pluginForestry extends pluginBase {
             peatModule.load(this);
             extraFuelsModule.load(this);
             solidfuelModule.load(this);
-            blueswaxModule.load(this);
+            BlueWaxmodule.load(this);
         }
         super.register();
     }

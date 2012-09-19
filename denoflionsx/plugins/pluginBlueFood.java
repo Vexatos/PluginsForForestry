@@ -87,19 +87,21 @@ public class pluginBlueFood extends pluginBase {
             PfFManagers.ButcherKnifeManager.addDropToAnimal(EnumAnimals.ANIMALS.SHEEP, PfFManagers.ItemManager.getItem("lambchop"));
             FMLWrapper.MODE.FML.addSmelt(PfFManagers.ItemManager.getItem("lambchop"), PfFManagers.ItemManager.getItem("cookedlambchop"));
             FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem("flour"), new Object[]{new ItemStack(Item.wheat)});
-            ArrayList<ItemStack> containers = PfFManagers.ItemManager.getAllContainersForLiquid("milk");
+            ArrayList<ItemStack> containers = PfFManagers.ItemManager.getContainersForLiquidNoBarrel("milk");
             containers.add(new ItemStack(Item.bucketMilk));
+            if (PfFManagers.ItemManager.doesItemExist("milkbag")){
+                containers.add(PfFManagers.ItemManager.getItem("milkbag"));
+            }
             for (ItemStack i : containers) {
-                if (!i.getItem().getItemNameIS(i).toLowerCase().contains("barrel")) {
-                    FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getNewItemStack("cupcake", 4), new Object[]{
-                                "MMM",
-                                "SES",
-                                "FFF",
-                                Character.valueOf('M'), i,
-                                Character.valueOf('S'), Item.sugar,
-                                Character.valueOf('E'), Item.egg,
-                                Character.valueOf('F'), PfFManagers.ItemManager.getItem("flour")});
-                }
+                FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getNewItemStack("cupcake", 4), new Object[]{
+                            "MMM",
+                            "SES",
+                            "FFF",
+                            Character.valueOf('M'), i,
+                            Character.valueOf('S'), Item.sugar,
+                            Character.valueOf('E'), Item.egg,
+                            Character.valueOf('F'), PfFManagers.ItemManager.getItem("flour")});
+
             }
             FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem("butcherknife"), new Object[]{
                         "XHX",

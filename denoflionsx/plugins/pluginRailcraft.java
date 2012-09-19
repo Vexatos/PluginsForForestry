@@ -4,7 +4,7 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.denLib.Config.Config;
-import denoflionsx.plugins.Railcraft.Modules.OreCrushmodule;
+import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.OreCrushmodule;
 import railcraft.common.api.core.items.ItemRegistry;
 
 public class pluginRailcraft extends pluginBase {

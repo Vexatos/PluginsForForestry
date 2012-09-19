@@ -9,7 +9,6 @@ import denoflionsx.core.core;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.denLib.denLib;
-import java.util.ArrayList;
 import java.util.List;
 
 public class multiItem extends Item {

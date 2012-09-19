@@ -9,7 +9,9 @@ public class EnumModIDs {
         BUILDCRAFT_ENERGY("BuildCraft|Energy","buildcraft.BuildCraftEnergy"),
         BUILDCRAFT_TRANSPORT("BuildCraft|Transport","buildcraft.BuildCraftTransport"),
         BUILDCRAFT_FACTORY("BuildCraft|Factory","buildcraft.BuildCraftFactory"),
-        RAILCRAFT("Railcraft","railcraft.common.core.Railcraft");
+        RAILCRAFT("Railcraft","railcraft.common.core.Railcraft"),
+        IC2("IC2","ic2.common.IC2"),
+        PAM("PamCombinedMod","pamsmods.common.combinedmod.Pamcombinedmod");
         
         private String mod;
         private String theClass;

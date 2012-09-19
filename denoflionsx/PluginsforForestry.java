@@ -24,13 +24,8 @@ public class PluginsforForestry {
     public static final String texture = "/denoflionsx/spritesheet.png";
     public static boolean hasPluginsLoaded = false;
     public static int count = 0;
-    public static PluginsforForestry instance;
     @SidedProxy(clientSide = "denoflionsx.Proxy.ProxyClient", serverSide = "denoflionsx.Proxy.ProxyServer")
     public static Proxy proxy;
-
-    public PluginsforForestry() {
-        instance = this;
-    }
 
     @Init
     public void load(FMLInitializationEvent event) {
@@ -40,13 +35,5 @@ public class PluginsforForestry {
     @PostInit
     public void modsLoaded(FMLPostInitializationEvent evt) {
         core.registerEarlyPlugins();
-    }
-
-    public String getPriorities() {
-        return "after:*";
-    }
-
-    public String getVersion() {
-        return core.modVersion();
     }
 }

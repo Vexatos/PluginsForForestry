@@ -15,8 +15,9 @@ import forestry.api.recipes.RecipeManagers;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
+import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.Enums.EnumLiquidTextures;
-import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import denoflionsx.items.Fuels.customFuel;
 
 public class pluginBetterFarming extends pluginBase {
 
@@ -77,11 +78,11 @@ public class pluginBetterFarming extends pluginBase {
 
         try {
             int s = Integer.valueOf(config.getOption("Seeds_SeedOilPerSqueeze"));
-            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Apple Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, s));
-            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Orange Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, s));
-            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Cocoa Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, s));
-            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Mint Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, s));
-            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Lemon Seeds")}, new LiquidStack(ItemInterface.getItem("liquidSeedOil").itemID, s));
+            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Apple Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, s));
+            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Orange Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, s));
+            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Cocoa Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, s));
+            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Mint Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, s));
+            RecipeManagers.squeezerManager.addRecipe(10, new ItemStack[]{this.items.get("Lemon Seeds")}, new LiquidStack(EnumForestryLiquids.SEEDOIL.getLiquid().itemID, s));
             if (denLib.convertToBoolean(config.getOption("CitrusJuice_Enabled"))) {
                 int s2 = Integer.valueOf(config.getOption("CitrusJuice_AmountPerSqueeze"));
                 int s3 = Integer.valueOf(config.getOption("CitrusJuice_PercentChanceOfMulch"));

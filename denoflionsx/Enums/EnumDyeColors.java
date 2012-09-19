@@ -7,31 +7,29 @@ public class EnumDyeColors {
     
     // This is to help when using dyes to craft.
     
-    public static int ColorMeta = 0;
-    
     public static enum DYES{
         
-        INK(),
-        RED(),
-        GREEN(),
-        COCOABEANS(),
-        BLUE(),
-        PURPLE(),
-        CYAN(),
-        LIGHTGREY(),
-        GREY(),
-        PINK(),
-        LIME(),
-        YELLOW(),
-        LIGHTBLUE(),
-        MAGENTA(),
-        ORANGE(),
-        BONEMEAL();
+        INK(0),
+        RED(1),
+        GREEN(2),
+        COCOABEANS(3),
+        BLUE(4),
+        PURPLE(5),
+        CYAN(6),
+        LIGHTGREY(7),
+        GREY(8),
+        PINK(9),
+        LIME(10),
+        YELLOW(11),
+        LIGHTBLUE(12),
+        MAGENTA(13),
+        ORANGE(14),
+        BONEMEAL(15);
         
         private int meta;
         
-        private DYES(){
-            this.meta = ColorMeta++;
+        private DYES(int meta){
+            this.meta = meta;
         }
         
         public ItemStack getDye(){

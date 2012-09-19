@@ -6,9 +6,8 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops;
-import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.SqueezerHelper;
-import denoflionsx.plugins.Forestry.addFermenterRecipes;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
 
@@ -63,7 +62,7 @@ public class Liquidmodule extends baseModule {
             for (EnumCrops.TREE tree : EnumCrops.TREE.values()){
                 SqueezerHelper.add(tree.getTree().getFruitItem(), new LiquidStack(PfFManagers.ItemManager.getItem("fruitjuice").itemID,this.getOptionInt("FruitJuice_AmountPerSqueeze")));
             }
-            addFermenterRecipes.add(PfFManagers.ItemManager.getItem("fruitjuice"), this.getOptionFloat("FruitJuice_FermenterBonus"));   
+            PfFManagers.FermenterManager.registerPfFLiquid(PfFManagers.ItemManager.getItem("fruitjuice"), this.getOptionFloat("FruitJuice_FermenterBonus"));   
         }
         if (this.getOptionBool("VeggieJuice_Enabled")) {
             for (EnumCrops.SINGLE crop : EnumCrops.SINGLE.values()) {
@@ -78,7 +77,7 @@ public class Liquidmodule extends baseModule {
                     SqueezerHelper.add(crop.getPlant().getPlant(), new LiquidStack(PfFManagers.ItemManager.getItem("veggiejuice").itemID, this.getOptionInt("VeggieJuice_AmountPerSqueezeMulti")));
                 }
             }
-            addFermenterRecipes.add(PfFManagers.ItemManager.getItem("veggiejuice"), this.getOptionFloat("VeggieJuice_FermenterBonus"));
+            PfFManagers.FermenterManager.registerPfFLiquid(PfFManagers.ItemManager.getItem("veggiejuice"), this.getOptionFloat("VeggieJuice_FermenterBonus"));
         }
     }
 

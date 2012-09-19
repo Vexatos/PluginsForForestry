@@ -5,7 +5,6 @@
 package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
-import denoflionsx.Achievements.PfFAchievement;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.Forestry.LiquidFXHook;
 import java.io.File;
@@ -54,7 +53,6 @@ public class ProxyClient extends Proxy {
 
     @Override
     public void registerAchievements() {
-        PfFAchievement.registerAchievements();
     }
 
     @Override

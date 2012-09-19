@@ -42,8 +42,8 @@ public class core {
         registerItemsEnum();
         PluginRegistry.registerEarlyPlugins();
         registerFX();
-        PluginsforForestry.proxy.registerAchievements();
         registerSolidFuelHandler();
+        PfFManagers.FermenterManager.createRecipes();
     }
 
     public static void setupManagers() {
@@ -52,6 +52,7 @@ public class core {
         PfFManagers.ExtractorTargetManager = new PfFExtractorTargetManager();
         PfFManagers.ContainerManager = new PfFContainerManager();
         PfFManagers.ButcherKnifeManager = new PfFButcherKnifeManager();
+        PfFManagers.FermenterManager = new PfFFermenterManager();
     }
     
     public static void RegisterColors(){

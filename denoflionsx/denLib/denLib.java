@@ -14,13 +14,13 @@ public class denLib {
     public static boolean detect(String mod) {
         return LOADER.FML.isModLoaded(mod);
     }
-    
-    public static HashMap flipHashMap(HashMap map){
+
+    public static HashMap flipHashMap(HashMap map) {
         HashMap metaMapReversed = new HashMap();
         Iterator i = map.entrySet().iterator();
-        while (i.hasNext()){
+        while (i.hasNext()) {
             Map.Entry pairs = (Map.Entry) i.next();
-            metaMapReversed.put(pairs.getValue(),pairs.getKey());
+            metaMapReversed.put(pairs.getValue(), pairs.getKey());
         }
         return metaMapReversed;
     }
@@ -34,8 +34,8 @@ public class denLib {
     public static ItemStack getItemStack(String mod, String name) {
         return ReflectionHelper.getItemStack(mod, name);
     }
-    
-    public static String removeDotItemFromName(String name){
+
+    public static String removeDotItemFromName(String name) {
         return name.substring(5);
     }
 
@@ -127,22 +127,22 @@ public class denLib {
                 ex.printStackTrace();
             }
         }
-        
-        public static Class getClass(String name){
+
+        public static Class getClass(String name) {
             Class c = null;
-            try{
+            try {
                 c = Class.forName(name);
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             return c;
         }
-        
-        public static Field getField(String field, Class c){
+
+        public static Field getField(String field, Class c) {
             Field f = null;
-            try{
+            try {
                 f = c.getDeclaredField(field);
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
             return f;
@@ -159,13 +159,13 @@ public class denLib {
                 return -1;
             }
         }
-        
-        public static void setStaticInt(String theClass, String theField, int set){
-            try{
+
+        public static void setStaticInt(String theClass, String theField, int set) {
+            try {
                 Class c = Class.forName(theClass);
                 Field f = c.getField(theField);
                 f.setInt(null, set);
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
@@ -185,69 +185,33 @@ public class denLib {
         // This stuff got moved from the base denLib class.
         // There are still shell functions up there so shit doesn't break.
         public static Item getItem(String mod, String name) {
-            boolean hooked = false;
-            Item temp = null;
-
-            try {
-                temp = (Item) Class.forName(mod).getField(name).get(null);
-                hooked = true;
-            } catch (Exception ex) {
-                print("" + ex);
-                hooked = false;
-            } finally {
-                if (hooked) {
-                    //print("Item " + temp.getItemName() + " hooked!");
-                }
-            }
-
-            return temp;
+            return (Item)getWithReflection(mod,name);
         }
 
         public static ItemStack getNewItemStack(String mod, String name) {
             return new ItemStack(getItem(mod, name));
         }
+
+        public static ItemStack getNewItemStackBlock(String mod, String name) {
+            return new ItemStack(getBlock(mod, name));
+        }
         
-        public static ItemStack getNewItemStackBlock(String mod, String name){
-            return new ItemStack(getBlock(mod,name));
+        public static Object getWithReflection(String mod, String name){
+            Object o = null;
+            try{
+                o = Class.forName(mod).getField(name).get(null);
+            }catch(Exception ex){
+                return null;
+            }
+            return o;
         }
 
         public static ItemStack getItemStack(String mod, String name) {
-            boolean hooked = false;
-            ItemStack temp = null;
-
-
-            try {
-                temp = (ItemStack) Class.forName(mod).getField(name).get(null);
-                hooked = true;
-            } catch (Exception ex) {
-                print("" + ex);
-                hooked = false;
-            } finally {
-                if (hooked) {
-                    //print("Item " + temp.getItemName() + " hooked!");
-                }
-
-                return temp;
-            }
+            return (ItemStack)getWithReflection(mod,name);
         }
 
         public static Block getBlock(String mod, String name) {
-            boolean hooked = false;
-            Block temp = null;
-
-            try {
-                temp = (Block) Class.forName(mod).getField(name).get(null);
-                hooked = true;
-            } catch (Exception ex) {
-                print("" + ex);
-                hooked = false;
-            } finally {
-                if (hooked) {
-                    //print("Block " + temp.getBlockName() + " hooked!");
-                }
-            }
-
-            return temp;
+            return (Block)getWithReflection(mod,name);
         }
 
         public static void classSnoop(String param1) {

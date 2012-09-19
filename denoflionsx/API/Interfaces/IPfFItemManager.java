@@ -22,6 +22,8 @@ public interface IPfFItemManager {
     
     public ArrayList<ItemStack> getAllContainersForLiquid(String liquid);
     
+    public ArrayList<ItemStack> getContainersForLiquidNoBarrel(String liquid);
+    
     public boolean doesItemExist(String s);
     
 }

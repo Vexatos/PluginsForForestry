@@ -9,13 +9,19 @@ import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
 import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Enums.EnumModIDs;
+import denoflionsx.denLib.denLib;
+import ic2.api.Items;
 
 public class addFermenterRecipes {
+    
+    // THIS CLASS IS DEPRICATED. WILL REMOVE WHEN BETTERFARMING PLUGIN IS UPDATED TO 1.3.2!!!
+    // USE FERMENTERMANAGER INSTEAD.
 
-    private static Item biomass = ItemInterface.getItem("liquidBiomass").getItem();
-    private static Item applejuice = ItemInterface.getItem("liquidJuice").getItem();
-    private static Item honey = ItemInterface.getItem("liquidHoney").getItem();
-    private static Item seedoil = ItemInterface.getItem("liquidSeedOil").getItem();
+    public static Item biomass = ItemInterface.getItem("liquidBiomass").getItem();
+    public static Item applejuice = ItemInterface.getItem("liquidJuice").getItem();
+    public static Item honey = ItemInterface.getItem("liquidHoney").getItem();
+    public static Item seedoil = ItemInterface.getItem("liquidSeedOil").getItem();
     public static float bonus = 1.5f;
 
     public static void add(ItemStack input, float value) {
@@ -28,10 +34,10 @@ public class addFermenterRecipes {
         RecipeManagers.fermenterManager.addRecipe(new ItemStack(Item.sugar, 1, 0), 200, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
         RecipeManagers.fermenterManager.addRecipe(new ItemStack(Block.mushroomBrown, 1, 0), 200, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
         RecipeManagers.fermenterManager.addRecipe(new ItemStack(Block.mushroomCapRed, 1, 0), 200, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
-//        if (denLib.detect("mod_IC2")) {
-//            RecipeManagers.fermenterManager.addRecipe(Items.getItem("plantBall").copy(), 400, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
-//            RecipeManagers.fermenterManager.addRecipe(Items.getItem("compressedPlantBall").copy(), 500, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
-//        }
+        if (denLib.detect(EnumModIDs.MODS.IC2.getID())) {
+            RecipeManagers.fermenterManager.addRecipe(Items.getItem("plantBall").copy(), 400, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
+            RecipeManagers.fermenterManager.addRecipe(Items.getItem("compressedPlantBall").copy(), 500, value, new LiquidStack(biomass, 1), new LiquidStack(input.getItem(), 1));
+        }
     }
 
     public static void addItem(Item s, int value, Object t) {

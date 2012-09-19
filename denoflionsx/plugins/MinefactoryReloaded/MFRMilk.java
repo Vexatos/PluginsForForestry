@@ -9,10 +9,10 @@ import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.items.PfFContainer;
-import denoflionsx.items.Placeholder;
+import denoflionsx.Enums.Placeholder;
 import denoflionsx.Enums.EnumContainers.Containers;
 import denoflionsx.plugins.Forestry.LiquidContainerSystem;
-import denoflionsx.plugins.Forestry.Modules.newFuels.customFuelSolid;
+import denoflionsx.items.Fuels.customFuelSolid;
 
 public class MFRMilk{
   

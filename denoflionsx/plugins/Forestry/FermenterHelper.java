@@ -5,10 +5,15 @@ import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.ItemStack;
 
 public class FermenterHelper {
-    
-    public static void add(ItemStack fermentedItem, ItemStack inputLiquid, int amountUsed, ItemStack outputLiquid, int amountProduced, float bonus){
+
+    public static void add(ItemStack fermentedItem, ItemStack inputLiquid, int amountUsed, ItemStack outputLiquid, int amountProduced, float bonus) {
         FermenterHelper.Recipe recipe = new FermenterHelper.Recipe(fermentedItem, inputLiquid, amountUsed, outputLiquid, amountProduced, bonus);
-        RecipeManagers.fermenterManager.addRecipe(recipe.getFermentedItem(),recipe.getAmountProduced(),recipe.getBonus(),recipe.getOutputLiquidStack(),recipe.getInputLiquidStack());
+        RecipeManagers.fermenterManager.addRecipe(recipe.getFermentedItem(), recipe.getAmountProduced(), recipe.getBonus(), recipe.getOutputLiquidStack(), recipe.getInputLiquidStack());
+    }
+
+    public static void add(ItemStack fermentedItem, ItemStack inputLiquid, int amountUsed, ItemStack outputLiquid, float bonus) {
+        FermenterHelper.Recipe recipe = new FermenterHelper.Recipe(fermentedItem, inputLiquid, amountUsed, outputLiquid, amountUsed, bonus);
+        RecipeManagers.fermenterManager.addRecipe(recipe.getFermentedItem(), recipe.getAmountProduced(), recipe.getBonus(), recipe.getOutputLiquidStack(), recipe.getInputLiquidStack());
     }
 
     public static class Recipe {
@@ -52,13 +57,13 @@ public class FermenterHelper {
         public ItemStack getOutputLiquid() {
             return outputLiquid;
         }
-        
-        public LiquidStack getOutputLiquidStack(){
-            return new LiquidStack(this.outputLiquid.getItem().shiftedIndex,this.amountProduced);
+
+        public LiquidStack getOutputLiquidStack() {
+            return new LiquidStack(this.outputLiquid.getItem().shiftedIndex, this.amountProduced);
         }
-        
-        public LiquidStack getInputLiquidStack(){
-            return new LiquidStack(this.inputLiquid.getItem().shiftedIndex,this.amountUsed);
+
+        public LiquidStack getInputLiquidStack() {
+            return new LiquidStack(this.inputLiquid.getItem().shiftedIndex, this.amountUsed);
         }
     }
 }

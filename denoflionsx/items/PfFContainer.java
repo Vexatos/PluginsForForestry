@@ -2,7 +2,7 @@ package denoflionsx.items;
 
 import java.util.HashMap;
 import denoflionsx.Enums.Colors;
-import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import denoflionsx.items.Fuels.customFuel;
 
 public class PfFContainer extends multiItem {
 

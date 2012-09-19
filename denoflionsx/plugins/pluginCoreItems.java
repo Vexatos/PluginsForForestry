@@ -20,7 +20,7 @@ import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Core.*;
 import denoflionsx.plugins.Forestry.LiquidContainer;
 import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
-import denoflionsx.plugins.Forestry.Modules.newFuels.customFuel;
+import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.SqueezerHelper;
 
 public class pluginCoreItems extends pluginBase {
@@ -96,13 +96,13 @@ public class pluginCoreItems extends pluginBase {
                         "XXX",
                         Character.valueOf('W'), Block.wood});
         }
-        if (this.getOptionBool("ExtractorTool_Enabled")){
+        if (this.getOptionBool("ExtractorTool_Enabled")) {
             FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem("extractortool"), new Object[]{
-                    "IHI",
-                    "XIX",
-                    "IXI",
-                    Character.valueOf('H'),PfFManagers.ItemManager.getItem("blacksmithhammer"),
-                    Character.valueOf('I'),new ItemStack(Item.ingotIron)});
+                        "IHI",
+                        "XIX",
+                        "IXI",
+                        Character.valueOf('H'), PfFManagers.ItemManager.getItem("blacksmithhammer"),
+                        Character.valueOf('I'), new ItemStack(Item.ingotIron)});
         }
     }
 
@@ -130,6 +130,9 @@ public class pluginCoreItems extends pluginBase {
                 ItemDebugStick.Debug.create();
             }
             fuels = new WoodenBucketFuels(this.getOptionInt("WoodenBucketFuels_ItemID"), "woodenbucketfuels");
+        }
+        if (this.getOptionBool("BarrelFuels_getBarrelBack")) {
+            BarrelFuels.mode = BarrelFuels.MODE.PERMA;
         }
         bfuels = new BarrelFuels(this.getOptionInt("BarrelFuels_ItemID"), "barrelfuels");
         if (this.config.getOptionBool("ExtractorTool_Enabled")) {
@@ -170,5 +173,6 @@ public class pluginCoreItems extends pluginBase {
         this.config.addDefault("ExtractorTool_ItemID=" + ItemExtractorTool.ID.getItemIDs().get(0));
         this.config.addDefault("ExtractorTool_MaxDamage=" + ItemExtractorTool.ConfigMaxDamage);
         this.config.addDefault("VanillaPotions_MaxStackSize=" + 10);
+        this.config.addDefault("BarrelFuels_getBarrelBack=" + "false");
     }
 }

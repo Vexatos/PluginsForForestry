@@ -1,7 +1,5 @@
 package denoflionsx.Enums;
 
-import denoflionsx.items.Placeholder;
-
 public class EnumLiquidTextures {
 
     public static enum Liquids {
