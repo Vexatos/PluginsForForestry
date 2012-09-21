@@ -18,8 +18,8 @@ public class WoodenBucketFuels extends PfFContainer {
         super(par1, name);
         this.setContainerItem(PfFManagers.ItemManager.getItem("woodenbucket").getItem());
         this.setMaxStackSize(1);
-        for (PfFLiquid liquid : PfFManagers.ContainerManager.getLiquids()){
-            addLiquid(liquid);
+        for (PfFLiquid l : PfFManagers.ContainerManager.getLiquids()) {
+            addLiquid(l);
         }
     }
 
@@ -32,10 +32,10 @@ public class WoodenBucketFuels extends PfFContainer {
     public ItemStack getContainerItemStack(ItemStack itemStack) {
         return PfFManagers.ItemManager.getItem("woodenbucket").copy();
     }
-    
-    public void addLiquid(PfFLiquid liquid){
-        this.add(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bucket",liquid.getMeta(),Containers.BUCKET.getTexture(),liquid.getLiquidName() + " Bucket");
-        this.renderColors.put(liquid.getMeta(),liquid.getColor().convertRBG());
-        LiquidContainerSystem.bucketWithOverride(new ItemStack(this,1,liquid.getMeta()), liquid.getLiquid(), PfFManagers.ItemManager.getItem("woodenbucket"));
+
+    public void addLiquid(PfFLiquid liquid) {
+        this.add(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bucket", liquid.getMeta(), Containers.BUCKET.getTexture(), liquid.getLiquidName() + " Bucket");
+        this.renderColors.put(liquid.getMeta(), liquid.getColor().convertRBG());
+        LiquidContainerSystem.bucketWithOverride(new ItemStack(this, 1, liquid.getMeta()), liquid.getLiquid(), PfFManagers.ItemManager.getItem("woodenbucket"));
     }
 }

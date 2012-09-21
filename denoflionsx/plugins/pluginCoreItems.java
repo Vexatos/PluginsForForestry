@@ -139,6 +139,7 @@ public class pluginCoreItems extends pluginBase {
             ItemExtractorTool.ConfigMaxDamage = this.config.getOptionInt("ExtractorTool_MaxDamage");
             ex = new ItemExtractorTool(this.config.getOptionInt("ExtractorTool_ItemID"));
             PfFManagers.ExtractorTargetManager.addBlock(Block.glass);
+            PfFManagers.ExtractorTargetManager.addBlock(Block.thinGlass);
         }
         if (this.config.getOptionBool("SmeltZombieFleshToLeather")) {
             ItemStack leather = new ItemStack(Item.leather);

@@ -43,7 +43,7 @@ public class pluginBuildcraft extends pluginBase {
             FuelManager.bronzeEngineFuel.put(Integer.valueOf(this.items.get("Fuel").itemID), new EngineBronzeFuel(this.items.get("Fuel"), Integer.valueOf(config.getOption("FuelMJt")), Integer.valueOf(config.getOption("FuelBurnTime")), 1));
         }
         if (denLib.convertToBoolean(config.getOption("OilInBiogas"))) {
-            FuelManager.bronzeEngineFuel.put(Integer.valueOf(this.blocks.get("Oil").itemID), new EngineBronzeFuel(this.blocks.get("Oil"), Integer.valueOf(config.getOption("OilMJt")), Integer.valueOf(config.getOption("FuelBurnTime")), 1));
+            FuelManager.bronzeEngineFuel.put(Integer.valueOf(this.blocks.get("Oil").itemID), new EngineBronzeFuel(this.blocks.get("Oil"), Integer.valueOf(config.getOption("OilMJt")), Integer.valueOf(config.getOption("OilBurntime")), 1));
         }
         if (this.config.getOptionBool("WoodenBucketIntegration")) {
             PfFManagers.ContainerManager.addLiquid("Oil", this.getBlockItemStack("Oil"), PfFManagers.ColorManager.getColor(Colors.Values.BLACK.toString()));

@@ -16,37 +16,39 @@ public class waxCast extends multiItem {
     public waxCast(int par1, String name) {
         super(par1, name);
         dropMap.put("Filled Wax Cast", new ItemStack(Block.ice));
-        dropMap.put("Filled Wax Cast_Red",new ItemStack(Block.ice));
-        dropMap.put("Lava Cast",new ItemStack(Block.obsidian));
+        dropMap.put("Filled Wax Cast_Red", new ItemStack(Block.ice));
+        dropMap.put("Lava Cast", new ItemStack(Block.obsidian));
     }
 
-    @Override public void addInformation(ItemStack par1ItemStack, List par2List){tooltips(par1ItemStack, par2List);}
+    @Override
+    public void addInformation(ItemStack par1ItemStack, List par2List) {
+        tooltips(par1ItemStack, par2List);
+    }
 
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Wax Cast"))) || par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Refractory Cast")))) {
             return this.customContainer(par1ItemStack, par2World, par3EntityPlayer);
-        } else if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Filled Wax Cast"))) || par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Filled Wax Cast_Red")))) {
-            if (par3EntityPlayer.inventory.hasItemStack(PfFManagers.ItemManager.getItem("rodoffreezing"))){
+        }
+        if (par2World.isRemote) {
+            return par1ItemStack;
+        }
+        if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Filled Wax Cast"))) || par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Filled Wax Cast_Red")))) {
+            if (par3EntityPlayer.inventory.hasItemStack(PfFManagers.ItemManager.getItem("rodoffreezing"))) {
                 par1ItemStack.stackSize--;
                 par3EntityPlayer.dropPlayerItemWithRandomChoice(dropMap.get("Filled Wax Cast").copy(), false);
             }
-        } else if (par1ItemStack.isItemEqual(new ItemStack(this,1,this.metaMap.get("Lava Cast")))){
-            if (par3EntityPlayer.inventory.hasItemStack(new ItemStack(this,1,this.metaMap.get("Rod of Freezing")))){
+        } else if (par1ItemStack.isItemEqual(new ItemStack(this, 1, this.metaMap.get("Lava Cast")))) {
+            if (par3EntityPlayer.inventory.hasItemStack(PfFManagers.ItemManager.getItem("rodoffreezing"))) {
                 par1ItemStack.stackSize--;
                 par3EntityPlayer.dropPlayerItemWithRandomChoice(dropMap.get("Lava Cast").copy(), false);
             }
         }
-//        } else if (par1ItemStack.isItemEqual(new ItemStack(this,1,this.metaMap.get("Test")))){
-//            MovingObjectPosition obj = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
-//            int coords[] = new int[]{obj.blockX,obj.blockY,obj.blockZ};
-//            coords[1]++;
-//            par2World.setBlockAndMetadataWithNotify(coords[0], coords[1], coords[2], blueswaxModule.thatch.blockID, 0);
-//        }
+
         return par1ItemStack;
     }
-    
-     public ItemStack customContainer(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+
+    public ItemStack customContainer(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         MovingObjectPosition obj = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, true);
         if (obj == null) {
             return par1ItemStack;
@@ -57,7 +59,12 @@ public class waxCast extends multiItem {
         coords.put("z", obj.blockZ);
         coords.put("id", par2World.getBlockId(coords.get("x"), coords.get("y"), coords.get("z")));
         coords.put("meta", par2World.getBlockMetadata(coords.get("x"), coords.get("y"), coords.get("z")));
-        LiquidContainer liq = LiquidManagerWrapper.getEmptyContainer(par1ItemStack, new LiquidStack(coords.get("id"), 1));
+        // BC is trying to babysit me with that exception shit. Try-Catch time...
+        LiquidContainer liq = null;
+        try {
+            liq = LiquidManagerWrapper.getEmptyContainer(par1ItemStack, new LiquidStack(coords.get("id"), 1));
+        } catch (Exception ex) {
+        }
         if (liq == null) {
             return par1ItemStack;
         }

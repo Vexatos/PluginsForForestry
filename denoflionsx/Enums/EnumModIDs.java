@@ -11,7 +11,9 @@ public class EnumModIDs {
         BUILDCRAFT_FACTORY("BuildCraft|Factory","buildcraft.BuildCraftFactory"),
         RAILCRAFT("Railcraft","railcraft.common.core.Railcraft"),
         IC2("IC2","ic2.common.IC2"),
-        PAM("PamCombinedMod","pamsmods.common.combinedmod.Pamcombinedmod");
+        PAM("PamCombinedMod","pamsmods.common.combinedmod.Pamcombinedmod"),
+        USEFUL_FOOD("silentspy_usefulfood",""),
+        METALURGY("MetallurgyCore","shadow.mods.metallurgy.mod_MetallurgyCore");
         
         private String mod;
         private String theClass;

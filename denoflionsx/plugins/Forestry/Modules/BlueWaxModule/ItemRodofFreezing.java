@@ -18,6 +18,8 @@ public class ItemRodofFreezing extends Item{
         this.name = core.addName("Rod of Freezing");
         PfFManagers.ItemManager.registerItem(denLib.toLowerCaseNoSpaces("Rod of Freezing"), this);
         this.setTabToDisplayOn(CreativeTabs.tabTools);
+        this.setFull3D();
+        this.setContainerItem(this);
     }
 
     @Override
@@ -29,6 +31,8 @@ public class ItemRodofFreezing extends Item{
         int id = par2World.getBlockId(obj.blockX, obj.blockY, obj.blockZ);
         if (id == Block.waterMoving.blockID || id == Block.waterStill.blockID){
             par2World.setBlockAndMetadataWithNotify(obj.blockX,obj.blockY,obj.blockZ, Block.ice.blockID, 0);
+        }else if (id == Block.lavaStill.blockID || id == Block.lavaMoving.blockID){
+            par2World.setBlockAndMetadataWithNotify(obj.blockX, obj.blockY, obj.blockZ, Block.obsidian.blockID, 0);
         }
         return par1ItemStack;
     }

@@ -3,14 +3,16 @@ package denoflionsx;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.PostInit;
+import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.Proxy.Proxy;
 import denoflionsx.core.core;
 
-@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3Dev")
+@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3Dev", dependencies = "required-after:Forestry")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PluginsforForestry {
 
@@ -27,13 +29,21 @@ public class PluginsforForestry {
     @SidedProxy(clientSide = "denoflionsx.Proxy.ProxyClient", serverSide = "denoflionsx.Proxy.ProxyServer")
     public static Proxy proxy;
 
+    @PreInit
+    public void preLoad(FMLPreInitializationEvent event) {
+        core.preInit();
+    }
+
     @Init
     public void load(FMLInitializationEvent event) {
-        core.runCoreFunctions(); 
+        core.runCoreFunctions();
     }
 
     @PostInit
     public void modsLoaded(FMLPostInitializationEvent evt) {
         core.registerEarlyPlugins();
+        core.registerSpecial();
     }
+    
+    
 }

@@ -1,14 +1,17 @@
 package denoflionsx.items.Fuels;
 
+import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import forestry.api.fuels.EngineCopperFuel;
 import forestry.api.fuels.FuelManager;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.FMLWrapper;
-import denoflionsx.core.FuelHandler;
+import denoflionsx.Handlers.FuelHandler;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFBar;
+import denoflionsx.plugins.Forestry.SqueezerHelper;
+import forestry.api.recipes.RecipeManagers;
 
 public class customFuelSolid {
 
@@ -48,20 +51,7 @@ public class customFuelSolid {
         for (ItemStack i : containers){
                 FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), new Object[]{PfFManagers.ItemManager.getItem("infusionbar"),i});
         }
-//        ArrayList<ItemStack> containers = new ArrayList();
-//        ArrayList<String> container_names = new ArrayList();
-//        container_names.add("Capsule");
-//        container_names.add("Can");
-//        container_names.add("Capsule_Red");
-//        container_names.add("Cell");
-//        for (String s : container_names) {
-//            ItemStack item = PfFManagers.ItemManager.getItemQuietly(this.liquidNameLowerCaseNoSpaces + denLib.toLowerCaseNoSpaces(s));
-//            if (item != null) {
-//                containers.add(item);
-//            }
-//        }
-//        for (ItemStack i : containers) {
-//            FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), new Object[]{PfFManagers.ItemManager.getItem("infusionbar"), i});
-//        }
+        SqueezerHelper.add(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces),PfFManagers.ItemManager.getItem("infusionbar") , 100, PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces),1000);
+        RecipeManagers.carpenterManager.addRecipe(10, new LiquidStack(PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces).itemID,1000), null, new ItemStack(this.fuel), new Object[]{"BXX","XXX","XXX",Character.valueOf('B'),PfFManagers.ItemManager.getItem("infusionbar")});
     }
 }

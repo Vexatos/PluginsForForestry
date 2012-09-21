@@ -1,9 +1,12 @@
 package denoflionsx.core;
 
+import denoflionsx.API.Objects.PfFLiquid;
 import denoflionsx.Enums.TextureManager;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
+import denoflionsx.Enums.EnumForestryLiquids;
+import denoflionsx.Handlers.HandlerInstances;
 import denoflionsx.Managers.*;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
@@ -13,6 +16,7 @@ import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import denoflionsx.items.CraftingTools.ItemIronRing;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.Buildcraft.Modules.FurnaceModule.TileEntityLavaFurnace;
+import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
 import denoflionsx.plugins.PluginRegistry;
 
 /*
@@ -25,8 +29,8 @@ public class core {
     public static boolean isBukkit = false;
     public static Config config;
     public static boolean isBetaBuild = true;
-    public static final int delay = 25;
-    
+    public static HandlerInstances Handlers;
+
     public static boolean isClient() {
         return PluginsforForestry.proxy.isClient();
     }
@@ -34,6 +38,7 @@ public class core {
     // This is for plugins that need to load after
     // everything else at all costs.
     public static void registerLatePlugins() {
+        EnumForestryLiquids.values();
         PluginRegistry.registerLatePlugins();
     }
 
@@ -42,8 +47,21 @@ public class core {
         registerItemsEnum();
         PluginRegistry.registerEarlyPlugins();
         registerFX();
-        registerSolidFuelHandler();
         PfFManagers.FermenterManager.createRecipes();
+    }
+
+    public static void preInit() {
+        Handlers = new HandlerInstances();
+    }
+
+    public static void registerSpecial() {
+        for (PfFLiquid l : PfFManagers.ContainerManager.getLiquids()) {
+            if (BlueWaxmodule.fuels != null) {
+                BlueWaxmodule.fuels.addLiquid(l);
+            }else{
+                break;
+            }
+        }
     }
 
     public static void setupManagers() {
@@ -54,10 +72,10 @@ public class core {
         PfFManagers.ButcherKnifeManager = new PfFButcherKnifeManager();
         PfFManagers.FermenterManager = new PfFFermenterManager();
     }
-    
-    public static void RegisterColors(){
-        for (Colors.Values v : Colors.Values.values()){
-            PfFManagers.ColorManager.addColor(v.toString(),v.getR(),v.getG(),v.getB());
+
+    public static void RegisterColors() {
+        for (Colors.Values v : Colors.Values.values()) {
+            PfFManagers.ColorManager.addColor(v.toString(), v.getR(), v.getG(), v.getB());
         }
     }
 
@@ -65,12 +83,11 @@ public class core {
         PluginsforForestry.proxy.registerFX();
     }
 
-    public static void registerSolidFuelHandler() {
-        FMLWrapper.MODE.FML.registerFuelHandler(new FuelHandler());
-    }
-
     // This function runs first.
     public static void runCoreFunctions() {
+        if (denLib.buildnumber < 4) {
+            throw new RuntimeException("denLib is out of date. Please update!");
+        }
         setupManagers();
         RegisterColors();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();

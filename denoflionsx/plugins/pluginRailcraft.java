@@ -35,7 +35,6 @@ public class pluginRailcraft extends pluginBase {
         this.hooked = true;
         this.addItem("Creosote", ItemRegistry.getItem("liquid.creosote.liquid", 1));
         PfFManagers.ExtractorTargetManager.addItemStack(ItemRegistry.getItem("machine.beta.tank.iron.gauge", 1));
-        //ItemRegistry.printItemTags();
         return this.hooked;
     }
 

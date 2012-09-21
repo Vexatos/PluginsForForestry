@@ -21,6 +21,9 @@ public class PluginRegistry {
         if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
             plugins.put("EE", new pluginEE());
         }
+        if (core.config.getOptionBool("pluginRailcraft_Enabled")) {
+            plugins.put("Railcraft", new pluginRailcraft());
+        }
         if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))) {
             plugins.put("Updater", new pluginUpdater());
         }
@@ -37,7 +40,7 @@ public class PluginRegistry {
             plugins.put("Forestry", new pluginForestry());
         }
         if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
-           plugins.put("IC2", new pluginIC2());
+            plugins.put("IC2", new pluginIC2());
         }
         if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
             plugins.put("Buildcraft", new pluginBuildcraft());
@@ -45,14 +48,11 @@ public class PluginRegistry {
         if (core.config.getOptionBool("pluginFarmCraftory_Enabled")) {
             plugins.put("FarmCraftory", new pluginFarmCraftory());
         }
-        if (core.config.getOptionBool("pluginRailcraft_Enabled")) {
-            plugins.put("Railcraft", new pluginRailcraft());
-        }
         plugins.put("CoreItems", new pluginCoreItems());
         if (core.config.getOptionBool("pluginBlueFood_Enabled")) {
             plugins.put("BluesFood", new pluginBlueFood());
         }
-        plugins.put("Pams",new pluginPam());
+        plugins.put("Pams", new pluginPam());
     }
 
     public static boolean isPluginAlive(String name) {

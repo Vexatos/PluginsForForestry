@@ -17,6 +17,7 @@ import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.recipes.RecipeManagers;
 import denoflionsx.plugins.Forestry.Modules.SolidFuelModule.solidfuelModule;
+import forestry.api.core.BlockInterface;
 
 public class pluginForestry extends pluginBase {
 
@@ -56,12 +57,19 @@ public class pluginForestry extends pluginBase {
             PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
             PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
         }
+        for (int i = 0; i != 15; i++) {
+            PfFManagers.ExtractorTargetManager.addBlock(BlockInterface.getBlock("glass").itemID, i);
+        }
     }
 
     @Override
     public void register() {
         if (!loaded) {
-            stillModule.load(this);
+            try {
+                stillModule.load(this);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             peatModule.load(this);
             extraFuelsModule.load(this);
             solidfuelModule.load(this);

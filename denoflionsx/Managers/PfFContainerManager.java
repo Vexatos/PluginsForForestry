@@ -4,6 +4,7 @@ import denoflionsx.API.Interfaces.IPfFContainerManager;
 import denoflionsx.API.Objects.PfFColor;
 import denoflionsx.API.Objects.PfFLiquid;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
 import denoflionsx.plugins.pluginCoreItems;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
@@ -42,6 +43,9 @@ public class PfFContainerManager implements IPfFContainerManager {
                 pluginCoreItems.bfuels.addLiquid(l);
                 if (PfFManagers.ItemManager.doesItemExist("woodenbucket")) {
                     pluginCoreItems.fuels.addLiquid(l);
+                }
+                if (PfFManagers.ItemManager.doesItemExist("waxcast_red")){
+                    BlueWaxmodule.fuels.addLiquid(l);
                 }
             }
         }

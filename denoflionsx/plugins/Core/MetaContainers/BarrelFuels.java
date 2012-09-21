@@ -17,15 +17,15 @@ public class BarrelFuels extends PfFContainer {
 
     public BarrelFuels(int par1, String name) {
         super(par1, name);
-        for (PfFLiquid liquid : PfFManagers.ContainerManager.getLiquids()) {
-            addLiquid(liquid);
-        }
         if (mode.equals(MODE.PERMA)) {
             core.print("Barrel mode is " + MODE.PERMA.toString());
             this.setMaxStackSize(1);
         } else {
             this.setContainerItem(null);
             this.setMaxStackSize(64);
+        }
+        for (PfFLiquid l : PfFManagers.ContainerManager.getLiquids()){
+            addLiquid(l);
         }
     }
 

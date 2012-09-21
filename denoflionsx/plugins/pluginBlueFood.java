@@ -2,9 +2,11 @@ package denoflionsx.plugins;
 
 import denoflionsx.API.Enums.EnumAnimals;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.FMLWrapper;
+import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.BluesFood.*;
 import java.util.ArrayList;
 import net.minecraft.src.Item;
@@ -65,10 +67,10 @@ public class pluginBlueFood extends pluginBase {
         this.Calamari = new ItemFoods(this.getOptionInt("Calamari_ItemID"), EnumFoodTextures.FOOD.CALAMARI.getIndex(), 8, 10.0f, "Calamari");
         this.CookedLambChops = new ItemFoods(this.getOptionInt("CookedLambChop_ItemID"), EnumFoodTextures.FOOD.COOKED_LAMBCHOP.getIndex(), 8, 10.0f, "Cooked Lambchop");
         this.CupCake = new Cupcake(this.getOptionInt("Cupcake_ItemID"), EnumFoodTextures.FOOD.CUPCAKE.getIndex(), 4, 6.0f, "Cupcake");
-        this.RawSausage = new ItemFoods(this.getOptionInt("RawSausage_ItemID"), EnumFoodTextures.FOOD.SAUSAGE.getIndex(), 1, 1.2f, "Raw Sausage");
-        this.GroundBeef = new ItemFoods(this.getOptionInt("GroundBeef_ItemID"), EnumFoodTextures.FOOD.GROUND_BEEF.getIndex(), 1, 1.2f, "Ground Beef");
-        this.Tentacle = new ItemFoods(this.getOptionInt("Tentacle_ItemID"), EnumFoodTextures.FOOD.TENTACLE.getIndex(), 1, 1.2f, "Tentacle");
-        this.LambChop = new ItemFoods(this.getOptionInt("LambChop_ItemID"), EnumFoodTextures.FOOD.LAMBCHOP.getIndex(), 1, 1.2f, "Lambchop");
+        this.RawSausage = new ItemFoods(this.getOptionInt("RawSausage_ItemID"), EnumFoodTextures.FOOD.SAUSAGE.getIndex(), 2, 1.2f, "Raw Sausage");
+        this.GroundBeef = new ItemFoods(this.getOptionInt("GroundBeef_ItemID"), EnumFoodTextures.FOOD.GROUND_BEEF.getIndex(), 2, 1.2f, "Ground Beef");
+        this.Tentacle = new ItemFoods(this.getOptionInt("Tentacle_ItemID"), EnumFoodTextures.FOOD.TENTACLE.getIndex(), 2, 1.2f, "Tentacle");
+        this.LambChop = new ItemFoods(this.getOptionInt("LambChop_ItemID"), EnumFoodTextures.FOOD.LAMBCHOP.getIndex(), 2, 1.2f, "Lambchop");
         this.flour = new multiItemFood(this.getOptionInt("Flour_ItemID"), "flour");
         this.flour.add("Flour", 0, EnumFoodTextures.FOOD.FLOUR.getIndex());
         return this.hooked;
@@ -77,7 +79,9 @@ public class pluginBlueFood extends pluginBase {
     @Override
     protected void recipes() {
         if (this.getOptionBool("BlueFood_Enabled")) {
-            FMLWrapper.MODE.FML.addSmelt(new ItemStack(Item.egg), PfFManagers.ItemManager.getItem("friedegg"));
+            if (!denLib.detect(EnumModIDs.MODS.USEFUL_FOOD.getID())) {
+                FMLWrapper.MODE.FML.addSmelt(new ItemStack(Item.egg), PfFManagers.ItemManager.getItem("friedegg"));
+            }
             PfFManagers.ButcherKnifeManager.addDropToAnimal(EnumAnimals.ANIMALS.PIG, PfFManagers.ItemManager.getItem("rawsausage"));
             FMLWrapper.MODE.FML.addSmelt(PfFManagers.ItemManager.getItem("rawsausage"), PfFManagers.ItemManager.getItem("sausage"));
             PfFManagers.ButcherKnifeManager.addDropToAnimal(EnumAnimals.ANIMALS.COW, PfFManagers.ItemManager.getItem("groundbeef"));
@@ -89,7 +93,7 @@ public class pluginBlueFood extends pluginBase {
             FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem("flour"), new Object[]{new ItemStack(Item.wheat)});
             ArrayList<ItemStack> containers = PfFManagers.ItemManager.getContainersForLiquidNoBarrel("milk");
             containers.add(new ItemStack(Item.bucketMilk));
-            if (PfFManagers.ItemManager.doesItemExist("milkbag")){
+            if (PfFManagers.ItemManager.doesItemExist("milkbag")) {
                 containers.add(PfFManagers.ItemManager.getItem("milkbag"));
             }
             for (ItemStack i : containers) {
@@ -102,6 +106,20 @@ public class pluginBlueFood extends pluginBase {
                             Character.valueOf('E'), Item.egg,
                             Character.valueOf('F'), PfFManagers.ItemManager.getItem("flour")});
 
+            }
+            if (denLib.detect(EnumModIDs.MODS.PAM.getID())) {
+                Item pamFlour = denLib.ReflectionHelper.getItem(EnumModIDs.MODS.PAM.gettheClass(), "flourItem");
+                for (ItemStack i : containers) {
+                    FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getNewItemStack("cupcake", 4), new Object[]{
+                                "MMM",
+                                "SES",
+                                "FFF",
+                                Character.valueOf('M'), i,
+                                Character.valueOf('S'), Item.sugar,
+                                Character.valueOf('E'), Item.egg,
+                                Character.valueOf('F'), pamFlour});
+
+                }
             }
             FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem("butcherknife"), new Object[]{
                         "XHX",

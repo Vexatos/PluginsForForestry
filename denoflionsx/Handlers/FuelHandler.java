@@ -1,4 +1,4 @@
-package denoflionsx.core;
+package denoflionsx.Handlers;
 
 import cpw.mods.fml.common.IFuelHandler;
 import java.util.HashMap;

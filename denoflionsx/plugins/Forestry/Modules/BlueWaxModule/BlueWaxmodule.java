@@ -3,30 +3,27 @@ package denoflionsx.plugins.Forestry.Modules.BlueWaxModule;
 import denoflionsx.Enums.Placeholder;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.waxCast;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
-import denoflionsx.items.*;
 import denoflionsx.plugins.baseModule;
 import denoflionsx.plugins.pluginBase;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
-import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumDyeColors;
 import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.plugins.Forestry.LiquidContainer;
 import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
-import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.EnumCastTextures;
-import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.ItemRodofFreezing;
 
 public class BlueWaxmodule extends baseModule {
 
     private ItemIDManager wax = new ItemIDManager(1, "ExtraWax");
     private ItemIDManager rod = new ItemIDManager(1, "RodofFreezing");
+    private ItemIDManager fuel = new ItemIDManager(1, "waxcastfuels");
     public static waxCast extrawax;
     public static ItemRodofFreezing Rod;
+    public static WaxCastFuels fuels;
 //    public static waxBlock thatch;
 //    public static waxSlab thatchslab;
     private int WaxCastPerCraft;
@@ -47,7 +44,9 @@ public class BlueWaxmodule extends baseModule {
         this.parent.config.addDefault("BluesWaxStuff_Enabled=true");
         this.parent.config.addDefault("BluesWaxStuff_ItemID=" + wax.getItemIDs().get(0));
         this.parent.config.addDefault("RodOfFreezing_ItemID=" + rod.getItemIDs().get(0));
-        this.addDefault("WaxCast_AmountPerCraft=" + 1);
+        this.parent.config.addDefault("WaxCastFuel_Enabled=" + "true");
+        this.parent.config.addDefault("WaxCastFuel_ItemID=" + fuel.getItemIDs().get(0));
+        this.addDefault("WaxCast_AmountPerCraft=" + 4);
     }
 
     @Override
@@ -88,6 +87,9 @@ public class BlueWaxmodule extends baseModule {
 //                waxSlabItem.names.put(0, "Thatched Slab");
 //            }
             Rod = new ItemRodofFreezing(this.parent.config.getOptionInt("RodOfFreezing_ItemID"));
+            if (this.getOptionBool("WaxCastFuel_Enabled")) {
+                fuels = new WaxCastFuels(this.getOptionInt("WaxCastFuel_ItemID"), "WaxCastFuel");
+            }
             recipes();
         }
     }
@@ -284,5 +286,7 @@ public class BlueWaxmodule extends baseModule {
                     Character.valueOf('l'), EnumDyeColors.DYES.LIGHTBLUE.getDye(),
                     Character.valueOf('G'), new ItemStack(Block.blockGold),
                     Character.valueOf('I'), new ItemStack(Item.ingotIron)});
+        FMLWrapper.MODE.FML.addShapelessRecipe(new ItemStack(Block.ice), new Object[]{PfFManagers.ItemManager.getItem("wascastfilled_red"),PfFManagers.ItemManager.getItem("rodoffreezing")});
+        FMLWrapper.MODE.FML.addShapelessRecipe(new ItemStack(Block.obsidian), new Object[]{PfFManagers.ItemManager.getItem("waxcastlava_red"),PfFManagers.ItemManager.getItem("rodoffreezing")});
     }
 }

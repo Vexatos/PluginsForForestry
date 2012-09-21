@@ -142,7 +142,7 @@ public class Config {
             return;
         }
         if (!new File(this.ConfigFile).exists()) {
-            new File(ConfigDir).mkdir();
+            new File(ConfigDir).mkdirs();
             FileWrite.write(this.ConfigFile, defaults);
             denLib.print("Wrote config file: " + this.ConfigFile);
         }

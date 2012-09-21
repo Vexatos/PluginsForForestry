@@ -8,6 +8,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.ModLoader;
 import net.minecraftforge.common.AchievementPage;
+import net.minecraftforge.common.MinecraftForge;
 
 public class FMLWrapper {
 
@@ -100,6 +101,14 @@ public class FMLWrapper {
                 denLib.print("addAchievementPage not implemented for mode ModLoader");
             }else{
                 AchievementPage.registerAchievementPage(page);
+            }
+        }
+        
+        public void registerEvent(Object event){
+            if (!isFML){
+                denLib.print("registerEvent not implemented for mode ModLoader.");
+            }else{
+                MinecraftForge.EVENT_BUS.register(event);
             }
         }
     }

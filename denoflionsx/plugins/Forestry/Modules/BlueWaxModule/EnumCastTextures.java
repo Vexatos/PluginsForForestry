@@ -4,9 +4,9 @@ import denoflionsx.Enums.Colors;
 
 public enum EnumCastTextures {
     
-    REFRACTORY(Colors.shiftRow(15, 3)),
-    WATER(Colors.shiftRow(15, 4)),
-    LAVA(Colors.shiftRow(15, 5));
+    REFRACTORY(Colors.shiftRow(14, 3)),
+    WATER(Colors.shiftRow(14, 4)),
+    LAVA(Colors.shiftRow(15, 4));
     private int index;
     private EnumCastTextures(int index){
         this.index = index;
