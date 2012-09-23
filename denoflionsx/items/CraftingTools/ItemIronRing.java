@@ -57,10 +57,10 @@ public class ItemIronRing extends multiItem {
         }
 
         private void defaults() {
-            core.config.addDefault("IronRings_AmountPerCraft=" + 64);
-            core.config.addDefault("IronRings_ItemID=" + this.ID.getItemIDs().get(0));
-            this.amount = core.config.getOptionInt("IronRings_AmountPerCraft");
-            this.id = core.config.getOptionInt("IronRings_ItemID");
+            core.PfFCore.config.addDefault("IronRings_AmountPerCraft=" + 64);
+            core.PfFCore.config.addDefault("IronRings_ItemID=" + this.ID.getItemIDs().get(0));
+            this.amount = core.PfFCore.config.getOptionInt("IronRings_AmountPerCraft");
+            this.id = core.PfFCore.config.getOptionInt("IronRings_ItemID");
         }
     }
 

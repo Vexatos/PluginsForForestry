@@ -12,7 +12,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.Proxy.Proxy;
 import denoflionsx.core.core;
 
-@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3Dev", dependencies = "required-after:Forestry")
+@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3 Beta", dependencies = "required-after:Forestry")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PluginsforForestry {
 
@@ -24,19 +24,18 @@ public class PluginsforForestry {
      * http://sam.zoy.org/wtfpl/COPYING for more details.
      */
     public static final String texture = "/denoflionsx/spritesheet.png";
-    public static boolean hasPluginsLoaded = false;
-    public static int count = 0;
     @SidedProxy(clientSide = "denoflionsx.Proxy.ProxyClient", serverSide = "denoflionsx.Proxy.ProxyServer")
     public static Proxy proxy;
 
     @PreInit
     public void preLoad(FMLPreInitializationEvent event) {
-        core.preInit();
+        core.PfFCore.PreLoad();
     }
 
     @Init
     public void load(FMLInitializationEvent event) {
-        core.runCoreFunctions();
+        core.PfFCore.runCoreFunctions();
+        core.PfFCore.setupUniversalItems();
     }
 
     @PostInit
@@ -44,6 +43,4 @@ public class PluginsforForestry {
         core.registerEarlyPlugins();
         core.registerSpecial();
     }
-    
-    
 }

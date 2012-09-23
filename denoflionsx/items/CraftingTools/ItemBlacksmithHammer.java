@@ -65,8 +65,8 @@ public class ItemBlacksmithHammer extends Item {
         }
 
         private void defaults() {
-            core.config.addDefault("BlacksmithHammer_ItemID=" + this.ID.getItemIDs().get(0));
-            this.id = core.config.getOptionInt("BlacksmithHammer_ItemID");
+            core.PfFCore.config.addDefault("BlacksmithHammer_ItemID=" + this.ID.getItemIDs().get(0));
+            this.id = core.PfFCore.config.getOptionInt("BlacksmithHammer_ItemID");
         }
         
         private void recipes(){

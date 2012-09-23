@@ -15,41 +15,41 @@ public class PluginRegistry {
     public static HashMap<String, pluginBase> plugins = new HashMap();
 
     public static void registerLatePlugins() {
-        if (denLib.convertToBoolean(core.config.getOption("pluginRedPower_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginRedPower_Enabled"))) {
             plugins.put("RedPowerWorld", new pluginRedPowerWorld());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginEE_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginEE_Enabled"))) {
             plugins.put("EE", new pluginEE());
         }
-        if (core.config.getOptionBool("pluginRailcraft_Enabled")) {
+        if (core.PfFCore.config.getOptionBool("pluginRailcraft_Enabled")) {
             plugins.put("Railcraft", new pluginRailcraft());
         }
-        if (denLib.convertToBoolean(core.config.getOption("UpdateCheck"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("UpdateCheck"))) {
             plugins.put("Updater", new pluginUpdater());
         }
     }
 
     public static void registerEarlyPlugins() {
-        if (denLib.convertToBoolean(core.config.getOption("pluginBetterFarming_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginBetterFarming_Enabled"))) {
             plugins.put("BetterFarming", new pluginBetterFarming());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginMineFactoryReloaded_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginMineFactoryReloaded_Enabled"))) {
             plugins.put("MFR", new pluginMineFactoryReloaded());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginForestry_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginForestry_Enabled"))) {
             plugins.put("Forestry", new pluginForestry());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginIc2_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginIc2_Enabled"))) {
             plugins.put("IC2", new pluginIC2());
         }
-        if (denLib.convertToBoolean(core.config.getOption("pluginBuildcraft_Enabled"))) {
+        if (denLib.convertToBoolean(core.PfFCore.config.getOption("pluginBuildcraft_Enabled"))) {
             plugins.put("Buildcraft", new pluginBuildcraft());
         }
-        if (core.config.getOptionBool("pluginFarmCraftory_Enabled")) {
+        if (core.PfFCore.config.getOptionBool("pluginFarmCraftory_Enabled")) {
             plugins.put("FarmCraftory", new pluginFarmCraftory());
         }
         plugins.put("CoreItems", new pluginCoreItems());
-        if (core.config.getOptionBool("pluginBlueFood_Enabled")) {
+        if (core.PfFCore.config.getOptionBool("pluginBlueFood_Enabled")) {
             plugins.put("BluesFood", new pluginBlueFood());
         }
         plugins.put("Pams", new pluginPam());

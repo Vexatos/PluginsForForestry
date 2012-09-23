@@ -111,6 +111,7 @@ public abstract class CartTools
      *
      * Generally Forge requires all cart items to extend ItemMinecart.
      *
+     * @param owner The player name that should used as the owner
      * @param cart An ItemStack containing a cart item, will not be changed by the function
      * @param world The World object
      * @param i x-Coord
@@ -134,7 +135,7 @@ public abstract class CartTools
                 if(placed) {
                     List<EntityMinecart> carts = getMinecartsAt(world, i, j, k, 0.3f);
                     if(carts.size() > 0) {
-                        carts.get(0).getEntityData().setString("owner", owner);
+                        setCartOwner(carts.get(0), owner);
                         return carts.get(0);
                     }
                 }

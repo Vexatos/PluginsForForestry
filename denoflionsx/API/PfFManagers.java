@@ -4,7 +4,7 @@ import denoflionsx.API.Interfaces.*;
 
 public class PfFManagers {
     
-    // These managers are created during @PreInit.
+    // These managers are created during @Init.
     
     // This manager contains all PfF ItemStacks.
     public static IPfFItemManager ItemManager;

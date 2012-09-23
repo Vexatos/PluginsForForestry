@@ -31,8 +31,8 @@ public class ItemDebugStick extends multiItem {
         
         public static void create(){
             id = new ItemIDManager(1,"DebugStick");
-            core.config.addDefault("DebugStick_ItemID=" + id.getItemIDs().get(0));
-            int itemID = core.config.getOptionInt("DebugStick_ItemID");
+            core.PfFCore.config.addDefault("DebugStick_ItemID=" + id.getItemIDs().get(0));
+            int itemID = core.PfFCore.config.getOptionInt("DebugStick_ItemID");
             debug = new ItemDebugStick(itemID,"debugstick");
             debug.metaMap.put("Debug Stick",0);
             debug.add("debugstick", 0, EnumToolTextures.ToolTextures.DEBUGSTICK.getIndex(), "Debug Stick");

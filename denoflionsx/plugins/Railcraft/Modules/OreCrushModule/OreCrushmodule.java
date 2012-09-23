@@ -127,13 +127,15 @@ public class OreCrushmodule extends baseModule {
     }
 
     public void MetalMode() {
-        for (ItemStack dust : core.Handlers.Ore.getDusts().values()) {
+        boolean ironSetup = false;
+        boolean goldSetup = false;
+        for (ItemStack dust : core.PfFCore.Handlers.Ore.getDusts().values()) {
             String dustName = denLib.getItemDisplayName(dust);
             String oreName = dustName.substring(5);
             if (oreName.length() - 4 != -1) {
                 oreName = oreName.substring(0, oreName.length() - 4);
             }
-            for (ItemStack ingot : core.Handlers.Ore.getIngots().values()) {
+            for (ItemStack ingot : core.PfFCore.Handlers.Ore.getIngots().values()) {
                 String ingotName = denLib.getItemDisplayName(ingot);
                 if (ingotName.contains(oreName)) {
                     RockCrusherManager.addRecipes(dust, OreDictionary.getOres("ingot" + oreName));
@@ -143,11 +145,13 @@ public class OreCrushmodule extends baseModule {
                     BlastFurnaceManager.addRecipes(dust,blast);
                 }
                 // Special handling for Iron and Gold.
-                if (oreName.toLowerCase().equals("iron")) {
+                if (oreName.toLowerCase().equals("iron") && !ironSetup) {
                     setupDust(dust, Block.oreIron, Item.ingotIron);
+                    ironSetup = true;
                 }
-                if (oreName.toLowerCase().equals("gold")) {
+                if (oreName.toLowerCase().equals("gold") && !goldSetup) {
                     setupDust(dust, Block.oreGold, Item.ingotGold);
+                    goldSetup = true;
                 }
             }
         }
