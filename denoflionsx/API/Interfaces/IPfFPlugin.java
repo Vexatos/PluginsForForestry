@@ -12,6 +12,15 @@ public interface IPfFPlugin {
     
     public String getName();
     
+    public String getParentName();
+    
     public boolean isLoaded();
+    
+    public void setLoadedState(boolean state);
+    
+    public void defaults();
+    
+    // This object will be a Config object from denLib.
+    public Object configAccess();
     
 }

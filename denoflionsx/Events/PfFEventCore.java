@@ -4,8 +4,10 @@ import denoflionsx.API.PfFEvents;
 
 public class PfFEventCore {
     
-    public void init(){
-        PfFEvents.pluginLoading = new PfFPluginLoadingManager();
+    public PfFEventCore init(){
         PfFEvents.pluginLoaded = new PfFPluginLoadedManager();
+        PfFEvents.moduleLoaded = new PfFModuleLoadedManager();
+        PfFEvents.itemInitialized = new PfFItemInitializedManager();
+        return this;
     }
 }

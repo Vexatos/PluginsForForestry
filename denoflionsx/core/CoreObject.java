@@ -1,13 +1,11 @@
 package denoflionsx.core;
 
-import denoflionsx.API.Events.IPluginListener;
+import denoflionsx.API.Events.*;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.TextureManager;
 import denoflionsx.Events.PfFEventCore;
-import denoflionsx.API.Events.EventPluginLoaded;
-import denoflionsx.API.Events.EventPluginLoading;
 import denoflionsx.Handlers.HandlerInstances;
 import denoflionsx.Managers.*;
 import denoflionsx.PluginsforForestry;
@@ -28,19 +26,13 @@ public class CoreObject implements IPluginListener{
     public void pluginLoaded(EventPluginLoaded event) {
         core.print(event.getPlugin().getName() + " is loaded!");
     }
-
-    @Override
-    public void pluginLoading(EventPluginLoading event) {
-        core.print(event.getPlugin() + " is loading...");
-    }
-
+ 
     public void runCoreFunctions() {
         if (denLib.buildnumber < 4) {
             throw new RuntimeException("denLib is out of date. Please update!");
         }
         setupManagers();
         PfFEvents.pluginLoaded.register(this);
-        PfFEvents.pluginLoading.register(this);
         this.translateColors();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
@@ -59,8 +51,7 @@ public class CoreObject implements IPluginListener{
 
     public void PreLoad() {
         Handlers = new HandlerInstances();
-        Events = new PfFEventCore();
-        Events.init();
+        Events = new PfFEventCore().init();
     }
 
     public void setupManagers() {

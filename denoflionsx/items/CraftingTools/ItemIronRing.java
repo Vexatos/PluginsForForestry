@@ -20,7 +20,6 @@ public class ItemIronRing extends multiItem {
     public static enum ironRing {
 
         IRONRING();
-        
         private ItemIDManager ID;
         private multiItem ring;
         private String tag;
@@ -47,13 +46,13 @@ public class ItemIronRing extends multiItem {
                         "XIX",
                         Character.valueOf('H'), hammer,
                         Character.valueOf('I'), Item.ingotIron});
-            FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem("barrel"),new Object[]{
-                "PRP",
-                "PGP",
-                "PRP",
-            Character.valueOf('P'),new ItemStack(Block.planks),
-            Character.valueOf('G'),new ItemStack(Block.glass),
-            Character.valueOf('R'),PfFManagers.ItemManager.getItem(this.tag)});
+            FMLWrapper.MODE.FML.addRecipe(PfFManagers.ItemManager.getItem("barrel"), new Object[]{
+                        "PRP",
+                        "PGP",
+                        "PRP",
+                        Character.valueOf('P'), Block.planks,
+                        Character.valueOf('G'), new ItemStack(Block.glass),
+                        Character.valueOf('R'), PfFManagers.ItemManager.getItem(this.tag)});
         }
 
         private void defaults() {

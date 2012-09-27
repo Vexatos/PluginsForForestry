@@ -8,8 +8,10 @@ public class PfFEvents {
     
     // THIS IS UNFINISHED AND PFF DOES NOT TRIGGER THESE EVENTS YET!
     
-    public static IListenerManager pluginLoading;
-    
     public static IListenerManager pluginLoaded;
+    
+    public static IListenerManager moduleLoaded;
+    
+    public static IListenerManager itemInitialized;
     
 }

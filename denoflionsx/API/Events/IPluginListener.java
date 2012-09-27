@@ -6,6 +6,4 @@ public interface IPluginListener extends EventListener{
 
     public void pluginLoaded(EventPluginLoaded event);
     
-    public void pluginLoading(EventPluginLoading event);
-    
 }

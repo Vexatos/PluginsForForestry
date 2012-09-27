@@ -1,6 +1,7 @@
 package denoflionsx.Managers;
 
 import denoflionsx.API.Interfaces.IPfFItemManager;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.core.core;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class PfFItemManager implements IPfFItemManager {
     @Override
     public void registerItem(String s, ItemStack i) {
         registeredItems.put(s, i);
+        PfFEvents.itemInitialized.notifyListeners(i);
     }
 
     @Override

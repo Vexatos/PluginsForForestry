@@ -1,11 +1,10 @@
 package denoflionsx.Beta;
 
 import denoflionsx.API.Events.EventPluginLoaded;
-import denoflionsx.API.Events.EventPluginLoading;
-import denoflionsx.core.IPluginTemplate;
+import denoflionsx.core.IPfFPluginTemplate;
 import denoflionsx.core.core;
 
-public class pluginTest extends IPluginTemplate{
+public class pluginTest extends IPfFPluginTemplate{
 
     public pluginTest(String name, String parent) {
         super(name, parent);
@@ -18,13 +17,13 @@ public class pluginTest extends IPluginTemplate{
     }
 
     @Override
-    public void pluginLoaded(EventPluginLoaded event) {
-        super.pluginLoaded(event);
+    public void defaults() {
+        super.defaults();
     }
 
     @Override
-    public void pluginLoading(EventPluginLoading event) {
-        super.pluginLoading(event);
+    public void pluginLoaded(EventPluginLoaded event) {
+        super.pluginLoaded(event);
     }
 
     @Override

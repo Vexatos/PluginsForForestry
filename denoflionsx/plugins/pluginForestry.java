@@ -11,7 +11,6 @@ import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.plugins.Forestry.Modules.PeatModule.peatModule;
-import denoflionsx.plugins.Forestry.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
