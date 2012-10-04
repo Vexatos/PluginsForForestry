@@ -8,57 +8,48 @@ import java.util.ArrayList;
 import net.minecraft.src.Item;
 import denoflionsx.Old.baseModule;
 import denoflionsx.Old.pluginBase;
+import denoflionsx.core.IPfFModuleTemplate;
 
-public class stillModule extends baseModule {
-    
+public class stillModule extends IPfFModuleTemplate {
+
     private Item biomass = EnumForestryLiquids.BIOMASS.getLiquid().getItem();
     private Item biofuel = EnumForestryLiquids.BIOFUEL.getLiquid().getItem();
-    
-    public stillModule(pluginBase parent) {
-        super(parent);
-    }
-    
-    public static void load(pluginBase parent){
-        baseModule b = new stillModule(parent);
-        b.register();
+
+    public stillModule(String name, String parent) {
+        super(name, parent);
     }
 
     @Override
-    protected void defaults() {
-        this.addDefault("# These options are for the Forestry Still");
-        this.addDefault("# StillFix removes SirSengir's Still recipe that has a hardcoded 10 -> 3 ratio...");
-        this.addDefault("# ...and substitutes my own with configurable ratio.");
-        this.addDefault("# If StillFix is disabled the PerCast options are not used.");
-        this.addDefault("StillFix=true");
-        this.addDefault("Still_BiomassPerCast=10");
-        this.addDefault("Still_BiofuelPerCast=5");
-        this.addDefault("# This sets the still's speed. Mim value is 1.");
-        this.addDefault("Still_WorkCycles=100");
+    public void defaults() {
+        this.config.addDefault("# These options are for the Forestry Still");
+        this.config.addDefault("# StillFix removes SirSengir's Still recipe that has a hardcoded 10 -> 3 ratio...");
+        this.config.addDefault("# ...and substitutes my own with configurable ratio.");
+        this.config.addDefault("# If StillFix is disabled the PerCast options are not used.");
+        this.config.addDefault("Still_BiomassPerCast=10");
+        this.config.addDefault("Still_BiofuelPerCast=5");
+        this.config.addDefault("# This sets the still's speed. Mim value is 1.");
+        this.config.addDefault("Still_WorkCycles=100");
     }
 
     @Override
-    protected void init() {
-        if (!this.getOptionBool("StillFix")){
-            return;
-        }
+    public void doSetup() {
         String RecipeManager = "MachineStill$RecipeManager";
         String ClassPath = "forestry.factory.gadgets.";
         String fieldname = "recipes";
-        try{
+        try {
             Class still = Class.forName(ClassPath + RecipeManager);
             Field recipes = still.getField(fieldname);
             recipes.setAccessible(true);
-            ArrayList Recipes = (ArrayList)recipes.get(null);
+            ArrayList Recipes = (ArrayList) recipes.get(null);
             Recipes.remove(0);
-            recipes.set(null,Recipes);
-        }catch(Exception ex){
+            recipes.set(null, Recipes);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-        recipes();
     }
 
     @Override
-    protected void recipes() {
-        RecipeManagers.stillManager.addRecipe(this.getOptionInt("Still_WorkCycles"), new LiquidStack(biomass,this.getOptionInt("Still_BiomassPerCast")), new LiquidStack(biofuel,this.getOptionInt("Still_BiofuelPerCast")));
+    public void recipes() {
+        RecipeManagers.stillManager.addRecipe(this.config.getOptionInt("Still_WorkCycles"), new LiquidStack(biomass, this.config.getOptionInt("Still_BiomassPerCast")), new LiquidStack(biofuel, this.config.getOptionInt("Still_BiofuelPerCast")));
     }
 }

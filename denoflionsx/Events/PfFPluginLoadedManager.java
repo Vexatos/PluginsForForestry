@@ -3,7 +3,11 @@ package denoflionsx.Events;
 import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.API.Events.IListenerManager;
 import denoflionsx.API.Events.IPluginListener;
-import denoflionsx.core.IPfFPluginTemplate;
+import denoflionsx.Annotations.PfFAnnotationSearch;
+import denoflionsx.Annotations.PfFAnnotationSearch.MethodAnnotation;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Interfaces.IPfFPlugin;
+import java.lang.Object;
 import java.util.ArrayList;
 
 public class PfFPluginLoadedManager implements IListenerManager {
@@ -12,10 +16,20 @@ public class PfFPluginLoadedManager implements IListenerManager {
 
     @Override
     public void notifyListeners(Object l) {
-        IPfFPluginTemplate z = (IPfFPluginTemplate) l;
+        IPfFPlugin z = (IPfFPlugin) l;
         for (Object a : listeners) {
-            IPluginListener p = (IPluginListener) a;
-            p.pluginLoaded(new EventPluginLoaded(this, z));
+            if (a instanceof IPluginListener) {
+                IPluginListener q = (IPluginListener) a;
+                q.pluginLoaded(new EventPluginLoaded(this, z));
+            }
+            MethodAnnotation m = PfFAnnotationSearch.AnnotatedMethod(a.getClass(),PfFEventTypes.PLUGIN_LOADED);
+            if (m != null) {
+                try {
+                    m.getMethod().invoke(a, new EventPluginLoaded(this, z));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 

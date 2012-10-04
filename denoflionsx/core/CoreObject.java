@@ -3,6 +3,9 @@ package denoflionsx.core;
 import denoflionsx.API.Events.*;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.Beta.BetaCore;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.TextureManager;
 import denoflionsx.Events.PfFEventCore;
@@ -13,20 +16,20 @@ import denoflionsx.PluginsforForestry;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
 
-public class CoreObject implements IPluginListener, IModuleListener, IWorldLoaded {
+public class CoreObject implements IWorldLoaded {
 
     public HandlerInstances Handlers;
     public PfFEventCore Events;
     public Config config;
 
-    @Override
+    @PfFSubscribe(Event = PfFEventTypes.PLUGIN_LOADED)
     public void pluginLoaded(EventPluginLoaded event) {
         core.print(event.getPlugin().getName() + " is loaded!");
     }
 
-    @Override
+    @PfFSubscribe(Event = PfFEventTypes.MODULE_LOADED)
     public void moduleLoaded(EventModuleLoaded event) {
-        
+        core.print(event.getModule().getParentName() + " | " + event.getModule().getName() + " is loaded!");
     }
 
     @Override
@@ -39,6 +42,7 @@ public class CoreObject implements IPluginListener, IModuleListener, IWorldLoade
         PluginInstances.Loader.register();
         PluginsforForestry.proxy.registerFX();
         PfFManagers.FermenterManager.createRecipes();
+        BetaCore.doStuff();
     }
 
     public void registerFX() {

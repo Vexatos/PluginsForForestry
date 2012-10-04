@@ -5,47 +5,46 @@ import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
+import denoflionsx.core.IPfFModuleTemplate;
 import denoflionsx.denLib.denLib;
-import denoflionsx.Old.baseModule;
-import denoflionsx.Old.pluginBase;
 
-public class solidfuelModule extends baseModule {
+public class solidfuelModule extends IPfFModuleTemplate {
 
     ExtendedLiquid biomass;
     ExtendedLiquid biofuel;
     ItemIDManager id1 = new ItemIDManager(1, "Biomass");
     ItemIDManager id2 = new ItemIDManager(1, "Biofuel");
 
-    public solidfuelModule(pluginBase parent) {
-        super(parent);
+    public solidfuelModule(String name, String parent) {
+        super(name, parent);
     }
 
     @Override
-    protected void defaults() {
-        this.addDefault("BiomassBar_Enabled=" + "true");
-        this.addDefault("BiomassBar_ItemID=" + id1.getItemIDs().get(0));
-        this.addDefault("BiomassBar_MJt=" + 5);
-        this.addDefault("BiomassBar_BurnTime=" + 10000);
-        this.addDefault("BiofuelBar_Enabled=" + "true");
-        this.addDefault("BiofuelBar_ItemID=" + id2.getItemIDs().get(0));
-        this.addDefault("BiofuelBar_MJt=" + 5);
-        this.addDefault("BiofuelBar_BurnTime=" + 40000);
+    public void defaults() {
+        this.config.addDefault("BiomassBar_Enabled=" + "true");
+        this.config.addDefault("BiomassBar_ItemID=" + id1.getItemIDs().get(0));
+        this.config.addDefault("BiomassBar_MJt=" + 5);
+        this.config.addDefault("BiomassBar_BurnTime=" + 10000);
+        this.config.addDefault("BiofuelBar_Enabled=" + "true");
+        this.config.addDefault("BiofuelBar_ItemID=" + id2.getItemIDs().get(0));
+        this.config.addDefault("BiofuelBar_MJt=" + 5);
+        this.config.addDefault("BiofuelBar_BurnTime=" + 40000);
     }
 
     @Override
-    protected void init() {
-        if (this.getOptionBool("BiofuelBar_Enabled")) {
+    public void doSetup() {
+        if (this.config.getOptionBool("BiofuelBar_Enabled")) {
             addtoAPI("Biomass");
-            biomass = new ExtendedLiquid(this.getOptionInt("BiomassBar_ItemID"), "Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), this.getOptionInt("BiomassBar_BurnTime"), this.getOptionInt("BiomassBar_MJt"), solidfuelModule.fuelRBG.BIOMASS);
+            biomass = new ExtendedLiquid(this.config.getOptionInt("BiomassBar_ItemID"), "Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), this.config.getOptionInt("BiomassBar_BurnTime"), this.config.getOptionInt("BiomassBar_MJt"), solidfuelModule.fuelRBG.BIOMASS);
         }
-        if (this.getOptionBool("BiofuelBar_Enabled")) {
+        if (this.config.getOptionBool("BiofuelBar_Enabled")) {
             addtoAPI("Biofuel");
-            biofuel = new ExtendedLiquid(this.getOptionInt("BiofuelBar_ItemID"), "Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), this.getOptionInt("BiofuelBar_BurnTime"), this.getOptionInt("BiofuelBar_MJt"), solidfuelModule.fuelRBG.BIOFUEL);
+            biofuel = new ExtendedLiquid(this.config.getOptionInt("BiofuelBar_ItemID"), "Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), this.config.getOptionInt("BiofuelBar_BurnTime"), this.config.getOptionInt("BiofuelBar_MJt"), solidfuelModule.fuelRBG.BIOFUEL);
         }
     }
 
     @Override
-    protected void recipes() {
+    public void recipes() {
     }
 
     private void addtoAPI(String name) {
@@ -58,11 +57,6 @@ public class solidfuelModule extends baseModule {
         PfFManagers.ItemManager.registerItem(nameLowerCaseNoSpaces + "capsule", ItemInterface.getItem("waxCapsule" + name).getItem());
         PfFManagers.ItemManager.registerItem(nameLowerCaseNoSpaces + "bucket", ItemInterface.getItem("bucket" + name).getItem());
         //-----------------------------------------------------------
-    }
-
-    public static void load(pluginBase parent) {
-        baseModule b = new solidfuelModule(parent);
-        b.register();
     }
 
     public static enum fuelRBG {

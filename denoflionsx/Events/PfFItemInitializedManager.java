@@ -1,8 +1,8 @@
 package denoflionsx.Events;
 
-import denoflionsx.API.Events.EventItemInitialized;
-import denoflionsx.API.Events.IItemListener;
-import denoflionsx.API.Events.IListenerManager;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Events.*;
+import denoflionsx.Annotations.PfFAnnotationSearch;
 import denoflionsx.denLib.denLib;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
@@ -13,10 +13,20 @@ public class PfFItemInitializedManager implements IListenerManager {
 
     @Override
     public void notifyListeners(Object l) {
-        ItemStack item = (ItemStack) l;
-        for (Object o : listeners) {
-            IItemListener z = (IItemListener) o;
-            z.itemInitialized(new EventItemInitialized(item, denLib.removeDotItemFromName(item.getItemName()), this));
+        ItemStack z = (ItemStack) l;
+        for (Object a : listeners) {
+            if (a instanceof IItemListener) {
+                IItemListener q = (IItemListener) a;
+                q.itemInitialized(new EventItemInitialized(z,denLib.removeDotItemFromName(z.getItemName()),this));
+            }
+            PfFAnnotationSearch.MethodAnnotation m = PfFAnnotationSearch.AnnotatedMethod(a.getClass(), PfFEventTypes.ITEM_CREATED);
+            if (m != null) {
+                try {
+                    m.getMethod().invoke(a, new EventItemInitialized(z,denLib.removeDotItemFromName(z.getItemName()),this));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 

@@ -1,27 +1,36 @@
 package denoflionsx.Events;
 
-import denoflionsx.API.Events.EventModuleLoaded;
-import denoflionsx.API.Events.IListenerManager;
-import denoflionsx.API.Events.IModuleListener;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Events.*;
 import denoflionsx.API.Interfaces.IPfFModule;
+import denoflionsx.Annotations.PfFAnnotationSearch;
 import java.util.ArrayList;
 
-public class PfFModuleLoadedManager implements IListenerManager{
-    
-    public static ArrayList<IModuleListener> listeners = new ArrayList();
+public class PfFModuleLoadedManager implements IListenerManager {
+
+    public static ArrayList<Object> listeners = new ArrayList();
 
     @Override
     public void notifyListeners(Object l) {
-        IPfFModule m = (IPfFModule)l;
-        for (IModuleListener a : listeners){
-            a.moduleLoaded(new EventModuleLoaded(m));
+        IPfFModule z = (IPfFModule) l;
+        for (Object a : listeners) {
+            if (a instanceof IModuleListener) {
+                IModuleListener q = (IModuleListener) a;
+                q.moduleLoaded(new EventModuleLoaded(this, z));
+            }
+            PfFAnnotationSearch.MethodAnnotation m = PfFAnnotationSearch.AnnotatedMethod(a.getClass(),PfFEventTypes.MODULE_LOADED);
+            if (m != null) {
+                try {
+                    m.getMethod().invoke(a, new EventModuleLoaded(this, z));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
     }
 
     @Override
     public void register(Object listener) {
-        IModuleListener i = (IModuleListener)listener;
-        listeners.add(i);
+        listeners.add(listener);
     }
-
 }

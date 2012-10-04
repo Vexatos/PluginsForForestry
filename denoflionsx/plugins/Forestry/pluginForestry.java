@@ -9,8 +9,11 @@ import denoflionsx.core.IPfFPluginTemplate;
 import denoflionsx.core.core;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
+import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
 import denoflionsx.plugins.Forestry.Modules.ExtraFuelsModule.extraFuelsModule;
 import denoflionsx.plugins.Forestry.Modules.PeatModule.peatModule;
+import denoflionsx.plugins.Forestry.Modules.SolidFuelModule.solidfuelModule;
+import denoflionsx.plugins.Forestry.Modules.StillModule.stillModule;
 import forestry.api.core.ItemInterface;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
@@ -20,14 +23,12 @@ public class pluginForestry extends IPfFPluginTemplate {
     
     public peatModule PeatModule = PeatModule = new peatModule("PeatModule",this.getName());
     public extraFuelsModule ExtraFuelsModule = new extraFuelsModule("ExtraFuelsModule",this.getName());
-
+    public solidfuelModule SolidFuelModule = new solidfuelModule("SolidFuelModule",this.getName());
+    public stillModule StillModule = new stillModule("StillModule",this.getName());
+    public BlueWaxmodule BlueWaxModule = new BlueWaxmodule("BlueWaxModule",this.getName());
+    
     public pluginForestry(String name, String parent) {
         super(name, parent);
-    }
-
-    @Override
-    public void doSetup() {
-        
     }
     
     @Override

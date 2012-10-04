@@ -24,7 +24,9 @@ public class IPfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleL
 
     @Override
     public void pluginLoaded(EventPluginLoaded event) {
+        
     }
+   
 
     @Override
     public void moduleLoaded(EventModuleLoaded event) {

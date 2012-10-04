@@ -7,8 +7,9 @@ public class EventModuleLoaded extends EventObject{
     
     private IPfFModule m;
 
-    public EventModuleLoaded(Object source) {
+    public EventModuleLoaded(Object source, IPfFModule m) {
         super(source);
+        this.m = m;
     }
 
     public IPfFModule getModule() {
