@@ -7,14 +7,14 @@ import denoflionsx.Interfaces.IWorldLoaded;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
 
-public class IPfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleListener, IItemListener, IWorldLoaded {
+public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleListener, IItemListener, IWorldLoaded {
 
     private String name;
     private boolean isLoaded = false;
     private String parent;
     public Config config;
 
-    public IPfFPluginTemplate(String name, String parent) {
+    public PfFPluginTemplate(String name, String parent) {
         this.name = name;
         this.parent = parent;
         this.config = new Config(name + ".cfg");
@@ -24,9 +24,10 @@ public class IPfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleL
 
     @Override
     public void pluginLoaded(EventPluginLoaded event) {
-        
+        if (event.getPlugin().getName().equals(("Loader"))) {
+            this.register();
+        }
     }
-   
 
     @Override
     public void moduleLoaded(EventModuleLoaded event) {

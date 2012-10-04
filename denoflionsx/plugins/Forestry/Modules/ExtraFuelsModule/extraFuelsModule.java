@@ -9,11 +9,11 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumLiquidTextures;
-import denoflionsx.core.IPfFModuleTemplate;
+import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 
-public class extraFuelsModule extends IPfFModuleTemplate {
+public class extraFuelsModule extends PfFModuleTemplate {
 
     public static customFuel pumpkinJuice;
     public static customFuel melonJuice;

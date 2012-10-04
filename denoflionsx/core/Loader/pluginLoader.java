@@ -2,13 +2,13 @@ package denoflionsx.core.Loader;
 
 import denoflionsx.API.Events.EventItemInitialized;
 import denoflionsx.API.Events.EventPluginLoaded;
-import denoflionsx.core.IPfFPluginTemplate;
+import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.items.Containers.Containers;
 import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import denoflionsx.items.CraftingTools.ItemIronRing;
 
-public class pluginLoader extends IPfFPluginTemplate {
+public class pluginLoader extends PfFPluginTemplate {
     
     // This really isn't a plugin.
     // It is for triggering the first event that makes the event load system work.

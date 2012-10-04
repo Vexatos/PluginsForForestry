@@ -15,7 +15,7 @@ import denoflionsx.items.PfFContainer;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumContainers;
-import denoflionsx.core.IPfFPluginTemplate;
+import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 
 // This class is to automate the creation of basic fuel liquids and the
@@ -40,11 +40,11 @@ public class customFuel {
     private int color = Colors.Values.WHITE.getColor();
     public static int numOfContainers = 6;
     private int redCapMeta = 3;
-    private IPfFPluginTemplate parent;
+    private PfFPluginTemplate parent;
     // Peat's MJ value divided by EU value.
     public static final double conversionRate = 1.25;
 
-    public customFuel(String name, int MJt, int burnTime, int textures[], ItemIDManager ItemIDs, int color, IPfFPluginTemplate parent) {
+    public customFuel(String name, int MJt, int burnTime, int textures[], ItemIDManager ItemIDs, int color, PfFPluginTemplate parent) {
 
         if (name.equals("")) {
             name = "Unnamed Liquid";
@@ -206,7 +206,7 @@ public class customFuel {
         return nameNoSpaces;
     }
 
-    public IPfFPluginTemplate getParent() {
+    public PfFPluginTemplate getParent() {
         return parent;
     }
 

@@ -11,11 +11,11 @@ import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.EnumDyeColors;
 import denoflionsx.Enums.EnumToolTextures;
-import denoflionsx.core.IPfFModuleTemplate;
+import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
 
-public class BlueWaxmodule extends IPfFModuleTemplate {
+public class BlueWaxmodule extends PfFModuleTemplate {
 
     private ItemIDManager wax = new ItemIDManager(1, "ExtraWax");
     private ItemIDManager rod = new ItemIDManager(1, "RodofFreezing");

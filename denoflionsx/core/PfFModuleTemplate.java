@@ -6,11 +6,11 @@ import denoflionsx.API.Interfaces.IPfFPlugin;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.denLib.Config.Config;
 
-public class IPfFModuleTemplate extends IPfFPluginTemplate implements IPfFModule {
+public class PfFModuleTemplate extends PfFPluginTemplate implements IPfFModule {
 
     private IPfFPlugin Parent = null;
 
-    public IPfFModuleTemplate(String name, String parent) {
+    public PfFModuleTemplate(String name, String parent) {
         super(name, parent);
     }
 

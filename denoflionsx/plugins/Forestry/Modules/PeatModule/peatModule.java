@@ -10,14 +10,14 @@ import forestry.api.recipes.RecipeManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumLiquidTextures;
-import denoflionsx.core.IPfFModuleTemplate;
+import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Helpers.FermenterHelper;
 import denoflionsx.Old.customFuel_OLD;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Railcraft.CokeOvenRecipeHelper;
 import net.minecraft.src.Item;
 
-public class peatModule extends IPfFModuleTemplate {
+public class peatModule extends PfFModuleTemplate {
 
     public static customFuel liquidpeat;
     public static customFuel sugarypeat;

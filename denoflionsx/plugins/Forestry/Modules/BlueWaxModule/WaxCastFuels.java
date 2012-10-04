@@ -2,7 +2,6 @@ package denoflionsx.plugins.Forestry.Modules.BlueWaxModule;
 
 import denoflionsx.API.Objects.PfFLiquid;
 import denoflionsx.API.PfFManagers;
-import denoflionsx.core.core;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFContainer;
@@ -21,7 +20,6 @@ public class WaxCastFuels extends PfFContainer {
         this.add(liquid.getLiquidName() + " Cast", liquid.getMeta(), EnumCastTextures.REFRACTORY.getIndex());
         this.renderColors.put(liquid.getMeta(), liquid.getColor().convertRBG());
         LiquidContainerSystem.genericCapWithOverride(new ItemStack(this, 1, liquid.getMeta()), PfFManagers.ItemManager.getItem("waxcast_red"), liquid.getLiquid().itemID);
-        core.print(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bar");
         if (PfFManagers.ItemManager.doesItemExist(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bar")) {
             FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bar"), new Object[]{new ItemStack(this, 1, liquid.getMeta()), PfFManagers.ItemManager.getItem("rodoffreezing")});
         }

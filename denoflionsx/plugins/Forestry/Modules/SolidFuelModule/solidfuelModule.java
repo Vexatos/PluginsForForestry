@@ -5,10 +5,10 @@ import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
-import denoflionsx.core.IPfFModuleTemplate;
+import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.denLib.denLib;
 
-public class solidfuelModule extends IPfFModuleTemplate {
+public class solidfuelModule extends PfFModuleTemplate {
 
     ExtendedLiquid biomass;
     ExtendedLiquid biofuel;

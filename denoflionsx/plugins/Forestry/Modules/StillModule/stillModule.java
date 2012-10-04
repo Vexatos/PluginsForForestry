@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import net.minecraft.src.Item;
 import denoflionsx.Old.baseModule;
 import denoflionsx.Old.pluginBase;
-import denoflionsx.core.IPfFModuleTemplate;
+import denoflionsx.core.PfFModuleTemplate;
 
-public class stillModule extends IPfFModuleTemplate {
+public class stillModule extends PfFModuleTemplate {
 
     private Item biomass = EnumForestryLiquids.BIOMASS.getLiquid().getItem();
     private Item biofuel = EnumForestryLiquids.BIOFUEL.getLiquid().getItem();

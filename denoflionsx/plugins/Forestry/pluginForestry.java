@@ -5,7 +5,7 @@ import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumForestryLiquids;
-import denoflionsx.core.IPfFPluginTemplate;
+import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.core.core;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
@@ -19,7 +19,7 @@ import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.core.BlockInterface;
 
-public class pluginForestry extends IPfFPluginTemplate {
+public class pluginForestry extends PfFPluginTemplate {
     
     public peatModule PeatModule = PeatModule = new peatModule("PeatModule",this.getName());
     public extraFuelsModule ExtraFuelsModule = new extraFuelsModule("ExtraFuelsModule",this.getName());
@@ -42,13 +42,6 @@ public class pluginForestry extends IPfFPluginTemplate {
                 PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
                 PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
             }
-        }
-    }
-
-    @Override
-    public void pluginLoaded(EventPluginLoaded event) {
-        if (event.getPlugin().getName().equals(("Loader"))){
-            this.register();
         }
     }
     
