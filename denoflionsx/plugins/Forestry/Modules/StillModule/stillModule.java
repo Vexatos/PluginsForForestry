@@ -6,8 +6,8 @@ import forestry.api.recipes.RecipeManagers;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import net.minecraft.src.Item;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 
 public class stillModule extends baseModule {
     

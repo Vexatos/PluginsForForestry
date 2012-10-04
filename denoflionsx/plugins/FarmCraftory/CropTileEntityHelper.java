@@ -1,6 +1,5 @@
 package denoflionsx.plugins.FarmCraftory;
 
-import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;

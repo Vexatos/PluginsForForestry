@@ -10,7 +10,7 @@ import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.Handlers.FuelHandler;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFBar;
-import denoflionsx.plugins.Forestry.SqueezerHelper;
+import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import forestry.api.recipes.RecipeManagers;
 
 public class customFuelSolid {

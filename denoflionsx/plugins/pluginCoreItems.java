@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.plugins.Core.DefaultReplacements.MushroomSoupBowlOverride;
 import denoflionsx.plugins.Core.MetaContainers.BarrelFuels;
 import denoflionsx.plugins.Core.MetaContainers.WoodenBucketFuels;
@@ -18,10 +19,10 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Core.*;
-import denoflionsx.plugins.Forestry.LiquidContainer;
-import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
-import denoflionsx.items.Fuels.customFuel;
-import denoflionsx.plugins.Forestry.SqueezerHelper;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
+import denoflionsx.Old.customFuel_OLD;
+import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 
 public class pluginCoreItems extends pluginBase {
 
@@ -35,7 +36,7 @@ public class pluginCoreItems extends pluginBase {
     public static BarrelFuels bfuels;
     public static MushroomSoupBowlOverride soupBowl;
     public static WoodenBucket wb;
-    public static customFuel mushroomSoup;
+    public static customFuel_OLD mushroomSoup;
     public static ItemExtractorTool ex;
 
     public pluginCoreItems() {
@@ -69,7 +70,7 @@ public class pluginCoreItems extends pluginBase {
                 Item.itemsList[temp] = null;
                 soupBowl = new MushroomSoupBowlOverride();
                 LiquidManagerWrapper.registerLiquidContainer(new LiquidContainer(new LiquidStack(PfFManagers.ItemManager.getItem("mushroomsoup").itemID, 1000), new ItemStack(soupBowl), new ItemStack(Item.bowlEmpty)));
-                PfFManagers.ContainerManager.addLiquidLate("Mushroom Soup", PfFManagers.ItemManager.getItem("mushroomsoup"), PfFManagers.ColorManager.getColor(Colors.Values.TAN.toString()));
+                PfFManagers.ContainerManager.addLiquid("Mushroom Soup", PfFManagers.ItemManager.getItem("mushroomsoup"), PfFManagers.ColorManager.getColor(Colors.Values.TAN.toString()));
             }
             SqueezerHelper.add(PfFManagers.ItemManager.getItem("milkbag"), new ItemStack(Item.leather), BagSqueezeLeatherChance, PfFManagers.ItemManager.getItem("milk"), this.config.getOptionInt("MilkBag_AmountPerSqueeze"));
             LiquidVacuum.Recipes.useBCRecipe = this.config.getOptionBool("LiquidVacuum_UseBCRecipeIfAvailable");
@@ -112,7 +113,7 @@ public class pluginCoreItems extends pluginBase {
         if (this.config.getOptionBool("MushroomBag_Enabled")) {
             mushroom = new MushroomBag(this.config.getOptionInt("MushroomBag_ItemID"));
             LiquidVacuum.mushroombagEnabled = this.config.getOptionBool("MushroomBag_Enabled");
-            mushroomSoup = new customFuel("Mushroom Soup", 1, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.MUSHROOMSOUP.getIndex()), mushroomSoupID, Colors.Values.TAN.getColor(), this);
+            mushroomSoup = new customFuel_OLD("Mushroom Soup", 1, 40000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.MUSHROOMSOUP.getIndex()), mushroomSoupID, Colors.Values.TAN.getColor(), this);
         }
         if (this.config.getOptionBool("LiquidVacuum_Enabled")) {
             mb = new MilkBag(this.config.getOptionInt("MilkBag_ItemID"), "milkbag");

@@ -7,7 +7,7 @@ import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFContainer;
 import denoflionsx.Enums.EnumContainers;
 import denoflionsx.core.core;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 import net.minecraft.src.ItemStack;
 
 public class BarrelFuels extends PfFContainer {

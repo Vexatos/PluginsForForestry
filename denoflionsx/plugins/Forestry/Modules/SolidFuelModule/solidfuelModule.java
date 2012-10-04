@@ -6,8 +6,8 @@ import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.denLib.denLib;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 
 public class solidfuelModule extends baseModule {
 

@@ -1,5 +1,7 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
+import denoflionsx.Version.PfFVersion;
 import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,7 +44,7 @@ public class pluginUpdater extends pluginBase {
         this.compare.deleteConfig();
         saveUrl(compare.ConfigDir + "PFFVersion.cfg",vfile);
         this.compare.readFile();
-        if (core.modVersion().equals(this.compare.getOption("Version"))){
+        if (PfFVersion.version.equals(this.compare.getOption("Version"))){
             core.print("PFF is up to date!");
         }else{
             String msg = "[PluginsforForestry]: New Version " + this.compare.getOption("Version") + " available!";

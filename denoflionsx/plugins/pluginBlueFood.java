@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.API.Enums.EnumAnimals;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;

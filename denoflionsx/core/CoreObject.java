@@ -7,16 +7,13 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.TextureManager;
 import denoflionsx.Events.PfFEventCore;
 import denoflionsx.Handlers.HandlerInstances;
+import denoflionsx.Interfaces.IWorldLoaded;
 import denoflionsx.Managers.*;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
-import denoflionsx.items.Containers.Containers;
-import denoflionsx.items.Containers.InfusionBar;
-import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
-import denoflionsx.items.CraftingTools.ItemIronRing;
 
-public class CoreObject implements IPluginListener{
+public class CoreObject implements IPluginListener, IModuleListener, IWorldLoaded {
 
     public HandlerInstances Handlers;
     public PfFEventCore Events;
@@ -26,27 +23,45 @@ public class CoreObject implements IPluginListener{
     public void pluginLoaded(EventPluginLoaded event) {
         core.print(event.getPlugin().getName() + " is loaded!");
     }
- 
+
+    @Override
+    public void moduleLoaded(EventModuleLoaded event) {
+        
+    }
+
+    @Override
+    public void onWorldLoaded() {
+        config.writeConfig();
+        ItemIDManager.usedIDs.writeConfig();
+    }
+
+    public void loadPlugins() {
+        PluginInstances.Loader.register();
+        PluginsforForestry.proxy.registerFX();
+        PfFManagers.FermenterManager.createRecipes();
+    }
+
+    public void registerFX() {
+        PluginsforForestry.proxy.registerFX();
+    }
+
     public void runCoreFunctions() {
         if (denLib.buildnumber < 4) {
             throw new RuntimeException("denLib is out of date. Please update!");
         }
         setupManagers();
         PfFEvents.pluginLoaded.register(this);
+        PfFEvents.moduleLoaded.register(this);
         this.translateColors();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();
         defaults.setup();
-        config.readFile();
-        Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
-    }
-
-    public void setupUniversalItems() {
-        Containers.Container.register();
-        ItemBlacksmithHammer.BlacksmithHammer();
-        ItemIronRing.IronRing();
-        InfusionBar.recipe();
+        if (config.doesConfigExist()) {
+            config.readFile();
+        }
+        Handlers.World.listeners.add(this);
+        //Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
 
     public void PreLoad() {

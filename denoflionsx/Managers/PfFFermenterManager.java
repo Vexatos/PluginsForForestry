@@ -2,7 +2,7 @@ package denoflionsx.Managers;
 
 import denoflionsx.API.Interfaces.IPfFFermenterManager;
 import denoflionsx.Enums.EnumForestryLiquids;
-import denoflionsx.plugins.Forestry.FermenterHelper;
+import denoflionsx.plugins.Forestry.Helpers.FermenterHelper;
 import java.util.ArrayList;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;

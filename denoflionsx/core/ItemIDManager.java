@@ -3,8 +3,6 @@ package denoflionsx.core;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
 import denoflionsx.denLib.Config.Config;
 
 public class ItemIDManager {
@@ -25,8 +23,9 @@ public class ItemIDManager {
                 alreadyExisted = true;
             }
             defaults();
-            usedIDs.writeConfig();
-            usedIDs.readFile();
+            if (usedIDs.doesConfigExist()) {
+                usedIDs.readFile();
+            }
             baseID = usedIDs.getOptionInt("BaseID");
             currentID = baseID - 1;
             hasDefault = true;
@@ -47,12 +46,10 @@ public class ItemIDManager {
     }
 
     public static int findLastID() {
-        Iterator i = usedIDs.Options.entrySet().iterator();
         int id;
         ArrayList<Integer> list = new ArrayList();
-        while (i.hasNext()) {
-            Map.Entry pairs = (Map.Entry) i.next();
-            list.add(Integer.valueOf(pairs.getValue().toString()));
+        for (String s : usedIDs.dumpValues()){
+            list.add(Integer.valueOf(s));
         }
         Collections.sort(list);
         id = list.get(list.size() - 1);

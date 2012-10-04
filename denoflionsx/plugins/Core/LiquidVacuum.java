@@ -9,7 +9,7 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.items.multiItem;
 import denoflionsx.plugins.Buildcraft.TankManager;
 import denoflionsx.plugins.Buildcraft.goldGear;
-import denoflionsx.plugins.Forestry.pipette;
+import denoflionsx.plugins.Forestry.Helpers.pipette;
 import forestry.api.core.ItemInterface;
 import net.minecraft.src.*;
 

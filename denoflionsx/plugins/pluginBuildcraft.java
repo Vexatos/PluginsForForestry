@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;

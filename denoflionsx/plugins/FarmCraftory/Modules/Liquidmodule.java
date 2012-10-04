@@ -6,17 +6,17 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops;
-import denoflionsx.items.Fuels.customFuel;
-import denoflionsx.plugins.Forestry.SqueezerHelper;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.Old.customFuel_OLD;
+import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 
 public class Liquidmodule extends baseModule {
 
     public static ItemIDManager f = new ItemIDManager(2, "fruitjuice");
     public static ItemIDManager v = new ItemIDManager(2, "veggiejuice");
-    public static customFuel fruitJuice;
-    public static customFuel veggieJuice;
+    public static customFuel_OLD fruitJuice;
+    public static customFuel_OLD veggieJuice;
 
     public Liquidmodule(pluginBase parent) {
         super(parent);
@@ -41,13 +41,13 @@ public class Liquidmodule extends baseModule {
     protected void init() {
         if (this.getOptionBool("LiquidModule_Enabled")) {
             if (this.getOptionBool("FruitJuice_Enabled")) {
-                fruitJuice = new customFuel("Fruit Juice", 1, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.FRUITJUICE.getIndex()), f, PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()).convertRBG(), this.parent);
+                fruitJuice = new customFuel_OLD("Fruit Juice", 1, 40000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.FRUITJUICE.getIndex()), f, PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()).convertRBG(), this.parent);
                 if (this.getOptionBool("FruitJuice_WoodenBucketAndBarrel")){
                     PfFManagers.ContainerManager.addLiquid("Fruit Juice",PfFManagers.ItemManager.getItem("fruitjuice"),PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()));
                 }
             }
             if (this.getOptionBool("VeggieJuice_Enabled")) {
-                veggieJuice = new customFuel("Veggie Juice", 5, 2000, customFuel.populateSprites(EnumLiquidTextures.Liquids.VEGGIEJUICE.getIndex()), v, PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()).convertRBG(), this.parent);
+                veggieJuice = new customFuel_OLD("Veggie Juice", 5, 2000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.VEGGIEJUICE.getIndex()), v, PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()).convertRBG(), this.parent);
                 if (this.getOptionBool("VeggieJuice_WoodenBucketAndBarrel")){
                     PfFManagers.ContainerManager.addLiquid("Veggie Juice", PfFManagers.ItemManager.getItem("veggiejuice"), PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()));
                 }

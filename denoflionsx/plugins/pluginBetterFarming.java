@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import net.minecraft.src.Item;
@@ -8,7 +9,7 @@ import denoflionsx.denLib.denLib;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.plugins.BetterFarming.*;
-import denoflionsx.plugins.Forestry.addFermenterRecipes;
+import denoflionsx.Old.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
 import forestry.api.recipes.RecipeManagers;
@@ -17,11 +18,11 @@ import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.Enums.EnumLiquidTextures;
-import denoflionsx.items.Fuels.customFuel;
+import denoflionsx.Old.customFuel_OLD;
 
 public class pluginBetterFarming extends pluginBase {
 
-    public static customFuel citrusJuice;
+    public static customFuel_OLD citrusJuice;
     protected String Class = "";
     private ItemIDManager IDs_CitrusJuice = new ItemIDManager(2,"CitrusJuice");
 
@@ -64,7 +65,7 @@ public class pluginBetterFarming extends pluginBase {
         this.addItem(BCT, "pipeWaterproof", "Waterproofing", 0);
 
 
-        citrusJuice = new customFuel("Citrus Juice", 1, 10000, customFuel.populateSprites(EnumLiquidTextures.Liquids.CITRUSJUICE.getIndex()), this.IDs_CitrusJuice, Colors.Values.SALMON.getColor(), this);
+        citrusJuice = new customFuel_OLD("Citrus Juice", 1, 10000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.CITRUSJUICE.getIndex()), this.IDs_CitrusJuice, Colors.Values.SALMON.getColor(), this);
 
         hooked = true;
         if (hooked) {

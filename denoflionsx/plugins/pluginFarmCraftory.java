@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumForestryLiquids;
@@ -11,7 +12,7 @@ import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops;
 import denoflionsx.plugins.FarmCraftory.Crops.Tree;
 import denoflionsx.plugins.FarmCraftory.Modules.Liquidmodule;
 import denoflionsx.plugins.FarmCraftory.cropHarvest;
-import denoflionsx.plugins.Forestry.SqueezerHelper;
+import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import forestry.api.cultivation.CropProviders;
 
 public class pluginFarmCraftory extends pluginBase {

@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
@@ -18,9 +19,6 @@ public class pluginRailcraft extends pluginBase {
 
     @Override
     public void register() {
-        if (!loaded){
-            OreCrushmodule.load(this);
-        }
         super.register();
     }
 
@@ -30,9 +28,16 @@ public class pluginRailcraft extends pluginBase {
         this.config.addDefault("CreosoteOilInWoodenBucket=" + "true");
     }
 
+    public void lateLoad() {
+        if (loaded) {
+            OreCrushmodule.load(this);
+            this.registerModules();
+        }
+    }
+
     @Override
     protected boolean init() {
-        if (!detect()){
+        if (!detect()) {
             return false;
         }
         this.hooked = true;
@@ -43,7 +48,7 @@ public class pluginRailcraft extends pluginBase {
 
     @Override
     protected void recipes() {
-        if (this.config.getOptionBool("CreosoteOilInWoodenBucket")){
+        if (this.config.getOptionBool("CreosoteOilInWoodenBucket")) {
             PfFManagers.ContainerManager.addLiquid("Creosote Oil", this.get("Creosote"), PfFManagers.ColorManager.getColor(Colors.Values.OIL.toString()));
         }
     }

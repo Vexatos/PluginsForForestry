@@ -1,7 +1,7 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import net.minecraft.src.ItemStack;
-import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
@@ -25,7 +25,7 @@ public class pluginMineFactoryReloaded extends pluginBase {
     @Override
     public void register() {
         if (!loaded) {
-            if (this.detect()){
+            if (this.detect()) {
                 milkModule.disableBCMilk = true;
             }
         }
@@ -43,13 +43,9 @@ public class pluginMineFactoryReloaded extends pluginBase {
         }
         this.addItem(this.theClass, "milkItem", "Milk", 0);
         PfFManagers.ItemManager.registerItem("milk", this.get("Milk").getItem());
-        if (PfFAPI.isPluginLoaded("BetterFarming")) {
-            this.addItem("Milk Bottle", PluginRegistry.plugins.get("BetterFarming").get("Milk Bottle"));
-            milk = new MFRMilk(this.IDs, this.get("Milk"), this.get("Milk Bottle"), this.getOptionInt("MineFactory_MilkMJt"), this.getOptionInt("MineFactory_MilkBurnTime"), this.getOptionBool("MineFactory_MilkLosesHeat"));
-        } else {
-            ItemStack n = null;
-            milk = new MFRMilk(this.IDs, this.get("Milk"), n, this.getOptionInt("MineFactory_MilkMJt"), this.getOptionInt("MineFactory_MilkBurnTime"), this.getOptionBool("MineFactory_MilkLosesHeat"));
-        }
+        ItemStack n = null;
+        milk = new MFRMilk(this.IDs, this.get("Milk"), n, this.getOptionInt("MineFactory_MilkMJt"), this.getOptionInt("MineFactory_MilkBurnTime"), this.getOptionBool("MineFactory_MilkLosesHeat"));
+
         this.hooked = true;
         return this.hooked;
     }

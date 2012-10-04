@@ -2,13 +2,11 @@ package denoflionsx.plugins.Buildcraft.Modules;
 
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.denLib;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
-import denoflionsx.plugins.PluginRegistry;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
-import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
@@ -19,7 +17,7 @@ public class milkModule extends baseModule {
 
     public static PfFContainer milk;
     public static boolean disableBCMilk = false;
-    public ItemIDManager id = new ItemIDManager(1,"PfFMilk");
+    public ItemIDManager id = new ItemIDManager(1, "PfFMilk");
     //public static ItemIDManager IDs = new ItemIDManager(2);
 
     public milkModule(pluginBase parent) {
@@ -40,12 +38,9 @@ public class milkModule extends baseModule {
             milk.add("milkcap", milk.metaMap.get("Milk Capsule"), Containers.CAPSULE.getTexture(), "Milk Capsule");
             milk.add("milkcan", milk.metaMap.get("Milk Can"), Containers.CAN.getTexture(), "Milk Can");
             milk.add("milkcap_red", milk.metaMap.get("Milk Capsule_Red"), Containers.CAPSULE_RED.getTexture(), "Milk Capsule");
-            if (!PfFAPI.isPluginLoaded("BetterFarming")) {
-                milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), Containers.BOTTLE.getTexture(), "Milk Bottle");
-                LiquidContainerSystem.createWithOverride(milk,milk.shiftedIndex,PfFManagers.ItemManager.getItem("milkbottle"),true);
-            } else {
-                LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, PluginRegistry.plugins.get("BetterFarming").get("Milk Bottle"), true);
-            }
+            milk.add("milkbottle", milk.metaMap.get("Milk Bottle"), Containers.BOTTLE.getTexture(), "Milk Bottle");
+            LiquidContainerSystem.createWithOverride(milk, milk.shiftedIndex, PfFManagers.ItemManager.getItem("milkbottle"), true);
+
             LiquidContainerSystem.registerMilkBucket(milk.shiftedIndex);
             milk.setAllRenderColor(Colors.Values.WHITE.getColor());
             recipes();

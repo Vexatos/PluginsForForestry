@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import net.minecraft.src.*;
 import denoflionsx.items.multiItem;
-import denoflionsx.plugins.Forestry.LiquidContainer;
-import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
 
 public class waxCast extends multiItem {
 

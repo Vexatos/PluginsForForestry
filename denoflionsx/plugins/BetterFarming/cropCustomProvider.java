@@ -1,6 +1,6 @@
 package denoflionsx.plugins.BetterFarming;
 
-import denoflionsx.plugins.Forestry.ForestryBlock;
+import denoflionsx.plugins.Forestry.Helpers.ForestryBlock;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;

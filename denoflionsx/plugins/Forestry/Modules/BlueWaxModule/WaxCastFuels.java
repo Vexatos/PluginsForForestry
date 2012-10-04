@@ -6,7 +6,7 @@ import denoflionsx.core.core;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFContainer;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;

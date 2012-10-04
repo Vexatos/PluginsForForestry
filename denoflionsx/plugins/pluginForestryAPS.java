@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.denLib.Config.Config;
 
 public class pluginForestryAPS extends pluginBase{

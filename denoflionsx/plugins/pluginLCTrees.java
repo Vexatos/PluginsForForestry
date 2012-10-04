@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import net.minecraft.src.Block;
 import net.minecraft.src.ModLoader;
 import denoflionsx.core.core;

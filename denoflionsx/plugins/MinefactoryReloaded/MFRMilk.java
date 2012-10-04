@@ -4,14 +4,13 @@ import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
-import denoflionsx.API.PfFAPI;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.Colors;
 import denoflionsx.items.PfFContainer;
 import denoflionsx.Enums.Placeholder;
 import denoflionsx.Enums.EnumContainers.Containers;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 import denoflionsx.items.Fuels.customFuelSolid;
 
 public class MFRMilk{

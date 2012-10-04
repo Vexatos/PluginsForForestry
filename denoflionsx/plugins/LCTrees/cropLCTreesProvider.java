@@ -5,7 +5,7 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import denoflionsx.core.core;
 import denoflionsx.plugins.BetterFarming.cropCustomTree;
-import denoflionsx.plugins.Forestry.ForestryBlock;
+import denoflionsx.plugins.Forestry.Helpers.ForestryBlock;
 import forestry.api.cultivation.ICropEntity;
 import forestry.api.cultivation.ICropProvider;
 

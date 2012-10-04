@@ -1,8 +1,8 @@
 package denoflionsx.plugins.Buildcraft.Modules;
 
 import denoflionsx.denLib.denLib;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 
 public class quarryModule extends baseModule {
 

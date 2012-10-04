@@ -8,6 +8,8 @@ public interface IPfFPlugin {
     
     public boolean init();
     
+    public void doSetup();
+    
     public void recipes();
     
     public String getName();

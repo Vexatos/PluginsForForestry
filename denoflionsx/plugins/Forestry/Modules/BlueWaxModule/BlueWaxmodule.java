@@ -5,16 +5,16 @@ import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
-import denoflionsx.plugins.baseModule;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.Old.baseModule;
+import denoflionsx.Old.pluginBase;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.Enums.EnumDyeColors;
 import denoflionsx.Enums.EnumToolTextures;
-import denoflionsx.plugins.Forestry.LiquidContainer;
-import denoflionsx.plugins.Forestry.LiquidContainer.LiquidManagerWrapper;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
 
 public class BlueWaxmodule extends baseModule {
 

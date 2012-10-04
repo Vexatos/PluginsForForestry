@@ -10,9 +10,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.Proxy.Proxy;
+import denoflionsx.Version.PfFVersion;
 import denoflionsx.core.core;
 
-@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = "1.3 Beta", dependencies = "required-after:Forestry")
+@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = PfFVersion.version, dependencies = "required-after:Forestry")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PluginsforForestry {
 
@@ -35,12 +36,10 @@ public class PluginsforForestry {
     @Init
     public void load(FMLInitializationEvent event) {
         core.PfFCore.runCoreFunctions();
-        core.PfFCore.setupUniversalItems();
     }
 
     @PostInit
     public void modsLoaded(FMLPostInitializationEvent evt) {
-        core.registerEarlyPlugins();
-        core.registerSpecial();
+        core.PfFCore.loadPlugins();
     }
 }

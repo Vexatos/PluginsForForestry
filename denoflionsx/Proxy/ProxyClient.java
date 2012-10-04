@@ -6,13 +6,11 @@ package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
 import denoflionsx.PluginsforForestry;
-import denoflionsx.plugins.Forestry.LiquidFXHook;
+import denoflionsx.plugins.Forestry.Utility.LiquidFXHook;
 import java.io.File;
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ModLoader;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ProxyClient extends Proxy {
@@ -27,6 +25,10 @@ public class ProxyClient extends Proxy {
     @Override
     public boolean isClient() {
         return true;
+    }
+
+    @Override
+    public void registerRender() {
     }
 
     @Override

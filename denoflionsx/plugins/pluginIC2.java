@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumModIDs;
@@ -8,14 +9,14 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.denLib;
-import denoflionsx.items.Fuels.customFuel;
-import denoflionsx.plugins.Forestry.SqueezerHelper;
+import denoflionsx.Old.customFuel_OLD;
+import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import denoflionsx.plugins.IC2.UraniumGoo;
 import ic2.api.Items;
 
 public class pluginIC2 extends pluginBase {
 
-    public static customFuel radioactive;
+    public static customFuel_OLD radioactive;
     private ItemIDManager ids = new ItemIDManager(2, "LiquidUranium");
     private ItemIDManager gooids = new ItemIDManager(1, "UraniumGoo");
     public static UraniumGoo goo;
@@ -45,7 +46,7 @@ public class pluginIC2 extends pluginBase {
         }
         this.addItem("Uranium", Items.getItem("uraniumIngot"));
         this.addItem("uraniumCell", Items.getItem("reactorUraniumSimple"));
-        radioactive = new customFuel("Radioactive Waste", 10, 70000, customFuel.populateSprites(2), ids, Colors.Values.LIME.getColor(), this);
+        radioactive = new customFuel_OLD("Radioactive Waste", 10, 70000, customFuel_OLD.populateSprites(2), ids, Colors.Values.LIME.getColor(), this);
         goo = new UraniumGoo(gooids.getItemIDs().get(0), denLib.toLowerCaseNoSpaces("Uranium Goo"));
         this.hooked = true;
         return this.hooked;

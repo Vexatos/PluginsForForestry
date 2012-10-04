@@ -4,6 +4,8 @@ import cpw.mods.fml.client.FMLTextureFX;
 import denoflionsx.PluginsforForestry;
 import java.io.File;
 import net.minecraft.src.EntityPlayer;
+import net.minecraft.src.TileEntity;
+import net.minecraft.src.TileEntitySpecialRenderer;
 import net.minecraft.src.World;
 
 public class Proxy {
@@ -13,6 +15,10 @@ public class Proxy {
 
     public void openGUI(PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
         pl.openGui(p, id, world, x, y, z);
+    }
+    
+    public void registerRender(){
+        
     }
 
     public boolean isClient() {

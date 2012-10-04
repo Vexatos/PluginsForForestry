@@ -6,7 +6,7 @@ import denoflionsx.API.Objects.PfFLiquid;
 import denoflionsx.denLib.denLib;
 import denoflionsx.items.PfFContainer;
 import denoflionsx.Enums.EnumContainers.Containers;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 

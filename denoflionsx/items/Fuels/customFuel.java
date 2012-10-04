@@ -15,8 +15,8 @@ import denoflionsx.items.PfFContainer;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumContainers;
-import denoflionsx.plugins.Forestry.LiquidContainerSystem;
-import denoflionsx.plugins.pluginBase;
+import denoflionsx.core.IPfFPluginTemplate;
+import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 
 // This class is to automate the creation of basic fuel liquids and the
 // associated containers.
@@ -40,11 +40,11 @@ public class customFuel {
     private int color = Colors.Values.WHITE.getColor();
     public static int numOfContainers = 6;
     private int redCapMeta = 3;
-    private pluginBase parent;
+    private IPfFPluginTemplate parent;
     // Peat's MJ value divided by EU value.
     public static final double conversionRate = 1.25;
 
-    public customFuel(String name, int MJt, int burnTime, int textures[], ItemIDManager ItemIDs, int color, pluginBase parent) {
+    public customFuel(String name, int MJt, int burnTime, int textures[], ItemIDManager ItemIDs, int color, IPfFPluginTemplate parent) {
 
         if (name.equals("")) {
             name = "Unnamed Liquid";
@@ -150,13 +150,13 @@ public class customFuel {
     }
 
     private void getConfigOptions() {
-        this.enabled = this.parent.getOptionBool(this.nameNoSpaces + "_Enabled");
-        this.ID1 = this.parent.getOptionInt(this.nameNoSpaces + "_Liquid_ItemID");
-        this.MJt = this.parent.getOptionInt(this.nameNoSpaces + "_Liquid_MJt");
-        this.burnTime = this.parent.getOptionInt(this.nameNoSpaces + "_Liquid_BurnTime");
-        this.ID2 = this.parent.getOptionInt(this.nameNoSpaces + "_Solid_ItemID");
-        this.MJt2 = this.parent.getOptionInt(this.nameNoSpaces + "_Solid_MJt");
-        this.burnTime2 = this.parent.getOptionInt(this.nameNoSpaces + "_Solid_BurnTime");
+        this.enabled = this.parent.config.getOptionBool(this.nameNoSpaces + "_Enabled");
+        this.ID1 = this.parent.config.getOptionInt(this.nameNoSpaces + "_Liquid_ItemID");
+        this.MJt = this.parent.config.getOptionInt(this.nameNoSpaces + "_Liquid_MJt");
+        this.burnTime = this.parent.config.getOptionInt(this.nameNoSpaces + "_Liquid_BurnTime");
+        this.ID2 = this.parent.config.getOptionInt(this.nameNoSpaces + "_Solid_ItemID");
+        this.MJt2 = this.parent.config.getOptionInt(this.nameNoSpaces + "_Solid_MJt");
+        this.burnTime2 = this.parent.config.getOptionInt(this.nameNoSpaces + "_Solid_BurnTime");
     }
 
     private String[] generateExternals() {
@@ -206,7 +206,7 @@ public class customFuel {
         return nameNoSpaces;
     }
 
-    public pluginBase getParent() {
+    public IPfFPluginTemplate getParent() {
         return parent;
     }
 

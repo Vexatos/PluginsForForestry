@@ -4,6 +4,7 @@ import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.API.Interfaces.IPfFModule;
 import denoflionsx.API.Interfaces.IPfFPlugin;
 import denoflionsx.API.PfFEvents;
+import denoflionsx.denLib.Config.Config;
 
 public class IPfFModuleTemplate extends IPfFPluginTemplate implements IPfFModule {
 
@@ -40,13 +41,25 @@ public class IPfFModuleTemplate extends IPfFPluginTemplate implements IPfFModule
     public void register() {
         // Overriding this so pluginLoaded doesn't fire for modules.
         if (!this.isLoaded()) {
-            PfFEvents.pluginLoaded.register(this);
-            PfFEvents.moduleLoaded.register(this);
             PfFEvents.itemInitialized.register(this);
-            this.init();
-            this.recipes();
-            this.setLoadedState(true);
-            PfFEvents.moduleLoaded.notifyListeners(this);
+            this.setLoadedState(this.init());
+            if (isLoaded()) {
+                this.defaults();
+                this.doSetup();
+                this.recipes();
+                PfFEvents.moduleLoaded.notifyListeners(this);
+            }
         }
+    }
+
+    @Override
+    public boolean init() {
+        // Get access to parent config through interface.
+        config = (Config) this.Parent.configAccess();
+        config.addDefault(this.getName() + "_Enabled=" + "true");
+        if (!config.getOptionBool(this.getName() + "_Enabled")) {
+            return false;
+        }
+        return true;
     }
 }

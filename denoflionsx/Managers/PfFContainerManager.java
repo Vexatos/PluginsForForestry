@@ -16,23 +16,13 @@ public class PfFContainerManager implements IPfFContainerManager {
 
     @Override
     public void addLiquid(String LiquidName, ItemStack liquid, PfFColor color) {
-        liquids.add(new PfFLiquid(LiquidName, liquid.itemID, liquid, color));
-    }
-
-    @Override
-    public void addLiquid(String LiquidName, ItemStack liquid, int r, int g, int b) {
-        liquids.add(new PfFLiquid(LiquidName, liquid.itemID, liquid, new PfFColor("Custom Color", r, g, b)));
-    }
-
-    @Override
-    public void addLiquidLate(String LiquidName, ItemStack liquid, PfFColor color) {
-        addLiquid(LiquidName, liquid, color);
+        liquids.add(new PfFLiquid(LiquidName,liquid.itemID,liquid,color));
         forceLiquidSetup(LiquidName);
     }
 
     @Override
-    public void addLiquidLate(String LiquidName, ItemStack liquid, int r, int g, int b) {
-        addLiquid(LiquidName, liquid, r, g, b);
+    public void addLiquid(String LiquidName, ItemStack liquid, int r, int g, int b) {
+        liquids.add(new PfFLiquid(LiquidName,liquid.itemID,liquid,new PfFColor("" + r + g + b,r,g,b)));
         forceLiquidSetup(LiquidName);
     }
 
@@ -40,11 +30,13 @@ public class PfFContainerManager implements IPfFContainerManager {
     public void forceLiquidSetup(String LiquidName) {
         for (PfFLiquid l : liquids) {
             if (l.getLiquidName().equals(LiquidName)) {
-                pluginCoreItems.bfuels.addLiquid(l);
+                if (PfFManagers.ItemManager.doesItemExist("barrelfuels")) {
+                    pluginCoreItems.bfuels.addLiquid(l);
+                }
                 if (PfFManagers.ItemManager.doesItemExist("woodenbucket")) {
                     pluginCoreItems.fuels.addLiquid(l);
                 }
-                if (PfFManagers.ItemManager.doesItemExist("waxcast_red")){
+                if (PfFManagers.ItemManager.doesItemExist("waxcast_red")) {
                     BlueWaxmodule.fuels.addLiquid(l);
                 }
             }

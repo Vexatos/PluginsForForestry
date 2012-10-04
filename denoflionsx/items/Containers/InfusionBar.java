@@ -4,7 +4,7 @@ import denoflionsx.API.PfFManagers;
 import denoflionsx.core.core;
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.FMLWrapper;
-import denoflionsx.plugins.Forestry.CarpenterHelper;
+import denoflionsx.plugins.Forestry.Helpers.CarpenterHelper;
 import forestry.api.core.ItemInterface;
 import net.minecraft.src.Item;
 

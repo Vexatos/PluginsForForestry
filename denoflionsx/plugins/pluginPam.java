@@ -1,5 +1,6 @@
 package denoflionsx.plugins;
 
+import denoflionsx.Old.pluginBase;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.plugins.Pam.EnumPamCrops;
 
