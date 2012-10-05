@@ -1,5 +1,8 @@
 package denoflionsx.plugins.Railcraft.Modules.OreCrushModule;
 
+import denoflionsx.API.Events.EventPluginLoaded;
+import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.Items.multiItemDust;
+import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.Items.EnumDustTextures;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
@@ -8,9 +11,8 @@ import denoflionsx.core.core;
 import denoflionsx.plugins.Railcraft.Managers.RockCrusherManager;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Railcraft.Managers.BlastFurnaceManager;
-import denoflionsx.plugins.Railcraft.RockCrusherRecipeHelper;
-import denoflionsx.Old.baseModule;
-import denoflionsx.Old.pluginBase;
+import denoflionsx.plugins.Railcraft.Helpers.RockCrusherRecipeHelper;
+import denoflionsx.core.PfFModuleTemplate;
 import ic2.api.Ic2Recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -20,7 +22,7 @@ import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class OreCrushmodule extends baseModule {
+public class OreCrushmodule extends PfFModuleTemplate {
 
     public static multiItemDust dusts;
     public static ItemIDManager ids = new ItemIDManager(1, "dusts");
@@ -28,32 +30,49 @@ public class OreCrushmodule extends baseModule {
     public static IOreDictRecipeManager BlastFurnaceManager = new BlastFurnaceManager();
     public static int NumberOfDustPerCrush;
     public static MODE mode = MODE.PFF;
+    public static boolean isParentLoaded = false;
 
-    public OreCrushmodule(pluginBase parent) {
-        super(parent);
+    public OreCrushmodule(String name, String parent) {
+        super(name, parent);
+    }
+
+  
+    @Override
+    public void defaults() {
+        this.config.addDefault("OreCrushModule_Enabled=" + "true");
+        this.config.addDefault("Dusts_ItemID=" + ids.getItemIDs().get(0));
+        this.config.addDefault("NumberOfDustPerCrush=" + 2);
+        this.config.addDefault("KillIC2Macerator=" + "false");
+        this.config.addDefault("ForcePFFMode=" + "false");
     }
 
     @Override
-    protected void defaults() {
-        this.addDefault("OreCrushModule_Enabled=" + "true");
-        this.addDefault("Dusts_ItemID=" + ids.getItemIDs().get(0));
-        this.addDefault("NumberOfDustPerCrush=" + 2);
-        this.addDefault("KillIC2Macerator=" + "false");
-        this.addDefault("ForcePFFMode=" + "false");
+    public void pluginLoaded(EventPluginLoaded event) {
+       // Override.
+        if (event.getPlugin().getName().equals(this.getParentName())){
+            isParentLoaded = true;
+        }
     }
 
     @Override
-    protected void init() {
-        if (this.getOptionBool("OreCrushModule_Enabled")) {
-            if (denLib.detect(EnumModIDs.MODS.IC2.getID()) && !this.getOptionBool("ForcePFFMode")) {
+    public void onWorldLoaded() {
+        if (isParentLoaded){
+            this.register();
+        }
+    }
+    
+
+    @Override
+    public void doSetup() {
+        if (denLib.detect(EnumModIDs.MODS.IC2.getID()) && !this.config.getOptionBool("ForcePFFMode")) {
                 //core.print("Ic2 Detected. Setting up MODE.IC2 for OreCrushModule.");
                 mode = MODE.IC2;
             }
-            if (denLib.detect(EnumModIDs.MODS.METALURGY.getID()) && !this.getOptionBool("ForcePFFMode")) {
+            if (denLib.detect(EnumModIDs.MODS.METALURGY.getID()) && !this.config.getOptionBool("ForcePFFMode")) {
                 //core.print("Metallurgy Detected. Setting up MODE.Metallurgy for OreCrushModule.");
                 mode = MODE.Metallurgy;
             }
-            NumberOfDustPerCrush = this.getOptionInt("NumberOfDustPerCrush");
+            NumberOfDustPerCrush = this.config.getOptionInt("NumberOfDustPerCrush");
             if (mode.equals(MODE.PFF)) {
                 PFFMode();
             } else if (mode.equals(MODE.IC2)) {
@@ -61,17 +80,17 @@ public class OreCrushmodule extends baseModule {
             } else if (mode.equals(MODE.Metallurgy)) {
                 MetalMode();
             }
-            recipes();
-        }
     }
 
+  
+
     @Override
-    protected void recipes() {
+    public void recipes() {
     }
 
     public void PFFMode() {
         EnumDustTextures.DUST.init();
-        dusts = new multiItemDust(this.getOptionInt("Dusts_ItemID"), "dusts");
+        dusts = new multiItemDust(this.config.getOptionInt("Dusts_ItemID"), "dusts");
         dusts.add("Iron Dust", 0, EnumDustTextures.DUST.IRON.getIndex());
         dusts.add("Gold Dust", 1, EnumDustTextures.DUST.GOLD.getIndex());
         dusts.add("Copper Dust", 2, EnumDustTextures.DUST.COPPER.getIndex());
@@ -112,7 +131,7 @@ public class OreCrushmodule extends baseModule {
     }
 
     public void IC2Mode() {
-        if (this.getOptionBool("KillIC2Macerator")) {
+        if (this.config.getOptionBool("KillIC2Macerator")) {
             Iterator i = Ic2Recipes.getMaceratorRecipes().iterator();
             while (i.hasNext()) {
                 Map.Entry pairs = (Map.Entry) i.next();
@@ -169,10 +188,7 @@ public class OreCrushmodule extends baseModule {
         BlastFurnaceManager.addRecipes(dust,d);
     }
 
-    public static void load(pluginBase parent) {
-        baseModule b = new OreCrushmodule(parent);
-        b.register();
-    }
+    
 
     public static enum MODE {
 

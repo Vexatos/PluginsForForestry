@@ -1,12 +1,9 @@
 package denoflionsx.plugins.Forestry;
 
-import denoflionsx.API.Events.EventItemInitialized;
-import denoflionsx.API.Events.EventPluginLoaded;
-import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.core.PfFPluginTemplate;
-import denoflionsx.core.core;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
@@ -20,31 +17,17 @@ import forestry.api.fuels.FuelManager;
 import forestry.api.core.BlockInterface;
 
 public class pluginForestry extends PfFPluginTemplate {
-    
-    public peatModule PeatModule = PeatModule = new peatModule("PeatModule",this.getName());
-    public extraFuelsModule ExtraFuelsModule = new extraFuelsModule("ExtraFuelsModule",this.getName());
-    public solidfuelModule SolidFuelModule = new solidfuelModule("SolidFuelModule",this.getName());
-    public stillModule StillModule = new stillModule("StillModule",this.getName());
-    public BlueWaxmodule BlueWaxModule = new BlueWaxmodule("BlueWaxModule",this.getName());
-    
+
+    public peatModule PeatModule = new peatModule("PeatModule", this.getName());
+    public extraFuelsModule ExtraFuelsModule = new extraFuelsModule("ExtraFuelsModule", this.getName());
+    public solidfuelModule SolidFuelModule = new solidfuelModule("SolidFuelModule", this.getName());
+    public stillModule StillModule = new stillModule("StillModule", this.getName());
+    public BlueWaxmodule BlueWaxModule = new BlueWaxmodule("BlueWaxModule", this.getName());
+
     public pluginForestry(String name, String parent) {
         super(name, parent);
     }
-    
-    @Override
-    public void itemInitialized(EventItemInitialized event) {
-        if (event.getName().equals("barrelfuels")) {
-            if (this.config.getOptionBool("WoodenBucketIntegration")) {
-                core.print("Setting up Forestry Liquids with Wooden Buckets.");
-                PfFManagers.ContainerManager.addLiquid("Seed Oil", EnumForestryLiquids.SEEDOIL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
-                PfFManagers.ContainerManager.addLiquid("Apple Juice", EnumForestryLiquids.APPLEJUICE.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
-                PfFManagers.ContainerManager.addLiquid("Honey", EnumForestryLiquids.HONEY.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
-                PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
-                PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
-            }
-        }
-    }
-    
+
     @Override
     public void recipes() {
         if (true) {
@@ -56,6 +39,13 @@ public class pluginForestry extends PfFPluginTemplate {
         }
         for (int i = 0; i != 15; i++) {
             PfFManagers.ExtractorTargetManager.addBlock(BlockInterface.getBlock("glass").itemID, i);
+        }
+        if (this.config.getOptionBool("WoodenBucketIntegration")) {
+            PfFManagers.ContainerManager.addLiquid("Seed Oil", EnumForestryLiquids.SEEDOIL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
+            PfFManagers.ContainerManager.addLiquid("Apple Juice", EnumForestryLiquids.APPLEJUICE.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Honey", EnumForestryLiquids.HONEY.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
         }
     }
 

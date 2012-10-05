@@ -14,7 +14,7 @@ import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Helpers.FermenterHelper;
 import denoflionsx.Old.customFuel_OLD;
 import denoflionsx.items.Fuels.customFuel;
-import denoflionsx.plugins.Railcraft.CokeOvenRecipeHelper;
+import denoflionsx.plugins.Railcraft.Helpers.CokeOvenRecipeHelper;
 import net.minecraft.src.Item;
 
 public class peatModule extends PfFModuleTemplate {

@@ -39,8 +39,6 @@ public class pluginBuildcraft extends PfFPluginTemplate {
 
     @Override
     public void doSetup() {
-        TankManager.setup();
-        goldGear.setup();
         String BCE = EnumModIDs.MODS.BUILDCRAFT_ENERGY.gettheClass();
         oil = denLib.ReflectionHelper.getNewItemStackBlock(BCE, "oilStill");
         fuel = denLib.ReflectionHelper.getNewItemStack(BCE, "fuel");

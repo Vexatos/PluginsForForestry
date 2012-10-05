@@ -14,4 +14,6 @@ public class PfFEvents {
     
     public static IListenerManager itemInitialized;
     
+    public static IListenerManager specialEvent;
+    
 }

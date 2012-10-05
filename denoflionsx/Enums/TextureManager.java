@@ -1,7 +1,7 @@
 package denoflionsx.Enums;
 
 import denoflionsx.PluginsforForestry;
-import denoflionsx.plugins.BluesFood.ItemFoods;
+import denoflionsx.plugins.BluesFood.Items.ItemFoods;
 
 public class TextureManager {
 

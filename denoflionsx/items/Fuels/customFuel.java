@@ -1,5 +1,6 @@
 package denoflionsx.items.Fuels;
 
+import buildcraft.api.liquids.LiquidDictionary;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import forestry.api.fuels.EngineBronzeFuel;
@@ -124,6 +125,7 @@ public class customFuel {
         FuelManager.bronzeEngineFuel.put(fuelStack.itemID, new EngineBronzeFuel(fuelStack, this.MJt, this.burnTime, this.isSafeFuel));
         GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), convertToEU(this.MJt, this.burnTime), 1));
         fuelSolid = new customFuelSolid(this.ID2, this.name, this.MJt2, this.burnTime2, EnumContainers.Containers.BAR.getTexture(), false, this.color);
+        LiquidDictionary.getOrCreateLiquid(this.name, new LiquidStack(this.fuel,1000));
     }
 
     private String[] generateInternals() {

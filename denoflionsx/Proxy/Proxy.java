@@ -4,8 +4,6 @@ import cpw.mods.fml.client.FMLTextureFX;
 import denoflionsx.PluginsforForestry;
 import java.io.File;
 import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.TileEntitySpecialRenderer;
 import net.minecraft.src.World;
 
 public class Proxy {

@@ -9,6 +9,9 @@ public class BlastFurnaceManager implements IOreDictRecipeManager {
 
     @Override
     public void addRecipes(ItemStack output, ArrayList<ItemStack> ores) {
+        if (ores.isEmpty()){
+            return;
+        }
          RailcraftCraftingManager.blastFurnace.addRecipe(output.itemID, output.getItemDamage(), 20, ores.get(0));
     }
 }

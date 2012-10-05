@@ -4,6 +4,7 @@ public enum PfFEventTypes {
     
     PLUGIN_LOADED,
     MODULE_LOADED,
-    ITEM_CREATED;
+    ITEM_CREATED,
+    SPECIAL;
     
 }

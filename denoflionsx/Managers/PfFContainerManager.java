@@ -1,18 +1,42 @@
 package denoflionsx.Managers;
 
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EventSpecial;
 import denoflionsx.API.Interfaces.IPfFContainerManager;
 import denoflionsx.API.Objects.PfFColor;
 import denoflionsx.API.Objects.PfFLiquid;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
-import denoflionsx.plugins.pluginCoreItems;
+import denoflionsx.plugins.Core.pluginCoreItems;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 
 public class PfFContainerManager implements IPfFContainerManager {
 
     private static ArrayList<PfFLiquid> liquids = new ArrayList();
-    public static boolean hasAPILiquid = false;
+
+    public PfFContainerManager() {
+        PfFEvents.specialEvent.register(this);
+    }
+
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void onSpecialEvent(EventSpecial event){
+        if (event.getMessage().toLowerCase().contains("barrel")){
+            for (PfFLiquid l : liquids){
+                pluginCoreItems.bfuels.addLiquid(l);
+            }
+        }else if (event.getMessage().toLowerCase().contains("bucket")){
+            for (PfFLiquid l : liquids){
+                pluginCoreItems.fuels.addLiquid(l);
+            }
+        }else if (event.getMessage().toLowerCase().contains("cast")){
+            for (PfFLiquid l : liquids){
+                BlueWaxmodule.fuels.addLiquid(l);
+            }
+        }
+    }
 
     @Override
     public void addLiquid(String LiquidName, ItemStack liquid, PfFColor color) {

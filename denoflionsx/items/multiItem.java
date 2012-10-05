@@ -43,7 +43,6 @@ public class multiItem extends Item {
             p = par1ItemStack;
         }
         return getMetaName(p);
-
     }
 
     public String getMetaName(ItemStack par1ItemStack) {

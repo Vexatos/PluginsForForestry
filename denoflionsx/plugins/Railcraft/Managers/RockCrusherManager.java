@@ -1,7 +1,7 @@
 package denoflionsx.plugins.Railcraft.Managers;
 
 import denoflionsx.Interfaces.IOreDictRecipeManager;
-import denoflionsx.plugins.Railcraft.RockCrusherRecipeHelper;
+import denoflionsx.plugins.Railcraft.Helpers.RockCrusherRecipeHelper;
 import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 
