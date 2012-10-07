@@ -33,7 +33,7 @@ public class WoodenBucketFuels extends PfFContainer {
         return PfFManagers.ItemManager.getItem("woodenbucket").copy();
     }
 
-    public void addLiquid(PfFLiquid liquid) {
+    public final void addLiquid(PfFLiquid liquid) {
         this.add(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "bucket", liquid.getMeta(), Containers.BUCKET.getTexture(), liquid.getLiquidName() + " Bucket");
         this.renderColors.put(liquid.getMeta(), liquid.getColor().convertRBG());
         LiquidContainerSystem.bucketWithOverride(new ItemStack(this, 1, liquid.getMeta()), liquid.getLiquid(), PfFManagers.ItemManager.getItem("woodenbucket"));

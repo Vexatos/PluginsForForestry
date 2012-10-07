@@ -7,6 +7,7 @@ import denoflionsx.plugins.BluesFood.Items.multiItemFood;
 import denoflionsx.plugins.BluesFood.Items.Cupcake;
 import denoflionsx.API.Enums.EnumAnimals;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Annotations.ThisIsBlues;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.PfFPluginTemplate;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
+@ThisIsBlues
 public class pluginBlueFood extends PfFPluginTemplate {
 
     ItemButcherKnife knife;

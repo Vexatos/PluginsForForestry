@@ -11,15 +11,21 @@ import java.io.File;
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.src.*;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ProxyClient extends Proxy {
-    
+
     public static ArrayList<FMLTextureFX> fx = new ArrayList();
 
     @Override
     public FMLTextureFX addLiquidFX(int rMin, int rMax, int gMin, int gMax, int bMin, int bMax, int iconIndex, String textureFile) {
         return LiquidFXHook.addTexture(rMin, rMax, gMin, gMax, bMin, bMax, iconIndex, textureFile);
+    }
+
+    @Override
+    public void bindTexture(String texture) {
+        ForgeHooksClient.bindTexture(texture, 0);
     }
 
     @Override
@@ -29,6 +35,7 @@ public class ProxyClient extends Proxy {
 
     @Override
     public void registerRender() {
+        
     }
 
     @Override

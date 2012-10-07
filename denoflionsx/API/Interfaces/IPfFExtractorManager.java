@@ -1,5 +1,6 @@
 package denoflionsx.API.Interfaces;
 
+import denoflionsx.API.Annotations.InternalUseOnly;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 
@@ -15,8 +16,10 @@ public interface IPfFExtractorManager {
     
     public void addItemStack(ItemStack i);
     
+    @InternalUseOnly
     public boolean isValidTarget(int id, int meta);
     
+    @InternalUseOnly
     public boolean isValidTarget(int id);
     
 }

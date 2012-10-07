@@ -1,5 +1,6 @@
 package denoflionsx.API.Interfaces;
 
+import denoflionsx.API.Annotations.InternalUseOnly;
 import denoflionsx.API.Objects.PfFColor;
 import denoflionsx.API.Objects.PfFLiquid;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public interface IPfFContainerManager {
     // This one is for custom colors. Pass RBG values as ints.
     public void addLiquid(String LiquidName, ItemStack liquid, int r, int g, int b);
     
-    //Internal use only!
+    @InternalUseOnly
     public void forceLiquidSetup(String LiquidName);
 
     public ArrayList<PfFLiquid> getLiquids();

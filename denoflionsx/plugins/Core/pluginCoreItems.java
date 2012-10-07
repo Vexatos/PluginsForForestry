@@ -12,9 +12,9 @@ import denoflionsx.plugins.Core.Items.MetaContainers.WoodenBucketFuels;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumToolTextures;
 import buildcraft.api.liquids.LiquidStack;
-import denoflionsx.API.Events.EventItemInitialized;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Annotations.doesSpecialEvent;
 import denoflionsx.Enums.EnumModIDs;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
@@ -100,6 +100,7 @@ public class pluginCoreItems extends PfFPluginTemplate {
     }
 
     @Override
+    @doesSpecialEvent
     public void doSetup() {
         if (this.config.getOptionBool("MushroomBag_Enabled")) {
             mushroom = new MushroomBag(this.config.getOptionInt("MushroomBag_ItemID"));

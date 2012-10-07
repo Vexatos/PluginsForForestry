@@ -2,6 +2,7 @@ package denoflionsx.core;
 
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.core.Loader.pluginLoader;
+import denoflionsx.plugins.BlueSilkWorm.pluginBlueSilkWorm;
 import denoflionsx.plugins.BluesFood.pluginBlueFood;
 import denoflionsx.plugins.Buildcraft.pluginBuildcraft;
 import denoflionsx.plugins.Core.pluginCoreItems;
@@ -21,5 +22,6 @@ public class PluginInstances {
     public static pluginRailcraft Railcraft = new pluginRailcraft("pluginRailcraft", EnumModIDs.MODS.RAILCRAFT.getID());
     public static pluginFarmCraftory FarmCraftory = new pluginFarmCraftory("pluginFarmCraftory", EnumModIDs.MODS.FARMCRAFTORY.getID());
     public static pluginCoreItems CoreItems = new pluginCoreItems("pluginCoreItems", EnumModIDs.MODS.FORESTRY.getID());
+    public static pluginBlueSilkWorm BlueSilkWorm = new pluginBlueSilkWorm("pluginBlueSilkWorm",EnumModIDs.MODS.FORESTRY.getID());
     public static pluginUpdater Updater = new pluginUpdater("pluginUpdater", EnumModIDs.MODS.FORESTRY.getID());
 }

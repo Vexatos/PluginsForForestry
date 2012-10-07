@@ -29,7 +29,7 @@ public class BarrelFuels extends PfFContainer {
         }
     }
 
-    public void addLiquid(PfFLiquid liquid) {
+    public final void addLiquid(PfFLiquid liquid) {
         this.add(denLib.toLowerCaseNoSpaces(liquid.getLiquidName()) + "barrel", liquid.getMeta(), EnumContainers.Containers.BARREL.getTexture(), liquid.getLiquidName() + " Barrel");
         this.renderColors.put(liquid.getMeta(), liquid.getColor().convertRBG());
         LiquidContainerSystem.barrelOverride(PfFManagers.ItemManager.getItem("barrel"), new ItemStack(this, 1, liquid.getMeta()), liquid.getLiquid().itemID);

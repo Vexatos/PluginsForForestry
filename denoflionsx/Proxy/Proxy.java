@@ -10,13 +10,16 @@ public class Proxy {
 
     public void preloadTexture(String texture) {
     }
+    
+    public void bindTexture(String texture){
+        
+    }
 
     public void openGUI(PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {
         pl.openGui(p, id, world, x, y, z);
     }
     
     public void registerRender(){
-        
     }
 
     public boolean isClient() {

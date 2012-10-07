@@ -1,15 +1,19 @@
 package denoflionsx.API.Interfaces;
 
+import denoflionsx.API.Annotations.InternalUseOnly;
 import java.util.ArrayList;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 
 public interface IPfFItemManager {
     
+    @InternalUseOnly
     public void registerItem(String s, ItemStack i);
     
+    @InternalUseOnly
     public void registerItem(String s, Item i, int dmg);
     
+    @InternalUseOnly
     public void registerItem(String s, Item i);
     
     public void dumpItemsToConsole();

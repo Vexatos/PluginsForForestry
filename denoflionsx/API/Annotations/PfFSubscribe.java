@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-// You can use this annotation in place of implemeting IPluginListener, IModuleListener, and IItemListener.
+// You can use this annotation in place of implemeting a listener interface.
 // It is used like so: @PfFSubscribe(Event = PfFEventType.PLUGIN_LOADED) over a method with the proper event parameter.
 // YOU STILL NEED TO REGISTER YOUR INSTANCE WITH THE LISTENER MANAGER!
 

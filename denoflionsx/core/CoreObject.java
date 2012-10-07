@@ -1,5 +1,6 @@
 package denoflionsx.core;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import denoflionsx.API.Events.*;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
@@ -14,6 +15,7 @@ import denoflionsx.Interfaces.IWorldLoaded;
 import denoflionsx.Managers.*;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.denLib.Config.Config;
+import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.denLib.denLib;
 
 public class CoreObject implements IWorldLoaded {
@@ -30,6 +32,10 @@ public class CoreObject implements IWorldLoaded {
     @PfFSubscribe(Event = PfFEventTypes.MODULE_LOADED)
     public void moduleLoaded(EventModuleLoaded event) {
         core.print(event.getModule().getParentName() + " | " + event.getModule().getName() + " is loaded!");
+    }
+    
+    public void registerGUIHandler(Object instance, IGuiHandler handler){
+        FMLWrapper.MODE.FML.registerGUIHandler(instance, handler);
     }
 
     @Override

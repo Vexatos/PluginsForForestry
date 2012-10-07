@@ -19,6 +19,9 @@ public class OreDictHandler {
     
     @ForgeSubscribe
     public void onOreRegistered(OreDictionary.OreRegisterEvent event){
+        if (event.Name.length() <= dust.length()){
+            return;
+        }
         if (event.Name.substring(0,dust.length()).contains(dust)){
             if (dusts.get(event.Name.substring(0,dust.length())) == null){
                 dusts.put(event.Name,event.Ore);

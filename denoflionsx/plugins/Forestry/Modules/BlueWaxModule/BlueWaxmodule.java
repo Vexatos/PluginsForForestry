@@ -4,6 +4,8 @@ import denoflionsx.Enums.Placeholder;
 import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
+import denoflionsx.Annotations.ThisIsBlues;
+import denoflionsx.Annotations.doesSpecialEvent;
 import net.minecraft.src.*;
 import denoflionsx.denLib.denLib;
 import forestry.api.core.ItemInterface;
@@ -16,6 +18,7 @@ import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
 
+@ThisIsBlues
 public class BlueWaxmodule extends PfFModuleTemplate {
 
     private ItemIDManager wax = new ItemIDManager(1, "ExtraWax");
@@ -25,6 +28,8 @@ public class BlueWaxmodule extends PfFModuleTemplate {
     public static ItemRodofFreezing Rod;
     public static WaxCastFuels fuels;
     private int WaxCastPerCraft;
+    private int arrowsPerCraft;
+    private int tabletsPerCraft;
 
     public BlueWaxmodule(String name, String parent) {
         super(name, parent);
@@ -40,9 +45,12 @@ public class BlueWaxmodule extends PfFModuleTemplate {
         this.config.addDefault("WaxCastFuel_Enabled=" + "true");
         this.config.addDefault("WaxCastFuel_ItemID=" + fuel.getItemIDs().get(0));
         this.config.addDefault("WaxCast_AmountPerCraft=" + 4);
+        this.config.addDefault("Arrows_AmountPerCraft=" + 3);
+        this.config.addDefault("WaxTablet_AmountPerCraft=" + 3);
     }
 
     @Override
+    @doesSpecialEvent
     public void doSetup() {
         //------------------------------------------------
         extrawax = new waxCast(Integer.valueOf(this.config.getOption("BluesWaxStuff_ItemID")), "bluesextrawaxitems");
@@ -77,6 +85,8 @@ public class BlueWaxmodule extends PfFModuleTemplate {
         // BLUE'S BEES WAX STUFF
         //--------------------------
         this.WaxCastPerCraft = this.config.getOptionInt("WaxCast_AmountPerCraft");
+        this.arrowsPerCraft = this.config.getOptionInt("Arrows_AmountPerCraft");
+        this.tabletsPerCraft = this.config.getOptionInt("WaxTablet_AmountPerCraft");
         if (denLib.convertToBoolean(this.config.getOption("BluesWaxStuff_Enabled"))) {
             FMLWrapper.MODE.FML.addRecipe(new ItemStack(Block.torchWood, 2, 0), new Object[]{
                         "XSX",
@@ -99,22 +109,22 @@ public class BlueWaxmodule extends PfFModuleTemplate {
                         Character.valueOf('S'), Item.silk,
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")
                     });
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.tabletsPerCraft, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "WWX",
                         "WWX",
                         "XXX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.tabletsPerCraft, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XXX",
                         "WWX",
                         "WWX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.tabletsPerCraft, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XWW",
                         "XWW",
                         "XXX",
                         Character.valueOf('W'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, 1, extrawax.metaMap.get("Wax Tablet")), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(extrawax, this.tabletsPerCraft, extrawax.metaMap.get("Wax Tablet")), new Object[]{
                         "XXX",
                         "XWW",
                         "XWW",
@@ -145,42 +155,42 @@ public class BlueWaxmodule extends PfFModuleTemplate {
                         Character.valueOf('G'), new ItemStack(Item.lightStoneDust),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('P'), ItemInterface.getItem("phosphor")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "FXX",
                         "SXX",
                         "BXX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "XFX",
                         "XSX",
                         "XBX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "XXF",
                         "XXS",
                         "XXB",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("beeswax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "FXX",
                         "SXX",
                         "BXX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("refractoryWax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "XFX",
                         "XSX",
                         "XBX",
                         Character.valueOf('F'), new ItemStack(Item.flint),
                         Character.valueOf('S'), new ItemStack(Item.stick),
                         Character.valueOf('B'), ItemInterface.getItem("refractoryWax")});
-            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow), new Object[]{
+            FMLWrapper.MODE.FML.addRecipe(new ItemStack(Item.arrow, this.arrowsPerCraft, 0), new Object[]{
                         "XXF",
                         "XXS",
                         "XXB",
