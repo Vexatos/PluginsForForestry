@@ -1,5 +1,6 @@
 package denoflionsx.plugins.BlueSilkWorm.Gadget;
 
+import denoflionsx.Enums.EnumBlockSides;
 import denoflionsx.Machine.Gadget.IPfFGadget;
 import denoflionsx.Machine.PfFMachineBlock;
 import net.minecraft.src.Material;
@@ -17,4 +18,13 @@ public class BlockIncubator extends PfFMachineBlock{
         return new TileEntityIncubator(this.gadget);
     }
 
+    @Override
+    public int getBlockTextureFromSide(int par1) {
+        if (par1 == EnumBlockSides.TOP.getIndex()){
+            return EnumIncubatorSideTextures.TOP.getIndex();
+        }else if (par1 == EnumBlockSides.BOTTOM.getIndex()){
+            return EnumIncubatorSideTextures.BOTTOM.getIndex();
+        }
+        return EnumIncubatorSideTextures.SIDE.getIndex();
+    }
 }

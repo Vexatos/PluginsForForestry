@@ -1,17 +1,15 @@
 package denoflionsx.plugins.BlueSilkWorm.Gadget;
 
 import denoflionsx.API.PfFManagers;
-import denoflionsx.Interfaces.IPfFTrigger;
 import denoflionsx.Machine.Gadget.IPfFGadget;
 import denoflionsx.Machine.PfFMachineTileEntity;
-import denoflionsx.core.core;
 import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
 import denoflionsx.plugins.BlueSilkWorm.Helpers.SilkWormHelper;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormCocoonAccess;
-import denoflionsx.plugins.Buildcraft.Triggers.Triggers;
-import java.util.LinkedList;
+import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormMothAccess;
+import net.minecraft.src.ItemStack;
 
-public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWormCocoonAccess, IPfFTrigger {
+public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWormCocoonAccess, ISilkWormMothAccess{
 
     public TileEntityIncubator() {
         super();
@@ -26,13 +24,7 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWo
         if (this.getStackInSlot(0) != null) {
             if (stacks[0].itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
                 if (SilkWormHelper.isWormValid(stacks[0])) {
-                    id = SilkWormHelper.getWormLifeSpanLabel(stacks[0]);
-                    time = String.valueOf(SilkWormHelper.getWormLifeSpanInt(stacks[0]));
-                    if (stopCocoon && stacks[0].getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()) {
-                        core.print("Stop!");
-                    } else {
-                        SilkWormHelper.progressWorm(stacks[0]);
-                    }
+                    SilkWormHelper.progressWorm(stacks[0]);
                 } else {
                     SilkWormHelper.setupWorm(stacks[0]);
                 }
@@ -41,17 +33,32 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWo
     }
 
     @Override
-    public LinkedList getCustomTriggers() {
-        LinkedList a = new LinkedList();
-        a.add(Triggers.hasCocoon);
-        return a;
+    public ItemStack getCocoon() {
+        return stacks[0];
+    }
+
+    @Override
+    public ItemStack getMoth() {
+        return stacks[0];
     }
 
     @Override
     public boolean hasCocoon() {
-        if (stacks[0] != null) {
-            if (stacks[0].itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
-                if (stacks[0].getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()) {
+        if (getCocoon() != null) {
+            if (getCocoon().itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
+                if (getCocoon().getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasMoth() {
+        if (getMoth() != null) {
+            if (getMoth().itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
+                if (getMoth().getItemDamage() == SilkWormGrowthStages.MOTH.getMeta()) {
                     return true;
                 }
             }

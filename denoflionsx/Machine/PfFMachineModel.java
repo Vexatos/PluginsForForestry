@@ -12,6 +12,7 @@ import net.minecraft.src.ModelRenderer;
 public class PfFMachineModel extends ModelBase {
     //fields
 
+    public static final String texture = "/denoflionsx/barrel_ahmg.png";
     ModelRenderer Shape1;
     ModelRenderer Shape2;
     ModelRenderer Shape3;

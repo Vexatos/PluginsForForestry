@@ -1,17 +1,16 @@
 package denoflionsx.Machine;
 
+import denoflionsx.Interfaces.IPfFTrigger;
 import denoflionsx.Machine.Gadget.IPfFGadget;
 import denoflionsx.Machine.Gadget.PfFGadgetManager;
 import denoflionsx.denLib.denLib;
+import java.util.LinkedList;
 import net.minecraft.src.*;
 
-public class PfFMachineTileEntity extends TileEntity implements IInventory {
+public class PfFMachineTileEntity extends TileEntity implements IInventory,IPfFTrigger{
 
-    public static final String texture = "/denoflionsx/barrel_ahmg.png";
     public ItemStack[] stacks;
-    public String id = "Life Span";
-    public String time = "Life Points";
-    public boolean stopCocoon = false;
+    public boolean hasWork = false;
     public IPfFGadget gadget;
 
     public PfFMachineTileEntity(IPfFGadget gadget) {
@@ -20,6 +19,11 @@ public class PfFMachineTileEntity extends TileEntity implements IInventory {
     }
 
     public PfFMachineTileEntity() {
+    }
+
+    @Override
+    public LinkedList getCustomTriggers() {
+        return this.gadget.getCustomTriggers();
     }
 
     @Override

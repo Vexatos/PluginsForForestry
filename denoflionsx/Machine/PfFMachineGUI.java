@@ -7,7 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 public class PfFMachineGUI extends GuiContainer {
 
-    public static final String texture = "/denoflionsx/oven_food_gui.png";
     private PfFMachineTileEntity tile;
 
     public PfFMachineGUI(TileEntity tile, Container par1Container) {

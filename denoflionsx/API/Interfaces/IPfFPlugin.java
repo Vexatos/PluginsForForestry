@@ -1,5 +1,8 @@
 package denoflionsx.API.Interfaces;
 
+import denoflionsx.API.Annotations.InternalUseOnly;
+
+@InternalUseOnly
 public interface IPfFPlugin {
     
     // New plugin interface.

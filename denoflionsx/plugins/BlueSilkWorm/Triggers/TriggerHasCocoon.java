@@ -1,21 +1,15 @@
-package denoflionsx.plugins.Buildcraft.Triggers;
+package denoflionsx.plugins.BlueSilkWorm.Triggers;
 
 import buildcraft.api.gates.ITriggerParameter;
-import buildcraft.api.gates.Trigger;
-import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormCocoonAccess;
+import denoflionsx.plugins.Buildcraft.Triggers.PfFCustomTrigger;
 import net.minecraft.src.TileEntity;
 
-public class TriggerHasCocoon extends Trigger {
+public class TriggerHasCocoon extends PfFCustomTrigger {
 
     public TriggerHasCocoon(int id) {
         super(id);
-    }
-
-    @Override
-    public String getTextureFile() {
-        return PluginsforForestry.texture;
     }
 
     @Override

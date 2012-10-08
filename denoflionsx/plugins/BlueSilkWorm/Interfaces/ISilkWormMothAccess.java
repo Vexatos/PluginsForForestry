@@ -2,10 +2,10 @@ package denoflionsx.plugins.BlueSilkWorm.Interfaces;
 
 import net.minecraft.src.ItemStack;
 
-public interface ISilkWormCocoonAccess {
+public interface ISilkWormMothAccess {
     
-    public boolean hasCocoon();
+    public boolean hasMoth();
     
-    public ItemStack getCocoon();
+    public ItemStack getMoth();
     
 }
