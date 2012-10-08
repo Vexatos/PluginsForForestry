@@ -1,7 +1,6 @@
 package denoflionsx.plugins.BlueSilkWorm.Managers;
 
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGenericManager;
-import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormRollManager;
 
 public class SilkWormManagers {
     
@@ -9,7 +8,7 @@ public class SilkWormManagers {
     // all of a sudden an awesome idea drops in.
     
     public static ISilkWormGenericManager LifeStates = new SilkWormLifeStateManager();
-    public static ISilkWormGenericManager LifeSpans = new SilkWormLifeSpanManager();
     public static ISilkWormGenericManager Genders = new SilkWormGenderManager();
-    public static ISilkWormRollManager LifeManager = new SilkWormRollManager();
+    public static SilkWormRollManager LifeManager = new SilkWormRollManager();
+    public static ISilkWormGenericManager LifeSpans = new SilkWormLifeSpanManager();
 }

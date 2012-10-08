@@ -21,8 +21,9 @@ public class ItemSilkWorm extends multiItem {
     @Override
     public void addInformation(ItemStack par1ItemStack, List par2List) {
         if (par1ItemStack.stackTagCompound != null){
-            par2List.add("Lifespan: " + SilkWormHelper.getWormLifeSpanLabel(par1ItemStack));
             par2List.add("Gender: " + SilkWormHelper.getWormGender(par1ItemStack));
+            par2List.add("Worm Stage Length: " + SilkWormHelper.getWormCocoonCategory(par1ItemStack));
+            par2List.add("Cocoon Stage Length: " + SilkWormHelper.getWormMothCategory(par1ItemStack));
         }
     }
 

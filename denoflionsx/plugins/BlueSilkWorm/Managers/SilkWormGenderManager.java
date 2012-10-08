@@ -5,7 +5,7 @@ import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGender;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGenericManager;
 import java.util.HashMap;
 
-public class SilkWormGenderManager implements ISilkWormGenericManager{
+public class SilkWormGenderManager implements ISilkWormGenericManager {
 
     public static HashMap<String, ISilkWormGender> genders = new HashMap();
 
@@ -26,17 +26,18 @@ public class SilkWormGenderManager implements ISilkWormGenericManager{
 
     @Override
     public Object getObject(String name) {
-        if (genders.get(name) != null){
+        if (genders.get(name) != null) {
             return genders.get(name);
-        }else{
+        } else {
             return null;
         }
     }
 
     @Override
     public final void register(Object state) {
-        ISilkWormGender g = (ISilkWormGender)state;
-        genders.put(g.getGender(),g);
+        if (state instanceof ISilkWormGender) {
+            ISilkWormGender g = (ISilkWormGender) state;
+            genders.put(g.getGender(), g);
+        }
     }
- 
 }

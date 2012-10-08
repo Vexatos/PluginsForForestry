@@ -1,45 +1,46 @@
 package denoflionsx.plugins.BlueSilkWorm.Managers;
 
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGenericManager;
-import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormLifeSpan;
-import denoflionsx.plugins.BlueSilkWorm.LifeSpans.SilkWormGenericLifeSpan;
+import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormLifeSpanCategory;
+import denoflionsx.plugins.BlueSilkWorm.LifeSpans.SilkWormLifeSpanCategory;
 import java.util.HashMap;
 
-public class SilkWormLifeSpanManager implements ISilkWormGenericManager{
+public class SilkWormLifeSpanManager implements ISilkWormGenericManager {
 
-    public static HashMap<String, ISilkWormLifeSpan> Lifespans = new HashMap();
+    public static HashMap<String, Object> objects = new HashMap();
 
     public SilkWormLifeSpanManager() {
-        register(new SilkWormGenericLifeSpan("Shortest",1));
-        register(new SilkWormGenericLifeSpan("Short",2));
-        register(new SilkWormGenericLifeSpan("Normal",3));
-        register(new SilkWormGenericLifeSpan("Long",4));
-        register(new SilkWormGenericLifeSpan("Longest",5));
+        this.register(new SilkWormLifeSpanCategory("Very Short",1,60));
+        this.register(new SilkWormLifeSpanCategory("Short",61,120));
+        this.register(new SilkWormLifeSpanCategory("Normal",121,180));
+        this.register(new SilkWormLifeSpanCategory("Long",181,240));
+        this.register(new SilkWormLifeSpanCategory("Very Long",241,300));
+    }
+
+    @Override
+    public HashMap getHashMap() {
+        return objects;
+    }
+
+    @Override
+    public int getNumberOfRegisteredObjects() {
+        return objects.size();
     }
 
     @Override
     public Object getObject(String name) {
-        if (Lifespans.get(name) != null){
-            return Lifespans.get(name);
-        }else{
+        if (objects.get(name) != null) {
+            return objects.get(name);
+        } else {
             return null;
         }
     }
 
     @Override
     public final void register(Object state) {
-        ISilkWormLifeSpan s = (ISilkWormLifeSpan)state;
-        Lifespans.put(s.getLifeSpanName(),s);
+        if (state instanceof ISilkWormLifeSpanCategory) {
+            ISilkWormLifeSpanCategory cat = (ISilkWormLifeSpanCategory) state;
+            objects.put(cat.getCategoryLabel(),cat);
+        }
     }
-
-    @Override
-    public int getNumberOfRegisteredObjects() {
-        return Lifespans.size();
-    }
-
-    @Override
-    public HashMap getHashMap() {
-        return Lifespans;
-    }
-
 }
