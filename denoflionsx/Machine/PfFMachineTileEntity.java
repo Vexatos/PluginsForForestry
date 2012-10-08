@@ -1,62 +1,29 @@
 package denoflionsx.Machine;
 
-import denoflionsx.API.PfFManagers;
-import denoflionsx.Interfaces.IPfFTrigger;
-import denoflionsx.core.core;
-import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
-import denoflionsx.plugins.BlueSilkWorm.Helpers.SilkWormHelper;
-import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormCocoonAccess;
-import denoflionsx.plugins.BlueSilkWorm.Triggers.Triggers;
-import java.util.LinkedList;
+import denoflionsx.Machine.Gadget.IPfFGadget;
+import denoflionsx.Machine.Gadget.PfFGadgetManager;
+import denoflionsx.denLib.denLib;
 import net.minecraft.src.*;
 
-public class PfFMachineTileEntity extends TileEntity implements IInventory, ISilkWormCocoonAccess, IPfFTrigger {
+public class PfFMachineTileEntity extends TileEntity implements IInventory {
 
     public static final String texture = "/denoflionsx/barrel_ahmg.png";
-    private ItemStack[] stacks = new ItemStack[1];
+    public ItemStack[] stacks;
     public String id = "Life Span";
     public String time = "Life Points";
     public boolean stopCocoon = false;
+    public IPfFGadget gadget;
+
+    public PfFMachineTileEntity(IPfFGadget gadget) {
+        this.gadget = gadget;
+        this.stacks = new ItemStack[gadget.getInventorySize()];
+    }
 
     public PfFMachineTileEntity() {
     }
 
     @Override
-    public LinkedList getCustomTriggers() {
-        LinkedList a = new LinkedList();
-        a.add(Triggers.hasCocoon);
-        return a;
-    }
-
-    @Override
-    public boolean hasCocoon() {
-        if (stacks[0] != null){
-            if (stacks[0].itemID == PfFManagers.ItemManager.getItem("silkworm").itemID){
-                if (stacks[0].getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()){
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
     public void updateEntity() {
-        if (this.getStackInSlot(0) != null) {
-            if (stacks[0].itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
-                if (SilkWormHelper.isWormValid(stacks[0])) {
-                    id = SilkWormHelper.getWormLifeSpanLabel(stacks[0]);
-                    time = String.valueOf(SilkWormHelper.getWormLifeSpanInt(stacks[0]));
-                    if (stopCocoon && stacks[0].getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()) {
-                        core.print("Stop!");
-                    }else{
-                        SilkWormHelper.progressWorm(stacks[0]);
-                    }
-                } else {
-                    SilkWormHelper.setupWorm(stacks[0]);
-                }
-            }
-        }
     }
 
     @Override
@@ -81,12 +48,12 @@ public class PfFMachineTileEntity extends TileEntity implements IInventory, ISil
 
     @Override
     public String getInvName() {
-        return "PfF.Machine";
+        return "PfF." + denLib.toNoSpaces(gadget.getName());
     }
 
     @Override
     public int getInventoryStackLimit() {
-        return 1;
+        return 64;
     }
 
     @Override
@@ -128,6 +95,8 @@ public class PfFMachineTileEntity extends TileEntity implements IInventory, ISil
     @Override
     public void readFromNBT(NBTTagCompound tagCompound) {
         super.readFromNBT(tagCompound);
+        gadget = PfFGadgetManager.GadgetManager.getGadgetByName(tagCompound.getString(PfFMachineVars.VAR_GADGET));
+        stacks = new ItemStack[gadget.getInventorySize()];
         NBTTagList tagList;
         tagList = tagCompound.getTagList("Inventory");
         for (int i = 0; i < tagList.tagCount(); i++) {
@@ -154,5 +123,6 @@ public class PfFMachineTileEntity extends TileEntity implements IInventory, ISil
             }
         }
         tagCompound.setTag("Inventory", itemList);
+        tagCompound.setString(PfFMachineVars.VAR_GADGET, gadget.getName());
     }
 }

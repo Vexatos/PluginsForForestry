@@ -1,12 +1,7 @@
 package denoflionsx.Beta;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import denoflionsx.Machine.PfFMachineBlock;
-import denoflionsx.Machine.PfFMachineTileEntity;
-import denoflionsx.Machine.PfFMachineTileEntityRenderer;
 import denoflionsx.core.PfFPluginTemplate;
-import denoflionsx.denLib.FMLWrapper;
-import net.minecraft.src.Material;
 
 public class pluginBeta extends PfFPluginTemplate{
     
@@ -27,11 +22,7 @@ public class pluginBeta extends PfFPluginTemplate{
 
     @Override
     public void doSetup() {
-        PfFMachineTileEntityRenderer renderer = new PfFMachineTileEntityRenderer();
-        FMLWrapper.MODE.FML.registerTileEntity(PfFMachineTileEntity.class, "PfF.Machine");
-        block = new PfFMachineBlock(blockid,1,Material.cactus);
-        FMLWrapper.MODE.FML.registerBlock(block);
-        LanguageRegistry.addName(block, "Test Barrel");
+
     }
 
     @Override

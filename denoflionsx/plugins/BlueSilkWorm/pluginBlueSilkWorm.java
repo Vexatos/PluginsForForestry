@@ -1,26 +1,20 @@
 package denoflionsx.plugins.BlueSilkWorm;
 
-import buildcraft.api.gates.ActionManager;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.transport.IPipe;
 import denoflionsx.Annotations.ThisIsBlues;
-import denoflionsx.Interfaces.IPfFTrigger;
 import denoflionsx.Machine.PfFMachineBlock;
-import denoflionsx.Machine.PfFMachineTileEntity;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.denLib.FMLWrapper;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.BlockIncubator;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.GadgetIncubator;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.TileEntityIncubator;
 import denoflionsx.plugins.BlueSilkWorm.Items.ItemSilkWorm;
-import denoflionsx.plugins.BlueSilkWorm.Triggers.Triggers;
-import java.util.LinkedList;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.Material;
-import net.minecraft.src.TileEntity;
 
 @ThisIsBlues
-public class pluginBlueSilkWorm extends PfFPluginTemplate implements ITriggerProvider{
+public class pluginBlueSilkWorm extends PfFPluginTemplate{
     
     public ItemIDManager id = new ItemIDManager(1,"silkworm");
     public ItemSilkWorm silkworm;
@@ -29,21 +23,6 @@ public class pluginBlueSilkWorm extends PfFPluginTemplate implements ITriggerPro
     
     public pluginBlueSilkWorm(String name, String parent) {
         super(name, parent);
-        ActionManager.registerTriggerProvider(this);
-    }
-
-    @Override
-    public LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity tile) {
-        if (tile instanceof PfFMachineTileEntity){
-            PfFMachineTileEntity t = (PfFMachineTileEntity)tile;
-            return t.getCustomTriggers();
-        }
-        return null;
-    }
-
-    @Override
-    public LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
-        return null;
     }
 
     @Override
@@ -55,11 +34,8 @@ public class pluginBlueSilkWorm extends PfFPluginTemplate implements ITriggerPro
     @Override
     public void doSetup() {
         silkworm = new ItemSilkWorm(this.config.getOptionInt("SilkWorm_ItemID"),"silkworms");
-        FMLWrapper.MODE.FML.registerTileEntity(PfFMachineTileEntity.class, "pffmachinetileentity");
-        block = new PfFMachineBlock(this.config.getOptionInt("TestBlock_BlockID"),1,Material.cactus);
-        FMLWrapper.MODE.FML.registerBlock(block);
-        FMLWrapper.MODE.FML.registerBlockName(block, "Test Machine");
-        Triggers.init();
+        FMLWrapper.MODE.FML.registerTileEntity(TileEntityIncubator.class, "dolx.incubator");
+        block = new BlockIncubator(this.config.getOptionInt("TestBlock_BlockID"),Material.cactus,GadgetIncubator.incubator,"Incubator");
     }
 
     @Override

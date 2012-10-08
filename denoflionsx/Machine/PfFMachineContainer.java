@@ -1,5 +1,6 @@
 package denoflionsx.Machine;
 
+import denoflionsx.Machine.Gadget.PfFSlotObject;
 import net.minecraft.src.*;
 
 public class PfFMachineContainer extends Container {
@@ -8,9 +9,11 @@ public class PfFMachineContainer extends Container {
 
     public PfFMachineContainer(TileEntity tile, EntityPlayer player) {
         this.tile = (PfFMachineTileEntity) tile;
-
-        addSlotToContainer(new Slot(this.tile, 0, 76, 37));
-        bindPlayerInventory(player.inventory);
+        for (Object s : this.tile.gadget.getSlots()){
+            PfFSlotObject slot = (PfFSlotObject)s;
+            this.addSlotToContainer(new Slot(this.tile,slot.getSlotnum(),slot.getX(),slot.getY()));
+        }
+        this.bindPlayerInventory(player.inventory);
     }
 
     @Override
@@ -18,7 +21,7 @@ public class PfFMachineContainer extends Container {
         return this.tile.isUseableByPlayer(var1);
     }
 
-    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
+    protected final void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
                 addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9,

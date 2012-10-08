@@ -1,4 +1,4 @@
-package denoflionsx.plugins.BlueSilkWorm.Triggers;
+package denoflionsx.plugins.Buildcraft.Triggers;
 
 public class Triggers {
     

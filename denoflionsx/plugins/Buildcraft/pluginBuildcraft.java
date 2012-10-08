@@ -1,26 +1,48 @@
 package denoflionsx.plugins.Buildcraft;
 
+import buildcraft.api.gates.ActionManager;
+import buildcraft.api.gates.ITrigger;
+import buildcraft.api.gates.ITriggerProvider;
+import buildcraft.api.transport.IPipe;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
+import denoflionsx.Interfaces.IPfFTrigger;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import denoflionsx.plugins.Buildcraft.Modules.quarryModule;
+import denoflionsx.plugins.Buildcraft.Triggers.Triggers;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
+import java.util.LinkedList;
+import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.TileEntity;
 
-public class pluginBuildcraft extends PfFPluginTemplate {
-    
-    public quarryModule QuarryModule = new quarryModule("QuarryModule",this.getName());
-    public milkModule MilkModule = new milkModule("MilkModule",this.getName());
-    
+public class pluginBuildcraft extends PfFPluginTemplate implements ITriggerProvider {
+
+    public quarryModule QuarryModule = new quarryModule("QuarryModule", this.getName());
+    public milkModule MilkModule = new milkModule("MilkModule", this.getName());
     public static ItemStack fuel;
     public static ItemStack oil;
 
     public pluginBuildcraft(String name, String parent) {
         super(name, parent);
+    }
+
+    @Override
+    public LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity tile) {
+        if (tile instanceof IPfFTrigger) {
+            IPfFTrigger t = (IPfFTrigger) tile;
+            return t.getCustomTriggers();
+        }
+        return null;
+    }
+
+    @Override
+    public LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
+        return null;
     }
 
     @Override
@@ -32,8 +54,8 @@ public class pluginBuildcraft extends PfFPluginTemplate {
             FuelManager.bronzeEngineFuel.put(Integer.valueOf(oil.itemID), new EngineBronzeFuel(oil, Integer.valueOf(config.getOption("OilMJt")), Integer.valueOf(config.getOption("OilBurntime")), 1));
         }
         if (this.config.getOptionBool("WoodenBucketIntegration")) {
-            PfFManagers.ContainerManager.addLiquid("Oil",oil, PfFManagers.ColorManager.getColor(Colors.Values.BLACK.toString()));
-            PfFManagers.ContainerManager.addLiquid("Fuel",fuel, PfFManagers.ColorManager.getColor(Colors.Values.PISS.toString()));
+            PfFManagers.ContainerManager.addLiquid("Oil", oil, PfFManagers.ColorManager.getColor(Colors.Values.BLACK.toString()));
+            PfFManagers.ContainerManager.addLiquid("Fuel", fuel, PfFManagers.ColorManager.getColor(Colors.Values.PISS.toString()));
         }
     }
 
@@ -42,6 +64,8 @@ public class pluginBuildcraft extends PfFPluginTemplate {
         String BCE = EnumModIDs.MODS.BUILDCRAFT_ENERGY.gettheClass();
         oil = denLib.ReflectionHelper.getNewItemStackBlock(BCE, "oilStill");
         fuel = denLib.ReflectionHelper.getNewItemStack(BCE, "fuel");
+        Triggers.init();
+        ActionManager.registerTriggerProvider(this);
     }
 
     @Override

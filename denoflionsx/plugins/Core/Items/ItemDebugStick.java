@@ -1,5 +1,6 @@
 package denoflionsx.plugins.Core.Items;
 
+import denoflionsx.Annotations.DebugStatementInThisMethod;
 import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
@@ -16,6 +17,7 @@ public class ItemDebugStick extends multiItem {
         this.setTabToDisplayOn(CreativeTabs.tabTools);
     }
 
+    @DebugStatementInThisMethod
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
         core.print("ID: " + world.getBlockId(x, y, z));

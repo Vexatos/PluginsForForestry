@@ -3,6 +3,7 @@ package denoflionsx.Enums;
 import denoflionsx.Machine.PfFMachineGUI;
 import denoflionsx.Machine.PfFMachineTileEntity;
 import denoflionsx.PluginsforForestry;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.GadgetIncubator;
 import denoflionsx.plugins.BluesFood.Items.ItemFoods;
 
 public class TextureManager {
@@ -16,7 +17,8 @@ public class TextureManager {
         DEFAULT(PluginsforForestry.texture),
         FOOD(ItemFoods.spritesheet),
         BARREL(PfFMachineTileEntity.texture),
-        OVEN(PfFMachineGUI.texture);
+        OVEN(PfFMachineGUI.texture),
+        INCUBATOR(GadgetIncubator.texture);
 
         private SPRITESHEETS(String sheet){
             PluginsforForestry.proxy.preloadTexture(sheet);
