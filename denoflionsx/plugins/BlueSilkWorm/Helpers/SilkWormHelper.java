@@ -23,6 +23,9 @@ public class SilkWormHelper {
 
     public static void progressWorm(ItemStack worm) {
         int current = getWormCurrentLife(worm);
+        if (current < 0){
+            return;
+        }
         current--;
         setWormCurrentLife(worm,current);
         if (current == 0){
