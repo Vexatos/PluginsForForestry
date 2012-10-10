@@ -35,6 +35,10 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWo
                 hasWork = true;
                 if (SilkWormHelper.isWormValid(getWorm())) {
                     SilkWormHelper.progressWorm(getWorm());
+                    if (getWorm().getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()){
+                        this.setInventorySlotContents(9, getWorm());
+                        this.setInventorySlotContents(8, null);
+                    }
                 } else {
                     SilkWormHelper.setupWorm(getWorm());
                 }
@@ -101,7 +105,7 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ISilkWo
         } else {
             if (stack.itemID == PfFManagers.ItemManager.getItem("silkworm").itemID) {
                 if (doAdd) {
-                    this.setInventorySlotContents(slot, stack);
+                    stacks[slot] = stack;
                     return stack.stackSize;
                 }
             }

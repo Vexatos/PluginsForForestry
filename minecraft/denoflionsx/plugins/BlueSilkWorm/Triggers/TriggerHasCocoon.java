@@ -1,6 +1,8 @@
 package denoflionsx.plugins.BlueSilkWorm.Triggers;
 
 import buildcraft.api.gates.ITriggerParameter;
+import denoflionsx.Machine.PfFMachineTileEntity;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.GadgetIncubator;
 import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormCocoonAccess;
 import denoflionsx.plugins.Buildcraft.Triggers.PfFCustomTrigger;
@@ -29,9 +31,14 @@ public class TriggerHasCocoon extends PfFCustomTrigger {
 
     @Override
     public boolean isTriggerActive(TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof ISilkWormCocoonAccess){
-            ISilkWormCocoonAccess access = (ISilkWormCocoonAccess) tile;
-            return access.hasCocoon();
+        if (tile instanceof PfFMachineTileEntity) {
+            PfFMachineTileEntity access = (PfFMachineTileEntity) tile;
+            if (access.gadget instanceof GadgetIncubator) {
+                GadgetIncubator gadget = (GadgetIncubator) access.gadget;
+                if (gadget instanceof ISilkWormCocoonAccess) {
+                    return gadget.hasCocoon(access);
+                }
+            }
         }
         return false;
     }

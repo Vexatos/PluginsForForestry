@@ -3,6 +3,7 @@ package denoflionsx.Machine.Gadget;
 import denoflionsx.API.Annotations.InternalUseOnly;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import net.minecraft.src.IInventory;
 
 @InternalUseOnly
 public interface IPfFGadget {
@@ -14,6 +15,10 @@ public interface IPfFGadget {
     public int getInventorySize();
     
     public String getTextureFile();
+    
+    public void updateCommon(IInventory inventory);
+    
+    public void updateClientOnly(IInventory inventory);
     
     public LinkedList getCustomTriggers();
     

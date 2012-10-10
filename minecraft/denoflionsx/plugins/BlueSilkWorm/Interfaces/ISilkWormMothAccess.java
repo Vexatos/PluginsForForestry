@@ -1,11 +1,14 @@
 package denoflionsx.plugins.BlueSilkWorm.Interfaces;
 
+import net.minecraft.src.IInventory;
 import net.minecraft.src.ItemStack;
 
 public interface ISilkWormMothAccess {
     
-    public boolean hasMoth();
+    public int getMothSlot(IInventory inventory);
     
-    public ItemStack getMoth();
+    public boolean hasMoth(IInventory inventory);
+    
+    public ItemStack getMoth(IInventory inventory);
     
 }

@@ -10,13 +10,15 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.Handlers.PacketHandler;
 import denoflionsx.Proxy.Proxy;
 import denoflionsx.Version.PfFVersion;
 import denoflionsx.core.core;
 
 @Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = PfFVersion.version, dependencies = "required-after:Forestry")
-@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels={PfFVersion.channel}, packetHandler = PacketHandler.class)
+@NetworkMod(clientSideRequired = true, serverSideRequired = true, channels = {PfFVersion.channel}, packetHandler = PacketHandler.class)
 public class PluginsforForestry {
 
     /*

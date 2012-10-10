@@ -12,6 +12,7 @@ public interface IPfFFermenterManager {
     @InternalUseOnly
     public void registerPfFLiquid(ItemStack liquid, float bonus);
     
+    @InternalUseOnly
     public void createRecipes();
     
     

@@ -1,6 +1,8 @@
 package denoflionsx.plugins.BlueSilkWorm.Triggers;
 
 import buildcraft.api.gates.ITriggerParameter;
+import denoflionsx.Machine.PfFMachineTileEntity;
+import denoflionsx.plugins.BlueSilkWorm.Gadget.GadgetIncubator;
 import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormMothAccess;
 import denoflionsx.plugins.Buildcraft.Triggers.PfFCustomTrigger;
@@ -24,9 +26,15 @@ public class TriggerHasMoth extends PfFCustomTrigger{
 
     @Override
     public boolean isTriggerActive(TileEntity tile, ITriggerParameter parameter) {
-        if (tile instanceof ISilkWormMothAccess){
-            ISilkWormMothAccess moth = (ISilkWormMothAccess)tile;
-            return moth.hasMoth();
+        if (tile instanceof PfFMachineTileEntity){
+            PfFMachineTileEntity moth = (PfFMachineTileEntity)tile;
+            if (moth.gadget instanceof GadgetIncubator){
+                GadgetIncubator gadget = (GadgetIncubator) moth.gadget;
+                if (gadget instanceof ISilkWormMothAccess){
+                    return gadget.hasMoth(moth);
+                }
+            }
+            
         }
         return false;
     }

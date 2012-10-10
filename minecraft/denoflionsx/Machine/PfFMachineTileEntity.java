@@ -46,6 +46,10 @@ public class PfFMachineTileEntity extends TileEntity implements ISpecialInventor
 
     @Override
     public void updateEntity() {
+        this.gadget.updateCommon(this);
+        if (!this.worldObj.isRemote){
+            this.gadget.updateClientOnly(this);
+        }
     }
 
     @Override

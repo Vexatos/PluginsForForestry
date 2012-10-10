@@ -1,7 +1,9 @@
 package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
+import denoflionsx.Machine.PfFMachineTileEntity;
 import denoflionsx.PluginsforForestry;
+import denoflionsx.denLib.FMLWrapper;
 import java.io.File;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.World;
@@ -13,6 +15,10 @@ public class Proxy {
     
     public void bindTexture(String texture){
         
+    }
+    
+    public void registerTileEntites(){
+        FMLWrapper.MODE.FML.registerTileEntity(PfFMachineTileEntity.class, "dolx.machine");
     }
 
     public void openGUI(PluginsforForestry p, EntityPlayer pl, World world, int id, int x, int y, int z) {

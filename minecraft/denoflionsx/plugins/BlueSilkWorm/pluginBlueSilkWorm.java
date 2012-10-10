@@ -6,7 +6,6 @@ import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.plugins.BlueSilkWorm.Gadget.BlockIncubator;
 import denoflionsx.plugins.BlueSilkWorm.Gadget.GadgetIncubator;
-import denoflionsx.plugins.BlueSilkWorm.Gadget.TileEntityIncubator;
 import denoflionsx.plugins.BlueSilkWorm.Items.ItemSilkWorm;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
@@ -32,7 +31,6 @@ public class pluginBlueSilkWorm extends PfFPluginTemplate{
     @Override
     public void doSetup() {
         silkworm = new ItemSilkWorm(this.config.getOptionInt("SilkWorm_ItemID"),"silkworms");
-        FMLWrapper.MODE.FML.registerTileEntity(TileEntityIncubator.class, "dolx.incubator");
         block = new BlockIncubator(this.config.getOptionInt("TestBlock_BlockID"),Material.cactus,GadgetIncubator.incubator,"Incubator");
     }
 

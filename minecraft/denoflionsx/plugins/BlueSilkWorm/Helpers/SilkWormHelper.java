@@ -1,5 +1,8 @@
 package denoflionsx.plugins.BlueSilkWorm.Helpers;
 
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
+import denoflionsx.Annotations.doesSpecialEvent;
 import denoflionsx.plugins.BlueSilkWorm.Growth.SilkWormGrowthStages;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGender;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormLifeSpan;
@@ -10,11 +13,18 @@ import net.minecraft.src.NBTTagCompound;
 
 public class SilkWormHelper {
 
+    @doesSpecialEvent
     public static void setupWorm(ItemStack worm) {
-        worm.stackTagCompound = new NBTTagCompound();
-        setWormGender(worm, SilkWormManagers.LifeManager.getNewGender());
-        setWormLifeSpan(worm, SilkWormManagers.LifeManager.getNewLifeSpanNoGenetics());
-        setWormLifeStateNormal(worm);
+        try {
+            worm.stackTagCompound = new NBTTagCompound();
+            setWormGender(worm, SilkWormManagers.LifeManager.getNewGender());
+            setWormLifeSpan(worm, SilkWormManagers.LifeManager.getNewLifeSpanNoGenetics());
+            setWormLifeStateNormal(worm);
+        } catch (Exception ex) {
+            // Sometimes the random takes a shit. Idk why yet. Reroll.
+            setupWorm(worm);
+        }
+
     }
 
     public static boolean isWormValid(ItemStack worm) {
@@ -23,39 +33,39 @@ public class SilkWormHelper {
 
     public static void progressWorm(ItemStack worm) {
         int current = getWormCurrentLife(worm);
-        if (current < 0){
+        if (current < 0) {
             return;
         }
         current--;
-        setWormCurrentLife(worm,current);
-        if (current == 0){
-            if (worm.getItemDamage() == SilkWormGrowthStages.WORM.getMeta()){
+        setWormCurrentLife(worm, current);
+        if (current == 0) {
+            if (worm.getItemDamage() == SilkWormGrowthStages.WORM.getMeta()) {
                 setWormCurrentLifeToCocoon(worm);
                 worm.setItemDamage(SilkWormGrowthStages.COCOON.getMeta());
-            }else if (worm.getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()){
-                setWormCurrentLife(worm,-1);
+            } else if (worm.getItemDamage() == SilkWormGrowthStages.COCOON.getMeta()) {
+                setWormCurrentLife(worm, -1);
                 worm.setItemDamage(SilkWormGrowthStages.MOTH.getMeta());
             }
         }
     }
-    
+
     public static void setWormGender(ItemStack worm, ISilkWormGender gender) {
         worm.stackTagCompound.setString(SilkWormStats.STAT_GENDER, gender.getGender());
     }
-    
-    public static String getWormCocoonCategory(ItemStack worm){
+
+    public static String getWormCocoonCategory(ItemStack worm) {
         return worm.stackTagCompound.getString(SilkWormStats.STAT_LIFESPAN_TTL_COCOON_LABEL);
     }
-    
-    public static String getWormMothCategory(ItemStack worm){
+
+    public static String getWormMothCategory(ItemStack worm) {
         return worm.stackTagCompound.getString(SilkWormStats.STAT_LIFESPAN_TTL_MOTH_LABEL);
     }
-    
-    public static int getWormLength(ItemStack worm){
+
+    public static int getWormLength(ItemStack worm) {
         return worm.stackTagCompound.getInteger(SilkWormStats.STAT_LIFESPAN_TTL_COCOON);
     }
-    
-    public static int getWormCocoonLength(ItemStack worm){
+
+    public static int getWormCocoonLength(ItemStack worm) {
         return worm.stackTagCompound.getInteger(SilkWormStats.STAT_LIFESPAN_TTL_MOTH);
     }
 
@@ -77,21 +87,21 @@ public class SilkWormHelper {
         return max;
     }
 
-    public static void setWormCurrentLifeToCocoon(ItemStack worm){
-        setWormCurrentLife(worm,getWormCocoonLength(worm));
+    public static void setWormCurrentLifeToCocoon(ItemStack worm) {
+        setWormCurrentLife(worm, getWormCocoonLength(worm));
     }
-    
-    public static void setWormCurrentLife(ItemStack worm, int life){
-        worm.stackTagCompound.setInteger(SilkWormStats.STAT_LIFESPAN_CURRENT,life);
+
+    public static void setWormCurrentLife(ItemStack worm, int life) {
+        worm.stackTagCompound.setInteger(SilkWormStats.STAT_LIFESPAN_CURRENT, life);
     }
-    
+
     public static int getWormCurrentLife(ItemStack worm) {
         return worm.stackTagCompound.getInteger(SilkWormStats.STAT_LIFESPAN_CURRENT);
     }
 
     public static void setWormLifeStateNormal(ItemStack worm) {
         ISilkWormLifeState state = (ISilkWormLifeState) SilkWormManagers.LifeStates.getObject("Normal");
-        setWormLifeState(worm,state);
+        setWormLifeState(worm, state);
     }
 
     public static void setWormLifeState(ItemStack worm, ISilkWormLifeState state) {
@@ -109,8 +119,8 @@ public class SilkWormHelper {
     public static int ConvertMinutesToTicks(int minutes) {
         return (minutes * 60) * 20;
     }
-    
-    public static int ConvertSecondsToTicks(int seconds){
+
+    public static int ConvertSecondsToTicks(int seconds) {
         return seconds * 20;
     }
 }

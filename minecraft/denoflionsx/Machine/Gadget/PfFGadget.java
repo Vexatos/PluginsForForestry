@@ -5,6 +5,7 @@ import denoflionsx.plugins.Buildcraft.Triggers.PfFCustomTrigger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import net.minecraft.src.IInventory;
 
 @InternalUseOnly
 public class PfFGadget implements IPfFGadget{
@@ -23,6 +24,17 @@ public class PfFGadget implements IPfFGadget{
         this.triggers = new LinkedList(Arrays.asList(triggers));
         PfFGadgetManager.GadgetManager.registerGadget(this);
     }
+
+    @Override
+    public void updateClientOnly(IInventory inventory) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void updateCommon(IInventory inventory) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 
     @Override
     public LinkedList getCustomTriggers() {

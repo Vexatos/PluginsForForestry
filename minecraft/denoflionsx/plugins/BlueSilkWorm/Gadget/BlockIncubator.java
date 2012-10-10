@@ -3,6 +3,7 @@ package denoflionsx.plugins.BlueSilkWorm.Gadget;
 import denoflionsx.Enums.EnumBlockSides;
 import denoflionsx.Machine.Gadget.IPfFGadget;
 import denoflionsx.Machine.PfFMachineBlock;
+import denoflionsx.Machine.PfFMachineTileEntity;
 import net.minecraft.src.Material;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
@@ -15,7 +16,7 @@ public class BlockIncubator extends PfFMachineBlock{
 
     @Override
     public TileEntity createNewTileEntity(World var1) {
-        return new TileEntityIncubator(this.gadget);
+        return new PfFMachineTileEntity(this.gadget);
     }
 
     @Override

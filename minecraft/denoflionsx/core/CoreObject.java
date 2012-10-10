@@ -62,6 +62,7 @@ public class CoreObject implements IWorldLoaded {
         setupManagers();
         PfFEvents.pluginLoaded.register(this);
         PfFEvents.moduleLoaded.register(this);
+        PfFEvents.specialEvent.register(this);
         this.translateColors();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
@@ -71,6 +72,7 @@ public class CoreObject implements IWorldLoaded {
             config.readFile();
         }
         Handlers.World.listeners.add(this);
+        PluginsforForestry.proxy.registerTileEntites();
         //Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
 
