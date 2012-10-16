@@ -1,4 +1,4 @@
-package denoflionsx.Machine;
+package denoflionsx.Machine.Client;
 
 import net.minecraft.src.Entity;
 import net.minecraft.src.ModelBase;

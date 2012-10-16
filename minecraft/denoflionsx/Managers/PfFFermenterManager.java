@@ -33,6 +33,14 @@ public class PfFFermenterManager implements IPfFFermenterManager {
     }
 
     @Override
+    public ArrayList getAllFermentableObjects() {
+        ArrayList All = new ArrayList();
+        All.addAll(vanillaItems);
+        All.addAll(items);
+        return All;
+    }
+
+    @Override
     public void addItem(ItemStack item, int bonus, ItemStack liquid) {
         items.add(new Fermentable(item, bonus, liquid));
     }
@@ -92,6 +100,18 @@ public class PfFFermenterManager implements IPfFFermenterManager {
             this.item = item;
             this.bonus = bonus;
             this.product = product;
+        }
+
+        public int getBonus() {
+            return bonus;
+        }
+
+        public ItemStack getItem() {
+            return item;
+        }
+
+        public ItemStack getProduct() {
+            return product;
         }
     }
 

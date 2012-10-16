@@ -12,7 +12,6 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Helpers.FermenterHelper;
-import denoflionsx.Old.customFuel_OLD;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Railcraft.Helpers.CokeOvenRecipeHelper;
 import net.minecraft.src.Item;
@@ -70,9 +69,9 @@ public class peatModule extends PfFModuleTemplate {
     @Override
     public void doSetup() {
 
-        liquidpeat = new customFuel("Liquid Peat", 1, 20000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.PEAT.getIndex()), IDs_Peat, Colors.Values.BROWN.getColor(), this);
+        liquidpeat = new customFuel("Liquid Peat", 1, 20000, customFuel.populateSprites(EnumLiquidTextures.Liquids.PEAT.getIndex()), IDs_Peat, Colors.Values.BROWN.getColor(), this);
 
-        sugarypeat = new customFuel("Sugary Peat", 2, 40000, customFuel_OLD.populateSprites(EnumLiquidTextures.Liquids.SUGARYPEAT.getIndex()), IDs_SugaryPeat, Colors.Values.LIGHTBROWN.getColor(), this);
+        sugarypeat = new customFuel("Sugary Peat", 2, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.SUGARYPEAT.getIndex()), IDs_SugaryPeat, Colors.Values.LIGHTBROWN.getColor(), this);
 
     }
 }

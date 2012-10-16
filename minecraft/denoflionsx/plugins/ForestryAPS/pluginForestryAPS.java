@@ -1,35 +1,29 @@
 package denoflionsx.plugins.ForestryAPS;
 
-import denoflionsx.Old.pluginBase;
-import denoflionsx.denLib.Config.Config;
+import denoflionsx.core.PfFPluginTemplate;
 
-public class pluginForestryAPS extends pluginBase{
+public class pluginForestryAPS extends PfFPluginTemplate{
+    
+    
+
+    public pluginForestryAPS(String name, String parent) {
+        super(name, parent);
+    }
     
     // This plugin will be my replacement for APS.
 
-    public pluginForestryAPS() {
-        this.name = "pluginForestryAPS";
-        this.config = new Config(this.name + ".cfg");
-        this.register();
-    }
-
     @Override
-    public void register() {
-        super.register();
-    }
-
-    @Override
-    protected void defaults() {
+    public void defaults() {
         
     }
 
     @Override
-    protected boolean init() {
-        return true;
+    public void doSetup() {
+        
     }
 
     @Override
-    protected void recipes() {
+    public void recipes() {
         
     }
 }

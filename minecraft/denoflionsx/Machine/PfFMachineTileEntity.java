@@ -1,55 +1,64 @@
 package denoflionsx.Machine;
 
-import buildcraft.api.core.Orientations;
-import buildcraft.api.inventory.ISpecialInventory;
-import denoflionsx.Interfaces.IPfFTrigger;
-import denoflionsx.Machine.Gadget.IPfFGadget;
-import denoflionsx.Machine.Gadget.PfFGadgetManager;
-import denoflionsx.Machine.Triggers.IHasWork;
-import denoflionsx.denLib.denLib;
-import java.util.LinkedList;
+import buildcraft.api.liquids.LiquidTank;
+import java.util.ArrayList;
 import net.minecraft.src.*;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.ISidedInventory;
 
-public class PfFMachineTileEntity extends TileEntity implements ISpecialInventory,IPfFTrigger,IHasWork{
+public abstract class PfFMachineTileEntity extends TileEntity implements ISidedInventory {
 
-    public ItemStack[] stacks;
+    public ItemStack[] stacks = null;
+    public LiquidTank[] tanks = null;
     public boolean hasWork = false;
-    public IPfFGadget gadget;
+    public boolean hasTanks = false;
+    public NBTTagCompound additionalData = new NBTTagCompound();
+    public ForgeSideInventory SideData = new ForgeSideInventory();
+    public ArrayList<PfFSlot> slots = new ArrayList();
 
-    public PfFMachineTileEntity(IPfFGadget gadget) {
-        this.gadget = gadget;
-        this.stacks = new ItemStack[gadget.getInventorySize()];
+    public PfFMachineTileEntity(int size, int tanks) {
+        this.stacks = new ItemStack[size];
+        this.tanks = new LiquidTank[tanks];
+        for (int i = 0; i < tanks; i++) {
+            this.tanks[i] = new LiquidTank(10000);
+        }
+    }
+
+    public void MoveItemStack(int origin, int dest) {
+        this.setInventorySlotContents(dest, this.getStackInSlot(origin));
+        this.setInventorySlotContents(origin, null);
+    }
+
+    public void ConsumeItem(int slot) {
+        this.decrStackSize(slot, 1);
+    }
+
+    public void addSlot(int index, int x, int y) {
+        this.slots.add(new PfFSlot(index, x, y));
     }
 
     public PfFMachineTileEntity() {
+        this(1, 1);
     }
 
-    @Override
-    public LinkedList getCustomTriggers() {
-        return this.gadget.getCustomTriggers();
-    }
+    public abstract String getName();
+
+    public abstract String getGUITexture();
 
     @Override
-    public boolean doesHaveWork() {
-        return this.hasWork;
-    }
-
-    @Override
-    public int addItem(ItemStack stack, boolean doAdd, Orientations from) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ItemStack[] extractItem(boolean doRemove, Orientations from, int maxItemCount) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void updateEntity() {
-        this.gadget.updateCommon(this);
-        if (!this.worldObj.isRemote){
-            this.gadget.updateClientOnly(this);
+    public int getSizeInventorySide(ForgeDirection side) {
+        if (SideData.Size.get(side) == null) {
+            return 0;
         }
+        return SideData.Size.get(side);
+    }
+
+    @Override
+    public int getStartInventorySide(ForgeDirection side) {
+        if (SideData.Start.get(side) == null) {
+            return 0;
+        }
+        return SideData.Start.get(side);
     }
 
     @Override
@@ -74,7 +83,7 @@ public class PfFMachineTileEntity extends TileEntity implements ISpecialInventor
 
     @Override
     public String getInvName() {
-        return "PfF." + denLib.toNoSpaces(gadget.getName());
+        return "PfF." + "GenericMachine";
     }
 
     @Override
@@ -84,7 +93,7 @@ public class PfFMachineTileEntity extends TileEntity implements ISpecialInventor
 
     @Override
     public int getSizeInventory() {
-        return stacks.length;
+        return this.stacks.length;
     }
 
     @Override
@@ -118,25 +127,7 @@ public class PfFMachineTileEntity extends TileEntity implements ISpecialInventor
         }
     }
 
-    @Override
-    public void readFromNBT(NBTTagCompound tagCompound) {
-        super.readFromNBT(tagCompound);
-        gadget = PfFGadgetManager.GadgetManager.getGadgetByName(tagCompound.getString(PfFMachineVars.VAR_GADGET));
-        stacks = new ItemStack[gadget.getInventorySize()];
-        NBTTagList tagList;
-        tagList = tagCompound.getTagList("Inventory");
-        for (int i = 0; i < tagList.tagCount(); i++) {
-            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
-            byte slot = tag.getByte("Slot");
-            if (slot >= 0 && slot < stacks.length) {
-                stacks[slot] = ItemStack.loadItemStackFromNBT(tag);
-            }
-        }
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound tagCompound) {
-        super.writeToNBT(tagCompound);
+    public void attachToNBT(NBTTagCompound tagCompound) {
         NBTTagList itemList;
         itemList = new NBTTagList();
         for (int i = 0; i < stacks.length; i++) {
@@ -148,7 +139,32 @@ public class PfFMachineTileEntity extends TileEntity implements ISpecialInventor
                 itemList.appendTag(tag);
             }
         }
-        tagCompound.setTag("Inventory", itemList);
-        tagCompound.setString(PfFMachineVars.VAR_GADGET, gadget.getName());
+        this.additionalData.setTag("Inventory", itemList);
+        tagCompound.setTag("dolx", this.additionalData);
+    }
+
+    public void syncFromNBT(NBTTagCompound tagCompound) {
+        this.additionalData = tagCompound.getCompoundTag("dolx");
+        NBTTagList tagList;
+        tagList = this.additionalData.getTagList("Inventory");
+        for (int i = 0; i < tagList.tagCount(); i++) {
+            NBTTagCompound tag = (NBTTagCompound) tagList.tagAt(i);
+            byte slot = tag.getByte("Slot");
+            if (slot >= 0 && slot < stacks.length) {
+                stacks[slot] = ItemStack.loadItemStackFromNBT(tag);
+            }
+        }
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound tagCompound) {
+        super.readFromNBT(tagCompound);
+        this.syncFromNBT(tagCompound);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound) {
+        super.writeToNBT(tagCompound);
+        this.attachToNBT(tagCompound);
     }
 }

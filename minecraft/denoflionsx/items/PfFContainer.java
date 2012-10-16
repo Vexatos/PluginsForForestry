@@ -2,7 +2,7 @@ package denoflionsx.items;
 
 import java.util.HashMap;
 import denoflionsx.Enums.Colors;
-import denoflionsx.Old.customFuel_OLD;
+import denoflionsx.items.Fuels.customFuel;
 
 public class PfFContainer extends multiItem {
 
@@ -18,7 +18,7 @@ public class PfFContainer extends multiItem {
     }
 
     public void setAllRenderColor(int color) {
-        for (int i = 0; i != customFuel_OLD.numOfContainers; i++) {
+        for (int i = 0; i != customFuel.numOfContainers; i++) {
 
             renderColors.put(i, color);
 

@@ -8,6 +8,7 @@ import denoflionsx.plugins.Buildcraft.pluginBuildcraft;
 import denoflionsx.plugins.Core.pluginCoreItems;
 import denoflionsx.plugins.FarmCraftory.pluginFarmCraftory;
 import denoflionsx.plugins.Forestry.pluginForestry;
+import denoflionsx.plugins.ForestryAPS.pluginForestryAPS;
 import denoflionsx.plugins.IC2.pluginIC2;
 import denoflionsx.plugins.Railcraft.pluginRailcraft;
 import denoflionsx.plugins.Updater.pluginUpdater;
@@ -23,5 +24,6 @@ public class PluginInstances {
     public static pluginFarmCraftory FarmCraftory = new pluginFarmCraftory("pluginFarmCraftory", EnumModIDs.MODS.FARMCRAFTORY.getID());
     public static pluginCoreItems CoreItems = new pluginCoreItems("pluginCoreItems", EnumModIDs.MODS.FORESTRY.getID());
     public static pluginBlueSilkWorm BlueSilkWorm = new pluginBlueSilkWorm("pluginBlueSilkWorm",EnumModIDs.MODS.FORESTRY.getID());
+    public static pluginForestryAPS ForestryAPS = new pluginForestryAPS("pluginForestryAPS",EnumModIDs.MODS.FORESTRY.getID());
     public static pluginUpdater Updater = new pluginUpdater("pluginUpdater", EnumModIDs.MODS.FORESTRY.getID());
 }

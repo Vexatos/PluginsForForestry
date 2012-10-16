@@ -10,4 +10,6 @@ public interface ISilkWorm {
     
     public boolean isWormValid(ItemStack worm);
     
+    public int getCurrentStageProgress(ItemStack worm);
+    
 }

@@ -33,8 +33,8 @@ public class CoreObject implements IWorldLoaded {
     public void moduleLoaded(EventModuleLoaded event) {
         core.print(event.getModule().getParentName() + " | " + event.getModule().getName() + " is loaded!");
     }
-    
-    public void registerGUIHandler(Object instance, IGuiHandler handler){
+
+    public void registerGUIHandler(Object instance, IGuiHandler handler) {
         FMLWrapper.MODE.FML.registerGUIHandler(instance, handler);
     }
 
@@ -59,11 +59,9 @@ public class CoreObject implements IWorldLoaded {
         if (denLib.buildnumber < 4) {
             throw new RuntimeException("denLib is out of date. Please update!");
         }
-        setupManagers();
         PfFEvents.pluginLoaded.register(this);
         PfFEvents.moduleLoaded.register(this);
         PfFEvents.specialEvent.register(this);
-        this.translateColors();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();
@@ -71,8 +69,11 @@ public class CoreObject implements IWorldLoaded {
         if (config.doesConfigExist()) {
             config.readFile();
         }
+        setupManagers();
+        this.translateColors();
         Handlers.World.listeners.add(this);
         PluginsforForestry.proxy.registerTileEntites();
+        PluginsforForestry.proxy.registerGUIElements();
         //Config.verbose = denLib.convertToBoolean(config.getOption("Verbose"));
     }
 

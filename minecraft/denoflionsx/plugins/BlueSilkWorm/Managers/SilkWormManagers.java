@@ -1,5 +1,6 @@
 package denoflionsx.plugins.BlueSilkWorm.Managers;
 
+import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormFoodRegistry;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormGenericManager;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWormRegistry;
 
@@ -13,4 +14,5 @@ public class SilkWormManagers {
     public static ISilkWormGenericManager Genders = new SilkWormGenderManager();
     public static SilkWormRollManager LifeManager = new SilkWormRollManager();
     public static ISilkWormGenericManager LifeSpans = new SilkWormLifeSpanManager();
+    public static ISilkWormFoodRegistry Food = new SilkWormFoodRegistry();
 }

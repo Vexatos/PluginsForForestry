@@ -7,12 +7,10 @@ import buildcraft.api.transport.IPipe;
 import denoflionsx.Enums.Colors;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
-import denoflionsx.Interfaces.IPfFTrigger;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import denoflionsx.plugins.Buildcraft.Modules.quarryModule;
-import denoflionsx.plugins.Buildcraft.Triggers.Triggers;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import java.util.LinkedList;
@@ -33,16 +31,13 @@ public class pluginBuildcraft extends PfFPluginTemplate implements ITriggerProvi
 
     @Override
     public LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity tile) {
-        if (tile instanceof IPfFTrigger) {
-            IPfFTrigger t = (IPfFTrigger) tile;
-            return t.getCustomTriggers();
-        }
-        return null;
+        
+        return new LinkedList();
     }
 
     @Override
     public LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
-        return null;
+        return new LinkedList();
     }
 
     @Override
@@ -64,7 +59,7 @@ public class pluginBuildcraft extends PfFPluginTemplate implements ITriggerProvi
         String BCE = EnumModIDs.MODS.BUILDCRAFT_ENERGY.gettheClass();
         oil = denLib.ReflectionHelper.getNewItemStackBlock(BCE, "oilStill");
         fuel = denLib.ReflectionHelper.getNewItemStack(BCE, "fuel");
-        Triggers.init();
+        
         ActionManager.registerTriggerProvider(this);
     }
 

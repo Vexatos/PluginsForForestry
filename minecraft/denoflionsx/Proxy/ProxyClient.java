@@ -5,7 +5,9 @@
 package denoflionsx.Proxy;
 
 import cpw.mods.fml.client.FMLTextureFX;
+import denoflionsx.Machine.Client.PfFGUIElementManager;
 import denoflionsx.PluginsforForestry;
+import denoflionsx.plugins.BlueSilkWorm.Machine.GUIElementIncubator;
 import denoflionsx.plugins.Forestry.Utility.LiquidFXHook;
 import java.io.File;
 import java.util.ArrayList;
@@ -29,13 +31,22 @@ public class ProxyClient extends Proxy {
     }
 
     @Override
+    public void registerGUIElements() {
+        PfFGUIElementManager.addElement("Incubator", new GUIElementIncubator());
+    }
+
+    @Override
+    public void registerTileEntites() {
+        super.registerTileEntites();
+    }
+
+    @Override
     public boolean isClient() {
         return true;
     }
 
     @Override
     public void registerRender() {
-        
     }
 
     @Override

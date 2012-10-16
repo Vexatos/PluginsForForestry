@@ -1,19 +1,15 @@
 package denoflionsx.Machine;
 
-import denoflionsx.Machine.Gadget.PfFSlotObject;
 import net.minecraft.src.*;
 
 public class PfFMachineContainer extends Container {
 
-    private PfFMachineTileEntity tile;
+    public PfFMachineTileEntity tile;
 
     public PfFMachineContainer(TileEntity tile, EntityPlayer player) {
         this.tile = (PfFMachineTileEntity) tile;
-        for (Object s : this.tile.gadget.getSlots()) {
-            if (s instanceof PfFSlotObject) {
-                PfFSlotObject slot = (PfFSlotObject) s;
-                this.addSlotToContainer(new Slot(this.tile, slot.getSlotnum(), slot.getX(), slot.getY()));
-            }
+        for (PfFSlot s : this.tile.slots){
+            this.addSlotToContainer(new Slot(this.tile,s.getId(),s.getX(),s.getY()));
         }
         this.bindPlayerInventory(player.inventory);
     }

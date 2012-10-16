@@ -1,4 +1,4 @@
-package denoflionsx.plugins.BlueSilkWorm.Gadget;
+package denoflionsx.plugins.BlueSilkWorm.Helpers;
 
 import denoflionsx.Enums.Colors;
 
