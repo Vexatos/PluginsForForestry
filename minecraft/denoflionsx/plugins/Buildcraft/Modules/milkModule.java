@@ -1,5 +1,10 @@
 package denoflionsx.plugins.Buildcraft.Modules;
 
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
@@ -21,6 +26,7 @@ public class milkModule extends PfFModuleTemplate {
 
     public milkModule(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
     }
 
     @Override
@@ -43,6 +49,14 @@ public class milkModule extends PfFModuleTemplate {
         milk.setAllRenderColor(Colors.Values.WHITE.getColor());
     }
 
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void barrel(EventSpecial event) {
+        if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
+            return;
+        }
+        PfFManagers.ContainerManager.addLiquid("Milk", PfFManagers.ItemManager.getItem("milk"), PfFManagers.ColorManager.getColor(Colors.Values.WHITE.toString()));
+    }
+
     @Override
     public void recipes() {
         if (denLib.convertToBoolean(this.config.getOption("MilkInBiogas")) && !disableBCMilk) {
@@ -54,7 +68,6 @@ public class milkModule extends PfFModuleTemplate {
             }
             FuelManager.bronzeEngineFuel.put(milk.shiftedIndex, new EngineBronzeFuel(new ItemStack(milk), Integer.valueOf(this.config.getOption("MilkMJt")), Integer.valueOf(this.config.getOption("MilkBurnTime")), b));
         }
-        PfFManagers.ContainerManager.addLiquid("Milk", PfFManagers.ItemManager.getItem("milk"), PfFManagers.ColorManager.getColor(Colors.Values.WHITE.toString()));
     }
 
     @Override

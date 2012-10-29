@@ -5,10 +5,7 @@ import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.core;
 import denoflionsx.items.multiItem;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.World;
+import net.minecraft.src.*;
 
 public class ItemDebugStick extends multiItem {
 
@@ -20,9 +17,6 @@ public class ItemDebugStick extends multiItem {
     @DebugStatementInThisMethod
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        core.print("ID: " + world.getBlockId(x, y, z));
-        core.print("Meta: " + world.getBlockMetadata(x, y, z));
-        world.setBlockMetadata(x, y, z, world.getBlockMetadata(x, y, z) + 6);
         return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
     }
 

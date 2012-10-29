@@ -13,6 +13,7 @@ public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleLi
     private boolean isLoaded = false;
     private String parent;
     public Config config;
+    public String loadCondition = "Loader";
 
     public PfFPluginTemplate(String name, String parent) {
         this.name = name;
@@ -24,7 +25,7 @@ public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleLi
 
     @Override
     public void pluginLoaded(EventPluginLoaded event) {
-        if (event.getPlugin().getName().equals(("Loader"))) {
+        if (event.getPlugin().getName().equals((loadCondition))) {
             this.register();
         }
     }
@@ -55,9 +56,6 @@ public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleLi
 
     @Override
     public void defaults() {
-        if (this.config.doesConfigExist()) {
-            this.config.readFile();
-        }
     }
 
     @Override
@@ -103,7 +101,10 @@ public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleLi
             core.PfFCore.Handlers.World.listeners.add(this);
             setLoadedState(this.init());
             if (isLoaded()) {
-                this.defaults();
+                if (!this.name.equals("Loader")) {
+                    this.config.readFile();
+                    this.defaults();
+                }
                 this.doSetup();
                 this.recipes();
                 PfFEvents.pluginLoaded.notifyListeners(this);

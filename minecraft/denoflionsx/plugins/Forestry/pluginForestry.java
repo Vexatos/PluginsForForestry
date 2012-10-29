@@ -1,5 +1,10 @@
 package denoflionsx.plugins.Forestry;
 
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
@@ -26,6 +31,21 @@ public class pluginForestry extends PfFPluginTemplate {
 
     public pluginForestry(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
+    }
+
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void barrel(EventSpecial event) {
+        if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
+            return;
+        }
+        if (this.config.getOptionBool("WoodenBucketIntegration")) {
+            PfFManagers.ContainerManager.addLiquid("Seed Oil", EnumForestryLiquids.SEEDOIL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
+            PfFManagers.ContainerManager.addLiquid("Apple Juice", EnumForestryLiquids.APPLEJUICE.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Honey", EnumForestryLiquids.HONEY.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
+            PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
+        }
     }
 
     @Override
@@ -39,13 +59,6 @@ public class pluginForestry extends PfFPluginTemplate {
         }
         for (int i = 0; i != 15; i++) {
             PfFManagers.ExtractorTargetManager.addBlock(BlockInterface.getBlock("glass").itemID, i);
-        }
-        if (this.config.getOptionBool("WoodenBucketIntegration")) {
-            PfFManagers.ContainerManager.addLiquid("Seed Oil", EnumForestryLiquids.SEEDOIL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.SEEDOIL.toString()));
-            PfFManagers.ContainerManager.addLiquid("Apple Juice", EnumForestryLiquids.APPLEJUICE.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTGREEN.toString()));
-            PfFManagers.ContainerManager.addLiquid("Honey", EnumForestryLiquids.HONEY.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.HONEY.toString()));
-            PfFManagers.ContainerManager.addLiquid("Biomass", EnumForestryLiquids.BIOMASS.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.GREEN.toString()));
-            PfFManagers.ContainerManager.addLiquid("Biofuel", EnumForestryLiquids.BIOFUEL.getLiquid(), PfFManagers.ColorManager.getColor(Colors.Values.ORANGE2.toString()));
         }
     }
 

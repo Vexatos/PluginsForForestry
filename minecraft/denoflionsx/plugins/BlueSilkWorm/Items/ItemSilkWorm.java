@@ -9,6 +9,7 @@ import denoflionsx.plugins.BlueSilkWorm.Helpers.SilkWormHelper;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.ISilkWorm;
 import denoflionsx.plugins.BlueSilkWorm.Managers.SilkWormManagers;
 import java.util.List;
+import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.ItemStack;
 
 public class ItemSilkWorm extends multiItem implements ISilkWorm {
@@ -31,7 +32,7 @@ public class ItemSilkWorm extends multiItem implements ISilkWorm {
 
     @DebugStatementInThisMethod
     @Override
-    public void addInformation(ItemStack par1ItemStack, List par2List) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
         if (par1ItemStack.stackTagCompound != null) {
             String gender = SilkWormHelper.getWormGender(par1ItemStack);
             if (gender.toLowerCase().equals("female")) {
@@ -39,11 +40,11 @@ public class ItemSilkWorm extends multiItem implements ISilkWorm {
             } else if (gender.toLowerCase().equals("male")) {
                 gender = EnumTextColor.AQUA.ColorString(gender);
             }
-            par2List.add("Gender: " + gender);
-            par2List.add("Worm Stage Length: " + SilkWormHelper.getWormCocoonCategory(par1ItemStack));
-            par2List.add("Cocoon Stage Length: " + SilkWormHelper.getWormMothCategory(par1ItemStack));
+            par3List.add("Gender: " + gender);
+            par3List.add("Worm Stage Length: " + SilkWormHelper.getWormCocoonCategory(par1ItemStack));
+            par3List.add("Cocoon Stage Length: " + SilkWormHelper.getWormMothCategory(par1ItemStack));
             if (needsDebugged) {
-                par2List.add("Stage Progress: " + EnumTextColor.ORANGE.ColorString(String.valueOf(SilkWormHelper.getWormCurrentLife(par1ItemStack))));
+                par3List.add("Stage Progress: " + EnumTextColor.ORANGE.ColorString(String.valueOf(SilkWormHelper.getWormCurrentLife(par1ItemStack))));
             }
         }
     }
@@ -70,10 +71,8 @@ public class ItemSilkWorm extends multiItem implements ISilkWorm {
 
     @Override
     public int getCurrentStageProgress(ItemStack worm) {
-        if (worm.getItemDamage() == SilkWormGrowthStages.WORM.getMeta()){
-            
+        if (worm.getItemDamage() == SilkWormGrowthStages.WORM.getMeta()) {
         }
         return 0;
     }
-
 }

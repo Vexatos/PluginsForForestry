@@ -65,10 +65,10 @@ public class CoreObject implements IWorldLoaded {
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();
-        defaults.setup();
         if (config.doesConfigExist()) {
             config.readFile();
         }
+        defaults.setup();
         setupManagers();
         this.translateColors();
         Handlers.World.listeners.add(this);

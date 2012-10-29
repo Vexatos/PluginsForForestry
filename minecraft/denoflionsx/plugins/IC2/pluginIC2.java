@@ -1,5 +1,10 @@
 package denoflionsx.plugins.IC2;
 
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
 import net.minecraft.src.Block;
@@ -23,6 +28,7 @@ public class pluginIC2 extends PfFPluginTemplate {
 
     public pluginIC2(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
     }
 
     @Override
@@ -41,13 +47,20 @@ public class pluginIC2 extends PfFPluginTemplate {
         goo = new UraniumGoo(this.config.getOptionInt("RadioactiveGoo_ItemID"), denLib.toLowerCaseNoSpaces("Uranium Goo"));
     }
 
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void barrel(EventSpecial event) {
+        if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
+            return;
+        }
+        if (this.config.getOptionBool("WoodenBucketBarrelIntegration")) {
+            PfFManagers.ContainerManager.addLiquid("Radioactive Waste", PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces("Radioactive Waste")), PfFManagers.ColorManager.getColor(Colors.Values.LIME.toString()));
+        }
+    }
+
     @Override
     public void recipes() {
         SqueezerHelper.add(uranium, PfFManagers.ItemManager.getItem(goo.ItemnameLowerCaseNoSpaces), this.config.getOptionInt("ChanceOfGoo"), new ItemStack(Block.lavaStill), this.config.getOptionInt("LavaFromUranium"));
         SqueezerHelper.add(uraniumcell, PfFManagers.ItemManager.getItem(goo.ItemnameLowerCaseNoSpaces));
         PfFManagers.FermenterManager.addItem(PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces("Uranium Goo")), this.config.getOptionInt("AmountOfFuelPerFermentation"), PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces("Radioactive Waste")));
-        if (this.config.getOptionBool("WoodenBucketBarrelIntegration")) {
-            PfFManagers.ContainerManager.addLiquid("Radioactive Waste", PfFManagers.ItemManager.getItem(denLib.toLowerCaseNoSpaces("Radioactive Waste")), PfFManagers.ColorManager.getColor(Colors.Values.LIME.toString()));
-        }
     }
 }

@@ -12,6 +12,7 @@ import denoflionsx.plugins.Core.Items.MetaContainers.WoodenBucketFuels;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumToolTextures;
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Annotations.doesSpecialEvent;
@@ -123,13 +124,14 @@ public class pluginCoreItems extends PfFPluginTemplate {
                 ItemDebugStick.Debug.create();
             }
             fuels = new WoodenBucketFuels(this.config.getOptionInt("WoodenBucketFuels_ItemID"), "woodenbucketfuels");
-            PfFEvents.specialEvent.notifyListeners("Its a bucket!");
+            PfFEvents.specialEvent.notifyListeners(EnumEventSpecialMessages.BUCKET.getMsg());
         }
+        core.print(this.config.getOption("BarrelFuels_getBarrelBack"));
         if (this.config.getOptionBool("BarrelFuels_getBarrelBack")) {
             BarrelFuels.mode = BarrelFuels.MODE.PERMA;
         }
         bfuels = new BarrelFuels(this.config.getOptionInt("BarrelFuels_ItemID"), "barrelfuels");
-        PfFEvents.specialEvent.notifyListeners("Its a barrel!");
+        PfFEvents.specialEvent.notifyListeners(EnumEventSpecialMessages.BARREL.getMsg());
         if (this.config.getOptionBool("ExtractorTool_Enabled")) {
             ItemExtractorTool.ConfigMaxDamage = this.config.getOptionInt("ExtractorTool_MaxDamage");
             ex = new ItemExtractorTool(this.config.getOptionInt("ExtractorTool_ItemID"));

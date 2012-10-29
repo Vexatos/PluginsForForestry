@@ -8,7 +8,7 @@ public class EnumLiquidTextures {
         CITRUSJUICE(5, 250, 197, 189), PUMPKINJUICE(6, 255, 210, 127),
         MELONJUICE(7, 255, 148, 152),
         RADIOACTIVEWASTE(2, 79, 156, 0), MILK(1),MUSHROOMSOUP(8,103,29,14),
-        VEGGIEJUICE(9,255,118,67),FRUITJUICE(10,214,103,134);
+        VEGGIEJUICE(9,255,118,67),FRUITJUICE(10,214,103,134),MUD(11,99,63,31);
         int index;
         int r;
         int b;

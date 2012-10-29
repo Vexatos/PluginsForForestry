@@ -1,12 +1,15 @@
 package denoflionsx.Machine;
 
+import buildcraft.api.gates.ITrigger;
 import buildcraft.api.liquids.LiquidTank;
+import denoflionsx.Machine.Trigger.IPfFTriggers;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
 
-public abstract class PfFMachineTileEntity extends TileEntity implements ISidedInventory {
+public abstract class PfFMachineTileEntity extends TileEntity implements ISidedInventory, IPfFTriggers {
 
     public ItemStack[] stacks = null;
     public LiquidTank[] tanks = null;
@@ -15,13 +18,24 @@ public abstract class PfFMachineTileEntity extends TileEntity implements ISidedI
     public NBTTagCompound additionalData = new NBTTagCompound();
     public ForgeSideInventory SideData = new ForgeSideInventory();
     public ArrayList<PfFSlot> slots = new ArrayList();
+    public LinkedList<ITrigger> triggers = new LinkedList();
 
-    public PfFMachineTileEntity(int size, int tanks) {
+    public PfFMachineTileEntity(int size, int tanks, ITrigger[] triggers) {
         this.stacks = new ItemStack[size];
         this.tanks = new LiquidTank[tanks];
         for (int i = 0; i < tanks; i++) {
             this.tanks[i] = new LiquidTank(10000);
         }
+        if (triggers != null && triggers.length != 0){
+            for (ITrigger t : triggers){
+                this.triggers.add(t);
+            }
+        }
+    }
+
+    @Override
+    public LinkedList<ITrigger> getCustomTriggers() {
+        return triggers;
     }
 
     public void MoveItemStack(int origin, int dest) {
@@ -38,7 +52,7 @@ public abstract class PfFMachineTileEntity extends TileEntity implements ISidedI
     }
 
     public PfFMachineTileEntity() {
-        this(1, 1);
+        this(1, 1, null);
     }
 
     public abstract String getName();

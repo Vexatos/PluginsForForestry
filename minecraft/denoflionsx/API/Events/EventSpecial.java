@@ -7,8 +7,7 @@ public class EventSpecial extends EventObject{
     // This event is for certain things that you might want to know about
     // without having to scan through all the item events.
     
-    // POSSIBLE MESSAGES: Its a barrel!, Its a bucket!, Its a cast!
-    // These messages are for when each type of container is ready to hold mod liquids.
+    // See: EnumEventSpecialMessages.
     
     private String message;
 

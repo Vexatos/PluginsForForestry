@@ -1,6 +1,5 @@
 package denoflionsx.plugins.Railcraft.Modules.OreCrushModule;
 
-import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.Items.multiItemDust;
 import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.Items.EnumDustTextures;
 import denoflionsx.API.PfFManagers;
@@ -13,6 +12,7 @@ import denoflionsx.denLib.denLib;
 import denoflionsx.plugins.Railcraft.Managers.BlastFurnaceManager;
 import denoflionsx.plugins.Railcraft.Helpers.RockCrusherRecipeHelper;
 import denoflionsx.core.PfFModuleTemplate;
+import denoflionsx.plugins.Railcraft.Managers.VanillaFurnaceManager;
 import ic2.api.Ic2Recipes;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,15 +28,14 @@ public class OreCrushmodule extends PfFModuleTemplate {
     public static ItemIDManager ids = new ItemIDManager(1, "dusts");
     public static IOreDictRecipeManager RockCrusherManager = new RockCrusherManager();
     public static IOreDictRecipeManager BlastFurnaceManager = new BlastFurnaceManager();
+    public static IOreDictRecipeManager VanillaFurnaceManager = new VanillaFurnaceManager();
     public static int NumberOfDustPerCrush;
     public static MODE mode = MODE.PFF;
-    public static boolean isParentLoaded = false;
 
     public OreCrushmodule(String name, String parent) {
         super(name, parent);
     }
 
-  
     @Override
     public void defaults() {
         this.config.addDefault("OreCrushModule_Enabled=" + "true");
@@ -47,45 +46,31 @@ public class OreCrushmodule extends PfFModuleTemplate {
     }
 
     @Override
-    public void pluginLoaded(EventPluginLoaded event) {
-       // Override.
-        if (event.getPlugin().getName().equals(this.getParentName())){
-            isParentLoaded = true;
-        }
-    }
-
-    @Override
-    public void onWorldLoaded() {
-        if (isParentLoaded){
-            this.register();
-        }
-    }
-    
-
-    @Override
     public void doSetup() {
         if (denLib.detect(EnumModIDs.MODS.IC2.getID()) && !this.config.getOptionBool("ForcePFFMode")) {
-                //core.print("Ic2 Detected. Setting up MODE.IC2 for OreCrushModule.");
-                mode = MODE.IC2;
-            }
-            if (denLib.detect(EnumModIDs.MODS.METALURGY.getID()) && !this.config.getOptionBool("ForcePFFMode")) {
-                //core.print("Metallurgy Detected. Setting up MODE.Metallurgy for OreCrushModule.");
-                mode = MODE.Metallurgy;
-            }
-            NumberOfDustPerCrush = this.config.getOptionInt("NumberOfDustPerCrush");
-            if (mode.equals(MODE.PFF)) {
-                PFFMode();
-            } else if (mode.equals(MODE.IC2)) {
-                IC2Mode();
-            } else if (mode.equals(MODE.Metallurgy)) {
-                MetalMode();
-            }
+            //core.print("Ic2 Detected. Setting up MODE.IC2 for OreCrushModule.");
+            mode = MODE.IC2;
+        }
+        if (denLib.detect(EnumModIDs.MODS.METALURGY.getID()) && !this.config.getOptionBool("ForcePFFMode")) {
+            //core.print("Metallurgy Detected. Setting up MODE.Metallurgy for OreCrushModule.");
+            mode = MODE.Metallurgy;
+        }
+        NumberOfDustPerCrush = this.config.getOptionInt("NumberOfDustPerCrush");
+        if (mode.equals(MODE.PFF)) {
+            PFFMode();
+        } else if (mode.equals(MODE.IC2)) {
+            IC2Mode();
+        } else if (mode.equals(MODE.Metallurgy)) {
+            MetalMode();
+        }
+        core.print("OreCrushModule: Mode " + mode.toString());
     }
-
-  
 
     @Override
     public void recipes() {
+        ArrayList<ItemStack> glass = new ArrayList();
+        glass.add(new ItemStack(Block.glass));
+        BlastFurnaceManager.addRecipes(new ItemStack(Block.sand), glass);
     }
 
     public void PFFMode() {
@@ -122,6 +107,12 @@ public class OreCrushmodule extends PfFModuleTemplate {
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("copperdust", 1), OreDictionary.getOres("ingotCopper"));
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("tindust", 1), OreDictionary.getOres("ingotTin"));
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("silverdust", 1), OreDictionary.getOres("ingotSilver"));
+
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("irondust", 1), ironBar);
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("golddust", 1), goldBar);
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("copperdust", 1), OreDictionary.getOres("ingotCopper"));
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("tindust", 1), OreDictionary.getOres("ingotTin"));
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("silverdust", 1), OreDictionary.getOres("ingotSilver"));
 
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("irondust"), ironBar);
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("golddust"), goldBar);
@@ -161,7 +152,8 @@ public class OreCrushmodule extends PfFModuleTemplate {
                     RockCrusherManager.addRecipes(new ItemStack(dust.itemID, NumberOfDustPerCrush, dust.getItemDamage()), OreDictionary.getOres("ore" + oreName));
                     ArrayList<ItemStack> blast = new ArrayList();
                     blast.add(ingot);
-                    BlastFurnaceManager.addRecipes(dust,blast);
+                    BlastFurnaceManager.addRecipes(dust, blast);
+                    VanillaFurnaceManager.addRecipes(dust, blast);
                 }
                 // Special handling for Iron and Gold.
                 if (oreName.toLowerCase().equals("iron") && !ironSetup) {
@@ -185,10 +177,8 @@ public class OreCrushmodule extends PfFModuleTemplate {
         RockCrusherManager.addRecipes(dust, ironIngot);
         ArrayList<ItemStack> d = new ArrayList();
         d.add(new ItemStack(ingot));
-        BlastFurnaceManager.addRecipes(dust,d);
+        BlastFurnaceManager.addRecipes(dust, d);
     }
-
-    
 
     public static enum MODE {
 

@@ -1,6 +1,11 @@
 package denoflionsx.plugins.FarmCraftory.Modules;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.Colors;
 import denoflionsx.core.ItemIDManager;
@@ -19,8 +24,8 @@ public class Liquidmodule extends PfFModuleTemplate {
 
     public Liquidmodule(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
     }
-
 
     @Override
     public void defaults() {
@@ -37,31 +42,36 @@ public class Liquidmodule extends PfFModuleTemplate {
         this.config.addDefault("VeggieJuice_WoodenBucketAndBarrel=" + "true");
     }
 
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void barrel(EventSpecial event) {
+        if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
+            return;
+        }
+        if (this.config.getOptionBool("FruitJuice_WoodenBucketAndBarrel")) {
+            PfFManagers.ContainerManager.addLiquid("Fruit Juice", PfFManagers.ItemManager.getItem("fruitjuice"), PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()));
+        }
+        if (this.config.getOptionBool("VeggieJuice_WoodenBucketAndBarrel")) {
+            PfFManagers.ContainerManager.addLiquid("Veggie Juice", PfFManagers.ItemManager.getItem("veggiejuice"), PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()));
+        }
+    }
+
     @Override
     public void doSetup() {
         if (this.config.getOptionBool("FruitJuice_Enabled")) {
-                fruitJuice = new customFuel("Fruit Juice", 1, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.FRUITJUICE.getIndex()), f, PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()).convertRBG(), this);
-                if (this.config.getOptionBool("FruitJuice_WoodenBucketAndBarrel")){
-                    PfFManagers.ContainerManager.addLiquid("Fruit Juice",PfFManagers.ItemManager.getItem("fruitjuice"),PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()));
-                }
-            }
-            if (this.config.getOptionBool("VeggieJuice_Enabled")) {
-                veggieJuice = new customFuel("Veggie Juice", 5, 2000, customFuel.populateSprites(EnumLiquidTextures.Liquids.VEGGIEJUICE.getIndex()), v, PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()).convertRBG(), this);
-                if (this.config.getOptionBool("VeggieJuice_WoodenBucketAndBarrel")){
-                    PfFManagers.ContainerManager.addLiquid("Veggie Juice", PfFManagers.ItemManager.getItem("veggiejuice"), PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()));
-                }
-            }
+            fruitJuice = new customFuel("Fruit Juice", 1, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.FRUITJUICE.getIndex()), f, PfFManagers.ColorManager.getColor(Colors.Values.MAUVE.toString()).convertRBG(), this);
+        }
+        if (this.config.getOptionBool("VeggieJuice_Enabled")) {
+            veggieJuice = new customFuel("Veggie Juice", 5, 2000, customFuel.populateSprites(EnumLiquidTextures.Liquids.VEGGIEJUICE.getIndex()), v, PfFManagers.ColorManager.getColor(Colors.Values.RED.toString()).convertRBG(), this);
+        }
     }
-
-   
 
     @Override
     public void recipes() {
         if (this.config.getOptionBool("FruitJuice_Enabled")) {
-            for (EnumCrops.TREE tree : EnumCrops.TREE.values()){
-                SqueezerHelper.add(tree.getTree().getFruitItem(), new LiquidStack(PfFManagers.ItemManager.getItem("fruitjuice").itemID,this.config.getOptionInt("FruitJuice_AmountPerSqueeze")));
+            for (EnumCrops.TREE tree : EnumCrops.TREE.values()) {
+                SqueezerHelper.add(tree.getTree().getFruitItem(), new LiquidStack(PfFManagers.ItemManager.getItem("fruitjuice").itemID, this.config.getOptionInt("FruitJuice_AmountPerSqueeze")));
             }
-            PfFManagers.FermenterManager.registerPfFLiquid(PfFManagers.ItemManager.getItem("fruitjuice"), this.config.getOptionFloat("FruitJuice_FermenterBonus"));   
+            PfFManagers.FermenterManager.registerPfFLiquid(PfFManagers.ItemManager.getItem("fruitjuice"), this.config.getOptionFloat("FruitJuice_FermenterBonus"));
         }
         if (this.config.getOptionBool("VeggieJuice_Enabled")) {
             for (EnumCrops.SINGLE crop : EnumCrops.SINGLE.values()) {
@@ -79,6 +89,4 @@ public class Liquidmodule extends PfFModuleTemplate {
             PfFManagers.FermenterManager.registerPfFLiquid(PfFManagers.ItemManager.getItem("veggiejuice"), this.config.getOptionFloat("VeggieJuice_FermenterBonus"));
         }
     }
-
- 
 }

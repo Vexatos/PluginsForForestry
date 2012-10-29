@@ -38,7 +38,8 @@ public class PfFMachineGUI extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer() {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+        super.drawGuiContainerForegroundLayer(par1, par2);
         fontRenderer.drawString(this.tile.getName(), 8, 6, 4210752);
     }
 }

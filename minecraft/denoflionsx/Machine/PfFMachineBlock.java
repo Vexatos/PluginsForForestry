@@ -33,7 +33,7 @@ public class PfFMachineBlock extends BlockContainer {
     }
 
     @Override
-    protected int damageDropped(int par1) {
+    public int damageDropped(int par1) {
         return par1;
     }
 

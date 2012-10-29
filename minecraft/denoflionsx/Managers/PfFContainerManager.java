@@ -2,12 +2,12 @@ package denoflionsx.Managers;
 
 import denoflionsx.API.Annotations.PfFEventTypes;
 import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.Events.EventSpecial;
 import denoflionsx.API.Interfaces.IPfFContainerManager;
 import denoflionsx.API.Objects.PfFColor;
 import denoflionsx.API.Objects.PfFLiquid;
 import denoflionsx.API.PfFEvents;
-import denoflionsx.API.PfFManagers;
 import denoflionsx.plugins.Forestry.Modules.BlueWaxModule.BlueWaxmodule;
 import denoflionsx.plugins.Core.pluginCoreItems;
 import java.util.ArrayList;
@@ -22,17 +22,17 @@ public class PfFContainerManager implements IPfFContainerManager {
     }
 
     @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
-    public void onSpecialEvent(EventSpecial event){
-        if (event.getMessage().toLowerCase().contains("barrel")){
-            for (PfFLiquid l : liquids){
+    public void onSpecialEvent(EventSpecial event) {
+        if (event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
+            for (PfFLiquid l : liquids) {
                 pluginCoreItems.bfuels.addLiquid(l);
             }
-        }else if (event.getMessage().toLowerCase().contains("bucket")){
-            for (PfFLiquid l : liquids){
+        } else if (event.getMessage().equals(EnumEventSpecialMessages.BUCKET.getMsg())) {
+            for (PfFLiquid l : liquids) {
                 pluginCoreItems.fuels.addLiquid(l);
             }
-        }else if (event.getMessage().toLowerCase().contains("cast")){
-            for (PfFLiquid l : liquids){
+        } else if (event.getMessage().equals(EnumEventSpecialMessages.CAST.getMsg())) {
+            for (PfFLiquid l : liquids) {
                 BlueWaxmodule.fuels.addLiquid(l);
             }
         }
@@ -40,31 +40,21 @@ public class PfFContainerManager implements IPfFContainerManager {
 
     @Override
     public void addLiquid(String LiquidName, ItemStack liquid, PfFColor color) {
-        liquids.add(new PfFLiquid(LiquidName,liquid.itemID,liquid,color));
-        forceLiquidSetup(LiquidName);
+        liquids.add(new PfFLiquid(LiquidName, liquid.itemID, liquid, color));
+        if (pluginCoreItems.bfuels != null) {
+            pluginCoreItems.bfuels.addLiquid(new PfFLiquid(LiquidName, liquid.itemID, liquid, color));
+        }
+        if (pluginCoreItems.fuels != null) {
+            pluginCoreItems.fuels.addLiquid(new PfFLiquid(LiquidName, liquid.itemID, liquid, color));
+        }
+        if (BlueWaxmodule.fuels != null){
+            BlueWaxmodule.fuels.addLiquid(new PfFLiquid(LiquidName, liquid.itemID, liquid, color));
+        }
     }
 
     @Override
     public void addLiquid(String LiquidName, ItemStack liquid, int r, int g, int b) {
-        liquids.add(new PfFLiquid(LiquidName,liquid.itemID,liquid,new PfFColor("" + r + g + b,r,g,b)));
-        forceLiquidSetup(LiquidName);
-    }
-
-    @Override
-    public void forceLiquidSetup(String LiquidName) {
-        for (PfFLiquid l : liquids) {
-            if (l.getLiquidName().equals(LiquidName)) {
-                if (PfFManagers.ItemManager.doesItemExist("barrelfuels")) {
-                    pluginCoreItems.bfuels.addLiquid(l);
-                }
-                if (PfFManagers.ItemManager.doesItemExist("woodenbucket")) {
-                    pluginCoreItems.fuels.addLiquid(l);
-                }
-                if (PfFManagers.ItemManager.doesItemExist("waxcast_red")) {
-                    BlueWaxmodule.fuels.addLiquid(l);
-                }
-            }
-        }
+        addLiquid(LiquidName, liquid, new PfFColor("" + r + g + b, r, g, b));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package denoflionsx.plugins.FarmCraftory;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.plugins.FarmCraftory.Crops.Crop;
@@ -18,12 +19,9 @@ public class pluginFarmCraftory extends PfFPluginTemplate {
     
     public pluginFarmCraftory(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
     }
-
-   
-
     
-
     @Override
     public void defaults() {
         this.config.addDefault("[FarmCraftory Options]");

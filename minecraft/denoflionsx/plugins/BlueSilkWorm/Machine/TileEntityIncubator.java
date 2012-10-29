@@ -1,21 +1,25 @@
 package denoflionsx.plugins.BlueSilkWorm.Machine;
 
 import buildcraft.api.core.Orientations;
+import buildcraft.api.gates.ITrigger;
 import buildcraft.api.liquids.ILiquidTank;
 import buildcraft.api.liquids.ITankContainer;
 import buildcraft.api.liquids.LiquidManager;
 import buildcraft.api.liquids.LiquidStack;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import denoflionsx.Enums.EnumBlockSides;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.Machine.PfFMachineTileEntity;
+import denoflionsx.Machine.Trigger.ILiquidContainerAccess;
 import denoflionsx.plugins.BlueSilkWorm.Helpers.EnumIncubatorSideTextures;
 import denoflionsx.plugins.BlueSilkWorm.Interfaces.*;
 import denoflionsx.plugins.BlueSilkWorm.Managers.SilkWormManagers;
+import denoflionsx.plugins.Buildcraft.Triggers.TriggerRegistry;
 import java.util.HashMap;
 import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityIncubator extends PfFMachineTileEntity implements ITankContainer, ISilkWormAccess, ISilkWormCocoonAccess, ISilkWormMothAccess, ISilkWormFoodAccess {
+public class TileEntityIncubator extends PfFMachineTileEntity implements ITankContainer, ISilkWormAccess, ISilkWormCocoonAccess, ISilkWormMothAccess, ISilkWormFoodAccess, ILiquidContainerAccess {
 
     public static final String guitexture = "/denoflionsx/incubator_gui.png";
     public static final String name = "Incubator";
@@ -28,7 +32,30 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
     private int count = 0;
 
     public TileEntityIncubator() {
-        this(19, 1);
+        this(19, 1, new ITrigger[]{TriggerRegistry.FoodTrigger, TriggerRegistry.WormTrigger, TriggerRegistry.CocoonTrigger, TriggerRegistry.MothTrigger, TriggerRegistry.BiomassTrigger});
+    }
+
+    @Override
+    public ItemStack getContainer() {
+        if (this.getStackInSlot(this.getContainerSlot()) != null) {
+            return this.getStackInSlot(this.getContainerSlot());
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public int getContainerSlot() {
+        return 7;
+    }
+
+    @Override
+    public boolean hasLiquidContainer() {
+        if (this.getContainer() != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -39,10 +66,12 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
         return packet;
     }
 
-    @Override
-    public void onDataPacket(NetworkManager net, Packet132TileEntityData pkt) {
-        this.syncFromNBT(pkt.customParam1);
-    }
+//    @Override
+//    public void onDataPacket(NetworkManager net, Packet132TileEntityData pkt) {
+//        this.syncFromNBT(pkt.customParam1);
+//    }
+    
+    
 
     @Override
     public void updateEntity() {
@@ -52,6 +81,7 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
             this.updateFood();
             this.updateContainerInput();
             count = 0;
+            this.sendUpdatePacket();
         }
         this.updateWorm();
         this.updateCocoon();
@@ -70,8 +100,6 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
             }
         }
     }
-    
-
 
     public void updateInput() {
         for (int i = inputSlots[0]; i < inputSlots[1] + 1; i++) {
@@ -79,12 +107,21 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
                 ItemStack input = this.getStackInSlot(i);
                 if (SilkWormManagers.Food.isValidFood(input) && this.getStackInSlot(foodSlot) == null) {
                     this.MoveItemStack(i, foodSlot);
+                    return;
                 }
                 if (SilkWormManagers.Registry.isItemStackWorm(input) && this.getWorm() == null) {
                     this.MoveItemStack(i, this.getWormSlot());
+                    return;
                 }
                 if (SilkWormManagers.Registry.isItemStackCocoon(input) && this.getCocoon() == null) {
                     this.MoveItemStack(i, this.getCocoonSlot());
+                    return;
+                }
+                LiquidStack liq = getLiquidForContainer(i);
+                if (liq != null) {
+                    if (liq.isLiquidEqual(EnumForestryLiquids.BIOMASS.getLiquid())) {
+                        this.MoveItemStack(i, this.getContainerSlot());
+                    }
                 }
             }
         }
@@ -93,11 +130,19 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
     public void updateContainerInput() {
         if (hasContainer()) {
             LiquidStack liq = getLiquidForContainer(liquid);
-            if (liq != null){
-                if (canTankHoldThis(liq.amount)){
+            if (liq != null) {
+                if (canTankHoldThis(liq.amount)) {
                     this.fill(Orientations.Unknown, liq, true);
                     ItemStack container = this.getStackInSlot(liquid);
-                    container.stackSize--;
+                    if (container.getItem().getContainerItem() != null) {
+                        this.setInventorySlotContents(7, new ItemStack(container.getItem().getContainerItem()));
+                    } else {
+                        if (container.stackSize > 1) {
+                            this.decrStackSize(7, 1);
+                        }else{
+                            this.setInventorySlotContents(7, null);
+                        }
+                    }
                 }
             }
         }
@@ -110,9 +155,9 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
             return false;
         }
     }
-    
-    public LiquidStack getLiquidForContainer(int slot){
-        if (LiquidManager.getLiquidForFilledItem(this.getStackInSlot(liquid)) != null){
+
+    public LiquidStack getLiquidForContainer(int slot) {
+        if (LiquidManager.getLiquidForFilledItem(this.getStackInSlot(liquid)) != null) {
             LiquidStack liq = LiquidManager.getLiquidForFilledItem(this.getStackInSlot(liquid));
             return liq;
         }
@@ -208,6 +253,11 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
         ItemStack c = this.getCocoon();
         ISilkWorm cocoon = (ISilkWorm) c.getItem();
         cocoon.progressWormGrowth(c);
+    }
+
+    public void sendUpdatePacket() {
+        Packet p = this.getDescriptionPacket();
+        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, 10, this.worldObj.provider.dimensionId, p);
     }
 
     @Override
@@ -308,8 +358,8 @@ public class TileEntityIncubator extends PfFMachineTileEntity implements ITankCo
         return false;
     }
 
-    public TileEntityIncubator(int size, int tanks) {
-        super(size, tanks);
+    public TileEntityIncubator(int size, int tanks, ITrigger[] triggers) {
+        super(size, tanks, triggers);
 
         //Texture Mapping.
         textureMap.put(EnumBlockSides.TOP, EnumIncubatorSideTextures.TOP);

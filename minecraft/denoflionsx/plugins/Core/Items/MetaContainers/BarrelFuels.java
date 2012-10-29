@@ -20,6 +20,7 @@ public class BarrelFuels extends PfFContainer {
         if (mode.equals(MODE.PERMA)) {
             core.print("Barrel mode is " + MODE.PERMA.toString());
             this.setMaxStackSize(1);
+            this.setContainerItem(PfFManagers.ItemManager.getItem("barrel").getItem());
         } else {
             this.setContainerItem(null);
             this.setMaxStackSize(64);

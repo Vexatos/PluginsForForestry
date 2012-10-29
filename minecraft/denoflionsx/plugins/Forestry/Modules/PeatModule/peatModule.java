@@ -1,7 +1,12 @@
 package denoflionsx.plugins.Forestry.Modules.PeatModule;
 
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.Annotations.PfFEventTypes;
+import denoflionsx.API.Annotations.PfFSubscribe;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.Events.EventItemInitialized;
+import denoflionsx.API.Events.EventSpecial;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.denLib;
@@ -25,6 +30,7 @@ public class peatModule extends PfFModuleTemplate {
 
     public peatModule(String name, String parent) {
         super(name, parent);
+        PfFEvents.specialEvent.register(this);
     }
 
     @Override
@@ -35,19 +41,19 @@ public class peatModule extends PfFModuleTemplate {
         this.config.addDefault("Peat_SmeltTimeInCokeOven=" + (15 * 20));
     }
 
-    @Override
-    public void itemInitialized(EventItemInitialized event) {
-        if (event.getName().equals("barrelfuels")) {
-            if (denLib.convertToBoolean(this.config.getOption("LiquidPeat_Enabled"))) {
-                PfFManagers.ContainerManager.addLiquid("Liquid Peat", PfFManagers.ItemManager.getItem("liquidpeat"), PfFManagers.ColorManager.getColor(Colors.Values.BROWN.toString()));
-            }
-            if (denLib.convertToBoolean(this.config.getOption("SugaryPeat_Enabled"))) {
-                PfFManagers.ContainerManager.addLiquid("Sugary Peat", PfFManagers.ItemManager.getItem("sugarypeat"), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTBROWN.toString()));
-            }
-
+    @PfFSubscribe(Event = PfFEventTypes.SPECIAL)
+    public void barrel(EventSpecial event) {
+        if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())){
+            return;
+        }
+        if (denLib.convertToBoolean(this.config.getOption("LiquidPeat_Enabled"))) {
+            PfFManagers.ContainerManager.addLiquid("Liquid Peat", PfFManagers.ItemManager.getItem("liquidpeat"), PfFManagers.ColorManager.getColor(Colors.Values.BROWN.toString()));
+        }
+        if (denLib.convertToBoolean(this.config.getOption("SugaryPeat_Enabled"))) {
+            PfFManagers.ContainerManager.addLiquid("Sugary Peat", PfFManagers.ItemManager.getItem("sugarypeat"), PfFManagers.ColorManager.getColor(Colors.Values.LIGHTBROWN.toString()));
         }
     }
-
+    
     @Override
     public void recipes() {
         //----------------------------
@@ -68,7 +74,6 @@ public class peatModule extends PfFModuleTemplate {
 
     @Override
     public void doSetup() {
-
         liquidpeat = new customFuel("Liquid Peat", 1, 20000, customFuel.populateSprites(EnumLiquidTextures.Liquids.PEAT.getIndex()), IDs_Peat, Colors.Values.BROWN.getColor(), this);
 
         sugarypeat = new customFuel("Sugary Peat", 2, 40000, customFuel.populateSprites(EnumLiquidTextures.Liquids.SUGARYPEAT.getIndex()), IDs_SugaryPeat, Colors.Values.LIGHTBROWN.getColor(), this);

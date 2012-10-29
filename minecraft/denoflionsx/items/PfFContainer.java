@@ -1,8 +1,11 @@
 package denoflionsx.items;
 
+import cpw.mods.fml.common.Side;
+import cpw.mods.fml.common.asm.SideOnly;
 import java.util.HashMap;
 import denoflionsx.Enums.Colors;
 import denoflionsx.items.Fuels.customFuel;
+import net.minecraft.src.ItemStack;
 
 public class PfFContainer extends multiItem {
 
@@ -26,6 +29,11 @@ public class PfFContainer extends multiItem {
     }
 
     @Override
+    public int func_82790_a(ItemStack par1ItemStack, int par2) {
+        return getColorFromDamage(par1ItemStack.getItemDamage(),par2);
+    }
+
+    @SideOnly(Side.CLIENT)
     public int getColorFromDamage(int par1, int par2) {
         if (par2 > 0) {
             if (this.renderColors.get(par1) != null) {

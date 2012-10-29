@@ -31,7 +31,7 @@ public class Colors {
         TAN(212,180,116), OIL(114,109,0),BLACK(0,0,0),PISS(196,192,14),
         GREEN(118,198,16),ORANGE2(223,103,7),LIGHTGREEN(141,196,66),
         HONEY(242,207,67),SEEDOIL(225,225,169),ICE(140,247,247),
-        RED(237,65,0),MAUVE(156,31,67);
+        RED(237,65,0),MAUVE(156,31,67), MUD(127,85,46);
         private int color = 0;
         private int r = 0;
         private int b = 0;

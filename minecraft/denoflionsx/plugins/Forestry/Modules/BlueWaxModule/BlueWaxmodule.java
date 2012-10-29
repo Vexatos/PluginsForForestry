@@ -2,6 +2,7 @@ package denoflionsx.plugins.Forestry.Modules.BlueWaxModule;
 
 import denoflionsx.Enums.Placeholder;
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Annotations.doesSpecialEvent;
@@ -73,7 +74,7 @@ public class BlueWaxmodule extends PfFModuleTemplate {
         Rod = new ItemRodofFreezing(this.config.getOptionInt("RodOfFreezing_ItemID"));
         if (this.config.getOptionBool("WaxCastFuel_Enabled")) {
             fuels = new WaxCastFuels(this.config.getOptionInt("WaxCastFuel_ItemID"), "WaxCastFuel");
-            PfFEvents.specialEvent.notifyListeners("Its a cast!");
+            PfFEvents.specialEvent.notifyListeners(EnumEventSpecialMessages.CAST.getMsg());
         }
     }
 

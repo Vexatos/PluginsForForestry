@@ -46,8 +46,14 @@ public class ItemRodofFreezing extends Item{
     public String getItemNameIS(ItemStack par1ItemStack) {
         return this.name;
     }
-    
-     @Override public void addInformation(ItemStack par1ItemStack, List par2List){tooltips(par1ItemStack, par2List);}
+
+    @Override
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+        super.addInformation(par1ItemStack, par2EntityPlayer, par3List, par4);
+        tooltips(par1ItemStack, par3List);
+    }
+     
+     
      
      private void tooltips(ItemStack item, List list){
          list.add("Right click some water!");

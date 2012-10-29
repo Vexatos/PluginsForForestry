@@ -9,6 +9,7 @@ import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.Handlers.FuelHandler;
 import denoflionsx.denLib.denLib;
+import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.PfFBar;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import forestry.api.recipes.RecipeManagers;
@@ -48,10 +49,13 @@ public class customFuelSolid {
 
     private void recipe() {
         ArrayList<ItemStack> containers = PfFManagers.ItemManager.getContainersForLiquidNoBarrel(this.liquidNameLowerCaseNoSpaces);
-        for (ItemStack i : containers){
-                FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), new Object[]{PfFManagers.ItemManager.getItem("infusionbar"),i});
+        if (InfusionBar.mode == InfusionBar.MODE.WORKBENCH) {
+            for (ItemStack i : containers) {
+                FMLWrapper.MODE.FML.addShapelessRecipe(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), new Object[]{PfFManagers.ItemManager.getItem("infusionbar"), i});
+            }
+        } else {
+            RecipeManagers.carpenterManager.addRecipe(10, new LiquidStack(PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces).itemID, 1000), null, new ItemStack(this.fuel), new Object[]{"BXX", "XXX", "XXX", Character.valueOf('B'), PfFManagers.ItemManager.getItem("infusionbar")});
         }
-        SqueezerHelper.add(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces),PfFManagers.ItemManager.getItem("infusionbar") , 100, PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces),1000);
-        RecipeManagers.carpenterManager.addRecipe(10, new LiquidStack(PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces).itemID,1000), null, new ItemStack(this.fuel), new Object[]{"BXX","XXX","XXX",Character.valueOf('B'),PfFManagers.ItemManager.getItem("infusionbar")});
+        SqueezerHelper.add(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), PfFManagers.ItemManager.getItem("infusionbar"), 100, PfFManagers.ItemManager.getItem(this.liquidNameLowerCaseNoSpaces), 1000);
     }
 }

@@ -36,35 +36,37 @@ public class PfFMachineContainer extends Container {
     protected boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4) {
         return super.mergeItemStack(par1ItemStack, par2, par3, par4);
     }
+    
+    
 
-    @Override
-    public ItemStack transferStackInSlot(int slot) {
-        ItemStack stack = null;
-        Slot slotObject = (Slot) inventorySlots.get(slot);
-
-        //null checks and checks if the item can be stacked (maxStackSize > 1)
-        if (slotObject != null && slotObject.getHasStack()) {
-            ItemStack stackInSlot = slotObject.getStack();
-            stack = stackInSlot.copy();
-
-            //merges the item into player inventory since its in the tileEntity
-            if (slot == 0) {
-                if (!mergeItemStack(stackInSlot, 1,
-                        inventorySlots.size(), true)) {
-                    return null;
-                }
-                //places it into the tileEntity is possible since its in the player inventory
-            } else if (!mergeItemStack(stackInSlot, 0, 1, false)) {
-                return null;
-            }
-
-            if (stackInSlot.stackSize == 0) {
-                slotObject.putStack(null);
-            } else {
-                slotObject.onSlotChanged();
-            }
-        }
-
-        return stack;
-    }
+//    @Override
+//    public ItemStack transferStackInSlot(int slot) {
+//        ItemStack stack = null;
+//        Slot slotObject = (Slot) inventorySlots.get(slot);
+//
+//        //null checks and checks if the item can be stacked (maxStackSize > 1)
+//        if (slotObject != null && slotObject.getHasStack()) {
+//            ItemStack stackInSlot = slotObject.getStack();
+//            stack = stackInSlot.copy();
+//
+//            //merges the item into player inventory since its in the tileEntity
+//            if (slot == 0) {
+//                if (!mergeItemStack(stackInSlot, 1,
+//                        inventorySlots.size(), true)) {
+//                    return null;
+//                }
+//                //places it into the tileEntity is possible since its in the player inventory
+//            } else if (!mergeItemStack(stackInSlot, 0, 1, false)) {
+//                return null;
+//            }
+//
+//            if (stackInSlot.stackSize == 0) {
+//                slotObject.putStack(null);
+//            } else {
+//                slotObject.onSlotChanged();
+//            }
+//        }
+//
+//        return stack;
+//    }
 }

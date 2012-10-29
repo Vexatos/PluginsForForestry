@@ -14,7 +14,8 @@ public class EnumModIDs {
         PAM("PamCombinedMod","pamsmods.common.combinedmod.Pamcombinedmod"),
         USEFUL_FOOD("silentspy_usefulfood",""),
         METALURGY("MetallurgyCore","shadow.mods.metallurgy.mod_MetallurgyCore"),
-        FORESTRY("Forestry","");
+        FORESTRY("Forestry",""),
+        millenaire("Millenaire","org.millenaire.common.forge.Mill");
         
         private String mod;
         private String theClass;
