@@ -90,11 +90,11 @@ public class pluginBuildcraft extends PfFPluginTemplate implements ITriggerProvi
     public void defaults() {
         config.addDefault("[Buildcraft Options]");
         config.addDefault("FuelInBiogas=true");
-        config.addDefault("FuelMJt=5");
-        config.addDefault("FuelBurnTime=50000");
+        config.addDefault("FuelMJt=6");
+        config.addDefault("FuelBurnTime=100000");
         config.addDefault("OilInBiogas=true");
-        config.addDefault("OilMJt=2");
-        config.addDefault("OilBurntime=10000");
+        config.addDefault("OilMJt=3");
+        config.addDefault("OilBurntime=20000");
         config.addDefault("WoodenBucketIntegration=" + "true");
         config.addDefault("Oil_WorksInStill=" + "true");
     }

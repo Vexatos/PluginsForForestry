@@ -15,4 +15,6 @@ public class PfFEvents {
     
     public static IListenerManager specialEvent;
     
+    public static IListenerManager fuelEvent;
+    
 }

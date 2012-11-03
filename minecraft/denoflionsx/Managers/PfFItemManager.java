@@ -3,6 +3,7 @@ package denoflionsx.Managers;
 import denoflionsx.API.Interfaces.IPfFItemManager;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.core.core;
+import denoflionsx.denLib.denLib;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.minecraft.src.Item;
@@ -26,6 +27,14 @@ public class PfFItemManager implements IPfFItemManager {
             if (itemName.contains(liquid) && !itemName.contains(" Bar")) {
                 if (i.getItemDamage() != 0) {
                     stacks.add(i);
+                }
+            }
+        }
+        if (liquid.equals("biomass") || liquid.equals("biofuel")){
+            stacks = new ArrayList();
+            for (String s : denLib.dumpMapKeys(registeredItems)){
+                if (s.contains(liquid) && !s.equals(liquid) && !s.contains("bar")){
+                    stacks.add(this.getItemQuietly(s));
                 }
             }
         }

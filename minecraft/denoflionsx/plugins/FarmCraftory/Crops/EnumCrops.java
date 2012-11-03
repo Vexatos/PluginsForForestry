@@ -17,15 +17,18 @@ public class EnumCrops {
         TURNIP(),
         CABBAGE(),
         ONION(),
-        CARROT(),
-        POTATO(),
+        //CARROT(),
+        //POTATO(),
         SPINACH(),
         LEEK();
         private PlantObject plant;
 
         private SINGLE() {
-            ItemStack p = denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "Item");
-            ItemStack s = denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "SeedBag");
+            ItemStack p;
+            ItemStack s;
+            p = denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "Item");
+            s = denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "SeedBag");
+
             int id = singleCropID++;
             PlantObject po = new PlantObject(p, s, id);
             this.plant = po;
@@ -72,31 +75,30 @@ public class EnumCrops {
         public PlantObject getPlant() {
             return plant;
         }
-        
-        public ItemStack[] asArray(){
+
+        public ItemStack[] asArray() {
             return this.plant.asArray();
         }
     }
-    
-    public static enum TREE{
+
+    public static enum TREE {
+
         ORANGE(),
         GRAPE(),
         PEAR(),
         PEACH(),
         BANANA(),
         CHERRY();
-        
         private TreeObject tree;
-        
-        private TREE(){
+
+        private TREE() {
             int id = treeID++;
-            tree = new TreeObject(denLib.getBlock(mod,"runeFruit"),id,denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "Item"));
+            tree = new TreeObject(denLib.getBlock(mod, "runeFruit"), id, denLib.ReflectionHelper.getNewItemStack(mod, denLib.toLowerCaseNoSpaces(this.toString()) + "Item"));
         }
 
         public TreeObject getTree() {
             return tree;
         }
-       
     }
 
     public static class PlantObject {
@@ -122,13 +124,14 @@ public class EnumCrops {
         public ItemStack getSeed() {
             return seed;
         }
-        
-        public ItemStack[] asArray(){
-            return new ItemStack[]{this.plant,this.seed};
+
+        public ItemStack[] asArray() {
+            return new ItemStack[]{this.plant, this.seed};
         }
     }
-    
-    public static class TreeObject{
+
+    public static class TreeObject {
+
         private Block fruit;
         private int baseMeta;
         private int grownMeta;
@@ -143,39 +146,37 @@ public class EnumCrops {
             this.saplingBlock = denLib.ReflectionHelper.getNewItemStackBlock(mod, "runeSapling");
             this.saplingBlock.setItemDamage(this.baseMeta);
         }
-        
 
         public int getBaseMeta() {
             return baseMeta;
         }
-        
-        public boolean isSapling(ItemStack i){
-            if (i == null){
+
+        public boolean isSapling(ItemStack i) {
+            if (i == null) {
                 return false;
             }
-            if (i.isItemEqual(this.saplingBlock)){
-                if (i.getItemDamage() == this.baseMeta){
-                   return true; 
+            if (i.isItemEqual(this.saplingBlock)) {
+                if (i.getItemDamage() == this.baseMeta) {
+                    return true;
                 }
             }
             return true;
         }
-        
-        public boolean isFruit(int BlockID){
+
+        public boolean isFruit(int BlockID) {
             return BlockID == this.fruit.blockID;
         }
-        
-        public boolean isGrown(int meta){
+
+        public boolean isGrown(int meta) {
             return this.grownMeta == meta;
         }
 
         public ItemStack getFruitItem() {
             return fruitItem.copy();
         }
-        
-        public ItemStack[] asArray(){
+
+        public ItemStack[] asArray() {
             return new ItemStack[]{this.fruitItem.copy()};
         }
-        
     }
 }

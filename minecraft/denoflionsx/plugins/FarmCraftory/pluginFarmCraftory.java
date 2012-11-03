@@ -26,8 +26,6 @@ public class pluginFarmCraftory extends PfFPluginTemplate {
     public void defaults() {
         this.config.addDefault("[FarmCraftory Options]");
         this.config.addDefault("ForestryIntegration=" + "true");
-        this.config.addDefault("#THIS OPTION BREAKS THE COMBINE IN TERRIBLE WAYS.");
-        this.config.addDefault("TreeFruitHarvestByCombine=" + "false");
         this.config.addDefault("# This makes the plants grow super fast in the farm machine.");
         this.config.addDefault("CheatMode=" + "false");
         this.config.addDefault("Seeds_AmountPerSqueeze=" + 100);

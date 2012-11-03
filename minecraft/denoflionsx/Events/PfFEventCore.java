@@ -9,6 +9,7 @@ public class PfFEventCore {
         PfFEvents.moduleLoaded = new PfFModuleLoadedManager();
         PfFEvents.itemInitialized = new PfFItemInitializedManager();
         PfFEvents.specialEvent = new PfFSpecialEventManager();
+        PfFEvents.fuelEvent = new PfFFuelCreatedManager();
         return this;
     }
 }

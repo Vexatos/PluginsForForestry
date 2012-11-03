@@ -49,10 +49,10 @@ public class pluginLoader extends PfFPluginTemplate {
         Containers.Container.register();
         ItemBlacksmithHammer.BlacksmithHammer();
         ItemIronRing.IronRing();
-        block = new PfFMachineBlock(core.PfFCore.config.getOptionInt("Machine_BlockID"),Material.clay);
-        FMLWrapper.MODE.FML.registerBlockWithItem(block, PfFMachineItemBlock.class);
-        FMLWrapper.MODE.FML.addSmelt(new ItemStack(Block.dirt), new ItemStack(block,1,0));
-        FMLWrapper.MODE.FML.addNameItemStack("Incubator", new ItemStack(block,1,0));
+        //block = new PfFMachineBlock(core.PfFCore.config.getOptionInt("Machine_BlockID"),Material.clay);
+        //FMLWrapper.MODE.FML.registerBlockWithItem(block, PfFMachineItemBlock.class);
+        //FMLWrapper.MODE.FML.addSmelt(new ItemStack(Block.dirt), new ItemStack(block,1,0));
+        //FMLWrapper.MODE.FML.addNameItemStack("Incubator", new ItemStack(block,1,0));
     }
 
     @Override

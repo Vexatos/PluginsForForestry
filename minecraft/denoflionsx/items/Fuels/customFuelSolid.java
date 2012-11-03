@@ -12,6 +12,7 @@ import denoflionsx.denLib.denLib;
 import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.PfFBar;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
+import denoflionsx.plugins.Railcraft.Event.FuelCalculation;
 import forestry.api.recipes.RecipeManagers;
 
 public class customFuelSolid {
@@ -43,7 +44,7 @@ public class customFuelSolid {
         fuel.add(this.nameLowerCaseNoSpaces, fuel.metaMap.get(this.name), this.texture, this.name + " Bar", this.isShiny);
         fuel.addRenderColor(0, this.color);
         FuelManager.copperEngineFuel.put(fuel.shiftedIndex, new EngineCopperFuel(PfFManagers.ItemManager.getItem(this.nameLowerCaseNoSpaces), this.MJt, this.BurnTime));
-        FuelHandler.values.put(this.fuel.shiftedIndex, 6000);
+        FuelHandler.values.put(this.fuel.shiftedIndex, FuelCalculation.getFuelValue(MJt, BurnTime));
         recipe();
     }
 

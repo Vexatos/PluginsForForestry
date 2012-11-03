@@ -126,7 +126,6 @@ public class pluginCoreItems extends PfFPluginTemplate {
             fuels = new WoodenBucketFuels(this.config.getOptionInt("WoodenBucketFuels_ItemID"), "woodenbucketfuels");
             PfFEvents.specialEvent.notifyListeners(EnumEventSpecialMessages.BUCKET.getMsg());
         }
-        core.print(this.config.getOption("BarrelFuels_getBarrelBack"));
         if (this.config.getOptionBool("BarrelFuels_getBarrelBack")) {
             BarrelFuels.mode = BarrelFuels.MODE.PERMA;
         }

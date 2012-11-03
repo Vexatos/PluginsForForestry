@@ -17,12 +17,14 @@ import denoflionsx.PluginsforForestry;
 import denoflionsx.denLib.Config.Config;
 import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.denLib.denLib;
+import denoflionsx.plugins.Railcraft.Event.BoilerFuelHandler;
 
 public class CoreObject implements IWorldLoaded {
 
     public HandlerInstances Handlers;
     public PfFEventCore Events;
     public Config config;
+    public BoilerFuelHandler Boiler;
 
     @PfFSubscribe(Event = PfFEventTypes.PLUGIN_LOADED)
     public void pluginLoaded(EventPluginLoaded event) {
@@ -62,6 +64,7 @@ public class CoreObject implements IWorldLoaded {
         PfFEvents.pluginLoaded.register(this);
         PfFEvents.moduleLoaded.register(this);
         PfFEvents.specialEvent.register(this);
+        Boiler = new BoilerFuelHandler().registerWithAPI();
         Config.ConfigDir = PluginsforForestry.proxy.getConfigDir();
         config = new Config("PluginsforForestry.cfg");
         TextureManager.Preload();

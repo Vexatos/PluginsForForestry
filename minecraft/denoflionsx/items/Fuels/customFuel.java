@@ -2,6 +2,8 @@ package denoflionsx.items.Fuels;
 
 import buildcraft.api.liquids.LiquidDictionary;
 import buildcraft.api.liquids.LiquidStack;
+import denoflionsx.API.Events.EventFuelCreatedObject;
+import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
@@ -18,6 +20,7 @@ import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumContainers;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
+import denoflionsx.plugins.Railcraft.Event.FuelCalculation;
 
 // This class is to automate the creation of basic fuel liquids and the
 // associated containers.
@@ -123,9 +126,10 @@ public class customFuel {
             ProxyClient.fx.add(PluginsforForestry.proxy.addLiquidFX(colors[0], Liquid.getR(), colors[1], Liquid.getB(), colors[2], Liquid.getG(), this.textures[0], PluginsforForestry.texture));
         }
         FuelManager.bronzeEngineFuel.put(fuelStack.itemID, new EngineBronzeFuel(fuelStack, this.MJt, this.burnTime, this.isSafeFuel));
-        GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), convertToEU(this.MJt, this.burnTime), 1));
+        GeneratorFuel.fuels.put(fuel.shiftedIndex, new GeneratorFuel(new LiquidStack(fuel.shiftedIndex, 1), FuelCalculation.getFuelValue(MJt, burnTime), 1));
         fuelSolid = new customFuelSolid(this.ID2, this.name, this.MJt2, this.burnTime2, EnumContainers.Containers.BAR.getTexture(), false, this.color);
         LiquidDictionary.getOrCreateLiquid(this.name, new LiquidStack(this.fuel,1000));
+        PfFEvents.fuelEvent.notifyListeners(new EventFuelCreatedObject(new ItemStack(this.fuel),this.MJt,this.burnTime));
     }
 
     private String[] generateInternals() {

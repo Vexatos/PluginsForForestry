@@ -5,6 +5,7 @@ public class EnumModIDs {
     public static enum MODS{
         MFR("MFReloaded", "powercrystals.minefactoryreloaded.common.MineFactoryReloadedCore"),
         FARMCRAFTORY("FarmCraftory","FarmCraftory"),
+        FARMCRAFTORY_CUSTOM("FarmCraftory","FarmCraftory.FarmCraftory"),
         BUILDCRAFT_CORE("BuildCraft|Core","buildcraft.BuildCraftCore"),
         BUILDCRAFT_ENERGY("BuildCraft|Energy","buildcraft.BuildCraftEnergy"),
         BUILDCRAFT_TRANSPORT("BuildCraft|Transport","buildcraft.BuildCraftTransport"),
