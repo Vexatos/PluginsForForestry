@@ -82,6 +82,7 @@ public class OreCrushmodule extends PfFModuleTemplate {
         dusts.add("Tin Dust", 3, EnumDustTextures.DUST.TIN.getIndex());
         dusts.add("Silver Dust", 4, EnumDustTextures.DUST.SILVER.getIndex());
         dusts.add("Coal Dust", 5, EnumDustTextures.DUST.COAL.getIndex());
+        dusts.add("Lead Dust", 6, EnumDustTextures.DUST.LEAD.getIndex());
 
         ArrayList<ItemStack> ironOre = new ArrayList();
         ironOre.add(new ItemStack(Block.oreIron));
@@ -96,6 +97,7 @@ public class OreCrushmodule extends PfFModuleTemplate {
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("tindust", NumberOfDustPerCrush), OreDictionary.getOres("oreTin"));
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("silverdust", NumberOfDustPerCrush), OreDictionary.getOres("oreSilver"));
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("coaldust", NumberOfDustPerCrush), coalOre);
+        RockCrusherManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("leaddust", NumberOfDustPerCrush), OreDictionary.getOres("oreLead"));
 
         ArrayList<ItemStack> ironBar = new ArrayList();
         ironBar.add(new ItemStack(Item.ingotIron));
@@ -107,18 +109,21 @@ public class OreCrushmodule extends PfFModuleTemplate {
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("copperdust", 1), OreDictionary.getOres("ingotCopper"));
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("tindust", 1), OreDictionary.getOres("ingotTin"));
         BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("silverdust", 1), OreDictionary.getOres("ingotSilver"));
+        BlastFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("leaddust", 1), OreDictionary.getOres("ingotLead"));
 
         VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("irondust", 1), ironBar);
         VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("golddust", 1), goldBar);
         VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("copperdust", 1), OreDictionary.getOres("ingotCopper"));
         VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("tindust", 1), OreDictionary.getOres("ingotTin"));
         VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("silverdust", 1), OreDictionary.getOres("ingotSilver"));
+        VanillaFurnaceManager.addRecipes(PfFManagers.ItemManager.getNewItemStack("leaddust", 1), OreDictionary.getOres("ingotLead"));
 
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("irondust"), ironBar);
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("golddust"), goldBar);
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("tindust"), OreDictionary.getOres("ingotTin"));
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("copperdust"), OreDictionary.getOres("ingotCopper"));
         RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("silverdust"), OreDictionary.getOres("ingotSilver"));
+        RockCrusherManager.addRecipes(PfFManagers.ItemManager.getItem("leaddust"), OreDictionary.getOres("ingotLead"));
     }
 
     public void IC2Mode() {

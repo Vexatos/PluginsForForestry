@@ -14,7 +14,6 @@ import denoflionsx.plugins.Railcraft.Event.BoilerAccess;
 import denoflionsx.plugins.Railcraft.Modules.OreCrushModule.OreCrushmodule;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
-import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import railcraft.common.api.core.items.ItemRegistry;
@@ -22,7 +21,7 @@ import railcraft.common.api.core.items.ItemRegistry;
 public class pluginRailcraft extends PfFPluginTemplate {
 
     public OreCrushmodule OreCrushModule = new OreCrushmodule("OreCrushModule", this.getName());
-    public static ItemStack creosote = ItemRegistry.getItem("liquid.creosote.liquid", 1);
+    public static ItemStack creosote;
 
     public pluginRailcraft(String name, String parent) {
         super(name, parent);
@@ -68,6 +67,7 @@ public class pluginRailcraft extends PfFPluginTemplate {
 
     @Override
     public void doSetup() {
+        creosote = ItemRegistry.getItem("liquid.creosote.liquid", 1);
     }
 
     @Override

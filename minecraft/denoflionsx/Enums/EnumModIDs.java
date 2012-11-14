@@ -1,5 +1,7 @@
 package denoflionsx.Enums;
 
+import denoflionsx.plugins.ForgottenNature.Crops.EnumCrops;
+
 public class EnumModIDs {
     
     public static enum MODS{
@@ -16,7 +18,8 @@ public class EnumModIDs {
         USEFUL_FOOD("silentspy_usefulfood",""),
         METALURGY("MetallurgyCore","shadow.mods.metallurgy.mod_MetallurgyCore"),
         FORESTRY("Forestry",""),
-        millenaire("Millenaire","org.millenaire.common.forge.Mill");
+        millenaire("Millenaire","org.millenaire.common.forge.Mill"),
+        ForgottenNature("ForgottenNature",EnumCrops.clazzpath);
         
         private String mod;
         private String theClass;

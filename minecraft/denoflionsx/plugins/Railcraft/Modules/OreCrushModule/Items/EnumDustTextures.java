@@ -14,7 +14,8 @@ public class EnumDustTextures {
         COPPER(),
         TIN(),
         SILVER(),
-        COAL();
+        COAL(),
+        LEAD();
         
         private int index;
         private DUST(){

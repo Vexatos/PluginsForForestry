@@ -12,7 +12,7 @@ import denoflionsx.PluginsforForestry;
 public class core {
 
     public static boolean isBukkit = false;
-    public static boolean isBetaBuild = false;
+    public static boolean isBetaBuild = true;
     public static CoreObject PfFCore = new CoreObject();
 
     public static boolean isClient() {

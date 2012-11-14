@@ -20,6 +20,11 @@ public class PfFModuleTemplate extends PfFPluginTemplate implements IPfFModule {
     }
 
     @Override
+    public void onWorldLoaded() {
+        
+    }
+    
+    @Override
     public void pluginLoaded(EventPluginLoaded event) {
         if (this.Parent == null && event.getPlugin().getName().equals(this.getParentName())) {
             this.Parent = event.getPlugin();

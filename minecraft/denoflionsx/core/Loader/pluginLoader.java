@@ -1,20 +1,13 @@
 package denoflionsx.core.Loader;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import denoflionsx.API.Events.EventItemInitialized;
 import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.Machine.PfFMachineBlock;
-import denoflionsx.Machine.PfFMachineItemBlock;
 import denoflionsx.core.PfFPluginTemplate;
-import denoflionsx.core.core;
-import denoflionsx.denLib.FMLWrapper;
 import denoflionsx.items.Containers.Containers;
 import denoflionsx.items.Containers.InfusionBar;
 import denoflionsx.items.CraftingTools.ItemBlacksmithHammer;
 import denoflionsx.items.CraftingTools.ItemIronRing;
-import net.minecraft.src.Block;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
 
 public class pluginLoader extends PfFPluginTemplate {
     

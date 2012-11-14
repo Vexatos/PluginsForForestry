@@ -17,7 +17,10 @@ public class ItemDebugStick extends multiItem {
     @DebugStatementInThisMethod
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        int id = world.getBlockId(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        core.print("ID: " + id + " | " + "Meta: " + meta);
+        return true;
     }
 
     public static class Debug {

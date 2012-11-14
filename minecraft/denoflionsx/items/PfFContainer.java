@@ -29,9 +29,11 @@ public class PfFContainer extends multiItem {
     }
 
     @Override
-    public int func_82790_a(ItemStack par1ItemStack, int par2) {
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
         return getColorFromDamage(par1ItemStack.getItemDamage(),par2);
     }
+    
+    
 
     @SideOnly(Side.CLIENT)
     public int getColorFromDamage(int par1, int par2) {

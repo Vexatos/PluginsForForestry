@@ -7,6 +7,7 @@ package denoflionsx.Proxy;
 import cpw.mods.fml.client.FMLTextureFX;
 import denoflionsx.Machine.Client.PfFGUIElementManager;
 import denoflionsx.PluginsforForestry;
+import denoflionsx.core.core;
 import denoflionsx.plugins.BlueSilkWorm.Machine.GUIElementIncubator;
 import denoflionsx.plugins.Forestry.Utility.LiquidFXHook;
 import java.io.File;
@@ -51,8 +52,12 @@ public class ProxyClient extends Proxy {
 
     @Override
     public void registerFX() {
-        for (FMLTextureFX f : fx) {
-            ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
+        try {
+            for (FMLTextureFX f : fx) {
+                ModLoader.getMinecraftInstance().renderEngine.registerTextureFX(f);
+            }
+        } catch (Exception ex) {
+            core.print("An error has occurred in ProxyClient.registerFX. Attempting to prevent the crash...");
         }
     }
 
