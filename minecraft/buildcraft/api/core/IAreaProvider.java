@@ -1,18 +1,35 @@
+/** 
+ * Copyright (c) SpaceToad, 2011
+ * http://www.mod-buildcraft.com
+ * 
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public 
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
 package buildcraft.api.core;
 
-public interface IAreaProvider
-{
-    int xMin();
+/**
+ * To be implemented by TileEntities able to provide a square area on the world,
+ * typically BuildCraft markers.
+ */
+public interface IAreaProvider {
 
-    int yMin();
+	public int xMin();
 
-    int zMin();
+	public int yMin();
 
-    int xMax();
+	public int zMin();
 
-    int yMax();
+	public int xMax();
 
-    int zMax();
+	public int yMax();
 
-    void removeFromWorld();
+	public int zMax();
+
+	/**
+	 * Remove from the world all objects used to define the area.
+	 */
+	public void removeFromWorld();
+
 }

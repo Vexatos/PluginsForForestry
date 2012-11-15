@@ -1,43 +1,56 @@
+/** 
+ * Copyright (c) SpaceToad, 2011
+ * http://www.mod-buildcraft.com
+ * 
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public 
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
 package buildcraft.api.power;
 
 import net.minecraft.src.NBTTagCompound;
 
-public abstract class PowerFramework
-{
-    private static String baseNBTName = "net.minecraft.src.buildcarft.Power";
-    public static PowerFramework currentFramework;
+public abstract class PowerFramework {
 
-    public abstract IPowerProvider createPowerProvider();
+	static private String baseNBTName = "net.minecraft.src.buildcarft.Power";
 
-    public void loadPowerProvider(IPowerReceptor var1, NBTTagCompound var2)
-    {
-        IPowerProvider var3 = this.createPowerProvider();
+	public static PowerFramework currentFramework;
 
-        if (var2.hasKey(baseNBTName))
-        {
-            NBTTagCompound var4 = var2.getCompoundTag(baseNBTName);
+	public abstract IPowerProvider createPowerProvider();
 
-            if (var4.getString("class").equals(this.getClass().getName()))
-            {
-                var3.readFromNBT(var4.getCompoundTag("contents"));
-            }
-        }
+	public void loadPowerProvider(IPowerReceptor receptor, NBTTagCompound compound) {
 
-        var1.setPowerProvider(var3);
-    }
+		IPowerProvider provider = createPowerProvider();
 
-    public void savePowerProvider(IPowerReceptor var1, NBTTagCompound var2)
-    {
-        IPowerProvider var3 = var1.getPowerProvider();
+		if (compound.hasKey(baseNBTName)) {
+			NBTTagCompound cpt = compound.getCompoundTag(baseNBTName);
+			if (cpt.getString("class").equals(this.getClass().getName())) {
+				provider.readFromNBT(cpt.getCompoundTag("contents"));
+			}
+		}
 
-        if (var3 != null)
-        {
-            NBTTagCompound var4 = new NBTTagCompound();
-            var4.setString("class", this.getClass().getName());
-            NBTTagCompound var5 = new NBTTagCompound();
-            var3.writeToNBT(var5);
-            var4.setTag("contents", var5);
-            var2.setTag(baseNBTName, var4);
-        }
-    }
+		receptor.setPowerProvider(provider);
+	}
+
+	public void savePowerProvider(IPowerReceptor receptor, NBTTagCompound compound) {
+
+		IPowerProvider provider = receptor.getPowerProvider();
+
+		if (provider == null) {
+			return;
+		}
+
+		NBTTagCompound cpt = new NBTTagCompound();
+
+		cpt.setString("class", this.getClass().getName());
+
+		NBTTagCompound contents = new NBTTagCompound();
+
+		provider.writeToNBT(contents);
+
+		cpt.setTag("contents", contents);
+		compound.setTag(baseNBTName, cpt);
+	}
+
 }

@@ -1,196 +1,162 @@
+/** 
+ * Copyright (c) SpaceToad, 2011
+ * http://www.mod-buildcraft.com
+ * 
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public 
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
 package buildcraft.api.power;
 
+import net.minecraftforge.common.ForgeDirection;
 import buildcraft.api.core.SafeTimeTracker;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
 
-public abstract class PowerProvider implements IPowerProvider
-{
-    protected int latency;
-    protected int minEnergyReceived;
-    protected int maxEnergyReceived;
-    protected int maxEnergyStored;
-    protected int minActivationEnergy;
-    protected float energyStored = 0.0F;
-    protected int powerLoss = 1;
-    protected int powerLossRegularity = 100;
-    public SafeTimeTracker timeTracker = new SafeTimeTracker();
-    public SafeTimeTracker energyLossTracker = new SafeTimeTracker();
-    public int[] powerSources = new int[] {0, 0, 0, 0, 0, 0};
+public abstract class PowerProvider implements IPowerProvider {
 
-    public SafeTimeTracker getTimeTracker()
-    {
-        return this.timeTracker;
-    }
+	protected int latency;
+	protected int minEnergyReceived;
+	protected int maxEnergyReceived;
+	protected int maxEnergyStored;
+	protected int minActivationEnergy;
+	protected float energyStored = 0;
 
-    public int getLatency()
-    {
-        return this.latency;
-    }
+	protected int powerLoss = 1;
+	protected int powerLossRegularity = 100;
 
-    public int getMinEnergyReceived()
-    {
-        return this.minEnergyReceived;
-    }
+	public SafeTimeTracker timeTracker = new SafeTimeTracker();
+	public SafeTimeTracker energyLossTracker = new SafeTimeTracker();
 
-    public int getMaxEnergyReceived()
-    {
-        return this.maxEnergyReceived;
-    }
+	public int[] powerSources = { 0, 0, 0, 0, 0, 0 };
 
-    public int getMaxEnergyStored()
-    {
-        return this.maxEnergyStored;
-    }
+	@Override public SafeTimeTracker getTimeTracker() { return this.timeTracker; }
+	
+	@Override public int getLatency() { return this.latency; }
+	@Override public int getMinEnergyReceived() { return this.minEnergyReceived; }
+	@Override public int getMaxEnergyReceived() { return this.maxEnergyReceived; }
+	@Override public int getMaxEnergyStored() { return this.maxEnergyStored; }
+	@Override public int getActivationEnergy() { return this.minActivationEnergy; }
+	@Override public float getEnergyStored() { return this.energyStored; }
+	
+	@Override 
+	public void configure(int latency, int minEnergyReceived, int maxEnergyReceived, int minActivationEnergy, int maxStoredEnergy) {
+		this.latency = latency;
+		this.minEnergyReceived = minEnergyReceived;
+		this.maxEnergyReceived = maxEnergyReceived;
+		this.maxEnergyStored = maxStoredEnergy;
+		this.minActivationEnergy = minActivationEnergy;
+	}
 
-    public int getActivationEnergy()
-    {
-        return this.minActivationEnergy;
-    }
+	@Override 
+	public void configurePowerPerdition(int powerLoss, int powerLossRegularity) {
+		this.powerLoss = powerLoss;
+		this.powerLossRegularity = powerLossRegularity;
+	}
 
-    public float getEnergyStored()
-    {
-        return this.energyStored;
-    }
+	@Override
+	public boolean update(IPowerReceptor receptor) {
+		if (!preConditions(receptor)) {
+			return false;
+		}
 
-    public void configure(int var1, int var2, int var3, int var4, int var5)
-    {
-        this.latency = var1;
-        this.minEnergyReceived = var2;
-        this.maxEnergyReceived = var3;
-        this.maxEnergyStored = var5;
-        this.minActivationEnergy = var4;
-    }
+		TileEntity tile = (TileEntity) receptor;
+		boolean result = false;
 
-    public void configurePowerPerdition(int var1, int var2)
-    {
-        this.powerLoss = var1;
-        this.powerLossRegularity = var2;
-    }
+		if (energyStored >= minActivationEnergy) {
+			if (latency == 0) {
+				receptor.doWork();
+				result = true;
+			} else {
+				if (timeTracker.markTimeIfDelay(tile.worldObj, latency)) {
+					receptor.doWork();
+					result = true;
+				}
+			}
+		}
 
-    public boolean update(IPowerReceptor var1)
-    {
-        if (!this.preConditions(var1))
-        {
-            return false;
-        }
-        else
-        {
-            TileEntity var2 = (TileEntity)var1;
-            boolean var3 = false;
+		if (powerLoss > 0 && energyLossTracker.markTimeIfDelay(tile.worldObj, powerLossRegularity)) {
 
-            if (this.energyStored >= (float)this.minActivationEnergy)
-            {
-                if (this.latency == 0)
-                {
-                    var1.doWork();
-                    var3 = true;
-                }
-                else if (this.timeTracker.markTimeIfDelay(var2.worldObj, (long)this.latency))
-                {
-                    var1.doWork();
-                    var3 = true;
-                }
-            }
+			energyStored -= powerLoss;
+			if (energyStored < 0) {
+				energyStored = 0;
+			}
+		}
 
-            if (this.powerLoss > 0 && this.energyLossTracker.markTimeIfDelay(var2.worldObj, (long)this.powerLossRegularity))
-            {
-                this.energyStored -= (float)this.powerLoss;
+		for (int i = 0; i < 6; ++i) {
+			if (powerSources[i] > 0) {
+				powerSources[i]--;
+			}
+		}
 
-                if (this.energyStored < 0.0F)
-                {
-                    this.energyStored = 0.0F;
-                }
-            }
+		return result;
+	}
 
-            for (int var4 = 0; var4 < 6; ++var4)
-            {
-                if (this.powerSources[var4] > 0)
-                {
-                    --this.powerSources[var4];
-                }
-            }
+	@Override
+	public boolean preConditions(IPowerReceptor receptor) {
+		return true;
+	}
 
-            return var3;
-        }
-    }
+	@Override
+	public float useEnergy(float min, float max, boolean doUse) {
+		float result = 0;
 
-    public boolean preConditions(IPowerReceptor var1)
-    {
-        return true;
-    }
+		if (energyStored >= min) {
+			if (energyStored <= max) {
+				result = energyStored;
+				if (doUse) {
+					energyStored = 0;
+				}
+			} else {
+				result = max;
+				if (doUse) {
+					energyStored -= max;
+				}
+			}
+		}
 
-    public float useEnergy(float var1, float var2, boolean var3)
-    {
-        float var4 = 0.0F;
+		return result;
+	}
 
-        if (this.energyStored >= var1)
-        {
-            if (this.energyStored <= var2)
-            {
-                var4 = this.energyStored;
+	@Override 
+	public void readFromNBT(NBTTagCompound nbttagcompound) {
+		latency = nbttagcompound.getInteger("latency");
+		minEnergyReceived = nbttagcompound.getInteger("minEnergyReceived");
+		maxEnergyReceived = nbttagcompound.getInteger("maxEnergyReceived");
+		maxEnergyStored = nbttagcompound.getInteger("maxStoreEnergy");
+		minActivationEnergy = nbttagcompound.getInteger("minActivationEnergy");
 
-                if (var3)
-                {
-                    this.energyStored = 0.0F;
-                }
-            }
-            else
-            {
-                var4 = var2;
+		try {
+			energyStored = nbttagcompound.getFloat("storedEnergy");
+		} catch (Throwable c) {
+			energyStored = 0;
+		}
+	}
 
-                if (var3)
-                {
-                    this.energyStored -= var2;
-                }
-            }
-        }
+	@Override 
+	public void writeToNBT(NBTTagCompound nbttagcompound) {
+		nbttagcompound.setInteger("latency", latency);
+		nbttagcompound.setInteger("minEnergyReceived", minEnergyReceived);
+		nbttagcompound.setInteger("maxEnergyReceived", maxEnergyReceived);
+		nbttagcompound.setInteger("maxStoreEnergy", maxEnergyStored);
+		nbttagcompound.setInteger("minActivationEnergy", minActivationEnergy);
+		nbttagcompound.setFloat("storedEnergy", energyStored);
+	}
 
-        return var4;
-    }
+	@Override
+	public void receiveEnergy(float quantity, ForgeDirection from) {
+		powerSources[from.ordinal()] = 2;
 
-    public void readFromNBT(NBTTagCompound var1)
-    {
-        this.latency = var1.getInteger("latency");
-        this.minEnergyReceived = var1.getInteger("minEnergyReceived");
-        this.maxEnergyReceived = var1.getInteger("maxEnergyReceived");
-        this.maxEnergyStored = var1.getInteger("maxStoreEnergy");
-        this.minActivationEnergy = var1.getInteger("minActivationEnergy");
+		energyStored += quantity;
 
-        try
-        {
-            this.energyStored = var1.getFloat("storedEnergy");
-        }
-        catch (Throwable var3)
-        {
-            this.energyStored = 0.0F;
-        }
-    }
+		if (energyStored > maxEnergyStored) {
+			energyStored = maxEnergyStored;
+		}
+	}
 
-    public void writeToNBT(NBTTagCompound var1)
-    {
-        var1.setInteger("latency", this.latency);
-        var1.setInteger("minEnergyReceived", this.minEnergyReceived);
-        var1.setInteger("maxEnergyReceived", this.maxEnergyReceived);
-        var1.setInteger("maxStoreEnergy", this.maxEnergyStored);
-        var1.setInteger("minActivationEnergy", this.minActivationEnergy);
-        var1.setFloat("storedEnergy", this.energyStored);
-    }
-
-    public void receiveEnergy(float var1, ForgeDirection var2)
-    {
-        this.powerSources[var2.ordinal()] = 2;
-        this.energyStored += var1;
-
-        if (this.energyStored > (float)this.maxEnergyStored)
-        {
-            this.energyStored = (float)this.maxEnergyStored;
-        }
-    }
-
-    public boolean isPowerSource(ForgeDirection var1)
-    {
-        return this.powerSources[var1.ordinal()] != 0;
-    }
+	@Override
+	public boolean isPowerSource(ForgeDirection from) {
+		return powerSources[from.ordinal()] != 0;
+	}
 }

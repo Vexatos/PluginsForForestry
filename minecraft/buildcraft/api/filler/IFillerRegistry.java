@@ -2,13 +2,14 @@ package buildcraft.api.filler;
 
 import net.minecraft.src.IInventory;
 
-public interface IFillerRegistry
-{
-    void addRecipe(IFillerPattern var1, Object[] var2);
+public interface IFillerRegistry {
 
-    IFillerPattern findMatchingRecipe(IInventory var1);
+	public void addRecipe(IFillerPattern pattern, Object aobj[]);
 
-    int getPatternNumber(IFillerPattern var1);
+	public IFillerPattern findMatchingRecipe(IInventory inventorycrafting);
 
-    IFillerPattern getPattern(int var1);
+	public int getPatternNumber(IFillerPattern pattern);
+
+	public IFillerPattern getPattern(int n);
+
 }

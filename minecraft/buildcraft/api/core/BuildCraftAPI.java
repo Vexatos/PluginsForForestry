@@ -1,38 +1,48 @@
+/**
+ * Copyright (c) SpaceToad, 2011
+ * http://www.mod-buildcraft.com
+ *
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
 package buildcraft.api.core;
 
 import net.minecraft.src.Block;
 import net.minecraft.src.World;
 
-public class BuildCraftAPI
-{
-    @Deprecated
-    public static final int BUCKET_VOLUME = 1000;
-    public static final int LAST_ORIGINAL_BLOCK = 122;
-    public static final int LAST_ORIGINAL_ITEM = 126;
-    public static final boolean[] softBlocks = new boolean[Block.blocksList.length];
+public class BuildCraftAPI {
 
-    @Deprecated
-    public static boolean softBlock(int var0)
-    {
-        return var0 == 0 || softBlocks[var0] || Block.blocksList[var0] == null;
-    }
+	@Deprecated
+	// To be removed, see LiquidContainerRegistry
+	public static final int BUCKET_VOLUME = 1000;
+	public static final int LAST_ORIGINAL_BLOCK = 122;
+	public static final int LAST_ORIGINAL_ITEM = 126;
 
-    @Deprecated
-    public static boolean unbreakableBlock(int var0)
-    {
-        return var0 == Block.bedrock.blockID || var0 == Block.lavaStill.blockID || var0 == Block.lavaMoving.blockID;
-    }
+	public static final boolean[] softBlocks = new boolean[Block.blocksList.length];
+        
+	@Deprecated
+	// To be removed
+	public static boolean softBlock(int blockId) {
+		return blockId == 0 || softBlocks[blockId] || Block.blocksList[blockId] == null;
+	}
 
-    @Deprecated
-    public static void breakBlock(World var0, int var1, int var2, int var3)
-    {
-        int var4 = var0.getBlockId(var1, var2, var3);
+	@Deprecated
+	// To be removed
+	public static boolean unbreakableBlock(int blockId) {
+		return blockId == Block.bedrock.blockID || blockId == Block.lavaStill.blockID || blockId == Block.lavaMoving.blockID;
+	}
 
-        if (var4 != 0)
-        {
-            Block.blocksList[var4].dropBlockAsItem(var0, var1, var2, var3, var0.getBlockMetadata(var1, var2, var3), 0);
-        }
+	@Deprecated
+	// To be removed
+	public static void breakBlock(World world, int x, int y, int z) {
+		int blockId = world.getBlockId(x, y, z);
 
-        var0.setBlockWithNotify(var1, var2, var3, 0);
-    }
+		if (blockId != 0) {
+			Block.blocksList[blockId].dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), 0);
+		}
+
+		world.setBlockWithNotify(x, y, z, 0);
+	}
 }

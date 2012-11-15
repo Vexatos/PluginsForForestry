@@ -1,34 +1,44 @@
+/** 
+ * Copyright (c) SpaceToad, 2011
+ * http://www.mod-buildcraft.com
+ * 
+ * BuildCraft is distributed under the terms of the Minecraft Mod Public 
+ * License 1.0, or MMPL. Please check the contents of the license located in
+ * http://www.mod-buildcraft.com/MMPL-1.0.txt
+ */
+
 package buildcraft.api.gates;
 
-public abstract class Action implements IAction
-{
-    protected int id;
 
-    public Action(int var1)
-    {
-        this.id = var1;
-        ActionManager.actions[var1] = this;
-    }
+public abstract class Action implements IAction {
 
-    public int getId()
-    {
-        return this.id;
-    }
+	protected int id;
 
-    public abstract String getTexture();
+	public Action(int id) {
+		this.id = id;
+		ActionManager.actions[id] = this;
+	}
 
-    public int getIndexInTexture()
-    {
-        return 0;
-    }
+	@Override
+	public int getId() {
+		return this.id;
+	}
+	
+	@Override
+	public abstract String getTexture();
 
-    public boolean hasParameter()
-    {
-        return false;
-    }
+	@Override
+	public int getIndexInTexture() {
+		return 0;
+	}
 
-    public String getDescription()
-    {
-        return "";
-    }
+	@Override
+	public boolean hasParameter() {
+		return false;
+	}
+
+	@Override
+	public String getDescription() {
+		return "";
+	}
 }

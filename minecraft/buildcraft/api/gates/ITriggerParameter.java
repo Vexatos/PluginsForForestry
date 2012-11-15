@@ -3,15 +3,16 @@ package buildcraft.api.gates;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 
-public interface ITriggerParameter
-{
-    ItemStack getItemStack();
+public interface ITriggerParameter {
 
-    void set(ItemStack var1);
+	public abstract ItemStack getItemStack();
 
-    void writeToNBT(NBTTagCompound var1);
+	public abstract void set(ItemStack stack);
 
-    void readFromNBT(NBTTagCompound var1);
+	public abstract void writeToNBT(NBTTagCompound compound);
 
-    ItemStack getItem();
+	public abstract void readFromNBT(NBTTagCompound compound);
+
+	public abstract ItemStack getItem();
+
 }

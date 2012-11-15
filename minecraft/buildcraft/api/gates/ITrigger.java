@@ -2,19 +2,40 @@ package buildcraft.api.gates;
 
 import net.minecraft.src.TileEntity;
 
-public interface ITrigger
-{
-    int getId();
+public interface ITrigger {
 
-    String getTextureFile();
+	public abstract int getId();
 
-    int getIndexInTexture();
+	/**
+	 * Return the texture file for this trigger icon
+	 */
+	public abstract String getTextureFile();
 
-    boolean hasParameter();
+	/**
+	 * Return the icon id in the texture file
+	 */
+	public abstract int getIndexInTexture();
 
-    String getDescription();
+	/**
+	 * Return true if this trigger can accept parameters
+	 */
+	public abstract boolean hasParameter();
 
-    boolean isTriggerActive(TileEntity var1, ITriggerParameter var2);
+	/**
+	 * Return the trigger description in the UI
+	 */
+	public abstract String getDescription();
 
-    ITriggerParameter createParameter();
+	/**
+	 * Return true if the tile given in parameter activates the trigger, given
+	 * the parameters.
+	 */
+	public abstract boolean isTriggerActive(TileEntity tile, ITriggerParameter parameter);
+
+	/**
+	 * Create parameters for the trigger. As for now, there is only one kind of
+	 * trigger parameter available so this subprogram is final.
+	 */
+	public abstract ITriggerParameter createParameter();
+
 }

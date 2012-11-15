@@ -1,118 +1,85 @@
 package buildcraft.api.gates;
 
-import buildcraft.api.transport.IPipe;
-import java.util.Iterator;
 import java.util.LinkedList;
+
+import buildcraft.api.transport.IPipe;
+
 import net.minecraft.src.Block;
 import net.minecraft.src.TileEntity;
 
-public class ActionManager
-{
-    public static Trigger[] triggers = new Trigger[1024];
-    public static Action[] actions = new Action[1024];
-    private static LinkedList triggerProviders = new LinkedList();
-    private static LinkedList actionProviders = new LinkedList();
+public class ActionManager {
 
-    public static void registerTriggerProvider(ITriggerProvider var0)
-    {
-        if (var0 != null && !triggerProviders.contains(var0))
-        {
-            triggerProviders.add(var0);
-        }
-    }
+	public static Trigger[] triggers = new Trigger[1024];
+	public static Action[] actions = new Action[1024];
 
-    public static LinkedList getNeighborTriggers(Block var0, TileEntity var1)
-    {
-        LinkedList var2 = new LinkedList();
-        Iterator var3 = triggerProviders.iterator();
+	private static LinkedList<ITriggerProvider> triggerProviders = new LinkedList<ITriggerProvider>();
+	private static LinkedList<IActionProvider> actionProviders = new LinkedList<IActionProvider>();
 
-        while (var3.hasNext())
-        {
-            ITriggerProvider var4 = (ITriggerProvider)var3.next();
-            LinkedList var5 = var4.getNeighborTriggers(var0, var1);
+	public static void registerTriggerProvider(ITriggerProvider provider) {
+		if (provider != null && !triggerProviders.contains(provider)) {
+			triggerProviders.add(provider);
+		}
+	}
 
-            if (var5 != null)
-            {
-                Iterator var6 = var5.iterator();
+	public static LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity entity) {
+		LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
 
-                while (var6.hasNext())
-                {
-                    ITrigger var7 = (ITrigger)var6.next();
+		for (ITriggerProvider provider : triggerProviders) {
+			LinkedList<ITrigger> toAdd = provider.getNeighborTriggers(block, entity);
 
-                    if (!var2.contains(var7))
-                    {
-                        var2.add(var7);
-                    }
-                }
-            }
-        }
+			if (toAdd != null) {
+				for (ITrigger t : toAdd) {
+					if (!triggers.contains(t)) {
+						triggers.add(t);
+					}
+				}
+			}
+		}
 
-        return var2;
-    }
+		return triggers;
+	}
 
-    public static void registerActionProvider(IActionProvider var0)
-    {
-        if (var0 != null && !actionProviders.contains(var0))
-        {
-            actionProviders.add(var0);
-        }
-    }
+	public static void registerActionProvider(IActionProvider provider) {
+		if (provider != null && !actionProviders.contains(provider)) {
+			actionProviders.add(provider);
+		}
+	}
 
-    public static LinkedList getNeighborActions(Block var0, TileEntity var1)
-    {
-        LinkedList var2 = new LinkedList();
-        Iterator var3 = actionProviders.iterator();
+	public static LinkedList<IAction> getNeighborActions(Block block, TileEntity entity) {
+		LinkedList<IAction> actions = new LinkedList<IAction>();
 
-        while (var3.hasNext())
-        {
-            IActionProvider var4 = (IActionProvider)var3.next();
-            LinkedList var5 = var4.getNeighborActions(var0, var1);
+		for (IActionProvider provider : actionProviders) {
+			LinkedList<IAction> toAdd = provider.getNeighborActions(block, entity);
 
-            if (var5 != null)
-            {
-                Iterator var6 = var5.iterator();
+			if (toAdd != null) {
+				for (IAction t : toAdd) {
+					if (!actions.contains(t)) {
+						actions.add(t);
+					}
+				}
+			}
+		}
 
-                while (var6.hasNext())
-                {
-                    IAction var7 = (IAction)var6.next();
+		return actions;
+	}
 
-                    if (!var2.contains(var7))
-                    {
-                        var2.add(var7);
-                    }
-                }
-            }
-        }
+	public static LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
+		LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
 
-        return var2;
-    }
+		for (ITriggerProvider provider : triggerProviders) {
+			LinkedList<ITrigger> toAdd = provider.getPipeTriggers(pipe);
 
-    public static LinkedList getPipeTriggers(IPipe var0)
-    {
-        LinkedList var1 = new LinkedList();
-        Iterator var2 = triggerProviders.iterator();
+			if (toAdd != null) {
+				for (ITrigger t : toAdd) {
+					if (!triggers.contains(t)) {
+						triggers.add(t);
+					}
+				}
+			}
+		}
 
-        while (var2.hasNext())
-        {
-            ITriggerProvider var3 = (ITriggerProvider)var2.next();
-            LinkedList var4 = var3.getPipeTriggers(var0);
+		return triggers;
+	}
 
-            if (var4 != null)
-            {
-                Iterator var5 = var4.iterator();
 
-                while (var5.hasNext())
-                {
-                    ITrigger var6 = (ITrigger)var5.next();
-
-                    if (!var1.contains(var6))
-                    {
-                        var1.add(var6);
-                    }
-                }
-            }
-        }
-
-        return var1;
-    }
 }
