@@ -2,16 +2,15 @@ package forestry.api.genetics;
 
 import forestry.api.core.INBTTagable;
 
-public interface IGenome extends INBTTagable {
+public interface IGenome extends INBTTagable
+{
+    IAlleleSpecies getPrimary();
 
-	IAlleleSpecies getPrimary();
+    IAlleleSpecies getSecondary();
 
-	IAlleleSpecies getSecondary();
+    IChromosome[] getChromosomes();
 
-	IChromosome[] getChromosomes();
+    IAllele getActiveAllele(int var1);
 
-	IAllele getActiveAllele(int chromosome);
-
-	IAllele getInactiveAllele(int chromosome);
-
+    IAllele getInactiveAllele(int var1);
 }

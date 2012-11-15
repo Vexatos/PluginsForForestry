@@ -3,41 +3,33 @@ package forestry.api.genetics;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.NBTTagCompound;
 
-/**
- * Can be used to garner information on bee breeding and to register new bees. See {@link IBreedingManager}
- * 
- * @author SirSengir
- */
-public interface IApiaristTracker {
+public interface IApiaristTracker
+{
+    void decodeFromNBT(NBTTagCompound var1);
 
-	void decodeFromNBT(NBTTagCompound nbttagcompound);
-	void encodeToNBT(NBTTagCompound nbttagcompound);
+    void encodeToNBT(NBTTagCompound var1);
 
-	String getModeName();
-	
-	void setModeName(String name);
-	
-	void registerQueen(EntityPlayer player, IIndividual bee);
+    String getModeName();
 
-	int getQueenCount();
+    void setModeName(String var1);
 
-	void registerPrincess(EntityPlayer player, IIndividual bee);
+    void registerQueen(EntityPlayer var1, IIndividual var2);
 
-	int getPrincessCount();
+    int getQueenCount();
 
-	void registerDrone(EntityPlayer player, IIndividual bee);
+    void registerPrincess(EntityPlayer var1, IIndividual var2);
 
-	int getDroneCount();
+    int getPrincessCount();
 
-	/**
-	 * @return Integer denoting the amount of species discovered.
-	 */
-	int getSpeciesBred();
+    void registerDrone(EntityPlayer var1, IIndividual var2);
 
-	void registerMutation(IMutation mutation);
+    int getDroneCount();
 
-	boolean isDiscovered(IMutation mutation);
+    int getSpeciesBred();
 
-	boolean isDiscovered(IAlleleSpecies species);
+    void registerMutation(IMutation var1);
 
+    boolean isDiscovered(IMutation var1);
+
+    boolean isDiscovered(IAlleleSpecies var1);
 }

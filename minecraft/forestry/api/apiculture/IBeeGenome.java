@@ -3,40 +3,33 @@ package forestry.api.apiculture;
 import forestry.api.genetics.EnumTolerance;
 import forestry.api.genetics.IGenome;
 
-/**
- * Only the default implementation is supported.
- * 
- * @author SirSengir
- * 
- */
-public interface IBeeGenome extends IGenome {
+public interface IBeeGenome extends IGenome
+{
+    IAlleleBeeSpecies getPrimaryAsBee();
 
-	IAlleleBeeSpecies getPrimaryAsBee();
+    IAlleleBeeSpecies getSecondaryAsBee();
 
-	IAlleleBeeSpecies getSecondaryAsBee();
+    float getSpeed();
 
-	float getSpeed();
+    int getLifespan();
 
-	int getLifespan();
+    int getFertility();
 
-	int getFertility();
+    boolean getNocturnal();
 
-	boolean getNocturnal();
+    boolean getTolerantFlyer();
 
-	boolean getTolerantFlyer();
+    boolean getCaveDwelling();
 
-	boolean getCaveDwelling();
+    IFlowerProvider getFlowerProvider();
 
-	IFlowerProvider getFlowerProvider();
+    int getFlowering();
 
-	int getFlowering();
+    int[] getTerritory();
 
-	int[] getTerritory();
+    IAlleleBeeEffect getEffect();
 
-	IAlleleBeeEffect getEffect();
+    EnumTolerance getToleranceTemp();
 
-	EnumTolerance getToleranceTemp();
-
-	EnumTolerance getToleranceHumid();
-
+    EnumTolerance getToleranceHumid();
 }

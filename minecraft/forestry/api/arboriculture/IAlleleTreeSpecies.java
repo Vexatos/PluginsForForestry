@@ -1,17 +1,19 @@
 package forestry.api.arboriculture;
 
-import java.util.HashMap;
-
 import forestry.api.genetics.IAlleleSpecies;
-
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 import net.minecraft.src.WorldGenerator;
 
-public interface IAlleleTreeSpecies extends IAlleleSpecies {
-	HashMap<ItemStack, Integer> getProducts(World world, int biomeid, int x, int y, int z);
+public interface IAlleleTreeSpecies extends IAlleleSpecies
+{
+    WorldGenerator getTreeGenerator(ITree var1);
 
-	public ItemStack[] getWoodBlocks(World world, int biomeid, int x, int y, int z);
+    ItemStack[] getGroundBlocks(World var1, int var2, int var3, int var4);
 
-	public WorldGenerator getTreeGenerator(EnumGrowthConditions conditions, int height);
+    int getGermlingIconIndex(EnumGermlingType var1);
+
+    String getTextureFile();
+
+    boolean usesDefaultTexture();
 }

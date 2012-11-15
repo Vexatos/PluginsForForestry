@@ -1,9 +1,6 @@
 package denoflionsx.plugins.Redpower;
 
 import denoflionsx.Old.pluginBase;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.ModLoader;
 import denoflionsx.core.core;
 import denoflionsx.denLib.denLib;
 import forestry.api.fuels.EngineCopperFuel;

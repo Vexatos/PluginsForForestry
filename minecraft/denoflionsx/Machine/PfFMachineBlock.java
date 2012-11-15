@@ -4,7 +4,6 @@ import denoflionsx.Machine.Client.PfFSidedTexture;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 import denoflionsx.PluginsforForestry;
 import denoflionsx.plugins.BlueSilkWorm.Helpers.EnumIncubatorSideTextures;
-import denoflionsx.plugins.BlueSilkWorm.Machine.TileEntityIncubator;
 import java.util.Random;
 import net.minecraft.src.*;
 
@@ -27,7 +26,7 @@ public class PfFMachineBlock extends BlockContainer {
     public TileEntity createNewTileEntity(World world, int metadata) {
         switch (metadata) {
             case 0:
-                return new TileEntityIncubator();
+                return null;
         }
         return null;
     }

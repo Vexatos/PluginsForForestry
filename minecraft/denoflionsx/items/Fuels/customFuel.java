@@ -1,7 +1,5 @@
 package denoflionsx.items.Fuels;
 
-import buildcraft.api.liquids.LiquidDictionary;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Events.EventFuelCreatedObject;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
@@ -21,6 +19,8 @@ import denoflionsx.Enums.EnumContainers;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
 import denoflionsx.plugins.Railcraft.Event.FuelCalculation;
+import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
 // This class is to automate the creation of basic fuel liquids and the
 // associated containers.

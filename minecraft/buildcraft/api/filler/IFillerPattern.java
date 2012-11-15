@@ -4,18 +4,17 @@ import buildcraft.api.core.IBox;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TileEntity;
 
-public interface IFillerPattern {
+public interface IFillerPattern
+{
+    int getId();
 
-	public int getId();
+    void setId(int var1);
 
-	public void setId(int id);
+    boolean iteratePattern(TileEntity var1, IBox var2, ItemStack var3);
 
-	public boolean iteratePattern(TileEntity tile, IBox box, ItemStack stackToPlace);
+    String getTextureFile();
 
-	public String getTextureFile();
+    int getTextureIndex();
 
-	public int getTextureIndex();
-
-	public String getName();
-
+    String getName();
 }

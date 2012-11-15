@@ -2,16 +2,17 @@ package forestry.api.genetics;
 
 import forestry.api.core.INBTTagable;
 
-public interface IEffectData extends INBTTagable {
-	void setInteger(int index, int val);
+public interface IEffectData extends INBTTagable
+{
+    void setInteger(int var1, int var2);
 
-	void setFloat(int index, float val);
+    void setFloat(int var1, float var2);
 
-	void setBoolean(int index, boolean val);
+    void setBoolean(int var1, boolean var2);
 
-	int getInteger(int index);
+    int getInteger(int var1);
 
-	float getFloat(int index);
+    float getFloat(int var1);
 
-	boolean getBoolean(int index);
+    boolean getBoolean(int var1);
 }

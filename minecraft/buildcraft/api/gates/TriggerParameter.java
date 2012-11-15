@@ -1,69 +1,47 @@
-/** 
- * Copyright (c) SpaceToad, 2011
- * http://www.mod-buildcraft.com
- * 
- * BuildCraft is distributed under the terms of the Minecraft Mod Public 
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
-
 package buildcraft.api.gates;
 
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 
-public class TriggerParameter implements ITriggerParameter {
+public class TriggerParameter implements ITriggerParameter
+{
+    protected ItemStack stack;
 
-	protected ItemStack stack;
+    public ItemStack getItemStack()
+    {
+        return this.stack;
+    }
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.src.buildcraft.api.gates.ITriggerParameter#getItemStack()
-	 */
-	@Override
-	public ItemStack getItemStack() {
-		return stack;
-	}
-	
-	/* (non-Javadoc)
-	 * @see net.minecraft.src.buildcraft.api.gates.ITriggerParameter#set(net.minecraft.src.ItemStack)
-	 */
-	@Override
-	public void set(ItemStack stack) {
-		if (stack != null) {
-			this.stack = stack.copy();
-			this.stack.stackSize = 1;
-		}
-	}
+    public void set(ItemStack var1)
+    {
+        if (var1 != null)
+        {
+            this.stack = var1.copy();
+            this.stack.stackSize = 1;
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.src.buildcraft.api.gates.ITriggerParameter#writeToNBT(net.minecraft.src.NBTTagCompound)
-	 */
-	@Override
-	public void writeToNBT(NBTTagCompound compound) {
-		if (stack != null) {
-			compound.setInteger("itemID", stack.itemID);
-			compound.setInteger("itemDMG", stack.getItemDamage());
-		}
-	}
+    public void writeToNBT(NBTTagCompound var1)
+    {
+        if (this.stack != null)
+        {
+            var1.setInteger("itemID", this.stack.itemID);
+            var1.setInteger("itemDMG", this.stack.getItemDamage());
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.src.buildcraft.api.gates.ITriggerParameter#readFromNBT(net.minecraft.src.NBTTagCompound)
-	 */
-	@Override
-	public void readFromNBT(NBTTagCompound compound) {
-		int itemID = compound.getInteger("itemID");
+    public void readFromNBT(NBTTagCompound var1)
+    {
+        int var2 = var1.getInteger("itemID");
 
-		if (itemID != 0) {
-			stack = new ItemStack(itemID, 1, compound.getInteger("itemDMG"));
-		}
-	}
+        if (var2 != 0)
+        {
+            this.stack = new ItemStack(var2, 1, var1.getInteger("itemDMG"));
+        }
+    }
 
-	/* (non-Javadoc)
-	 * @see net.minecraft.src.buildcraft.api.gates.ITriggerParameter#getItem()
-	 */
-	@Override
-	public ItemStack getItem() {
-		return stack;
-	}
-
+    public ItemStack getItem()
+    {
+        return this.stack;
+    }
 }

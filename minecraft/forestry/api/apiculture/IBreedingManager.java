@@ -1,78 +1,42 @@
 package forestry.api.apiculture;
 
-import java.util.ArrayList;
-
 import forestry.api.core.IStructureLogic;
 import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IApiaristTracker;
+import java.util.ArrayList;
 import net.minecraft.src.World;
 
-public interface IBreedingManager {
+public interface IBreedingManager
+{
+    ArrayList getBeekeepingModes();
 
-	ArrayList<IBeekeepingMode> getBeekeepingModes();
-	IBeekeepingMode getBeekeepingMode(World world);
-	IBeekeepingMode getBeekeepingMode(String name);
-	void registerBeekeepingMode(IBeekeepingMode mode);
-	void setBeekeepingMode(World world, String name);
+    IBeekeepingMode getBeekeepingMode(World var1);
 
-	/**
-	 * @return Integer denoting the number of (counted) bee species in the world.
-	 */
-	int getBeeSpeciesCount();
+    IBeekeepingMode getBeekeepingMode(String var1);
 
-	/**
-	 * Blacklist a species identified by its UID from mutation.
-	 * @param uid UID of the species to blacklist.
-	 */
-	void blacklistBeeSpecies(String uid);
-	/**
-	 * @return Current blacklisted bee species.
-	 */
-	ArrayList<String> getBeeSpeciesBlacklist();
-	
-	/**
-	 * @param uid UID of the species to vet.
-	 * @return true if the bee is blacklisted.
-	 */
-	boolean isBlacklisted(String uid);
-	
-	/**
-	 * @param housing Object implementing IBeeHousing.
-	 * @return IBeekeepingLogic 
-	 */
-	IBeekeepingLogic createBeekeepingLogic(IBeeHousing housing);
-	
-	/**
-	 * TileEntities wanting to function as alveary components need to implement structure logic for validation.
-	 * @return IStructureLogic for alvearies.
-	 */
-	IStructureLogic createAlvearyStructureLogic(IAlvearyComponent structure);
-	
-	/**
-	 * Registers a bee template using the UID of the first allele as identifier.
-	 * @param template
-	 */
-	void registerBeeTemplate(IAllele[] template);
-	/**
-	 * Registers a bee template using the passed identifier.
-	 * @param template
-	 */
-	void registerBeeTemplate(String identifier, IAllele[] template);
-	/**
-	 * Retrieves a registered template using the passed identifier.
-	 * @param identifier
-	 * @return
-	 */
-	IAllele[] getBeeTemplate(String identifier);
-	
-	/**
-	 * @return Default bee template for use in emergencies.
-	 */
-	IAllele[] getDefaultBeeTemplate();
+    void registerBeekeepingMode(IBeekeepingMode var1);
 
-	/**
-	 * @param world
-	 * @return {@link IApiaristTracker} associated with the passed world.
-	 */
-	IApiaristTracker getApiaristTracker(World world);
+    void setBeekeepingMode(World var1, String var2);
+
+    int getBeeSpeciesCount();
+
+    void blacklistBeeSpecies(String var1);
+
+    ArrayList getBeeSpeciesBlacklist();
+
+    boolean isBlacklisted(String var1);
+
+    IBeekeepingLogic createBeekeepingLogic(IBeeHousing var1);
+
+    IStructureLogic createAlvearyStructureLogic(IAlvearyComponent var1);
+
+    void registerBeeTemplate(IAllele[] var1);
+
+    void registerBeeTemplate(String var1, IAllele[] var2);
+
+    IAllele[] getBeeTemplate(String var1);
+
+    IAllele[] getDefaultBeeTemplate();
+
+    IApiaristTracker getApiaristTracker(World var1);
 }

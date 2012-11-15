@@ -1,6 +1,5 @@
 package denoflionsx.plugins.FarmCraftory.Modules;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Annotations.PfFEventTypes;
 import denoflionsx.API.Annotations.PfFSubscribe;
 import denoflionsx.API.Events.EnumEventSpecialMessages;
@@ -14,6 +13,7 @@ import denoflionsx.plugins.FarmCraftory.Crops.EnumCrops;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.items.Fuels.customFuel;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class Liquidmodule extends PfFModuleTemplate {
 

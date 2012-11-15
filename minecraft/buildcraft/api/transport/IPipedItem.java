@@ -1,6 +1,5 @@
 package buildcraft.api.transport;
 
-import buildcraft.api.core.Orientations;
 import buildcraft.api.core.Position;
 import buildcraft.api.core.SafeTimeTracker;
 import net.minecraft.src.EntityItem;
@@ -8,93 +7,59 @@ import net.minecraft.src.ItemStack;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
+import net.minecraftforge.common.ForgeDirection;
 
-public interface IPipedItem {
+public interface IPipedItem
+{
+    void remove();
 
-	public abstract void remove();
+    void setWorld(World var1);
 
-	/* GETTING & SETTING */
-	public abstract void setWorld(World world);
+    Position getPosition();
 
-	public abstract Position getPosition();
+    void setPosition(double var1, double var3, double var5);
 
-	public abstract void setPosition(double x, double y, double z);
+    float getSpeed();
 
-	/**
-	 * @return the speed
-	 */
-	public abstract float getSpeed();
+    void setSpeed(float var1);
 
-	/**
-	 * @param speed the speed to set
-	 */
-	public abstract void setSpeed(float speed);
+    ItemStack getItemStack();
 
-	/**
-	 * @return the item
-	 */
-	public abstract ItemStack getItemStack();
+    void setItemStack(ItemStack var1);
 
-	/**
-	 * @param item the item to set
-	 */
-	public abstract void setItemStack(ItemStack item);
+    TileEntity getContainer();
 
-	/**
-	 * @return the container
-	 */
-	public abstract TileEntity getContainer();
+    void setContainer(TileEntity var1);
 
-	/**
-	 * @param container the container to set
-	 */
-	public abstract void setContainer(TileEntity container);
+    @Deprecated
+    SafeTimeTracker getSynchroTracker();
 
-	/**
-	 * @return the synchroTracker
-	 */
-	public abstract SafeTimeTracker getSynchroTracker();
+    @Deprecated
+    void setSynchroTracker(SafeTimeTracker var1);
 
-	/**
-	 * @param synchroTracker the synchroTracker to set
-	 */
-	public abstract void setSynchroTracker(SafeTimeTracker synchroTracker);
+    @Deprecated
+    int getDeterministicRandomization();
 
-	/**
-	 * @return the deterministicRandomization
-	 */
-	public abstract int getDeterministicRandomization();
+    @Deprecated
+    void setDeterministicRandomization(int var1);
 
-	/**
-	 * @param deterministicRandomization the deterministicRandomization to set
-	 */
-	public abstract void setDeterministicRandomization(int deterministicRandomization);
+    int getEntityId();
 
-	/**
-	 * @return the entityId
-	 */
-	public abstract int getEntityId();
+    void setEntityId(int var1);
 
-	/**
-	 * @param entityId the entityId to set
-	 */
-	public abstract void setEntityId(int entityId);
+    void readFromNBT(NBTTagCompound var1);
 
-	/* SAVING & LOADING */
-	public abstract void readFromNBT(NBTTagCompound nbttagcompound);
+    void writeToNBT(NBTTagCompound var1);
 
-	public abstract void writeToNBT(NBTTagCompound nbttagcompound);
+    EntityItem toEntityItem(ForgeDirection var1);
 
-	public abstract EntityItem toEntityItem(Orientations dir);
+    float getEntityBrightness(float var1);
 
-	public abstract float getEntityBrightness(float f);
+    boolean isCorrupted();
 
-	public abstract boolean isCorrupted();
+    void addContribution(String var1, IPassiveItemContribution var2);
 
-	public abstract void addContribution(String key, IPassiveItemContribution contribution);
+    IPassiveItemContribution getContribution(String var1);
 
-	public abstract IPassiveItemContribution getContribution(String key);
-
-	public abstract boolean hasContributions();
-
+    boolean hasContributions();
 }

@@ -4,76 +4,34 @@ import forestry.api.core.EnumHumidity;
 import forestry.api.core.EnumTemperature;
 import net.minecraft.src.Achievement;
 
-public interface IAlleleSpecies extends IAllele {
-	/**
-	 * @return Localized short, human-readable identifier used in tooltips and beealyzer.
-	 */
-	String getName();
-	
-	/**
-	 * @return Localized short description of this species. (May be null.)
-	 */
-	String getDescription();
+public interface IAlleleSpecies extends IAllele
+{
+    String getName();
 
-	/**
-	 * @return Int describing the body type (icon type) to use for this species. Default is 0.
-	 */
-	int getBodyType();
-	
-	/**
-	 * @return Color to use for outline.
-	 */
-	int getPrimaryColor();
+    String getDescription();
 
-	/**
-	 * @return Colour to use for body.
-	 */
-	int getSecondaryColor();
+    int getBodyType();
 
-	/**
-	 * @return Preferred temperature
-	 */
-	EnumTemperature getTemperature();
+    int getPrimaryColor();
 
-	/**
-	 * @return Preferred humidity
-	 */
-	EnumHumidity getHumidity();
+    int getSecondaryColor();
 
-	/**
-	 * @return true if the species icon should have a glowing effect.
-	 */
-	boolean hasEffect();
+    EnumTemperature getTemperature();
 
-	/**
-	 * @return true if the species should not be displayed in NEI or creative inventory.
-	 */
-	boolean isSecret();
+    EnumHumidity getHumidity();
 
-	/**
-	 * @return true to have the species count against the species total.
-	 */
-	boolean isCounted();
+    boolean hasEffect();
 
-	/**
-	 * Binomial name of the species sans genus ("Apis"). Returning "humboldti" will have the bee species flavour name be "Apis humboldti". Feel free to use fun
-	 * names or return null.
-	 * 
-	 * @return flavour text (may be null)
-	 */
-	String getBinomial();
-	
-	/**
-	 * Authority for the binomial name, e.g. "Sengir" on species of base Forestry.
-	 * @return flavour text (may be null)
-	 */
-	String getAuthority();
-	
-	/**
-	 * @return Branch this species is associated with.
-	 */
-	IBranch getBranch();
-	
-	@Deprecated
-	Achievement getAchievement();
+    boolean isSecret();
+
+    boolean isCounted();
+
+    String getBinomial();
+
+    String getAuthority();
+
+    IBranch getBranch();
+
+    @Deprecated
+    Achievement getAchievement();
 }

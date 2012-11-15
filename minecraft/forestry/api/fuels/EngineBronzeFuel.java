@@ -2,28 +2,18 @@ package forestry.api.fuels;
 
 import net.minecraft.src.ItemStack;
 
-public class EngineBronzeFuel {
-	/**
-	 * Item that is valid fuel for a biogas engine.
-	 */
-	public final ItemStack liquid;
-	/**
-	 * Power produced by this fuel per work cycle of the engine.
-	 */
-	public final int powerPerCycle;
-	/**
-	 * How many work cycles a single "stack" of this type lasts.
-	 */
-	public final int burnDuration;
-	/**
-	 * By how much the normal heat dissipation rate of 1 is multiplied when using this fuel type.
-	 */
-	public final int dissipationMultiplier;
+public class EngineBronzeFuel
+{
+    public final ItemStack liquid;
+    public final int powerPerCycle;
+    public final int burnDuration;
+    public final int dissipationMultiplier;
 
-	public EngineBronzeFuel(ItemStack liquid, int powerPerCycle, int burnDuration, int dissipationMultiplier) {
-		this.liquid = liquid;
-		this.powerPerCycle = powerPerCycle;
-		this.burnDuration = burnDuration;
-		this.dissipationMultiplier = dissipationMultiplier;
-	}
+    public EngineBronzeFuel(ItemStack var1, int var2, int var3, int var4)
+    {
+        this.liquid = var1;
+        this.powerPerCycle = var2;
+        this.burnDuration = var3;
+        this.dissipationMultiplier = var4;
+    }
 }

@@ -4,14 +4,12 @@ import denoflionsx.plugins.BetterFarming.Helpers.growHook;
 import denoflionsx.plugins.BetterFarming.Crops.cropCustomSeedProvider;
 import denoflionsx.plugins.BetterFarming.Crops.cropCustomProvider;
 import denoflionsx.Old.pluginBase;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import denoflionsx.denLib.denLib;
 import denoflionsx.core.core;
 import denoflionsx.denLib.Config.Config;
-import denoflionsx.plugins.BetterFarming.*;
 import denoflionsx.Old.addFermenterRecipes;
 import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
@@ -22,6 +20,7 @@ import denoflionsx.Enums.Colors;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Old.customFuel_OLD;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginBetterFarming extends pluginBase {
 

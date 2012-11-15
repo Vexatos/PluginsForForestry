@@ -1,14 +1,12 @@
 package denoflionsx.plugins.Forestry.Modules.StillModule;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.Enums.EnumForestryLiquids;
 import forestry.api.recipes.RecipeManagers;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import net.minecraft.src.Item;
-import denoflionsx.Old.baseModule;
-import denoflionsx.Old.pluginBase;
 import denoflionsx.core.PfFModuleTemplate;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class stillModule extends PfFModuleTemplate {
 

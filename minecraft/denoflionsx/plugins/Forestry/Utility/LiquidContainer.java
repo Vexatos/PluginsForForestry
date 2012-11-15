@@ -1,9 +1,9 @@
 package denoflionsx.plugins.Forestry.Utility;
 
-import buildcraft.api.liquids.LiquidData;
-import buildcraft.api.liquids.LiquidManager;
-import buildcraft.api.liquids.LiquidStack;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidData;
+import net.minecraftforge.liquids.LiquidManager;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class LiquidContainer {
 

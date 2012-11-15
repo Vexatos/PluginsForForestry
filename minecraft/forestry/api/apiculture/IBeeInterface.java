@@ -5,53 +5,27 @@ import forestry.api.genetics.IChromosome;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 
-public interface IBeeInterface {
-	/**
-	 * @return true if passed item is a Forestry bee.
-	 */
-	boolean isBee(ItemStack stack);
+public interface IBeeInterface
+{
+    boolean isBee(ItemStack var1);
 
-	/**
-	 * @return true if passed item is a drone.
-	 */
-	boolean isDrone(ItemStack stack);
+    boolean isDrone(ItemStack var1);
 
-	/**
-	 * @return true if passed item is mated (i.e. a queen)
-	 */
-	boolean isMated(ItemStack stack);
+    boolean isMated(ItemStack var1);
 
-	/**
-	 * @return {@link IBee} pattern parsed from the passed stack's nbt data.
-	 */
-	IBee getBee(ItemStack stack);
+    IBee getBee(ItemStack var1);
 
-	/**
-	 * @param genome Valid {@link IBeeGenome}
-	 * @return {@link IBee} from the passed genome
-	 */
-	IBee getBee(World world, IBeeGenome genome);
-	
-	/**
-	 * Creates an IBee suitable for a queen containing the necessary second genome for the mate.
-	 * @param genome Valid {@link IBeeGenome}
-	 * @param mate Valid {@link IBee} representing the mate.
-	 * @return Mated {@link IBee} from the passed genomes.
-	 */
-	IBee getBee(World world, IBeeGenome genome, IBee mate);
-	
-	/**
-	 * @param bee Bee object to use in creating the itemstack. If a queen is to be created, make sure the mate genome is set.
-	 * @param type {@link EnumBeeType} according to whether a princess, drone or queen is wanted.
-	 * @return ItemStack representing a Forestry bee.
-	 */
-	ItemStack getBeeStack(IBee bee, EnumBeeType type);
+    IBee getBee(World var1, IBeeGenome var2);
 
-	IChromosome[] templateAsChromosomes(IAllele[] template);
+    IBee getBee(World var1, IBeeGenome var2, IBee var3);
 
-	IChromosome[] templateAsChromosomes(IAllele[] templateActive, IAllele[] templateInactive);
+    ItemStack getBeeStack(IBee var1, EnumBeeType var2);
 
-	IBeeGenome templateAsGenome(IAllele[] template);
+    IChromosome[] templateAsChromosomes(IAllele[] var1);
 
-	IBeeGenome templateAsGenome(IAllele[] templateActive, IAllele[] templateInactive);
+    IChromosome[] templateAsChromosomes(IAllele[] var1, IAllele[] var2);
+
+    IBeeGenome templateAsGenome(IAllele[] var1);
+
+    IBeeGenome templateAsGenome(IAllele[] var1, IAllele[] var2);
 }

@@ -1,27 +1,27 @@
 package forestry.api.circuits;
 
 import java.util.List;
-
 import net.minecraft.src.TileEntity;
 
-public interface ICircuit {
-	String getUID();
+public interface ICircuit
+{
+    String getUID();
 
-	boolean requiresDiscovery();
+    boolean requiresDiscovery();
 
-	int getLimit();
+    int getLimit();
 
-	String getName();
+    String getName();
 
-	boolean isCircuitable(TileEntity tile);
+    boolean isCircuitable(TileEntity var1);
 
-	void onInsertion(TileEntity tile);
+    void onInsertion(TileEntity var1);
 
-	void onLoad(TileEntity tile);
+    void onLoad(TileEntity var1);
 
-	void onRemoval(TileEntity tile);
+    void onRemoval(TileEntity var1);
 
-	void onTick(TileEntity tile);
+    void onTick(TileEntity var1);
 
-	void addTooltip(List<String> list);
+    void addTooltip(List var1);
 }

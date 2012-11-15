@@ -11,7 +11,6 @@ import denoflionsx.plugins.Core.Items.MetaContainers.BarrelFuels;
 import denoflionsx.plugins.Core.Items.MetaContainers.WoodenBucketFuels;
 import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumToolTextures;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
@@ -30,6 +29,7 @@ import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginCoreItems extends PfFPluginTemplate {
 

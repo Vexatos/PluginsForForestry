@@ -2,25 +2,16 @@ package forestry.api.fuels;
 
 import net.minecraft.src.ItemStack;
 
-public class EngineCopperFuel {
+public class EngineCopperFuel
+{
+    public final ItemStack fuel;
+    public final int powerPerCycle;
+    public final int burnDuration;
 
-	/**
-	 * Item that is valid fuel for a peat-fired engine.
-	 */
-	public final ItemStack fuel;
-	/**
-	 * Power produced by this fuel per work cycle.
-	 */
-	public final int powerPerCycle;
-	/**
-	 * Amount of work cycles this item lasts before being consumed.
-	 */
-	public final int burnDuration;
-
-	public EngineCopperFuel(ItemStack fuel, int powerPerCycle, int burnDuration) {
-		this.fuel = fuel;
-		this.powerPerCycle = powerPerCycle;
-		this.burnDuration = burnDuration;
-	}
-
+    public EngineCopperFuel(ItemStack var1, int var2, int var3)
+    {
+        this.fuel = var1;
+        this.powerPerCycle = var2;
+        this.burnDuration = var3;
+    }
 }

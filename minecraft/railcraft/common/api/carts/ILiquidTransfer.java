@@ -1,6 +1,7 @@
 package railcraft.common.api.carts;
 
-import buildcraft.api.liquids.LiquidStack;
+import net.minecraftforge.liquids.LiquidStack;
+
 
 /**
  * This interface allows carts to transfer liquid between each other

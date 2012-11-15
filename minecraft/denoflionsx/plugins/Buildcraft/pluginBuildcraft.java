@@ -3,7 +3,6 @@ package denoflionsx.plugins.Buildcraft;
 import buildcraft.api.gates.ActionManager;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.liquids.LiquidStack;
 import buildcraft.api.transport.IPipe;
 import denoflionsx.API.Annotations.PfFEventTypes;
 import denoflionsx.API.Annotations.PfFSubscribe;
@@ -26,6 +25,7 @@ import java.util.LinkedList;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.TileEntity;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginBuildcraft extends PfFPluginTemplate implements ITriggerProvider {
 

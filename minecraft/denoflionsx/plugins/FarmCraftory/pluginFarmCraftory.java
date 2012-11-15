@@ -1,6 +1,5 @@
 package denoflionsx.plugins.FarmCraftory;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.Enums.EnumForestryLiquids;
 import denoflionsx.core.PfFPluginTemplate;
@@ -12,6 +11,7 @@ import denoflionsx.plugins.FarmCraftory.Crops.cropHarvest;
 import denoflionsx.plugins.FarmCraftory.Modules.Liquidmodule;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import forestry.api.cultivation.CropProviders;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginFarmCraftory extends PfFPluginTemplate {
 

@@ -1,8 +1,8 @@
 package railcraft.common.api.crafting;
 
-import buildcraft.api.liquids.LiquidStack;
 import java.util.List;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 
 /**
  *

@@ -2,34 +2,28 @@ package forestry.api.fuels;
 
 import net.minecraft.src.ItemStack;
 
-public class RainSubstrate {
-	/**
-	 * Rain substrate capable of activating the rainmaker.
-	 */
-	public ItemStack item;
-	/**
-	 * Duration of the rain shower triggered by this substrate in Minecraft ticks.
-	 */
-	public int duration;
-	/**
-	 * Speed of activation sequence triggered.
-	 */
-	public float speed;
+public class RainSubstrate
+{
+    public ItemStack item;
+    public int duration;
+    public float speed;
+    public boolean reverse;
 
-	public boolean reverse;
+    public RainSubstrate(ItemStack var1, int var2, float var3)
+    {
+        this(var1, var2, var3, false);
+    }
 
-	public RainSubstrate(ItemStack item, int duration, float speed) {
-		this(item, duration, speed, false);
-	}
+    public RainSubstrate(ItemStack var1, float var2)
+    {
+        this(var1, 0, var2, true);
+    }
 
-	public RainSubstrate(ItemStack item, float speed) {
-		this(item, 0, speed, true);
-	}
-
-	public RainSubstrate(ItemStack item, int duration, float speed, boolean reverse) {
-		this.item = item;
-		this.duration = duration;
-		this.speed = speed;
-		this.reverse = reverse;
-	}
+    public RainSubstrate(ItemStack var1, int var2, float var3, boolean var4)
+    {
+        this.item = var1;
+        this.duration = var2;
+        this.speed = var3;
+        this.reverse = var4;
+    }
 }

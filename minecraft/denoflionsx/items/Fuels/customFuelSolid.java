@@ -1,6 +1,5 @@
 package denoflionsx.items.Fuels;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import forestry.api.fuels.EngineCopperFuel;
 import forestry.api.fuels.FuelManager;
@@ -14,6 +13,7 @@ import denoflionsx.items.PfFBar;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import denoflionsx.plugins.Railcraft.Event.FuelCalculation;
 import forestry.api.recipes.RecipeManagers;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class customFuelSolid {
 

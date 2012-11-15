@@ -1,10 +1,10 @@
 package denoflionsx.plugins.Core.Items;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.core.core;
 import denoflionsx.items.multiItem;
 import net.minecraft.src.*;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class WoodenBucket extends multiItem {
 

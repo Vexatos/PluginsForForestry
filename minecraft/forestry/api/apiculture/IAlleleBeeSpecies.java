@@ -1,21 +1,14 @@
 package forestry.api.apiculture;
 
-import java.util.HashMap;
-
 import forestry.api.genetics.IAlleleSpecies;
-
-import net.minecraft.src.ItemStack;
+import java.util.HashMap;
 import net.minecraft.src.World;
 
-public interface IAlleleBeeSpecies extends IAlleleSpecies {
+public interface IAlleleBeeSpecies extends IAlleleSpecies
+{
+    HashMap getProducts();
 
-	// / Products, Chance
-	HashMap<ItemStack, Integer> getProducts();
+    HashMap getSpecialty();
 
-	// / Specialty, Chance
-	HashMap<ItemStack, Integer> getSpecialty();
-
-	// / Only jubilant bees give their specialty product
-	boolean isJubilant(World world, int biomeid, int x, int y, int z);
-
+    boolean isJubilant(World var1, int var2, int var3, int var4, int var5);
 }

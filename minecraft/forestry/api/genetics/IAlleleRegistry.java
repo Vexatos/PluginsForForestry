@@ -1,26 +1,27 @@
 package forestry.api.genetics;
 
 import java.util.LinkedHashMap;
-
 import net.minecraft.src.World;
 
-public interface IAlleleRegistry {
-	LinkedHashMap<String, IAllele> getRegisteredAlleles();
-	LinkedHashMap<String, IBranch> getRegisteredBranches();
-	
-	void registerAllele(IAllele allele);
-	IAllele getAllele(String uid);
-	
-	void reloadMetaMap(World world);
-	IAllele getFromMetaMap(int meta);
-	int getFromUIDMap(String uid);
-	
-	void registerBranch(IBranch branch);
-	IBranch getBranch(String uid);
-	
-	/*
-	 * Registers a new IAlleleHandler
-	 */
-	void registerAlleleHandler(IAlleleHandler handler);
+public interface IAlleleRegistry
+{
+    LinkedHashMap getRegisteredAlleles();
 
+    LinkedHashMap getRegisteredBranches();
+
+    void registerAllele(IAllele var1);
+
+    IAllele getAllele(String var1);
+
+    void reloadMetaMap(World var1);
+
+    IAllele getFromMetaMap(int var1);
+
+    int getFromUIDMap(String var1);
+
+    void registerBranch(IBranch var1);
+
+    IBranch getBranch(String var1);
+
+    void registerAlleleHandler(IAlleleHandler var1);
 }

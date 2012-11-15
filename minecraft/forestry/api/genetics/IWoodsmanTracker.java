@@ -1,5 +1,5 @@
 package forestry.api.genetics;
 
-public interface IWoodsmanTracker {
-
+public interface IWoodsmanTracker
+{
 }

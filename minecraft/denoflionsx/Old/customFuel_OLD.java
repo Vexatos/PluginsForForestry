@@ -1,6 +1,5 @@
 package denoflionsx.Old;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
@@ -17,6 +16,7 @@ import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumContainers;
 import denoflionsx.items.Fuels.customFuelSolid;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainerSystem;
+import net.minecraftforge.liquids.LiquidStack;
 
 // This class is to automate the creation of basic fuel liquids and the
 // associated containers.

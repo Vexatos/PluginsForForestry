@@ -1,141 +1,154 @@
-/** 
- * Copyright (c) SpaceToad, 2011
- * http://www.mod-buildcraft.com
- * 
- * BuildCraft is distributed under the terms of the Minecraft Mod Public 
- * License 1.0, or MMPL. Please check the contents of the license located in
- * http://www.mod-buildcraft.com/MMPL-1.0.txt
- */
-
 package buildcraft.api.core;
 
+import buildcraft.api.core.Position$1;
 import net.minecraft.src.NBTTagCompound;
 import net.minecraft.src.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 
-public class Position {
+public class Position
+{
+    public double x;
+    public double y;
+    public double z;
+    public ForgeDirection orientation;
 
-	public double x, y, z;
-	public Orientations orientation;
+    public Position(double var1, double var3, double var5)
+    {
+        this.x = var1;
+        this.y = var3;
+        this.z = var5;
+        this.orientation = ForgeDirection.UNKNOWN;
+    }
 
-	public Position(double ci, double cj, double ck) {
-		x = ci;
-		y = cj;
-		z = ck;
-		orientation = Orientations.Unknown;
-	}
+    public Position(double var1, double var3, double var5, ForgeDirection var7)
+    {
+        this.x = var1;
+        this.y = var3;
+        this.z = var5;
+        this.orientation = var7;
+    }
 
-	public Position(double ci, double cj, double ck, Orientations corientation) {
-		x = ci;
-		y = cj;
-		z = ck;
-		orientation = corientation;
-	}
+    public Position(Position var1)
+    {
+        this.x = var1.x;
+        this.y = var1.y;
+        this.z = var1.z;
+        this.orientation = var1.orientation;
+    }
 
-	public Position(Position p) {
-		x = p.x;
-		y = p.y;
-		z = p.z;
-		orientation = p.orientation;
-	}
+    public Position(NBTTagCompound var1)
+    {
+        this.x = var1.getDouble("i");
+        this.y = var1.getDouble("j");
+        this.z = var1.getDouble("k");
+        this.orientation = ForgeDirection.UNKNOWN;
+    }
 
-	public Position(NBTTagCompound nbttagcompound) {
-		x = nbttagcompound.getDouble("i");
-		y = nbttagcompound.getDouble("j");
-		z = nbttagcompound.getDouble("k");
+    public Position(TileEntity var1)
+    {
+        this.x = (double)var1.xCoord;
+        this.y = (double)var1.yCoord;
+        this.z = (double)var1.zCoord;
+    }
 
-		orientation = Orientations.Unknown;
-	}
+    public void moveRight(double var1)
+    {
+        switch (Position$1.$SwitchMap$net$minecraftforge$common$ForgeDirection[this.orientation.ordinal()])
+        {
+            case 1:
+                this.x -= var1;
+                break;
 
-	public Position(TileEntity tile) {
-		x = tile.xCoord;
-		y = tile.yCoord;
-		z = tile.zCoord;
-	}
+            case 2:
+                this.x += var1;
+                break;
 
-	public void moveRight(double step) {
-		switch (orientation) {
-		case ZPos:
-			x = x - step;
-			break;
-		case ZNeg:
-			x = x + step;
-			break;
-		case XPos:
-			z = z + step;
-			break;
-		case XNeg:
-			z = z - step;
-			break;
-		default:
-		}
-	}
+            case 3:
+                this.z += var1;
+                break;
 
-	public void moveLeft(double step) {
-		moveRight(-step);
-	}
+            case 4:
+                this.z -= var1;
+        }
+    }
 
-	public void moveForwards(double step) {
-		switch (orientation) {
-		case YPos:
-			y = y + step;
-			break;
-		case YNeg:
-			y = y - step;
-			break;
-		case ZPos:
-			z = z + step;
-			break;
-		case ZNeg:
-			z = z - step;
-			break;
-		case XPos:
-			x = x + step;
-			break;
-		case XNeg:
-			x = x - step;
-			break;
-		default:
-		}
-	}
+    public void moveLeft(double var1)
+    {
+        this.moveRight(-var1);
+    }
 
-	public void moveBackwards(double step) {
-		moveForwards(-step);
-	}
+    public void moveForwards(double var1)
+    {
+        switch (Position$1.$SwitchMap$net$minecraftforge$common$ForgeDirection[this.orientation.ordinal()])
+        {
+            case 1:
+                this.z += var1;
+                break;
 
-	public void moveUp(double step) {
-		switch (orientation) {
-		case ZPos:
-		case ZNeg:
-		case XPos:
-		case XNeg:
-			y = y + step;
-			break;
-		default:
-		}
+            case 2:
+                this.z -= var1;
+                break;
 
-	}
+            case 3:
+                this.x += var1;
+                break;
 
-	public void moveDown(double step) {
-		moveUp(-step);
-	}
+            case 4:
+                this.x -= var1;
+                break;
 
-	public void writeToNBT(NBTTagCompound nbttagcompound) {
-		nbttagcompound.setDouble("i", x);
-		nbttagcompound.setDouble("j", y);
-		nbttagcompound.setDouble("k", z);
-	}
+            case 5:
+                this.y += var1;
+                break;
 
-	@Override
-	public String toString() {
-		return "{" + x + ", " + y + ", " + z + "}";
-	}
+            case 6:
+                this.y -= var1;
+        }
+    }
 
-	public Position min(Position p) {
-		return new Position(p.x > x ? x : p.x, p.y > y ? y : p.y, p.z > z ? z : p.z);
-	}
+    public void moveBackwards(double var1)
+    {
+        this.moveForwards(-var1);
+    }
 
-	public Position max(Position p) {
-		return new Position(p.x < x ? x : p.x, p.y < y ? y : p.y, p.z < z ? z : p.z);
-	}
+    public void moveUp(double var1)
+    {
+        switch (Position$1.$SwitchMap$net$minecraftforge$common$ForgeDirection[this.orientation.ordinal()])
+        {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                this.y += var1;
 
+            default:
+        }
+    }
+
+    public void moveDown(double var1)
+    {
+        this.moveUp(-var1);
+    }
+
+    public void writeToNBT(NBTTagCompound var1)
+    {
+        var1.setDouble("i", this.x);
+        var1.setDouble("j", this.y);
+        var1.setDouble("k", this.z);
+    }
+
+    public String toString()
+    {
+        return "{" + this.x + ", " + this.y + ", " + this.z + "}";
+    }
+
+    public Position min(Position var1)
+    {
+        return new Position(var1.x > this.x ? this.x : var1.x, var1.y > this.y ? this.y : var1.y, var1.z > this.z ? this.z : var1.z);
+    }
+
+    public Position max(Position var1)
+    {
+        return new Position(var1.x < this.x ? this.x : var1.x, var1.y < this.y ? this.y : var1.y, var1.z < this.z ? this.z : var1.z);
+    }
 }

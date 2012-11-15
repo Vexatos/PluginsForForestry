@@ -1,6 +1,5 @@
 package denoflionsx.plugins.MinefactoryReloaded;
 
-import buildcraft.api.liquids.LiquidDictionary;
 import net.minecraft.src.ItemStack;
 import denoflionsx.API.PfFManagers;
 import denoflionsx.Enums.EnumModIDs;
@@ -8,6 +7,7 @@ import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.plugins.Buildcraft.Modules.milkModule;
 import denoflionsx.plugins.MinefactoryReloaded.Items.MFRMilk;
+import net.minecraftforge.liquids.LiquidDictionary;
 
 public class pluginMineFactoryReloaded extends PfFPluginTemplate {
 

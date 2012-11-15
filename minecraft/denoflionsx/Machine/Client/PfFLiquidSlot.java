@@ -1,6 +1,7 @@
 package denoflionsx.Machine.Client;
 
-import buildcraft.api.liquids.LiquidStack;
+import net.minecraftforge.liquids.LiquidStack;
+
 
 public class PfFLiquidSlot {
 

@@ -1,16 +1,15 @@
 package denoflionsx.plugins.Redpower;
 
 import denoflionsx.Old.pluginBase;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.Enums.EnumForestryLiquids;
 import forestry.api.apiculture.FlowerManager;
-import forestry.api.core.ItemInterface;
 import forestry.api.cultivation.CropProviders;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
 import denoflionsx.core.core;
 import denoflionsx.plugins.Redpower.Crops.cropFlaxProvider;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginRedPowerWorld extends pluginBase {
 

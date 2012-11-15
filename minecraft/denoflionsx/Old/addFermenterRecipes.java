@@ -1,6 +1,5 @@
 package denoflionsx.Old;
 
-import buildcraft.api.liquids.LiquidStack;
 import net.minecraft.src.Block;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -9,6 +8,7 @@ import forestry.api.recipes.RecipeManagers;
 import denoflionsx.Enums.EnumModIDs;
 import denoflionsx.denLib.denLib;
 import ic2.api.Items;
+import net.minecraftforge.liquids.LiquidStack;
 
 @Deprecated
 public class addFermenterRecipes {

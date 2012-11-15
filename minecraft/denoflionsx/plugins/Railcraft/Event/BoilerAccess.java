@@ -1,7 +1,7 @@
 package denoflionsx.plugins.Railcraft.Event;
 
-import buildcraft.api.liquids.LiquidStack;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 import railcraft.common.api.fuel.FuelManager;
 
 public class BoilerAccess {

@@ -1,10 +1,10 @@
 package denoflionsx.plugins.Railcraft.Event;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Annotations.PfFEventTypes;
 import denoflionsx.API.Annotations.PfFSubscribe;
 import denoflionsx.API.Events.EventFuelCreated;
 import denoflionsx.API.PfFEvents;
+import net.minecraftforge.liquids.LiquidStack;
 import railcraft.common.api.fuel.FuelManager;
 
 public class BoilerFuelHandler {

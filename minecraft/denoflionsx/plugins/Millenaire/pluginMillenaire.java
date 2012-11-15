@@ -1,20 +1,15 @@
 package denoflionsx.plugins.Millenaire;
 
-import buildcraft.api.liquids.LiquidStack;
-import denoflionsx.API.PfFManagers;
-import denoflionsx.Enums.Colors;
-import denoflionsx.Enums.EnumLiquidTextures;
 import denoflionsx.Enums.EnumModIDs;
-import denoflionsx.core.ItemIDManager;
 import denoflionsx.core.PfFPluginTemplate;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.Helpers.CarpenterHelper;
 import denoflionsx.plugins.Millenaire.Crops.cropMudBrickProvider;
 import denoflionsx.plugins.Millenaire.Enums.EnumMillBlocks;
 import forestry.api.cultivation.CropProviders;
-import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.Block;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class pluginMillenaire extends PfFPluginTemplate {
 

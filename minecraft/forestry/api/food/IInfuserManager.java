@@ -2,16 +2,15 @@ package forestry.api.food;
 
 import net.minecraft.src.ItemStack;
 
-public interface IInfuserManager {
+public interface IInfuserManager
+{
+    void addMixture(int var1, ItemStack var2, IBeverageEffect var3);
 
-	void addMixture(int meta, ItemStack ingredient, IBeverageEffect effect);
+    void addMixture(int var1, ItemStack[] var2, IBeverageEffect var3);
 
-	void addMixture(int meta, ItemStack[] ingredients, IBeverageEffect effect);
+    ItemStack getSeasoned(ItemStack var1, ItemStack[] var2);
 
-	ItemStack getSeasoned(ItemStack base, ItemStack[] ingredients);
+    boolean hasMixtures(ItemStack[] var1);
 
-	boolean hasMixtures(ItemStack[] ingredients);
-
-	ItemStack[] getRequired(ItemStack[] ingredients);
-
+    ItemStack[] getRequired(ItemStack[] var1);
 }

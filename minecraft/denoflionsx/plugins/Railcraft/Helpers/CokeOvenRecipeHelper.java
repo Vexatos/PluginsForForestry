@@ -1,7 +1,7 @@
 package denoflionsx.plugins.Railcraft.Helpers;
 
-import buildcraft.api.liquids.LiquidStack;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 import railcraft.common.api.crafting.RailcraftCraftingManager;
 
 public class CokeOvenRecipeHelper {

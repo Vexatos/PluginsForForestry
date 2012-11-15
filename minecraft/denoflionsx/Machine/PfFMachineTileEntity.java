@@ -1,13 +1,13 @@
 package denoflionsx.Machine;
 
 import buildcraft.api.gates.ITrigger;
-import buildcraft.api.liquids.LiquidTank;
 import denoflionsx.Machine.Trigger.IPfFTriggers;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import net.minecraft.src.*;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.ISidedInventory;
+import net.minecraftforge.liquids.LiquidTank;
 
 public abstract class PfFMachineTileEntity extends TileEntity implements ISidedInventory, IPfFTriggers {
 

@@ -1,10 +1,8 @@
 package denoflionsx.plugins.Forestry.Modules.ExtraFuelsModule;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Annotations.PfFEventTypes;
 import denoflionsx.API.Annotations.PfFSubscribe;
 import denoflionsx.API.Events.EnumEventSpecialMessages;
-import denoflionsx.API.Events.EventItemInitialized;
 import denoflionsx.API.Events.EventPluginLoaded;
 import denoflionsx.API.Events.EventSpecial;
 import denoflionsx.API.PfFEvents;
@@ -18,6 +16,7 @@ import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.items.Fuels.customFuel;
 import denoflionsx.plugins.Forestry.Helpers.SqueezerHelper;
 import net.minecraft.src.Item;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class extraFuelsModule extends PfFModuleTemplate {
 

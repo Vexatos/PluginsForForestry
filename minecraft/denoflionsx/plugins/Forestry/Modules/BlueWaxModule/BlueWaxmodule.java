@@ -1,7 +1,6 @@
 package denoflionsx.plugins.Forestry.Modules.BlueWaxModule;
 
 import denoflionsx.Enums.Placeholder;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.Events.EnumEventSpecialMessages;
 import denoflionsx.API.PfFEvents;
 import denoflionsx.API.PfFManagers;
@@ -17,6 +16,7 @@ import denoflionsx.Enums.EnumToolTextures;
 import denoflionsx.core.PfFModuleTemplate;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class BlueWaxmodule extends PfFModuleTemplate {
 

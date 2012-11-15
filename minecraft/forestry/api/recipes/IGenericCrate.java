@@ -2,10 +2,9 @@ package forestry.api.recipes;
 
 import net.minecraft.src.ItemStack;
 
-public interface IGenericCrate {
+public interface IGenericCrate
+{
+    void setContained(ItemStack var1, ItemStack var2);
 
-	void setContained(ItemStack crate, ItemStack contained);
-
-	ItemStack getContained(ItemStack crate);
-
+    ItemStack getContained(ItemStack var1);
 }

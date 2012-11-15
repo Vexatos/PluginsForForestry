@@ -3,22 +3,23 @@ package forestry.api.arboriculture;
 import forestry.api.genetics.EnumTolerance;
 import forestry.api.genetics.IGenome;
 
-public interface ITreeGenome extends IGenome {
+public interface ITreeGenome extends IGenome
+{
+    IAlleleTreeSpecies getPrimaryAsTree();
 
-	IAlleleTreeSpecies getPrimaryAsTree();
+    IAlleleTreeSpecies getSecondaryAsTree();
 
-	IAlleleTreeSpecies getSecondaryAsTree();
+    IFruitProvider getFruitProvider();
 
-	IGrowthProvider getGrowthProvider();
+    IGrowthProvider getGrowthProvider();
 
-	int getHeight();
+    int getHeight();
 
-	float getFertility();
+    float getFertility();
 
-	float getYield();
+    float getYield();
 
-	EnumTolerance getToleranceTemp();
+    EnumTolerance getToleranceTemp();
 
-	EnumTolerance getToleranceHumid();
-
+    EnumTolerance getToleranceHumid();
 }

@@ -1,9 +1,9 @@
 package railcraft.common.api.fuel;
 
-import buildcraft.api.liquids.LiquidStack;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import net.minecraftforge.liquids.LiquidStack;
 
 /**
  *

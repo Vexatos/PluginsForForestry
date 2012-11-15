@@ -51,6 +51,9 @@ public class pluginRailcraft extends PfFPluginTemplate {
         if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
             return;
         }
+        if (creosote == null){
+            return;
+        }
         if (this.config.getOptionBool("CreosoteOilInWoodenBucket")) {
             PfFManagers.ContainerManager.addLiquid("Creosote Oil", creosote, PfFManagers.ColorManager.getColor(Colors.Values.OIL.toString()));
         }

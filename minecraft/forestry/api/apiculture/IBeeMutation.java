@@ -4,6 +4,7 @@ import forestry.api.genetics.IAllele;
 import forestry.api.genetics.IGenome;
 import forestry.api.genetics.IMutation;
 
-public interface IBeeMutation extends IMutation {
-	int getChance(IBeeHousing housing, IAllele allele0, IAllele allele1, IGenome genome0, IGenome genome1);
+public interface IBeeMutation extends IMutation
+{
+    int getChance(IBeeHousing var1, IAllele var2, IAllele var3, IGenome var4, IGenome var5);
 }

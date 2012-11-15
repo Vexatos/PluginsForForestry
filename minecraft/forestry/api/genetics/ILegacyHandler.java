@@ -1,9 +1,8 @@
 package forestry.api.genetics;
 
-/**
- * AlleleManager.alleleRegistry can be cast to this type.
- */
-public interface ILegacyHandler {
-	void registerLegacyMapping(int id, String uid);
-	IAllele getFromLegacyMap(int id);
+public interface ILegacyHandler
+{
+    void registerLegacyMapping(int var1, String var2);
+
+    IAllele getFromLegacyMap(int var1);
 }

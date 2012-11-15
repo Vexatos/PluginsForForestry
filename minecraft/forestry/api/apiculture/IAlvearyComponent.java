@@ -2,20 +2,15 @@ package forestry.api.apiculture;
 
 import forestry.api.core.ITileStructure;
 
-/**
- * Needs to be implemented by TileEntities that want to be part of an alveary. 
- */
-public interface IAlvearyComponent extends ITileStructure {
-	
-	void registerBeeModifier(IBeeModifier modifier);
-	void removeBeeModifier(IBeeModifier modifier);
-	
-	void addTemperatureChange(float change, float boundaryDown, float boundaryUp);
-	void addHumidityChange(float change, float boundaryDown, float boundaryUp);
-	
-	/**
-	 * @return true if this TE has a function other than a plain alveary block. Returning true prevents the TE from becoming master.
-	 */
-	boolean hasFunction();
-	
+public interface IAlvearyComponent extends ITileStructure
+{
+    void registerBeeModifier(IBeeModifier var1);
+
+    void removeBeeModifier(IBeeModifier var1);
+
+    void addTemperatureChange(float var1, float var2, float var3);
+
+    void addHumidityChange(float var1, float var2, float var3);
+
+    boolean hasFunction();
 }

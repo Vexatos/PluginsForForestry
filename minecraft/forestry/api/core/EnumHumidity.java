@@ -1,48 +1,48 @@
 package forestry.api.core;
 
+import forestry.api.core.EnumHumidity$1;
 import java.util.ArrayList;
 
-public enum EnumHumidity {
-	ARID("Arid", 2), NORMAL("Normal", 1), DAMP("Damp", 4);
+public enum EnumHumidity
+{
+    ARID("Arid", 2),
+    NORMAL("Normal", 1),
+    DAMP("Damp", 4);
+    public static ArrayList aridBiomeIds = new ArrayList();
+    public static ArrayList dampBiomeIds = new ArrayList();
+    public static ArrayList normalBiomeIds = new ArrayList();
+    public final String name;
+    public final int iconIndex;
 
-	/**
-	 * Populated by Forestry with vanilla biomes. Add additional arid biomes here. (ex. desert)
-	 */
-	public static ArrayList<Integer> aridBiomeIds = new ArrayList<Integer>();
-	/**
-	 * Populated by Forestry with vanilla biomes. Add additional damp biomes here. (ex. jungle)
-	 */
-	public static ArrayList<Integer> dampBiomeIds = new ArrayList<Integer>();
-	/**
-	 * Populated by Forestry with vanilla biomes. Add additional normal biomes here.
-	 */
-	public static ArrayList<Integer> normalBiomeIds = new ArrayList<Integer>();
+    private EnumHumidity(String var3, int var4)
+    {
+        this.name = var3;
+        this.iconIndex = var4;
+    }
 
-	public final String name;
-	public final int iconIndex;
+    public String getName()
+    {
+        return this.name;
+    }
 
-	private EnumHumidity(String name, int iconIndex) {
-		this.name = name;
-		this.iconIndex = iconIndex;
-	}
+    public int getIconIndex()
+    {
+        return this.iconIndex;
+    }
 
-	public String getName() {
-		return this.name;
-	}
+    public static ArrayList getBiomeIds(EnumHumidity var0)
+    {
+        switch (EnumHumidity$1.$SwitchMap$forestry$api$core$EnumHumidity[var0.ordinal()])
+        {
+            case 1:
+                return aridBiomeIds;
 
-	public int getIconIndex() {
-		return this.iconIndex;
-	}
+            case 2:
+                return dampBiomeIds;
 
-	public static ArrayList<Integer> getBiomeIds(EnumHumidity humidity) {
-		switch (humidity) {
-		case ARID:
-			return aridBiomeIds;
-		case DAMP:
-			return dampBiomeIds;
-		case NORMAL:
-		default:
-			return normalBiomeIds;
-		}
-	}
+            case 3:
+            default:
+                return normalBiomeIds;
+        }
+    }
 }

@@ -1,20 +1,19 @@
 package forestry.api.circuits;
 
 import java.util.HashMap;
-
 import net.minecraft.src.World;
 
-public interface ICircuitRegistry {
+public interface ICircuitRegistry
+{
+    HashMap getRegisteredCircuits();
 
-	HashMap<String, ICircuit> getRegisteredCircuits();
-	
-	void registerCircuit(ICircuit circuit);
-	ICircuit getCircuit(String uid);
-	
-	ICircuitLibrary getCircuitLibrary(World world, String playername);
+    void registerCircuit(ICircuit var1);
 
-	void registerLegacyMapping(int id, String uid);
+    ICircuit getCircuit(String var1);
 
-	ICircuit getFromLegacyMap(int id);
+    ICircuitLibrary getCircuitLibrary(World var1, String var2);
 
+    void registerLegacyMapping(int var1, String var2);
+
+    ICircuit getFromLegacyMap(int var1);
 }

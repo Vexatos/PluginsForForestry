@@ -1,7 +1,6 @@
 package denoflionsx.plugins.Forestry.Utility;
 
 import denoflionsx.Enums.EnumContainers;
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import java.util.Iterator;
 import java.util.Map;
@@ -12,6 +11,7 @@ import denoflionsx.items.multiItem;
 import forestry.api.core.ItemInterface;
 import forestry.api.recipes.RecipeManagers;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class LiquidContainerSystem {
 

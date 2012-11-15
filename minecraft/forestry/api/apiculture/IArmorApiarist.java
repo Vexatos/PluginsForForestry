@@ -1,3 +1,5 @@
 package forestry.api.apiculture;
 
-public interface IArmorApiarist {}
+public interface IArmorApiarist
+{
+}

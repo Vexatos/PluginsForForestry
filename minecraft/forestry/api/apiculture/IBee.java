@@ -1,75 +1,52 @@
 package forestry.api.apiculture;
 
-import java.util.ArrayList;
-
 import forestry.api.genetics.IEffectData;
 import forestry.api.genetics.IIndividual;
-
+import java.util.ArrayList;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 
-/**
- * Other implementations than Forestry's default one are not supported.
- * 
- * @author SirSengir
- */
-public interface IBee extends IIndividual {
+public interface IBee extends IIndividual
+{
+    void age(World var1, float var2);
 
-	void age(World world, float ageModifier);
+    void mate(IBee var1);
 
-	void mate(IBee drone);
+    void setIsNatural(boolean var1);
 
-	void setIsNatural(boolean flag);
-	
-	IEffectData[] doEffect(IEffectData[] storedData, IBeeHousing housing);
+    IEffectData[] doEffect(IEffectData[] var1, IBeeHousing var2);
 
-	IEffectData[] doFX(IEffectData[] storedData, IBeeHousing housing);
-	
-	boolean isAlive();
-	boolean isPureBred(EnumBeeChromosome chromosome);
+    IEffectData[] doFX(IEffectData[] var1, IBeeHousing var2);
 
-	/**
-	 * @return true if the bee may spawn offspring
-	 */
-	boolean canSpawn();
+    boolean isAlive();
 
-	/**
-	 * Determines whether the queen can work.
-	 * 
-	 * @param world
-	 * @param isAlveary
-	 * @param biomeid
-	 * @param temperature
-	 * @param humidity
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @return Ordinal of the error code encountered. 0 - EnumErrorCode.OK
-	 */
-	int isWorking(IBeeHousing housing);
+    boolean isPureBred(EnumBeeChromosome var1);
 
-	boolean hasFlower(IBeeHousing housing);
+    boolean canSpawn();
 
-	ArrayList<Integer> getSuitableBiomeIds();
+    int isWorking(IBeeHousing var1);
 
-	ItemStack[] getProduceList();
+    boolean hasFlower(IBeeHousing var1);
 
-	ItemStack[] getSpecialtyList();
+    ArrayList getSuitableBiomeIds();
 
-	ItemStack[] produceStacks(IBeeHousing housing);
+    ItemStack[] getProduceList();
 
-	IBee spawnPrincess(IBeeHousing housing);
+    ItemStack[] getSpecialtyList();
 
-	IBee[] spawnDrones(IBeeHousing housing);
+    ItemStack[] produceStacks(IBeeHousing var1);
 
-	void plantFlowerRandom(IBeeHousing housing);
+    IBee spawnPrincess(IBeeHousing var1);
 
-	int getHealth();
+    IBee[] spawnDrones(IBeeHousing var1);
 
-	int getMaxHealth();
+    void plantFlowerRandom(IBeeHousing var1);
 
-	IBeeGenome getGenome();
-	
-	IBeeGenome getMate();
+    int getHealth();
 
+    int getMaxHealth();
+
+    IBeeGenome getGenome();
+
+    IBeeGenome getMate();
 }

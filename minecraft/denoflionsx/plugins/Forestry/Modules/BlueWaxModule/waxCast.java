@@ -1,6 +1,5 @@
 package denoflionsx.plugins.Forestry.Modules.BlueWaxModule;
 
-import buildcraft.api.liquids.LiquidStack;
 import denoflionsx.API.PfFManagers;
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +7,7 @@ import net.minecraft.src.*;
 import denoflionsx.items.multiItem;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer;
 import denoflionsx.plugins.Forestry.Utility.LiquidContainer.LiquidManagerWrapper;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class waxCast extends multiItem {
 

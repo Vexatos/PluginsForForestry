@@ -3,40 +3,15 @@ package forestry.api.apiculture;
 import net.minecraft.src.ItemStack;
 import net.minecraft.src.World;
 
-public interface IFlowerProvider {
-	/**
-	 * @param world
-	 * @param species
-	 *            Integer representing a species' ordinal matching {@EnumBeeBreed}
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @return True if the block at the passed coordinates is a valid flower for the species.
-	 */
-	boolean isAcceptedFlower(World world, IBeeGenome genome, int x, int y, int z);
+public interface IFlowerProvider
+{
+    boolean isAcceptedFlower(World var1, IBeeGenome var2, int var3, int var4, int var5);
 
-	/**
-	 * @param world
-	 * @param species
-	 *            Integer representing a species' ordinal matching {@EnumBeeBreed}
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @return True if a flower was planted.
-	 */
-	boolean growFlower(World world, IBeeGenome genome, int x, int y, int z);
+    boolean growFlower(World var1, IBeeGenome var2, int var3, int var4, int var5);
 
-	/**
-	 * @return Short, human-readable identifier used in the beealyzer.
-	 */
-	String getDescription();
-	
-	ItemStack[] affectProducts(World world, IBeeGenome genome, int x, int y, int z, ItemStack[] products);
+    String getDescription();
 
-	/**
-	 * @return Array of itemstacks representing valid flowers for the flower provider. 
-	 * The first in the array is for use as an icon
-	 * Return null or an empty array if the flower does not have an itemstack
-	 */
-	ItemStack[] getItemStacks();
+    ItemStack[] affectProducts(World var1, IBeeGenome var2, int var3, int var4, int var5, ItemStack[] var6);
+
+    ItemStack[] getItemStacks();
 }

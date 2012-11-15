@@ -2,6 +2,7 @@ package forestry.api.arboriculture;
 
 import net.minecraft.src.World;
 
-public interface IGrowthProvider {
-	EnumGrowthConditions getGrowthConditions(World world, int biomeid, int xPos, int yPos, int zPos);
+public interface IGrowthProvider
+{
+    EnumGrowthConditions getGrowthConditions(World var1, int var2, int var3, int var4);
 }

@@ -1,8 +1,8 @@
 package denoflionsx.plugins.Forestry.Helpers;
 
-import buildcraft.api.liquids.LiquidStack;
 import forestry.api.recipes.RecipeManagers;
 import net.minecraft.src.ItemStack;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class FermenterHelper {
 

@@ -1,39 +1,31 @@
 package forestry.api.genetics;
 
+import forestry.api.core.INBTTagable;
 import java.util.List;
 
-import forestry.api.core.INBTTagable;
+public interface IIndividual extends INBTTagable
+{
+    boolean analyze();
 
+    boolean isAnalyzed();
 
-public interface IIndividual extends INBTTagable {
+    String getDisplayName();
 
-	boolean analyze();
+    void addTooltip(List var1);
 
-	boolean isAnalyzed();
+    boolean hasEffect();
 
-	String getDisplayName();
+    boolean isSecret();
 
-	void addTooltip(List<String> list);
+    IGenome getGenome();
 
-	boolean hasEffect();
+    String getIdent();
 
-	boolean isSecret();
+    boolean isNatural();
 
-	IGenome getGenome();
+    int getGeneration();
 
-	String getIdent();
+    IIndividual setNatural(boolean var1);
 
-	/**
-	 * @return true if the individual is originally of natural origin.
-	 */
-	boolean isNatural();
-	/**
-	 * @return generation this individual is removed from the original individual.
-	 */
-	int getGeneration();
-
-	IIndividual setNatural(boolean flag);
-
-	boolean isIrregularMating();
-
+    boolean isIrregularMating();
 }

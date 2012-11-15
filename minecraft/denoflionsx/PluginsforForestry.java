@@ -14,7 +14,7 @@ import denoflionsx.Proxy.Proxy;
 import denoflionsx.Version.PfFVersion;
 import denoflionsx.core.core;
 
-@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = PfFVersion.version, dependencies = "required-after:Forestry")
+@Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = PfFVersion.version, dependencies = "required-after:Forestry;required-after:denLib")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PluginsforForestry{
 
