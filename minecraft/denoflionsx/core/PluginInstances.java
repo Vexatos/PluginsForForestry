@@ -7,8 +7,6 @@ import denoflionsx.plugins.Buildcraft.pluginBuildcraft;
 import denoflionsx.plugins.Core.pluginCoreItems;
 import denoflionsx.plugins.FarmCraftory.pluginFarmCraftory;
 import denoflionsx.plugins.Forestry.pluginForestry;
-import denoflionsx.plugins.ForestryAPS.pluginForestryAPS;
-import denoflionsx.plugins.ForgottenNature.pluginForgottenNature;
 import denoflionsx.plugins.IC2.pluginIC2;
 import denoflionsx.plugins.Millenaire.pluginMillenaire;
 import denoflionsx.plugins.Railcraft.pluginRailcraft;
@@ -24,9 +22,9 @@ public class PluginInstances {
     public static pluginRailcraft Railcraft = new pluginRailcraft("pluginRailcraft", EnumModIDs.MODS.RAILCRAFT.getID());
     public static pluginFarmCraftory FarmCraftory = new pluginFarmCraftory("pluginFarmCraftory", EnumModIDs.MODS.FARMCRAFTORY.getID());
     //public static pluginBlueSilkWorm BlueSilkWorm = new pluginBlueSilkWorm("pluginBlueSilkWorm", EnumModIDs.MODS.FORESTRY.getID());
-    public static pluginForestryAPS ForestryAPS = new pluginForestryAPS("pluginForestryAPS", EnumModIDs.MODS.FORESTRY.getID());
+    //public static pluginForestryAPS ForestryAPS = new pluginForestryAPS("pluginForestryAPS", EnumModIDs.MODS.FORESTRY.getID());
     public static pluginMillenaire Millenaire = new pluginMillenaire();
-    public static pluginForgottenNature FN = new pluginForgottenNature();
+    //public static pluginForgottenNature FN = new pluginForgottenNature();
     public static pluginCoreItems CoreItems = new pluginCoreItems("pluginCoreItems", EnumModIDs.MODS.FORESTRY.getID());
     public static pluginUpdater Updater = new pluginUpdater("pluginUpdater", EnumModIDs.MODS.FORESTRY.getID());
 }

@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class PfFSpecialEventManager implements IListenerManager{
     
     public static ArrayList<Object> listeners = new ArrayList();
+    // I really should do something with any exceptions that get swallowed.
+    // I'll just store them for now.
+    private static ArrayList<Exception> exceptionSwallow = new ArrayList();
 
     @Override
     public void notifyListeners(Object l) {
@@ -25,7 +28,7 @@ public class PfFSpecialEventManager implements IListenerManager{
                 try{
                     m.getMethod().invoke(a, new EventSpecial(this,message));
                 }catch(Exception ex){
-                    ex.printStackTrace();
+                    exceptionSwallow.add(ex);
                 }
             }
         }

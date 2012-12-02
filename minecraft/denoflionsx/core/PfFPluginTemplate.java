@@ -18,7 +18,9 @@ public class PfFPluginTemplate implements IPfFPlugin, IPluginListener, IModuleLi
     public PfFPluginTemplate(String name, String parent) {
         this.name = name;
         this.parent = parent;
-        this.config = new Config(name + ".cfg");
+        if (!(this instanceof PfFModuleTemplate)) {
+            this.config = new Config(name + ".cfg");
+        }
         PfFEvents.pluginLoaded.register(this);
         PfFEvents.moduleLoaded.register(this);
     }

@@ -52,7 +52,7 @@ public class CropTileEntityHelper {
 
         public void setCropID(World world, int x, int y, int z, int cropID) {
             denLib.ReflectionHelper.setIntFromTileEntity(theClass, "cropID", world.getBlockTileEntity(x, y, z), cropID);
-            world.markBlockNeedsUpdate(x, y, z);
+            world.markBlockForRenderUpdate(x, y, z);
         }
 
         public void setGrowthStage(World world, int x, int y, int z, int growth) {
@@ -60,7 +60,7 @@ public class CropTileEntityHelper {
                 growth = 2;
             }
             denLib.ReflectionHelper.setIntFromTileEntity(theClass, "growthStage", world.getBlockTileEntity(x, y, z), growth);
-            world.markBlockNeedsUpdate(x, y, z);
+            world.markBlockForRenderUpdate(x, y, z);
         }
 
         public void setCropIDandGrowthStage(World world, int x, int y, int z, int cropID, int growth) {

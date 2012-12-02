@@ -12,7 +12,7 @@ import net.minecraftforge.liquids.LiquidStack;
 public class FuelManager
 {
 
-    private static final Map<LiquidStack, Integer> boilerFuel = new HashMap<LiquidStack, Integer>();
+    public static final Map<LiquidStack, Integer> boilerFuel = new HashMap<LiquidStack, Integer>();
 
     /**
      * Register the amount of heat in a bucket of liquid fuel.

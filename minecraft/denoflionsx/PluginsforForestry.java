@@ -16,7 +16,7 @@ import denoflionsx.core.core;
 
 @Mod(modid = "mod_PluginsforForestry", name = "Plugins for Forestry", version = PfFVersion.version, dependencies = "required-after:Forestry;required-after:denLib")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
-public class PluginsforForestry{
+public class PluginsforForestry {
 
     /*
      * This program is free software. It comes without any warranty, to the
@@ -32,11 +32,11 @@ public class PluginsforForestry{
     public static Proxy proxy;
 
     public PluginsforForestry() {
-        instance = this;
     }
 
     @PreInit
     public void preLoad(FMLPreInitializationEvent event) {
+        instance = this;
         core.PfFCore.PreLoad();
     }
 

@@ -51,6 +51,9 @@ public class pluginRailcraft extends PfFPluginTemplate {
         if (!event.getMessage().equals(EnumEventSpecialMessages.BARREL.getMsg())) {
             return;
         }
+        if (!this.isLoaded()){
+            return;
+        }
         if (creosote == null){
             return;
         }
