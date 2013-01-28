@@ -60,6 +60,9 @@ public class PfFBuildCraftCore implements IPfFCore {
             BackpackBuildcraft backpack = new BackpackBuildcraft(valid, "BuildCraft Backpack", new Color(242, 212, 46));
             PluginLiquidRoundup.backpacks.add(new BackpackData(new int[]{BuildCraftTuning.Items.BackpackT1_ItemID, BuildCraftTuning.Items.BackpackT2_ItemID}, backpack, new ItemStack(denLib.ReflectionHelper.getItem("buildcraft.BuildCraftTransport", "pipeItemsStone"))));
         }
+        if (BuildCraftTuning.Enables.Quarry_SpeedModifier){
+            denLib.ReflectionHelper.setStaticInt("buildcraft.factory.TileQuarry", "MAX_ENERGY", BuildCraftTuning.Tuning.Quarry_EnergyBuffer);
+        }
     }
 
     @PfFSubscribe
