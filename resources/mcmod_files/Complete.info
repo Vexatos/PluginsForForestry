@@ -1,0 +1,172 @@
+[
+{
+  "modid": "PluginsforForestry|Core",
+  "name": "PluginsforForestry|Core",
+  "description": "Integrate all Forge mods with Forestry!",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","Forestry","LiquidRoundup","denLib"
+  ]
+},
+{
+  "modid": "LiquidRoundup",
+  "name": "Liquid Roundup",
+  "description": "Liquid creation management system for denoflions mods",
+  "version": "",
+  "credits": "denoflions",
+  "logoFile": "",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent": "",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+},
+{
+  "modid": "PluginsforForestry|Thaumcraft",
+  "name": "PluginsforForestry|Thaumcraft",
+  "description": "Integrate Thaumcraft with Forestry!",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","Thaumcraft"
+  ]
+},
+{
+  "modid": "PluginsforForestry|Railcraft",
+  "name": "PluginsforForestry|Railcraft",
+  "description": "Integrate Railcraft with Forestry!",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","Railcraft"
+  ]
+},
+{
+  "modid": "PluginsforForestry|Forestry",
+  "name": "PluginsforForestry|Forestry",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","Forestry"
+  ]
+},
+{
+  "modid": "PluginsforForestry|Tweaks",
+  "name": "PluginsforForestry|Tweaks",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core"
+  ]
+},
+{
+  "modid": "PluginsforForestry|Ic2",
+  "name": "PluginsforForestry|Ic2",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","IC2"
+  ]
+},
+{
+  "modid": "PluginsforForestry|BuildCraft",
+  "name": "PluginsforForestry|BuildCraft",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","BuildCraft|Core"
+  ]
+},
+{
+  "modid": "PluginsforForestry|RedPower",
+  "name": "PluginsforForestry|RedPower",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core","RedPowerWorld"
+  ]
+},
+{
+  "modid": "PluginsforForestry|BlueFood",
+  "name": "PluginsforForestry|BlueFood",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core"
+  ]
+}
+]

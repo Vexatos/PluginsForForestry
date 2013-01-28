@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<research>
+
+<project id="PFFTEST">
+<name>Plugins for Forestry!</name>
+<popupText>Thaumcraft plugin</popupText>
+<longText></longText>
+<page type="text">You installed the Thaumcraft plugin for Plugins for Forestry!</page>
+</project>
+
+</research>

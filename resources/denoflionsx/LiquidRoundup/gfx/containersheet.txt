@@ -1,0 +1,1 @@
+This sheet is where container sprites are loaded. If you're making sprites for an HD texture pack you need to replace this sheet with one of your target size.

@@ -1,0 +1,19 @@
+[
+{
+  "modid": "PluginsforForestry|BlueFood",
+  "name": "PluginsforForestry|BlueFood",
+  "description": "",
+  "version": "",
+  "credits": "denoflions and Blue",
+  "logoFile": "/denoflionsx/PluginsforForestry/gfx/PFF_spalsh.png",
+  "mcversion": "",
+  "url": "https://github.com/denoflionsx/PluginsForForestry",
+  "updateUrl": "https://github.com/denoflionsx/PluginsForForestry",
+  "authors": [ "denoflions" ],
+  "parent":"PluginsforForestry|Core",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge","PluginsforForestry|Core"
+  ]
+}
+]
