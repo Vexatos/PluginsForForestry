@@ -1,0 +1,11 @@
+build.xml
+forge/
+*.mf
+nbproject/
+*.class
+build/
+dist/
+Test_Env/
+Complete/
+/forge/fml/eclipse/.metadata/
+temp/
