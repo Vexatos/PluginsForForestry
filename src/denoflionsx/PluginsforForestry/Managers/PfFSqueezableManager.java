@@ -31,7 +31,7 @@ public class PfFSqueezableManager implements IPfFSqueezableManager {
                     if (list != null) {
                         for (Dict d : list) {
                             LiquidStack lq = LiquidDictionary.getLiquid(l.liquidname(), d.getLiquidAmount());
-                            APIWrappers.forestry.squeezer.addRecipe((lq.amount / 200), new ItemStack[]{d.getStack()}, lq);
+                            APIWrappers.forestry.squeezer.addRecipe(5, new ItemStack[]{d.getStack()}, lq);
                             if (l.TEMode() == 0) {
                                 APIWrappers.TE.transposer.addExtractionRecipe(lq.amount, d.getStack(), null, lq, false);
                             }else{

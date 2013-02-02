@@ -101,7 +101,7 @@ public class CoreTuning {
 
         @Tunable(category = "core.blocks")
         public static int omniplant = 3333;
-//        @Tunable(category = "core.blocks")
-//        public static int coreblock = 3335;
+        @Tunable(category = "core.blocks")
+        public static int farmblock = 3335;
     }
 }

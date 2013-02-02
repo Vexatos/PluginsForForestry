@@ -60,7 +60,7 @@ public class PfFBuildCraftCore implements IPfFCore {
             BackpackBuildcraft backpack = new BackpackBuildcraft(valid, "BuildCraft Backpack", new Color(242, 212, 46));
             PluginLiquidRoundup.backpacks.add(new BackpackData(new int[]{BuildCraftTuning.Items.BackpackT1_ItemID, BuildCraftTuning.Items.BackpackT2_ItemID}, backpack, new ItemStack(denLib.ReflectionHelper.getItem("buildcraft.BuildCraftTransport", "pipeItemsStone"))));
         }
-        if (BuildCraftTuning.Enables.Quarry_SpeedModifier){
+        if (BuildCraftTuning.Enables.Quarry_SpeedModifier) {
             denLib.ReflectionHelper.setStaticInt("buildcraft.factory.TileQuarry", "MAX_ENERGY", BuildCraftTuning.Tuning.Quarry_EnergyBuffer);
         }
     }
@@ -103,7 +103,9 @@ public class PfFBuildCraftCore implements IPfFCore {
                     return;
                 }
                 // Biogas it.
-                APIWrappers.forestry.biogas.addSafeFuel(fuel, BuildCraftTuning.Fuels.Fuel_MJt, BuildCraftTuning.Fuels.Fuel_BurnTime);
+                if (BuildCraftTuning.Enables.Fuel_InBiogas) {
+                    APIWrappers.forestry.biogas.addSafeFuel(fuel, BuildCraftTuning.Fuels.Fuel_MJt, BuildCraftTuning.Fuels.Fuel_BurnTime);
+                }
                 if (BuildCraftTuning.Enables.Fuel_CreateInStill) {
                     if (oil == null) {
                         oil = LiquidDictionary.getLiquid("Oil", 1000);

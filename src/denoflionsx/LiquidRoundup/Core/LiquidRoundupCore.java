@@ -110,7 +110,7 @@ public class LiquidRoundupCore implements IDenCore {
                     LiquidContainerData d = new LiquidContainerData(copy, con, r.getEmpty());
                     LiquidContainerRegistry.registerLiquid(d);
                     LRManagers.Liquids.registerContainer(l.getName() + " " + r.getName(), r.getStack());
-                    APIWrappers.forestry.squeezer.addRecipe((d.stillLiquid.amount / 200), new ItemStack[]{con}, copy);
+                    APIWrappers.forestry.squeezer.addRecipe(5, new ItemStack[]{con}, copy);
                     APIWrappers.TE.transposer.addFillRecipe(d.stillLiquid.amount, d.container, d.filled, d.stillLiquid, true);
                 }
             }

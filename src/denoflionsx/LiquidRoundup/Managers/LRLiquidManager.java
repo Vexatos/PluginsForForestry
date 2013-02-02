@@ -240,7 +240,7 @@ public class LRLiquidManager implements ILRLiquidManager {
                         LiquidContainerRegistry.registerLiquid(d);
                         //LiquidRoundup.Proxy.print("Registered " + r.getName() + " for " + name);
                         this.registerContainer(name + " " + r.getName(), filled);
-                        APIWrappers.forestry.squeezer.addRecipe((d.stillLiquid.amount / 200), new ItemStack[]{filled}, copy);
+                        APIWrappers.forestry.squeezer.addRecipe(5, new ItemStack[]{filled}, copy);
                         APIWrappers.TE.transposer.addFillRecipe(d.stillLiquid.amount, d.container, d.filled, d.stillLiquid, true);
                     }
                 }

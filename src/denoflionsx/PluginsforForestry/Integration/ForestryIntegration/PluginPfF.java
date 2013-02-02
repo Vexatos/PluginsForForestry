@@ -1,18 +1,33 @@
 package denoflionsx.PluginsforForestry.Integration.ForestryIntegration;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import denoflionsx.PluginsforForestry.Blocks.Farm.BlockFarmPart;
+import denoflionsx.PluginsforForestry.Blocks.Farm.ItemBlockFarmPart;
+import denoflionsx.PluginsforForestry.Blocks.Farm.TileEntityFarmPart;
+import denoflionsx.PluginsforForestry.Config.CoreTuning;
+import denoflionsx.denLib.FMLWrapper;
 import forestry.api.core.*;
 import forestry.api.cultivation.CropProviders;
 import java.util.Random;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.command.ICommand;
 import net.minecraft.world.World;
 
 @PluginInfo(pluginID = "PfF2", name = "Plugins for Forestry 2")
 public class PluginPfF implements IPlugin {
 
+    private Block farmblock;
+    private final boolean test = false;
+
     @Override
     public void doInit() {
         CropProviders.cerealCrops.add(new OmniPlantProvider());
+        if (test) {
+            farmblock = new BlockFarmPart(CoreTuning.Blocks.farmblock, Material.clay);
+            FMLWrapper.MODE.FML.registerBlockWithItem(farmblock, ItemBlockFarmPart.class);
+            FMLWrapper.MODE.FML.registerTileEntity(TileEntityFarmPart.class, "PfFFarmPart1");
+        }
     }
 
     @Override

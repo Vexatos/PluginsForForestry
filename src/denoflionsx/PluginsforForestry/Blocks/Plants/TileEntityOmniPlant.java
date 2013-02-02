@@ -14,10 +14,19 @@ public class TileEntityOmniPlant extends TileEntity {
     private int growthStage = 0;
     private static final int finalStage = 4;
     private boolean isExternal = false;
+    private boolean isMFR = false;
 
     public TileEntityOmniPlant() {
     }
 
+    public boolean isIsMFR() {
+        return isMFR;
+    }
+
+    public void setIsMFR(boolean isMFR) {
+        this.isMFR = isMFR;
+    }
+    
     @Override
     public void updateEntity() {
     }
