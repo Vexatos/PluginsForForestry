@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry_PluginTweaks.Integration.ExtraBees;
 
 import denoflionsx.PluginsforForestry.API.Annotations.Tunable;
+import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.PluginsforForestry_PluginTweaks.PfFTweaks;
 import java.lang.reflect.Field;
@@ -12,6 +13,10 @@ public class ExtraBeesIntegration {
 
     private static final String target = "serumEmpty";
     private static HashMap<String, ItemStack> items = new HashMap();
+    
+    static{
+        CoreTuning.tuning.registerTunable(ExtraBeesIntegration.class);
+    }
 
     public static void Integrate() {
         try {
