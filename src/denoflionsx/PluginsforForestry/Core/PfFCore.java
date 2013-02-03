@@ -1,7 +1,6 @@
 package denoflionsx.PluginsforForestry.Core;
 
 import denoflionsx.LiquidRoundup.API.LRManagers;
-import denoflionsx.LiquidRoundup.LiquidRoundup;
 import denoflionsx.PluginsforForestry.API.Events.PfFEvent;
 import denoflionsx.PluginsforForestry.API.Events.PfFSubscribe;
 import denoflionsx.PluginsforForestry.API.Interfaces.IPfFLiquid;
@@ -12,7 +11,7 @@ import denoflionsx.PluginsforForestry.Blocks.Plants.TileEntityOmniPlant;
 import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.Config.CoreUpdater;
 import denoflionsx.PluginsforForestry.CreativeTab.PfFTab;
-import denoflionsx.PluginsforForestry.Integration.XycraftIntegration.XyIntegration;
+import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry.Items.*;
 import denoflionsx.PluginsforForestry.Items.Plants.*;
@@ -23,6 +22,7 @@ import denoflionsx.PluginsforForestry.Utils.FermenterUtils;
 import denoflionsx.PluginsforForestry.Utils.ForestryContainers;
 import denoflionsx.denLib.FMLWrapper;
 import java.io.File;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
@@ -57,6 +57,7 @@ public class PfFCore implements IPfFCore {
     public static IPfFLiquid melonjuice;
     public static ItemCharm charm;
     public ArrayList<ItemStack> logs;
+    public ArrayList<Method> lateRunners = new ArrayList();
 
     @Override
     public void preloadTextures() {
@@ -159,7 +160,7 @@ public class PfFCore implements IPfFCore {
         LRManagers.Containers.registerNewContainer("Can", new String[]{path + "can.png", path + "overlays/generic_capsule_overlay.png"}, LiquidContainerRegistry.BUCKET_VOLUME, ForestryContainers.CAN.getContainer(), false, false, true, 64);
         LRManagers.Containers.registerNewContainer("Refractory Capsule", new String[]{path + "capsule_red.png", path + "overlays/generic_capsule_overlay.png"}, LiquidContainerRegistry.BUCKET_VOLUME, ForestryContainers.CAPSULE_RED.getContainer(), false, false, true, 64);
         LRManagers.Containers.registerNewContainer("Bottle", new String[]{path + "bottle.png", path + "overlays/bottle_overlay.png"}, LiquidContainerRegistry.BUCKET_VOLUME, new ItemStack(Item.glassBottle), false, true, true, 64);
-        XyIntegration.integrate();
+        IntegrationModules.Xycraft.Integrate();
         config.save();
     }
 
@@ -191,6 +192,13 @@ public class PfFCore implements IPfFCore {
         }
         if (CoreTuning.Enables.liquidvac_enabled) {
             vac.createRecipe();
+        }
+        IntegrationModules.AE.Integrate();
+        for (Method m : lateRunners) {
+            try {
+                m.invoke(null, new Object[0]);
+            } catch (Exception ex) {
+            }
         }
     }
     private ArrayList<Object> refs = new ArrayList();

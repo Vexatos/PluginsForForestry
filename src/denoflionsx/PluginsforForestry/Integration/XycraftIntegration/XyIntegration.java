@@ -1,22 +1,28 @@
 package denoflionsx.PluginsforForestry.Integration.XycraftIntegration;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import denoflionsx.LiquidRoundup.API.LRManagers;
 import denoflionsx.LiquidRoundup.LiquidRoundup;
 import denoflionsx.PluginsforForestry.API.Annotations.Tunable;
 import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.Core.OmniPlantList;
+import denoflionsx.PluginsforForestry.Integration.IIntegrationModule;
 import denoflionsx.PluginsforForestry.PfF;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 
-public class XyIntegration {
+public class XyIntegration implements IIntegrationModule {
 
     public static HashMap<String, ItemStack> items;
+    public static HashMap<String, Block> blocks;
+    public static ItemStack altQuartz = null;
 
-    public static void integrate() {
+    @Override
+    public void Integrate() {
         try {
             Class xy = Class.forName("soaryn.xycraft.world.WorldItems");
             if (xy != null) {
@@ -52,16 +58,44 @@ public class XyIntegration {
                         if (corn == null) {
                             PfF.Proxy.print("Cannot find Xycraft corn.");
                         }
-                        if (seed == null){
+                        if (seed == null) {
                             PfF.Proxy.print("Cannot find Xycraft corn kernels.");
                         }
                     }
                 }
+                Class xyBlocks = Class.forName("soaryn.xycraft.world.WorldBlocks");
+                if (xyBlocks == null) {
+                    return;
+                } else {
+                    PfF.Proxy.print("Scanning Xycraft blocks...");
+                    blocks = new HashMap();
+                    for (Field f : xyBlocks.getDeclaredFields()) {
+                        Object o = f.get(null);
+                        if (o != null) {
+                            if (o instanceof Block) {
+                                blocks.put(f.getName(), (Block) o);
+                                PfF.Proxy.print("Scanned Xycraft block: " + f.getName());
+                            }
+                        }
+                    }
+                }
+                PfF.Core.lateRunners.add(this.getClass().getDeclaredMethod("Quartz", new Class[0]));
             }
         } catch (ClassNotFoundException ex) {
             PfF.Proxy.print("Xycraft not found! Integration aborted.");
         } catch (Exception ex) {
             PfF.Proxy.print("Xycraft not found! Integration aborted.");
+        }
+    }
+
+    public static void Quartz() {
+        if (altQuartz != null) {
+            Block q = blocks.get("crystal");
+            if (q != null) {
+                if (Enables.Quartz_AEConversion) {
+                    GameRegistry.addSmelting(q.blockID, altQuartz, 10);
+                }
+            }
         }
     }
 
@@ -71,5 +105,7 @@ public class XyIntegration {
         public static boolean AluminumCans_Integrate = true;
         @Tunable(category = "xycraft.integration")
         public static boolean Corn_Omniplant = true;
+        @Tunable(category = "xycraft.integration")
+        public static boolean Quartz_AEConversion = true;
     }
 }

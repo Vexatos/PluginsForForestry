@@ -13,8 +13,8 @@ public class ExtraBeesIntegration {
 
     private static final String target = "serumEmpty";
     private static HashMap<String, ItemStack> items = new HashMap();
-    
-    static{
+
+    static {
         CoreTuning.tuning.registerTunable(ExtraBeesIntegration.class);
     }
 
@@ -26,8 +26,14 @@ public class ExtraBeesIntegration {
             }
             PfF.Proxy.print("Scanning for Extrabees items...");
             for (Field f : c.getDeclaredFields()) {
-                items.put(f.getName(), new ItemStack((Item) f.get(null)));
-                PfF.Proxy.print("Scanned Extrabees item: " + f.getName());
+                Item i = (Item) f.get(null);
+                String msg = "";
+                if (i != null) {
+                    items.put(f.getName(), new ItemStack(i));
+                }else{
+                    msg = " Found null.";
+                }
+                PfF.Proxy.print("Scanned Extrabees item: " + f.getName() + "." + msg);
             }
             ItemStack vial = items.get(target);
             if (vial != null) {
