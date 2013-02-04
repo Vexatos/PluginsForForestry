@@ -42,6 +42,9 @@ public class CoreUpdater implements IScheduledTickHandler {
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
+        if (BuildFlags.isCustomBuild){
+            return;
+        }
         if (alertPlayer) {
             for (Class c : alerts) {
                 String t = EnumTextColor.DARK_GREEN.ColorString("[PfF2]");
