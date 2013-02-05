@@ -73,8 +73,13 @@ public class PfFRailcraftCore implements IPfFCore {
         if (event.getMsg().equals("config ready!")) {
             RailcraftTuning.tuning_enabled = true;
         } else if (event.getOrigin().equals("Fuel")) {
-            EngineFuel f = (EngineFuel) event.getObj();
-            APIWrappers.railcraft.boiler.addBoilerFuel(f);
+            if (event.getMsg().equals("Liquid Peat")) {
+                EngineFuel f = (EngineFuel) event.getObj();
+                APIWrappers.railcraft.boiler.addBoilerFuelNoConversion(f);
+            } else {
+                EngineFuel f = (EngineFuel) event.getObj();
+                APIWrappers.railcraft.boiler.addBoilerFuel(f);
+            }
         }
     }
 
@@ -93,7 +98,7 @@ public class PfFRailcraftCore implements IPfFCore {
             sc = new ItemSugarCharcoal();
             scs = new LiquidSugarSyrup().createLiquid();
             acid = new LiquidSulfuricAcid().createLiquid();
-            if (RailcraftTuning.Enables.cactuscharcoal_enabled){
+            if (RailcraftTuning.Enables.cactuscharcoal_enabled) {
                 ccs = new LiquidCactusSyrup().createLiquid();
             }
         }
@@ -108,7 +113,7 @@ public class PfFRailcraftCore implements IPfFCore {
             }
             SugarCharcoalCraftingChain.acid = LiquidDictionary.getLiquid("Sulfuric Acid", 10000);
             SugarCharcoalCraftingChain.createCraftingChain(sc, LiquidDictionary.getLiquid("Sugar Syrup", 1000));
-            if (RailcraftTuning.Enables.cactuscharcoal_enabled){
+            if (RailcraftTuning.Enables.cactuscharcoal_enabled) {
                 SugarCharcoalCraftingChain.createCraftingChainB(sc, LiquidDictionary.getLiquid("Cactus Syrup", 1000));
             }
             PfFManagers.Squeeze.registerSqueezeLiquid(scs);

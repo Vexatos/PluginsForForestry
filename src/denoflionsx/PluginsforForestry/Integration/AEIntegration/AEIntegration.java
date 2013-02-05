@@ -9,8 +9,7 @@ import net.minecraft.item.ItemStack;
 
 public class AEIntegration implements IIntegrationModule {
 
-    public static HashMap<String, ItemStack> items = new HashMap();
-    private static final String target = "matQuartz";
+    public HashMap<String, ItemStack> items = new HashMap();
 
     @Override
     public void Integrate() {
@@ -29,7 +28,7 @@ public class AEIntegration implements IIntegrationModule {
                         }
                     }
                 }
-                ItemStack q = items.get(target);
+                ItemStack q = items.get("matQuartz");
                 if (q != null){
                     XyIntegration.altQuartz = q;
                 }

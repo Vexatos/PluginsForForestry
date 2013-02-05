@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.Blocks.Farm;
 
 import denoflionsx.LiquidRoundup.Utils.StackUtils;
+import denoflionsx.PluginsforForestry.PfF;
 import forestry.api.farming.ICrop;
 import forestry.api.farming.IFarmListener;
 import forestry.api.farming.IFarmLogic;
@@ -22,12 +23,12 @@ public class FarmListener implements IFarmListener {
 
     @Override
     public boolean beforeCropHarvest(ICrop crop) {
-        return true;
+        return false;
     }
 
     @Override
     public boolean beforeProduceStowing(ItemStack produce) {
-        return true;
+        return false;
     }
 
     @Override

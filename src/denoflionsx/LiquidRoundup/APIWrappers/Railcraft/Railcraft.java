@@ -34,6 +34,14 @@ public class Railcraft implements IAPIWrapper {
                 warning();
             }
         }
+        
+        public void addBoilerFuelNoConversion(EngineFuel fuel){
+            try{
+                FuelManager.addBoilerFuel(fuel.getLiquid(), (int) (fuel.getBurnTime()));
+            }catch(NoClassDefFoundError ex){
+                warning();
+            }
+        }
     }
 
     public class CokeOvenManager {

@@ -7,6 +7,7 @@ import denoflionsx.PluginsforForestry.API.Annotations.Tunable;
 import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.Core.OmniPlantList;
 import denoflionsx.PluginsforForestry.Integration.IIntegrationModule;
+import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
 import denoflionsx.PluginsforForestry.PfF;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ import net.minecraftforge.liquids.LiquidContainerRegistry;
 
 public class XyIntegration implements IIntegrationModule {
 
-    public static HashMap<String, ItemStack> items;
-    public static HashMap<String, Block> blocks;
+    public HashMap<String, ItemStack> items;
+    public HashMap<String, Block> blocks;
     public static ItemStack altQuartz = null;
 
     @Override
@@ -90,7 +91,8 @@ public class XyIntegration implements IIntegrationModule {
 
     public static void Quartz() {
         if (altQuartz != null) {
-            Block q = blocks.get("crystal");
+            XyIntegration z = (XyIntegration) IntegrationModules.Xycraft;
+            Block q = z.blocks.get("crystal");
             if (q != null) {
                 if (Enables.Quartz_AEConversion) {
                     GameRegistry.addSmelting(q.blockID, altQuartz, 10);

@@ -19,7 +19,7 @@ public class MFRIntegration {
     public static HashMap<Class, IFactoryRanchable> ranchables = new HashMap();
     public static HashMap<Integer, IFactoryPlantable> plantables = new HashMap();
     public static ArrayList<OmniPlantExternal> externalCopy = new ArrayList();
-    
+
     static {
         CoreTuning.tuning.registerTunable(MFRIntegration.class);
         try {
@@ -67,7 +67,7 @@ public class MFRIntegration {
         if (Tuning.Integration) {
             LiquidStack soup = LiquidDictionary.getLiquid("Mushroom Soup", 1000);
             reRegisterMooshroom(new RanchableMooshroom(soup));
-            
+
         }
     }
 

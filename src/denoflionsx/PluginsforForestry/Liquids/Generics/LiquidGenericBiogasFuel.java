@@ -20,9 +20,8 @@ public class LiquidGenericBiogasFuel extends LiquidGeneric {
     public IPfFLiquid createLiquid() {
         super.createLiquid();
         APIWrappers.forestry.biogas.addSafeFuel(liquid, MJt, BurnTime);
-        APIWrappers.buildcraft.combustion.registerFuel(liquid, MJt, BurnTime);
         EngineFuel f = new EngineFuel(MJt,BurnTime,liquid);
-        PfFManagers.Events.SystemEvents.raiseAlert("Fuel", "Biogas", f);
+        PfFManagers.Events.SystemEvents.raiseAlert("Fuel", this.name, f);
         return this;
     }
     

@@ -10,7 +10,6 @@ import denoflionsx.PluginsforForestry.API.PfFManagers;
 import denoflionsx.PluginsforForestry.Annotations.Core;
 import denoflionsx.PluginsforForestry.Core.PfFCore;
 import denoflionsx.PluginsforForestry.Events.PfFEventManager;
-import denoflionsx.PluginsforForestry.Interfaces.IPfFModule;
 import denoflionsx.PluginsforForestry.Managers.*;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.PluginsforForestry.Version.PfFVersion;
@@ -76,6 +75,4 @@ public class PfF extends PfFModule {
     public String targetMod() {
         return "";
     }
-    
-    
 }

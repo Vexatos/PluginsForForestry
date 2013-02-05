@@ -47,7 +47,10 @@ public class HarvestableOmniplant implements IFactoryHarvestable{
     public void preHarvest(World world, int x, int y, int z) {
         
     }
-    
-    
-    
+
+    @Override
+    public boolean breakBlock() {
+        return true;
+    }
+
 }

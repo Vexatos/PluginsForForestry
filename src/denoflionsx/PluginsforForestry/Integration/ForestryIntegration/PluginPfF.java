@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class PluginPfF implements IPlugin {
 
     private Block farmblock;
-    private final boolean test = false;
+    private final boolean test = true;
 
     @Override
     public void doInit() {
