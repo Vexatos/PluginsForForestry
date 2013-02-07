@@ -4,7 +4,7 @@
 	
     <property name="file.name" value="PluginsForForestry2-MC1.4.7-.jar"/>
     <property name="Utils.dir" value="Util"/>
-    <property name="Forge.file" value="minecraftforge-src-1.4.7-6.6.0.497.zip"/>
+    <property name="Forge.file" value="minecraftforge-src-1.4.7-6.6.0.515.zip"/>
     <property name="Forge.dir" value="forge"/>
     <property name="MCP.dir" value="${Forge.dir}/mcp"/>
     <property name="MCPsrc.dir" value="${MCP.dir}/src/minecraft"/>

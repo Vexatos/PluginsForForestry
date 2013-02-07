@@ -26,6 +26,7 @@ public class BlockFarmPart extends BlockContainer {
         }
         this.setHardness(0.3f);
         this.setCreativeTab(PfF.Core.tab);
+        this.setTextureFile(PfF.Core.spritesheet);
     }
 
     private void add(Class TE, int meta, int texture) {

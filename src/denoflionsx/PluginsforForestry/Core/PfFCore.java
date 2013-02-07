@@ -11,6 +11,7 @@ import denoflionsx.PluginsforForestry.Blocks.Plants.TileEntityOmniPlant;
 import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.Config.CoreUpdater;
 import denoflionsx.PluginsforForestry.CreativeTab.PfFTab;
+import denoflionsx.PluginsforForestry.Integration.IIntegrationModule;
 import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry.Items.*;
@@ -194,6 +195,9 @@ public class PfFCore implements IPfFCore {
             vac.createRecipe();
         }
         IntegrationModules.AE.Integrate();
+        for (IIntegrationModule i : IntegrationModules.externalModules){
+            i.Integrate();
+        }
         for (Method m : lateRunners) {
             try {
                 m.invoke(null, new Object[0]);

@@ -9,6 +9,7 @@ import denoflionsx.LiquidRoundup.APIWrappers.APIWrappers;
 import denoflionsx.LiquidRoundup.Items.LRIDs;
 import denoflionsx.LiquidRoundup.Items.LiquidBase;
 import denoflionsx.LiquidRoundup.LiquidRoundup;
+import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.denLib.denLib;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -242,6 +243,14 @@ public class LRLiquidManager implements ILRLiquidManager {
                         this.registerContainer(name + " " + r.getName(), filled);
                         APIWrappers.forestry.squeezer.addRecipe(5, new ItemStack[]{filled}, copy);
                         APIWrappers.TE.transposer.addFillRecipe(d.stillLiquid.amount, d.container, d.filled, d.stillLiquid, true);
+                        // There is something wrong between us and Xycraft. Look for nulls.
+                        if (d.filled == null){
+                            try{
+                                throw new Exception("Filled container is null!");
+                            }catch(Exception ex){
+                                ex.printStackTrace();
+                            }
+                        }
                     }
                 }
             }

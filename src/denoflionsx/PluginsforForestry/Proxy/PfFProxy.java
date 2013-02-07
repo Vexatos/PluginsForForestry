@@ -1,9 +1,8 @@
 package denoflionsx.PluginsforForestry.Proxy;
 
+import cpw.mods.fml.common.FMLLog;
 import denoflionsx.PluginsforForestry.PfF;
-import denoflionsx.PluginsforForestry.Utils.BackpackUtils;
 import denoflionsx.denLib.Mod.denLibMod;
-import denoflionsx.denLib.denLib;
 import java.io.File;
 import java.util.ArrayList;
 import net.minecraft.entity.Entity;
@@ -71,7 +70,7 @@ public class PfFProxy implements IPfFProxy {
 
     @Override
     public void print(String msg) {
-        denLib.print("[PfF]: " + msg);
+        FMLLog.info("[PfF]: " + msg);
     }
 
     @Override
