@@ -38,10 +38,15 @@ public class ItemCupcake extends ItemFoodTemplate {
         LiquidStack milk = LiquidContainerRegistry.getLiquidForFilledItem(bucket);
         if (milk != null) {
             for (LiquidContainerData d : LiquidContainerRegistry.getRegisteredLiquidContainerData()) {
-                if (d.stillLiquid.isLiquidEqual(milk)) {
-                    if (!d.container.getItemName().equals("item.barrel")) {
-                        FMLWrapper.MODE.FML.addRecipe(new ItemStack(this, FoodTuning.Tuning.Cupcake_AmountPerCraft, 0), new Object[]{"SSS", "MEM", "FFF", Character.valueOf('S'), Sugar, Character.valueOf('M'), d.filled.copy(), Character.valueOf('E'), Egg, Character.valueOf('F'), PfFManagers.Items.getItemByTag("flour")});
+                try {
+                    if (d.stillLiquid.isLiquidEqual(milk)) {
+                        if (!d.container.getItemName().equals("item.barrel")) {
+                            FMLWrapper.MODE.FML.addRecipe(new ItemStack(this, FoodTuning.Tuning.Cupcake_AmountPerCraft, 0), new Object[]{"SSS", "MEM", "FFF", Character.valueOf('S'), Sugar, Character.valueOf('M'), d.filled.copy(), Character.valueOf('E'), Egg, Character.valueOf('F'), PfFManagers.Items.getItemByTag("flour")});
+                        }
                     }
+                } catch (Exception ex) {
+                    PfF.Proxy.print("Error in cupcake recipe handler.");
+                    continue;
                 }
             }
             APIWrappers.forestry.carpenter.addRecipe(5, StackUtils.getNewStack(milk, 2000), null, new ItemStack(this, FoodTuning.Tuning.Cupcake_AmountPerCraft, 0), new Object[]{"SSS", "XEX", "FFF", Character.valueOf('S'), Sugar, Character.valueOf('E'), Egg, Character.valueOf('F'), PfFManagers.Items.getItemByTag("flour")});
