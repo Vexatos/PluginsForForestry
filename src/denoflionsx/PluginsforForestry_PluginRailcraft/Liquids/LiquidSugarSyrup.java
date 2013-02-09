@@ -3,6 +3,7 @@ package denoflionsx.PluginsforForestry_PluginRailcraft.Liquids;
 import denoflionsx.PluginsforForestry.API.Annotations.SqueezeLiquid;
 import denoflionsx.PluginsforForestry.API.Interfaces.IPfFLiquid;
 import denoflionsx.PluginsforForestry.API.PfFManagers;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGeneric;
 import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.PluginsforForestry_PluginRailcraft.Config.RailcraftTuning;
@@ -24,7 +25,7 @@ public class LiquidSugarSyrup extends LiquidGeneric {
     }
 
     public LiquidSugarSyrup() {
-        this("Sugar Syrup", new String[]{Constants.path + "sugar.png", Constants.path + "sugar_sparkles.png"});
+        this("Sugar Syrup", new String[]{PfFConstants.RCpath + "sugar.png", PfFConstants.RCpath + "sugar_sparkles.png"});
     }
 
     @Override

@@ -5,12 +5,12 @@ import denoflionsx.PluginsforForestry.API.Events.PfFSubscribe;
 import denoflionsx.PluginsforForestry.API.PfFManagers;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry.PfF;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry_PluginBlueFood.Config.FoodTuning;
 import denoflionsx.PluginsforForestry_PluginBlueFood.Enchants.EnchantBeastSlaying;
 import denoflionsx.PluginsforForestry_PluginBlueFood.Items.Food.*;
 import denoflionsx.PluginsforForestry_PluginBlueFood.Items.ItemButcherKnife;
 import denoflionsx.PluginsforForestry_PluginBlueFood.Items.ItemUncooked;
-import denoflionsx.PluginsforForestry_PluginBlueFood.gfx.FoodGfx;
 
 public class PfFFoodCore implements IPfFCore {
 
@@ -20,7 +20,7 @@ public class PfFFoodCore implements IPfFCore {
     @Override
     public void preloadTextures() {
         PfF.Proxy.print("Starting Blue's Food module.");
-        spritesheet = PfF.Proxy.preloadTextures(FoodGfx.pack + "/Food/food_sheet.png");
+        spritesheet = PfF.Proxy.preloadTextures(PfFConstants.FoodPath);
         eventID = PfFManagers.Events.SystemEvents.registerListener(this);
     }
 

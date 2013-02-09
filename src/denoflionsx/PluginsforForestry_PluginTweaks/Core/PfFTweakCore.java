@@ -3,6 +3,7 @@ package denoflionsx.PluginsforForestry_PluginTweaks.Core;
 import denoflionsx.PluginsforForestry.API.Events.PfFEvent;
 import denoflionsx.PluginsforForestry.API.Events.PfFSubscribe;
 import denoflionsx.PluginsforForestry.API.PfFManagers;
+import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry_PluginTweaks.Config.TweaksTuning;
 import denoflionsx.PluginsforForestry_PluginTweaks.Integration.ExtraBees.ExtraBeesIntegration;
@@ -43,6 +44,7 @@ public class PfFTweakCore implements IPfFCore {
         if (event.getMsg().equals("config ready!")) {
             TweaksTuning.tuning_enabled = true;
             PfFManagers.Events.SystemEvents.unregisterListener(eventID);
+            IntegrationModules.externalModules.add(new ExtraBeesIntegration());
         }
     }
     
@@ -64,7 +66,7 @@ public class PfFTweakCore implements IPfFCore {
     
     @Override
     public void lateCode() {
-        ExtraBeesIntegration.Integrate();
+
     }
     private boolean hasWorldLoaded = false;
     

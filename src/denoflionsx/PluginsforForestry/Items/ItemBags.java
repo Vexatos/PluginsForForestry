@@ -6,6 +6,8 @@ import denoflionsx.LiquidRoundup.LiquidRoundup;
 import denoflionsx.PluginsforForestry.API.Enums.EnumAnimals;
 import denoflionsx.PluginsforForestry.API.PfFManagers;
 import denoflionsx.PluginsforForestry.Config.CoreTuning;
+import denoflionsx.PluginsforForestry.Interfaces.ILateRunner;
+import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.denLib.denLib;
 import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
@@ -38,7 +40,6 @@ public class ItemBags extends PfFBase {
     public final void linkLiquidRecipes() {
         // Milk
         PfFManagers.LiquidVacuum.addDropToAnimal(EnumAnimals.ANIMALS.COW, PfFManagers.Items.getItemByTag("milkbag"));
-        LiquidStack milk = null;
         for (LiquidRegisterEvent event : LiquidRoundup.events) {
             try {
                 if (event.Liquid.asItemStack().getDisplayName().equals("Milk")) {
@@ -66,6 +67,19 @@ public class ItemBags extends PfFBase {
         LiquidContainerData d2 = new LiquidContainerData(s, new ItemStack(this, 1, 1), PfFManagers.Items.getItemByTag("bag"));
         LiquidContainerRegistry.registerLiquid(d2);
         APIWrappers.forestry.squeezer.addRecipe(5, new ItemStack[]{new ItemStack(this, 1, 1)}, s);
+
         PluginLiquidRoundup.valid.addAll(this.stacks);
+        PfF.Core.lateRunners.add(new MilkTransposerFix());
+    }
+    private static LiquidStack milk;
+
+    public static class MilkTransposerFix implements ILateRunner {
+
+        @Override
+        public void runLate() {
+            if (milk != null) {
+                APIWrappers.TE.transposer.addExtractionRecipe(160, PfFManagers.Items.getItemByTag("milkbag"), PfFManagers.Items.getItemByTag("bag"), milk, true);
+            }
+        }
     }
 }

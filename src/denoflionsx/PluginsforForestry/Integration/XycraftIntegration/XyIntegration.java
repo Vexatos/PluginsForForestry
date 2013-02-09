@@ -8,6 +8,7 @@ import denoflionsx.PluginsforForestry.Config.CoreTuning;
 import denoflionsx.PluginsforForestry.Core.OmniPlantList;
 import denoflionsx.PluginsforForestry.Integration.IIntegrationModule;
 import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
+import denoflionsx.PluginsforForestry.Interfaces.ILateRunner;
 import denoflionsx.PluginsforForestry.PfF;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -80,7 +81,7 @@ public class XyIntegration implements IIntegrationModule {
                         }
                     }
                 }
-                PfF.Core.lateRunners.add(this.getClass().getDeclaredMethod("Quartz", new Class[0]));
+                PfF.Core.lateRunners.add(new Quartz());
             }
         } catch (ClassNotFoundException ex) {
             PfF.Proxy.print("Xycraft not found! Integration aborted.");
@@ -89,13 +90,17 @@ public class XyIntegration implements IIntegrationModule {
         }
     }
 
-    public static void Quartz() {
-        if (altQuartz != null) {
-            XyIntegration z = (XyIntegration) IntegrationModules.Xycraft;
-            Block q = z.blocks.get("crystal");
-            if (q != null) {
-                if (Enables.Quartz_AEConversion) {
-                    GameRegistry.addSmelting(q.blockID, altQuartz, 10);
+    public static class Quartz implements ILateRunner {
+
+        @Override
+        public void runLate() {
+            if (altQuartz != null) {
+                XyIntegration z = (XyIntegration) IntegrationModules.Xycraft;
+                Block q = z.blocks.get("crystal");
+                if (q != null) {
+                    if (Enables.Quartz_AEConversion) {
+                        GameRegistry.addSmelting(q.blockID, altQuartz, 10);
+                    }
                 }
             }
         }

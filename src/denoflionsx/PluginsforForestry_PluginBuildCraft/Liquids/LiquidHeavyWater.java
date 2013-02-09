@@ -5,8 +5,8 @@ import denoflionsx.LiquidRoundup.Utils.StackUtils;
 import denoflionsx.PluginsforForestry.API.Interfaces.IPfFLiquid;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGenericCoolant;
 import denoflionsx.PluginsforForestry.PfF;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry_PluginBuildCraft.Config.BuildCraftTuning;
-import denoflionsx.PluginsforForestry_PluginBuildCraft.gfx.BCGfxPackage;
 import net.minecraft.block.Block;
 import net.minecraftforge.liquids.LiquidStack;
 
@@ -17,7 +17,7 @@ public class LiquidHeavyWater extends LiquidGenericCoolant {
     }
 
     public LiquidHeavyWater() {
-        super("Heavy Water", new String[]{BCGfxPackage.pack + "/liquids/heavywater.png", BCGfxPackage.pack + "/liquids/heavywater_sparkles.png"}, BuildCraftTuning.Coolants.HeavyWater_Coolant);
+        super("Heavy Water", new String[]{PfFConstants.BCPath + "heavywater.png", PfFConstants.BCPath + "heavywater_sparkles.png"}, BuildCraftTuning.Coolants.HeavyWater_Coolant);
     }
 
     @Override

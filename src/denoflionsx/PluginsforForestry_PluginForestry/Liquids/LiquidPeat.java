@@ -2,8 +2,8 @@ package denoflionsx.PluginsforForestry_PluginForestry.Liquids;
 
 import denoflionsx.PluginsforForestry.API.Annotations.SqueezeLiquid;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGenericBiogasFuel;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry_PluginForestry.Config.ForestryTuning;
-import denoflionsx.PluginsforForestry_PluginForestry.gfx.ForestryGfxPackage;
 
 @SqueezeLiquid(liquidname = "Liquid Peat", validplants = "Peat")
 public class LiquidPeat extends LiquidGenericBiogasFuel {
@@ -17,6 +17,6 @@ public class LiquidPeat extends LiquidGenericBiogasFuel {
     }
 
     public LiquidPeat() {
-        this("Liquid Peat", new String[]{ForestryGfxPackage.getPackage() + "/liquids/liquid_peat.png", ForestryGfxPackage.getPackage() + "/liquids/sparkles_peat.png"}, ForestryTuning.Fuels.LiquidPeat_MJt,ForestryTuning.Fuels.LiquidPeat_BurnTime);
+        this("Liquid Peat", new String[]{PfFConstants.ForestryPath + "liquid_peat.png", PfFConstants.ForestryPath + "sparkles_peat.png"}, ForestryTuning.Fuels.LiquidPeat_MJt,ForestryTuning.Fuels.LiquidPeat_BurnTime);
     }
 }

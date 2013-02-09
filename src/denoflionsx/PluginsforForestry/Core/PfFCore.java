@@ -13,6 +13,7 @@ import denoflionsx.PluginsforForestry.Config.CoreUpdater;
 import denoflionsx.PluginsforForestry.CreativeTab.PfFTab;
 import denoflionsx.PluginsforForestry.Integration.IIntegrationModule;
 import denoflionsx.PluginsforForestry.Integration.IntegrationModules;
+import denoflionsx.PluginsforForestry.Interfaces.ILateRunner;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry.Items.*;
 import denoflionsx.PluginsforForestry.Items.Plants.*;
@@ -58,7 +59,7 @@ public class PfFCore implements IPfFCore {
     public static IPfFLiquid melonjuice;
     public static ItemCharm charm;
     public ArrayList<ItemStack> logs;
-    public ArrayList<Method> lateRunners = new ArrayList();
+    public ArrayList<ILateRunner> lateRunners = new ArrayList();
 
     @Override
     public void preloadTextures() {
@@ -198,11 +199,8 @@ public class PfFCore implements IPfFCore {
         for (IIntegrationModule i : IntegrationModules.externalModules){
             i.Integrate();
         }
-        for (Method m : lateRunners) {
-            try {
-                m.invoke(null, new Object[0]);
-            } catch (Exception ex) {
-            }
+        for (ILateRunner late : lateRunners){
+            late.runLate();
         }
     }
     private ArrayList<Object> refs = new ArrayList();

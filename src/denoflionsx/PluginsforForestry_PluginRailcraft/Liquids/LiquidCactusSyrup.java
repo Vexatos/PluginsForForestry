@@ -2,6 +2,7 @@ package denoflionsx.PluginsforForestry_PluginRailcraft.Liquids;
 
 import denoflionsx.PluginsforForestry.API.Annotations.SqueezeLiquid;
 import denoflionsx.PluginsforForestry.API.PfFManagers;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGeneric;
 import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.PluginsforForestry_PluginRailcraft.Config.RailcraftTuning;
@@ -22,6 +23,6 @@ public class LiquidCactusSyrup extends LiquidGeneric {
     }
 
     public LiquidCactusSyrup() {
-        this("Cactus Syrup", new String[]{Constants.path + "liquid_cactussyrup.png", Constants.path + "sparkles_cactussyrup.png"});
+        this("Cactus Syrup", new String[]{PfFConstants.RCpath + "liquid_cactussyrup.png", PfFConstants.RCpath + "sparkles_cactussyrup.png"});
     }
 }

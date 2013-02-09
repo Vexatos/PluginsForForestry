@@ -9,13 +9,12 @@ import denoflionsx.PluginsforForestry.API.PfFManagers;
 import denoflionsx.PluginsforForestry.Interfaces.IPfFCore;
 import denoflionsx.PluginsforForestry.PfF;
 import denoflionsx.PluginsforForestry.Utils.BackpackUtils;
-import denoflionsx.PluginsforForestry.Utils.ReflectUtils;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry_PluginIc2.Backpack.BackpackIc2;
 import denoflionsx.PluginsforForestry_PluginIc2.Config.Ic2Tuning;
 import denoflionsx.PluginsforForestry_PluginIc2.Items.ItemPortableReactor;
 import denoflionsx.PluginsforForestry_PluginIc2.Items.ItemRadioactiveWaste;
 import denoflionsx.PluginsforForestry_PluginIc2.Liquids.LiquidUranium;
-import denoflionsx.PluginsforForestry_PluginIc2.gfx.Ic2GfxPackage;
 import ic2.api.Items;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class PfFIc2Core implements IPfFCore {
     @Override
     public void preloadTextures() {
         eventID = PfFManagers.Events.SystemEvents.registerListener(this);
-        spritesheet = PfF.Proxy.preloadTextures(Ic2GfxPackage.pack + "/plugin_ic2.png");
+        spritesheet = PfF.Proxy.preloadTextures(PfFConstants.Ic2spritesheet);
     }
 
     @Override

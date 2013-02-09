@@ -1,8 +1,8 @@
 package denoflionsx.PluginsforForestry.Liquids;
 
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGenericMixture;
 import denoflionsx.PluginsforForestry.Utils.ForestryLiquids;
-import denoflionsx.PluginsforForestry.gfx.PfFGfxPackage;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class LiquidLivingSeedOil extends LiquidGenericMixture{
@@ -16,7 +16,7 @@ public class LiquidLivingSeedOil extends LiquidGenericMixture{
     }
 
     public LiquidLivingSeedOil() {
-        this("Living Seedoil", new String[]{PfFGfxPackage.getPackage() + "/liquids/livingseedoil.png",PfFGfxPackage.getPackage() + "/liquids/livingseedoil_sparkles.png"},new LiquidStack[]{new LiquidStack(ForestryLiquids.BIOMASS.getStack().itemID,2,ForestryLiquids.BIOMASS.getStack().getItemDamage()), new LiquidStack(ForestryLiquids.SEEDOIL.getStack().itemID,1,ForestryLiquids.SEEDOIL.getStack().getItemDamage())});
+        this("Living Seedoil", new String[]{PfFConstants.PfFPath + "livingseedoil.png", PfFConstants.PfFPath + "livingseedoil_sparkles.png"},new LiquidStack[]{ForestryLiquids.BIOMASS.getLiquidStack(), ForestryLiquids.SEEDOIL.getLiquidStack()});
     }
 
 }

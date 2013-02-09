@@ -12,11 +12,16 @@ public class OmniPlantList {
     public static final String cat = "core.Omniplant_WhiteList".toLowerCase();
 
     public static void registerList() {
-        addToWhiteList(Item.book);
-        addToWhiteList(Item.fishRaw);
-        addToWhiteList(Item.silk);
-        PfF.Core.config.save();
         ConfigCategory c = PfF.Core.config.getCategory(cat);
+        if (c == null) {
+            // Fix for being unable to disable stuff.
+            addToWhiteList(Item.book);
+            addToWhiteList(Item.fishRaw);
+            addToWhiteList(Item.silk);
+            PfF.Core.config.save();
+            c = PfF.Core.config.getCategory(cat);
+        }
+        PfF.Core.config.save();
         for (Property p : c.getValues().values()) {
             String a = p.value;
             String[] parse = a.split(",");

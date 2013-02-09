@@ -24,7 +24,7 @@ public class FermenterUtils {
                                 LiquidStack l = (LiquidStack) c3.getField("liquid").get(c3.cast(o));
                                 LiquidStack output = (LiquidStack) c3.getField("output").get(c3.cast(o));
                                 if (output.isLiquidEqual(ForestryLiquids.BIOMASS.getLiquidStack())) {
-                                    if (l.isLiquidEqual(Constants.water)) {
+                                    if (l.isLiquidEqual(PfFConstants.water)) {
                                         r.add(new FermenterRecipe(resource, value));
                                     }
                                 }

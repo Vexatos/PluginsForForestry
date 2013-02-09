@@ -4,7 +4,7 @@ import denoflionsx.PluginsforForestry.API.Annotations.SqueezeLiquid;
 import denoflionsx.PluginsforForestry.API.Events.PfFEvent;
 import denoflionsx.PluginsforForestry.API.Events.PfFSubscribe;
 import denoflionsx.PluginsforForestry.Liquids.Generics.LiquidGenericEvent;
-import denoflionsx.PluginsforForestry.gfx.PfFGfxPackage;
+import denoflionsx.PluginsforForestry.Utils.PfFConstants;
 
 @SqueezeLiquid(liquidname = "Veggie Juice", validplants = {"Potato", "Carrot", "Veggie"})
 public class LiquidVeggieJuice extends LiquidGenericEvent {
@@ -14,7 +14,7 @@ public class LiquidVeggieJuice extends LiquidGenericEvent {
     }
 
     public LiquidVeggieJuice() {
-        this("Veggie Juice", new String[]{PfFGfxPackage.getPackage() + "/liquids/juice_veggie.png", PfFGfxPackage.getPackage() + "/liquids/sparkles_veggie.png"});
+        this("Veggie Juice", new String[]{PfFConstants.PfFPath + "juice_veggie.png", PfFConstants.PfFPath + "sparkles_veggie.png"});
     }
 
     @Override
