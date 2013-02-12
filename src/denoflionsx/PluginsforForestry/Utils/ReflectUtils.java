@@ -26,23 +26,25 @@ public class ReflectUtils {
             ArrayList<String> fieldList = new ArrayList();
             Class c = Class.forName(clazz);
             for (Field f : c.getDeclaredFields()) {
-                q = f;
-                f.setAccessible(true);
-                Object o = null;
-                try {
-                    o = f.get(null);
-                } catch (Exception ex2) {
-                    PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
-                }
-                if (o instanceof ItemStack) {
-                    fieldList.add(f.getName());
+                if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+                    q = f;
+                    f.setAccessible(true);
+                    Object o = null;
+                    try {
+                        o = f.get(null);
+                    } catch (Exception ex2) {
+                        PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
+                    }
+                    if (o instanceof ItemStack) {
+                        fieldList.add(f.getName());
+                    }
                 }
             }
             for (String s : fieldList) {
                 ItemStack item = denLib.ReflectionHelper.getItemStack(clazz, s);
-                try{
+                try {
                     item.getItem().getSubItems(0, CreativeTabs.tabMaterials, addtome);
-                }catch(Exception ex){
+                } catch (Exception ex) {
                     int id = item.itemID;
                     Block b = Block.blocksList[id];
                     b.getSubBlocks(0, CreativeTabs.tabMaterials, addtome);
@@ -59,15 +61,17 @@ public class ReflectUtils {
             ArrayList<String> fieldList = new ArrayList();
             Class c = Class.forName(clazz);
             for (Field f : c.getDeclaredFields()) {
-                f.setAccessible(true);
-                Object o = null;
-                try {
-                    o = f.get(null);
-                } catch (Exception ex2) {
-                    PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
-                }
-                if (o instanceof Item) {
-                    fieldList.add(f.getName());
+                if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+                    f.setAccessible(true);
+                    Object o = null;
+                    try {
+                        o = f.get(null);
+                    } catch (Exception ex2) {
+                        PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
+                    }
+                    if (o instanceof Item) {
+                        fieldList.add(f.getName());
+                    }
                 }
             }
             for (String s : fieldList) {
@@ -85,15 +89,17 @@ public class ReflectUtils {
             ArrayList<String> fieldList = new ArrayList();
             Class c = Class.forName(clazz);
             for (Field f : c.getDeclaredFields()) {
-                f.setAccessible(true);
-                Object o = null;
-                try {
-                    o = f.get(null);
-                } catch (Exception ex2) {
-                    PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
-                }
-                if (o instanceof Block) {
-                    fieldList.add(f.getName());
+                if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
+                    f.setAccessible(true);
+                    Object o = null;
+                    try {
+                        o = f.get(null);
+                    } catch (Exception ex2) {
+                        PfF.Proxy.print("Failed to reflect " + f.getName() + "! (This warning is harmless)");
+                    }
+                    if (o instanceof Block) {
+                        fieldList.add(f.getName());
+                    }
                 }
             }
             for (String s : fieldList) {
