@@ -14,7 +14,7 @@ public class LiquidMelonJuice extends LiquidGenericEvent {
     }
 
     public LiquidMelonJuice() {
-        super("Melon Juice", new String[]{PfFConstants.PfFPath + "/juice_melon.png", PfFConstants.PfFPath + "sparkles_melon.png"});
+        super("Melon Juice", new String[]{PfFConstants.PfFPath + "juice_melon.png", PfFConstants.PfFPath + "sparkles_melon.png"});
     }
 
     @Override

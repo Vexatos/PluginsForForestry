@@ -1,10 +1,9 @@
 package denoflionsx.PluginsforForestry.CreativeTab;
 
-import denoflionsx.PluginsforForestry.PfF;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
-public class PfFTab extends CreativeTabs{
+public class PfFTab extends CreativeTabs {
 
     public PfFTab() {
         super("PfF");
@@ -12,7 +11,7 @@ public class PfFTab extends CreativeTabs{
 
     @Override
     public ItemStack getIconItemStack() {
-        return new ItemStack(PfF.Core.woodenbucket);
+        return PfFTabIcon.iconStack;
     }
 
     @Override
@@ -24,5 +23,4 @@ public class PfFTab extends CreativeTabs{
     public String getTranslatedTabLabel() {
         return getTabLabel();
     }
-
 }
