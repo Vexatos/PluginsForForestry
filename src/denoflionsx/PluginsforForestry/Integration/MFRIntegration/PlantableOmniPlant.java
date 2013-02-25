@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 
-public class PlantableOmniPlant implements IFactoryPlantable{
+public class PlantableOmniPlant implements IFactoryPlantable {
 
     @Override
     public boolean canBePlantedHere(World world, int x, int y, int z, ItemStack stack) {
@@ -35,7 +35,4 @@ public class PlantableOmniPlant implements IFactoryPlantable{
     public void prePlant(World world, int x, int y, int z, ItemStack stack) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
-    
-    
 }

@@ -167,4 +167,43 @@ public class FarmingRegistry
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Registers a Safari Net handler to properly serialize a type of mob.
+	 * 
+	 * @param handler The Safari Net handler.
+	 */
+	public static void registerSafariNetHandler(ISafariNetHandler handler)
+	{
+		try
+		{
+			Class<?> registry = Class.forName("powercrystals.minefactoryreloaded.MFRRegistry");
+			if(registry != null)
+			{
+				Method reg = registry.getMethod("registerSafariNetHandler", ISafariNetHandler.class);
+				reg.invoke(registry, handler);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public static void registerMobEggHandler(IMobEggHandler handler)
+	{
+		try
+		{
+			Class<?> registry = Class.forName("powercrystals.minefactoryreloaded.MFRRegistry");
+			if(registry != null)
+			{
+				Method reg = registry.getMethod("registerMobEggHandler", IMobEggHandler.class);
+				reg.invoke(registry, handler);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 }

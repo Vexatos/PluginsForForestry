@@ -1,0 +1,3 @@
+OFFICIALLY SUPPORTED BUILDS: https://www.dropbox.com/sh/94kj98grt0581e8/v2xcJOf4hL
+
+AUTO-COMPILED JENKINS BUILDS: http://pluginsforforestry.zapto.org:8080/job/Plugins%20for%20Forestry%202%20Auto-Builds/

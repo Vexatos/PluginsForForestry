@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 import powercrystals.minefactoryreloaded.api.HarvestType;
 import powercrystals.minefactoryreloaded.api.IFactoryHarvestable;
 
-public class HarvestableOmniplant implements IFactoryHarvestable{
+public class HarvestableOmniplant implements IFactoryHarvestable {
 
     @Override
     public boolean canBeHarvested(World world, Map<String, Boolean> harvesterSettings, int x, int y, int z) {
         TileEntityOmniPlant t = (TileEntityOmniPlant) world.getBlockTileEntity(x, y, z);
-        if (t.getGrowthStage() == TileEntityOmniPlant.getFinalStage()){
+        if (t.getGrowthStage() == TileEntityOmniPlant.getFinalStage()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -40,17 +40,14 @@ public class HarvestableOmniplant implements IFactoryHarvestable{
 
     @Override
     public void postHarvest(World world, int x, int y, int z) {
-        
     }
 
     @Override
     public void preHarvest(World world, int x, int y, int z) {
-        
     }
 
     @Override
     public boolean breakBlock() {
         return true;
     }
-
 }
