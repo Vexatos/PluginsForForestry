@@ -9,8 +9,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import net.minecraft.entity.passive.EntityMooshroom;
-import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
 import powercrystals.minefactoryreloaded.api.FarmingRegistry;
 import powercrystals.minefactoryreloaded.api.IFactoryPlantable;
 import powercrystals.minefactoryreloaded.api.IFactoryRanchable;
@@ -67,8 +65,8 @@ public class MFRIntegration implements IIntegrationModule{
     @Override
     public void Integrate() {
         if (Tuning.Integration) {
-            LiquidStack soup = LiquidDictionary.getLiquid("Mushroom Soup", 1000);
-            reRegisterMooshroom(new RanchableMooshroom(soup));
+//            LiquidStack soup = LiquidDictionary.getLiquid("Mushroom Soup", 1000);
+//            reRegisterMooshroom(new RanchableMooshroom(soup));
 
         }
     }
