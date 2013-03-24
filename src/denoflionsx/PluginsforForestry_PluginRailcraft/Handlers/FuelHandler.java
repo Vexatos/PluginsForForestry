@@ -11,17 +11,14 @@ public class FuelHandler implements IPfFFuelHandler{
 
     @Override
     public void registerFuel(ItemStack fuel, int burn) {
-        String hash = denLib.Hash(fuel.itemID + " | " + fuel.getItemDamage());
+        String hash = fuel.itemID + " | " + fuel.getItemDamage();
         fuels.put(hash, burn);
     }
 
     @Override
     public int getBurnTime(ItemStack fuel) {
-        String hash = denLib.Hash(fuel.itemID + " | " + fuel.getItemDamage());
-        if (fuels.get(hash) != null) {
-            return fuels.get(hash);
-        } else {
-            return 0;
-        }
+        String hash = fuel.itemID + " | " + fuel.getItemDamage();
+        Integer time = fuels.get(hash);
+        return time == null ? 0 : time;
     }
 }
