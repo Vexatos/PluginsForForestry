@@ -1,39 +1,29 @@
 package denoflionsx.PluginsforForestry.Proxy;
 
-import denoflionsx.LiquidRoundup.gfx.SpriteUtils;
-import denoflionsx.PluginsforForestry.Utils.BackpackUtils;
-import denoflionsx.PluginsforForestry.Utils.ReflectUtils;
-import java.util.ArrayList;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import denoflionsx.PluginsforForestry.Client.Render.ItemContainerRenderer;
+import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
+import denoflionsx.denLib.Mod.Client.Render.RenderBlockFluidClassic;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class PfFProxyClient extends PfFProxy {
 
-//    private static boolean inject = false;
-//    private static int index = -1;
+    public static int liquidRenderID = RenderingRegistry.getNextAvailableRenderId();
 
     @Override
-    public void addSheetToMap(String sheet) {
-        super.addSheetToMap(sheet);
-        SpriteUtils.addBlankSheetToMap(sheet);
+    public void registerClientSide() {
+        MinecraftForgeClient.registerItemRenderer(LRItems.containers.get("Barrel").itemID, new ItemContainerRenderer("barrel.txt"));
+        RenderingRegistry.registerBlockHandler(liquidRenderID, new RenderBlockFluidClassic(liquidRenderID));
     }
 
-    @Override
-    public void saveList(ArrayList<ItemStack> list, String category) {
-        BackpackUtils.turnListToFile(category, list);
-    }
-
-    @Override
-    public void getAllReferences(String clazz, ArrayList<ItemStack> add) {
-        ReflectUtils.getAllReferences(clazz, add);
-    }
-
-    @Override
-    public boolean isClient() {
-        return true;
-    }
-
-    @Override
-    public void makeEntityDropItem(Entity entity, ItemStack item) {
+    @SideOnly(Side.CLIENT)
+    public static Icon registerIcon(IconRegister par1IconRegister, String icon) {
+        PfF.Proxy.print("Registering icon " + icon);
+        return par1IconRegister.registerIcon(icon);
     }
 }

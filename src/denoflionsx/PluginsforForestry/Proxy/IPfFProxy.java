@@ -1,23 +1,13 @@
 package denoflionsx.PluginsforForestry.Proxy;
 
-import denoflionsx.denLib.Interfaces.IDenProxy;
-import java.util.ArrayList;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 
-public interface IPfFProxy extends IDenProxy{
+public interface IPfFProxy {
     
-    public boolean isClient();
+    public void print(String msg);
     
-    public void makeEntityDropItem(Entity entity, ItemStack item);
+    public void registerClientSide();
     
-    public void getAllReferences(String clazz, ArrayList<ItemStack> add);
-    
-    public void saveList(ArrayList<ItemStack> list, String category);
-    
-    public ArrayList<ItemStack> loadList(Configuration config, String category, ArrayList<ItemStack> list);
-    
-    public void addSheetToMap(String sheet);
+    public void registerLiquidBlock(String name, LRLiquidBlock b);
     
 }
