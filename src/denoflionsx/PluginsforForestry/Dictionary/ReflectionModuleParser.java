@@ -10,14 +10,14 @@ public class ReflectionModuleParser extends ModuleParser {
     }
 
     public ArrayList<ClassAndField> getClassAndFieldEntries() {
-        ArrayList<String> getEntries = this.getAllEntires();
+        ArrayList<SqueezeObject> getEntries = this.getAllEntires();
         ArrayList<ClassAndField> r = new ArrayList();
-        for (String s : getEntries) {
-            String[] parse = s.split(",");
+        for (SqueezeObject s : getEntries) {
+            String[] parse = s.getTag().split(",");
             String c = denLib.StringUtils.removeSpaces(parse[0]);
             String f = denLib.StringUtils.removeSpaces(parse[1]);
             String m = denLib.StringUtils.removeSpaces(parse[2]);
-            ClassAndField cf = new ClassAndField(c, f, Integer.valueOf(m));
+            ClassAndField cf = new ClassAndField(c, f, Integer.valueOf(m), s);
             r.add(cf);
         }
         return r;
@@ -28,11 +28,13 @@ public class ReflectionModuleParser extends ModuleParser {
         private String className;
         private String fieldName;
         private int meta;
+        private SqueezeObject squeezeobject;
 
-        public ClassAndField(String className, String fieldName, int meta) {
+        public ClassAndField(String className, String fieldName, int meta, SqueezeObject squeezeobject) {
             this.className = className;
             this.fieldName = fieldName;
             this.meta = meta;
+            this.squeezeobject = squeezeobject;
         }
 
         public String getClassName() {
@@ -45,6 +47,10 @@ public class ReflectionModuleParser extends ModuleParser {
 
         public int getMeta() {
             return meta;
+        }
+
+        public SqueezeObject getSqueezeobject() {
+            return squeezeobject;
         }
     }
 }

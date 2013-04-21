@@ -1,15 +1,14 @@
 package denoflionsx.PluginsforForestry.Dictionary;
 
 import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Dictionary.ModuleParser.SqueezeObject;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.ArrayList;
 import java.util.HashMap;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class PfFDictionaryParser {
 
-    private HashMap<String, ArrayList<String>> lists = new HashMap();
+    private HashMap<String, ArrayList<SqueezeObject>> lists = new HashMap();
     public static PfFDictionaryParser instance;
     private String typesFile;
     private String list;
@@ -21,10 +20,13 @@ public class PfFDictionaryParser {
 
     public void parse() {
         for (String type : denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, typesFile, instance)) {
-            lists.put(type, new ArrayList<String>());
+            lists.put(denLib.StringUtils.removeSpaces(type), new ArrayList<SqueezeObject>());
             PfF.Proxy.print("Creating new dictionary list: " + type);
         }
         for (String module : denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, list, instance)) {
+            if (module.equals("")){
+                break;
+            }
             ModuleParser parse = new ModuleParser(denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, module, instance));
             PfF.Proxy.print("Reading module " + parse.getTitle() + " by " + parse.getAuthor());
             lists.get(parse.getType()).addAll(parse.getAllEntires());
@@ -36,12 +38,7 @@ public class PfFDictionaryParser {
         instance.parse();
     }
 
-    public ItemStack[] getAllEntriesForType(String type) {
-        ArrayList<String> s = lists.get(type);
-        ArrayList<ItemStack> stacks = new ArrayList();
-        for (String a : s) {
-            stacks.addAll(OreDictionary.getOres(a));
-        }
-        return stacks.toArray(new ItemStack[stacks.size()]);
+    public HashMap<String, ArrayList<SqueezeObject>> getLists() {
+        return lists;
     }
 }

@@ -9,10 +9,10 @@ public class PfFTranslator {
     public static PfFTranslator instance;
     private static final String defaultLang = "en_US";
 
-    public static void createInstance(){
+    public static void createInstance() {
         instance = new PfFTranslator();
     }
-    
+
     public String translateKey(String key) {
         return this.translateKey(key, defaultLang);
     }

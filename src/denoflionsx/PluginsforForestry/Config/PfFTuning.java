@@ -12,8 +12,8 @@ public class PfFTuning {
     public static int getInt(String s) {
         return Integer.valueOf(s);
     }
-    
-    public static boolean getBool(String s){
+
+    public static boolean getBool(String s) {
         return Boolean.getBoolean(s);
     }
 
@@ -23,9 +23,11 @@ public class PfFTuning {
         public static String barrel_ItemID = String.valueOf(4100);
         public static String barrel_capacity = String.valueOf(10000);
     }
-    
+
     @Tunable(category = "blocks", comment = "set id to 0 to disable")
-    public static class Blocks{
+    public static class Blocks {
+
         public static String veggiejuice_BlockID = String.valueOf(3100);
+        public static String liquidpeat_BlockID = String.valueOf(3101);
     }
 }

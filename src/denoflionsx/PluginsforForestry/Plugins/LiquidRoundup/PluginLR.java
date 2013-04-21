@@ -30,6 +30,10 @@ public class PluginLR implements IPfFPlugin {
             Block veggiejuice = new LRLiquidBlock(PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID), "Veggie Juice");
             PfF.Proxy.registerLiquidBlock("Veggie Juice", (LRLiquidBlock) veggiejuice);
         }
+        if (PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID) > 0) {
+            Block liquidpeat = new LRLiquidBlock(PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID), "Liquid Peat");
+            PfF.Proxy.registerLiquidBlock("Liquid Peat", (LRLiquidBlock) liquidpeat);
+        }
     }
 
     @Override

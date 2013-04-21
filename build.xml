@@ -115,6 +115,9 @@
 				<filter token="BUILD_NUMBER" value="${build.number}" />
 			</filterset>
 		</copy>
+                <copy todir="${mcpsrc.dir}/minecraft/forestry}">
+                    <fileset dir="${src.dir}/forestry"/>
+                </copy>
 
                 <unzip dest="${mcpsrc.dir}/minecraft" src="${lib.dir}/denLib-Src.zip"/>
                 <copy todir="${forgelib.dir}">
@@ -170,6 +173,7 @@
 
 		<!-- Reset src dir to post-forge-install state -->
 		<delete dir="${mcpsrc.dir}/minecraft/denoflionsx"/>
+                <delete dir="${mcpsrc.dir}/minecraft/forestry"/>
 
 	</target>
 

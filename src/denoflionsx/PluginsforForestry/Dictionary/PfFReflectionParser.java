@@ -23,10 +23,13 @@ public class PfFReflectionParser {
 
     public void parse() {
         for (String type : denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, this.typesList, instance)) {
-            map.put(type, new ArrayList<ClassAndField>());
+            map.put(denLib.StringUtils.removeSpaces(type), new ArrayList<ClassAndField>());
             PfF.Proxy.print("Creating new reflection list: " + type);
         }
         for (String module : denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, this.masterList, instance)) {
+            if (module.equals("")){
+                break;
+            }
             ReflectionModuleParser parse = new ReflectionModuleParser(denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, module, instance));
             PfF.Proxy.print("Reading module " + parse.getTitle() + " by " + parse.getAuthor());
             map.get(parse.getType()).addAll(parse.getClassAndFieldEntries());

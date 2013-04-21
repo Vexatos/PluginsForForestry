@@ -6,11 +6,10 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import denoflionsx.PluginsforForestry.Dictionary.PfFDictionaryParser;
-import denoflionsx.PluginsforForestry.Dictionary.PfFReflectionParser;
 import denoflionsx.PluginsforForestry.EventHandler.DictionaryPrint;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRecipes.PluginLiquidRecipes;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
@@ -30,28 +29,31 @@ public class PfF {
     public static PfFPluginManager plugins;
     public static PfFCore core;
     public static LangManager lang;
-    //----
     private boolean debug = true;
+
+    public void setupPlugins() {
+        plugins = new PfFPluginManager();
+        plugins.registerPlugin(new PluginLR());
+        plugins.registerPlugin(new PluginLiquidRecipes());
+        core.setupLocalization();
+    }
 
     @Mod.PreInit
     public void preLoad(FMLPreInitializationEvent event) {
-        core = new PfFCore();
+        core = new PfFCore(event.getSourceFile());
         lang = new LangManager("PluginsforForestry", event.getModConfigurationDirectory());
         core.setupConfig(event);
         PfFTranslator.createInstance();
-        PfFDictionaryParser.createInstance();
-        PfFReflectionParser.createInstance();
         if (debug) {
             WorldEventHandler.registerHandler(new DictionaryPrint());
         }
-        plugins = new PfFPluginManager();
-        plugins.registerPlugin(new PluginLR());
+        this.setupPlugins();
         plugins.runPluginLoadEvent(event);
+        core.registerWithUpdater();
     }
 
     @Mod.Init
     public void load(FMLInitializationEvent event) {
-        core.setupLocalization();
         core.setupContainers();
         core.setupRendering();
         plugins.runPluginLoadEvent(event);
