@@ -11,14 +11,13 @@ import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRecipes.PluginLiquidRecipes;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
+import denoflionsx.PluginsforForestry.Plugins.MFR.PluginMFR;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.lang.LangManager;
-import denoflionsx.denLib.Updater.Annotations.DenMod;
 
 @Mod(modid = "PluginsforForestry", name = "PluginsforForestry", version = "@VERSION@")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
-@DenMod(name = "PluginsforForestry", version = "@VERSION@", url = "Not done yet")
 public class PfF {
 
     @Mod.Instance("PluginsforForestry")
@@ -35,6 +34,7 @@ public class PfF {
         plugins = new PfFPluginManager();
         plugins.registerPlugin(new PluginLR());
         plugins.registerPlugin(new PluginLiquidRecipes());
+        plugins.registerPlugin(new PluginMFR());
         core.setupLocalization();
     }
 

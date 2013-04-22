@@ -66,7 +66,7 @@ public class PfFCore implements IDenUpdate {
 
     @Override
     public int getBuildNumber() {
-        return 0;
+        return 1;
     }
 
     @Override
