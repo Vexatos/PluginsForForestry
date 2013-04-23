@@ -17,6 +17,13 @@ public class PluginMFR implements IPfFPlugin {
 
     @Override
     public void onPostLoad() {
-        FarmingRegistry.registerLiquidDrinkHandler(PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID), new PfFStrawHandler());
+        this.registerDrink(PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
+        this.registerDrink(PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
+    }
+    
+    public void registerDrink(int id){
+        if (id > 0){
+            FarmingRegistry.registerLiquidDrinkHandler(id, new PfFStrawHandler());
+        }
     }
 }

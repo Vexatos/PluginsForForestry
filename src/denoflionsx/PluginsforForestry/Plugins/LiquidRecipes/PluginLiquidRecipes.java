@@ -4,8 +4,6 @@ import denoflionsx.PluginsforForestry.Dictionary.ModuleParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFDictionaryParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFReflectionParser;
 import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
-import denoflionsx.denLib.Lib.denLib;
 import forestry.api.recipes.RecipeManagers;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;

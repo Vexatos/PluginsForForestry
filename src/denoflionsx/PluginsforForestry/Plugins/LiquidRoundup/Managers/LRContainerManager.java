@@ -71,7 +71,7 @@ public class LRContainerManager {
         ItemMeta a = new ItemMeta(textures, itemID);
         a.createItemEntry(0);
         LRItems.containers.put(name, a);
-        a.setUnlocalizedName("pff." + name.toLowerCase().replaceAll("\\s", ""));
+        a.setUnlocalizedName("pff." + denLib.StringUtils.removeSpaces(name.toLowerCase()));
         PfF.Proxy.print("Created Liquid Container: " + a.getUnlocalizedName());
         LRItems.containerSize.put(a, capacity);
     }

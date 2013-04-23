@@ -4,8 +4,10 @@ import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRContainerManager;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRLiquidManager;
+import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.denLibMod;
 import java.util.ArrayList;
@@ -26,13 +28,12 @@ public class PluginLR implements IPfFPlugin {
 
     @Override
     public void onLoad() {
-        if (PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID) > 0) {
-            Block veggiejuice = new LRLiquidBlock(PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID), "Veggie Juice");
-            PfF.Proxy.registerLiquidBlock("Veggie Juice", (LRLiquidBlock) veggiejuice);
-        }
-        if (PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID) > 0) {
-            Block liquidpeat = new LRLiquidBlock(PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID), "Liquid Peat");
-            PfF.Proxy.registerLiquidBlock("Liquid Peat", (LRLiquidBlock) liquidpeat);
+        if (PfFTuning.getBool(PfFTuning.Liquids.liquid_asBlock)) {
+            this.createLiquidBlockForm("Veggie Juice", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
+            this.createLiquidBlockForm("Liquid Peat", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
+        } else {
+            this.createLiquidItemForm("Veggie Juice", PfFTuning.getInt(PfFTuning.Items.veggiejuice_ItemID));
+            this.createLiquidItemForm("Liquid Peat", PfFTuning.getInt(PfFTuning.Items.liquidpeat_ItemID));
         }
     }
 
@@ -47,5 +48,19 @@ public class PluginLR implements IPfFPlugin {
     @ForgeSubscribe
     public void onLiquidRegister(LiquidDictionary.LiquidRegisterEvent event) {
         events.add(event);
+    }
+
+    public void createLiquidBlockForm(String name, int blockID) {
+        if (blockID > 0) {
+            Block b = new LRLiquidBlock(blockID, name);
+            PfF.Proxy.registerLiquidBlock(name, (LRLiquidBlock) b);
+        }
+    }
+
+    public void createLiquidItemForm(String name, int itemID) {
+        if (itemID > 0) {
+            LRLiquidItem liquid = new LRLiquidItem(new String[]{PfF.core.liquidgfxpath + PfFLib.PffStringUtils.getTextureFromName(name)}, itemID);
+            PfF.Proxy.registerLiquidItem(name, liquid);
+        }
     }
 }

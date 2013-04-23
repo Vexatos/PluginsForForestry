@@ -7,6 +7,6 @@ public class PfFStrawHandler implements ILiquidDrinkHandler {
 
     @Override
     public void onDrink(EntityPlayer player) {
-        player.addChatMessage("Drink!");
+        
     }
 }
