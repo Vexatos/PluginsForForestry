@@ -1,7 +1,7 @@
 package denoflionsx.PluginsforForestry.Plugins.MFR;
 
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
-import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
+import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Plugins.MFR.Straw.PfFStrawHandler;
 import powercrystals.minefactoryreloaded.api.FarmingRegistry;
 

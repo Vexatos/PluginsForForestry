@@ -15,7 +15,11 @@ public class PfFTuning {
     }
 
     public static boolean getBool(String s) {
-        return s.equals("true");
+        return s.toLowerCase().equals("true");
+    }
+    
+    public static float getFloat(String s){
+        return Float.valueOf(s);
     }
 
     @Tunable(category = "liquids")
@@ -23,12 +27,16 @@ public class PfFTuning {
 
         @Comment(comment = "If true liquids will take up 1 block id per.")
         public static String liquid_asBlock = String.valueOf(true);
+        //---------------------------------------------------------
+        public static String veggiejuice_FermenterBonus = String.valueOf(1.5f);
+        public static String liquidpeat_FermenterBonus = String.valueOf(1.5f);
     }
 
     @Tunable(category = "items", comment = "set id to 0 to disable")
     public static class Items {
 
         public static String barrel_ItemID = String.valueOf(4100);
+        public static String ironBucket_ItemID = String.valueOf(4103);
         public static String barrel_capacity = String.valueOf(10000);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_ItemID = String.valueOf(4101);

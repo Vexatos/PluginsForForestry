@@ -31,22 +31,7 @@ public class LRContainerManager {
     }
 
     public void createContainersForDictionaryLiquid(LiquidRegisterEvent event) {
-        // This is some crap to figure out what the last used ID is.
-        // I'm sure there is a better way, but this is what I came up with at
-        // 1 am.
-        int ids[] = new int[liquidMap.size()];
-        int temp = 0;
-        for (Object o : liquidMap.keySet()) {
-            Integer i = (Integer) o;
-            ids[temp] = i;
-            temp++;
-        }
-        Arrays.sort(ids);
-        int f = 0;
-        if (ids.length != 0) {
-            f = ids[ids.length - 1];
-        }
-        f++;
+        int f = PfFLib.MathUtils.getLastID(liquidMap);
         //------------
         String value = event.Liquid.itemID + "|" + event.Liquid.itemMeta + "|" + event.Name;
         if (liquidMap.inverse().containsKey(value)) {
@@ -59,9 +44,7 @@ public class LRContainerManager {
             liquidMap.put(f, value);
         }
         for (ItemMeta m : LRItems.containers.values()) {
-            NBTTagCompound tag = new NBTTagCompound();
-            tag.setString("internal", value);
-            ItemStack i = m.createItemEntry(f, tag);
+            ItemStack i = m.createItemEntry(f);
             LanguageRegistry.addName(i, PfFLib.PffStringUtils.cleanLiquidNameFromEvent(event) + " " + PfFTranslator.instance.translateKey(m.getUnlocalizedName() + ".0.name"));
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(event.Liquid, LRItems.containerSize.get(m)), i, new ItemStack(m, 1, 0)));
         }

@@ -3,8 +3,8 @@ package denoflionsx.PluginsforForestry.Managers;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
-import denoflionsx.PluginsforForestry.Interface.IPfFPluginManager;
+import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
+import denoflionsx.PluginsforForestry.API.Plugin.IPfFPluginManager;
 import java.util.ArrayList;
 
 public class PfFPluginManager implements IPfFPluginManager {

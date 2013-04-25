@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.Core;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import denoflionsx.PluginsforForestry.Plugins.Localization.PluginLang;
@@ -27,7 +28,7 @@ public class PfFCore implements IDenUpdate {
     }
 
     public void setupLocalization() {
-        PfF.plugins.registerPlugin(new PluginLang());
+        PfFAPI.plugins.registerPlugin(new PluginLang());
     }
 
     public void setupConfig(FMLPreInitializationEvent event) {

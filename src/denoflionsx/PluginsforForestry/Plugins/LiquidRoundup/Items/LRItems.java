@@ -8,4 +8,6 @@ public class LRItems {
     public static HashMap<String, ItemMeta> liquids = new HashMap();
     public static HashMap<String, ItemMeta> containers = new HashMap();
     public static HashMap<ItemMeta, Integer> containerSize = new HashMap();
+    //---------------------------------------------------------------------
+    public static ItemMeta ironBucket = null;
 }

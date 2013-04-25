@@ -3,6 +3,7 @@ package denoflionsx.PluginsforForestry.Proxy;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import denoflionsx.PluginsforForestry.Client.Render.ItemBucketRenderer;
 import denoflionsx.PluginsforForestry.Client.Render.ItemContainerRenderer;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
@@ -18,6 +19,7 @@ public class PfFProxyClient extends PfFProxy {
     @Override
     public void registerClientSide() {
         MinecraftForgeClient.registerItemRenderer(LRItems.containers.get("Barrel").itemID, new ItemContainerRenderer("barrel.txt"));
+        MinecraftForgeClient.registerItemRenderer(LRItems.ironBucket.itemID, new ItemBucketRenderer("bucket.txt"));
         RenderingRegistry.registerBlockHandler(liquidRenderID, new RenderBlockFluidClassic(liquidRenderID));
     }
 

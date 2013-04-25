@@ -1,4 +1,4 @@
-package denoflionsx.PluginsforForestry.Interface;
+package denoflionsx.PluginsforForestry.API.Plugin;
 
 public interface IPfFPlugin {
 

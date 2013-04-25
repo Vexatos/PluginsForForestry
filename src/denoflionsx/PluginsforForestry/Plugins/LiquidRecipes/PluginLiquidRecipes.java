@@ -3,7 +3,8 @@ package denoflionsx.PluginsforForestry.Plugins.LiquidRecipes;
 import denoflionsx.PluginsforForestry.Dictionary.ModuleParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFDictionaryParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFReflectionParser;
-import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
+import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
+import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import forestry.api.recipes.RecipeManagers;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
@@ -15,6 +16,7 @@ public class PluginLiquidRecipes implements IPfFPlugin {
     public void onPreLoad() {
         PfFDictionaryParser.createInstance();
         PfFReflectionParser.createInstance();
+        FermenterRecipes.register();
     }
 
     @Override

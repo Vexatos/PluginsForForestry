@@ -3,8 +3,8 @@ package denoflionsx.PluginsforForestry.Client.Render;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
+import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.denLib.Lib.denLib;
-import java.io.InputStream;
 import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -17,14 +17,12 @@ import net.minecraftforge.liquids.LiquidStack;
 @SideOnly(Side.CLIENT)
 public class ItemContainerRenderer implements IItemRenderer {
 
-    private static RenderItem renderItem = new RenderItem();
-    private Icon container = null;
-    private ArrayList<RenderData> renderTargets = new ArrayList();
+    protected static RenderItem renderItem = new RenderItem();
+    protected Icon container = null;
+    protected ArrayList<RenderData> renderTargets = new ArrayList();
 
     public ItemContainerRenderer(String coordsFile) {
-        InputStream i = this.getClass().getResourceAsStream(coordsFile);
-        String f = denLib.StringUtils.scanFileContents(i);
-        String[] p = denLib.StringUtils.splitByNewLine(f);
+        String[] p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, coordsFile, this);
         for (String a : p) {
             String b[] = a.split(",");
             int x = PfFTuning.getInt(b[0]);

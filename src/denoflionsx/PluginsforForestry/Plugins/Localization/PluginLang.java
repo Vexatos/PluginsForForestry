@@ -1,7 +1,7 @@
 package denoflionsx.PluginsforForestry.Plugins.Localization;
 
 import denoflionsx.PluginsforForestry.Core.PfF;
-import denoflionsx.PluginsforForestry.Interface.IPfFPlugin;
+import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 
 public class PluginLang implements IPfFPlugin {
     
