@@ -17,8 +17,8 @@ public class PfFTuning {
     public static boolean getBool(String s) {
         return s.toLowerCase().equals("true");
     }
-    
-    public static float getFloat(String s){
+
+    public static float getFloat(String s) {
         return Float.valueOf(s);
     }
 
@@ -36,11 +36,14 @@ public class PfFTuning {
     public static class Items {
 
         public static String barrel_ItemID = String.valueOf(4100);
-        public static String ironBucket_ItemID = String.valueOf(4103);
         public static String barrel_capacity = String.valueOf(10000);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_ItemID = String.valueOf(4101);
         public static String liquidpeat_ItemID = String.valueOf(4102);
+        // Buckets (+100 of normal ID range)
+        @Comment(comment = "Containers capable of placing custom liquids need their own item id. Sorry!")
+        public static String veggiejuice_IronBucket_ItemID = String.valueOf(4200);
+        public static String liquidpeat_IronBucket_ItemID = String.valueOf(4201);
     }
 
     @Tunable(category = "blocks", comment = "set id to 0 to disable")

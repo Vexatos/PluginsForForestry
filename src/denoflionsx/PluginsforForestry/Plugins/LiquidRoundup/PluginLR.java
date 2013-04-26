@@ -6,7 +6,6 @@ import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes.Fermentable;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRBucketManager;
@@ -14,7 +13,6 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRContainer
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRLiquidManager;
 import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
-import denoflionsx.denLib.Mod.Items.ItemMeta;
 import denoflionsx.denLib.Mod.denLibMod;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
@@ -38,11 +36,11 @@ public class PluginLR implements IPfFPlugin {
 
     @Override
     public void onLoad() {
-        if (PfFTuning.getInt(PfFTuning.Items.ironBucket_ItemID) > 0){
-            // Set up bucket.
-            LRItems.ironBucket = new ItemMeta(new String[]{PfF.core.containergfxpath + "bucket"}, PfFTuning.getInt(PfFTuning.Items.ironBucket_ItemID));
-            LRItems.ironBucket.setUnlocalizedName("pff.ironbucket");
-        }
+        //-------------
+        // Bucket setup
+        //-------------
+        
+        //--------------
         if (PfFTuning.getBool(PfFTuning.Liquids.liquid_asBlock)) {
             this.createLiquidBlockForm("Veggie Juice", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
             this.createLiquidBlockForm("Liquid Peat", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));

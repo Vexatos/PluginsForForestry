@@ -9,5 +9,6 @@ public class LRItems {
     public static HashMap<String, ItemMeta> containers = new HashMap();
     public static HashMap<ItemMeta, Integer> containerSize = new HashMap();
     //---------------------------------------------------------------------
-    public static ItemMeta ironBucket = null;
+    public static ItemLRBucket itemVeggieJuiceBucket = null;
+    public static ItemLRBucket itemLiquidPeatBucket = null;
 }
