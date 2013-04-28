@@ -22,7 +22,7 @@ public class LRLiquidBlock extends BlockFluidClassic {
     public LRLiquidBlock(int id, String name) {
         super(id, Material.water);
         this.setUnlocalizedName("pff." + denLib.StringUtils.removeSpaces(name.toLowerCase()));
-        textureSheet = PfF.core.liquidgfxpath + this.getUnlocalizedName() + ".still";
+        textureSheet = "PluginsforForestry:" + this.getUnlocalizedName() + ".still";
         this.name = name;
     }
 

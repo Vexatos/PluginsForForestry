@@ -10,9 +10,7 @@ import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.Items.ItemMeta;
 import java.io.File;
-import java.util.Arrays;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary.LiquidRegisterEvent;
@@ -21,7 +19,7 @@ public class LRContainerManager {
 
     // Omg why didn't I know about BiMap earlier?!
     public BiMap<Integer, String> liquidMap = HashBiMap.create();
-    public File c = new File(PfF.core.configDir.getAbsolutePath() + "/LiquidData.bin");
+    public static final File c = new File(PfF.core.mappingsDir + "/LiquidData.bin");
 
     public LRContainerManager() {
         if (c.exists()) {
@@ -33,7 +31,7 @@ public class LRContainerManager {
     public void createContainersForDictionaryLiquid(LiquidRegisterEvent event) {
         int f = PfFLib.MathUtils.getLastID(liquidMap);
         //------------
-        String value = event.Liquid.itemID + "|" + event.Liquid.itemMeta + "|" + event.Name;
+        String value = PfFLib.PffStringUtils.Hash(event.Liquid.itemID + "|" + event.Liquid.itemMeta + "|" + event.Name);
         if (liquidMap.inverse().containsKey(value)) {
             // Liquid exists in map.
             PfF.Proxy.print("Found known liquid " + event.Name + ".");
@@ -55,11 +53,7 @@ public class LRContainerManager {
         a.createItemEntry(0);
         LRItems.containers.put(name, a);
         a.setUnlocalizedName("pff." + denLib.StringUtils.removeSpaces(name.toLowerCase()));
-        PfF.Proxy.print("Created Liquid Container: " + a.getUnlocalizedName());
         LRItems.containerSize.put(a, capacity);
-    }
-
-    public void registerNewPfFContainer(String name, String[] textures, int itemID, int capacity) {
     }
 
     public void registerNewContainer(String name, String[] textures, int itemID) {

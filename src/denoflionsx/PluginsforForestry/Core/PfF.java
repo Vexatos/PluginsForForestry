@@ -10,9 +10,6 @@ import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.EventHandler.DictionaryPrint;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRecipes.PluginLiquidRecipes;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
-import denoflionsx.PluginsforForestry.Plugins.MFR.PluginMFR;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.lang.LangManager;
@@ -32,13 +29,7 @@ public class PfF {
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
-    }
-
-    public void setupPlugins() {
-        PfFAPI.plugins.registerPlugin(new PluginLR());
-        PfFAPI.plugins.registerPlugin(new PluginLiquidRecipes());
-        PfFAPI.plugins.registerPlugin(new PluginMFR());
-        core.setupLocalization();
+        
     }
 
     @Mod.PreInit
@@ -51,7 +42,7 @@ public class PfF {
         if (debug) {
             WorldEventHandler.registerHandler(new DictionaryPrint());
         }
-        this.setupPlugins();
+        PluginRegistry.register();
         PfFAPI.plugins.runPluginLoadEvent(event);
         core.registerWithUpdater();
     }

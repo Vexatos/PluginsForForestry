@@ -6,6 +6,10 @@ import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes.Fermentable;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.BucketEventRegistry;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.LRBucketEvent;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucketEmpty;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRBucketManager;
@@ -16,7 +20,7 @@ import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.denLibMod;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
-import net.minecraftforge.event.Event;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -26,8 +30,10 @@ public class PluginLR implements IPfFPlugin {
 
     public static LRLiquidManager liquids = new LRLiquidManager();
     public static LRContainerManager containers = new LRContainerManager();
-    public static LRBucketManager buckets = new LRBucketManager();
-    private ArrayList<LiquidDictionary.LiquidRegisterEvent> events = new ArrayList();
+    public static LRBucketManager buckets;
+    public static LRBucketManager woodenBuckets;
+    public static BucketEventRegistry bucketEvents = new BucketEventRegistry();
+    public static ArrayList<LiquidDictionary.LiquidRegisterEvent> events = new ArrayList();
 
     @Override
     public void onPreLoad() {
@@ -36,11 +42,12 @@ public class PluginLR implements IPfFPlugin {
 
     @Override
     public void onLoad() {
-        //-------------
-        // Bucket setup
-        //-------------
-        
-        //--------------
+        if (PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID) > 0) {
+            LRItems.itemWoodenBucketEmpty = new ItemWoodenBucketEmpty(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 0, "item.pff.woodenbucket.0.name");
+            LRItems.ItemStackWoodenBucketEmpty = new ItemStack(LRItems.itemWoodenBucketEmpty);
+            woodenBuckets = new LRBucketManager(LRBucketManager.BucketType.WOODEN);
+        }
+        buckets = new LRBucketManager(LRBucketManager.BucketType.IRON);
         if (PfFTuning.getBool(PfFTuning.Liquids.liquid_asBlock)) {
             this.createLiquidBlockForm("Veggie Juice", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
             this.createLiquidBlockForm("Liquid Peat", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
@@ -59,6 +66,10 @@ public class PluginLR implements IPfFPlugin {
             denLib.NBTUtils.saveObjectToNBTFile(containers.c, containers.liquidMap);
         }
         buckets.processLiquids();
+        if (woodenBuckets != null) {
+            woodenBuckets.processLiquids();
+        }
+        bucketEvents.registerHandler(new LRBucketEvent());
     }
 
     @ForgeSubscribe
@@ -75,7 +86,7 @@ public class PluginLR implements IPfFPlugin {
 
     public void createLiquidItemForm(String name, int itemID) {
         if (itemID > 0) {
-            LRLiquidItem liquid = new LRLiquidItem(new String[]{PfF.core.liquidgfxpath + PfFLib.PffStringUtils.getTextureFromName(name)}, itemID);
+            LRLiquidItem liquid = new LRLiquidItem(new String[]{"PluginsforForestry:" + PfFLib.PffStringUtils.getTextureFromName(name)}, itemID);
             PfF.Proxy.registerLiquidItem(name, liquid);
         }
     }
@@ -88,12 +99,6 @@ public class PluginLR implements IPfFPlugin {
 
     @ForgeSubscribe
     public void onBucket(FillBucketEvent e) {
-        for (LiquidStack l : LRLiquids.LRLiquids.values()) {
-            if (l.itemID == e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ)) {
-                e.result = LRLiquids.bucketStacks.get(l.toString()).copy();
-                e.world.setBlockToAir(e.target.blockX, e.target.blockY, e.target.blockZ);
-                e.setResult(Event.Result.ALLOW);
-            }
-        }
+        bucketEvents.runEvent(e);
     }
 }

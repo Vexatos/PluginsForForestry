@@ -14,9 +14,24 @@ import net.minecraftforge.liquids.LiquidStack;
 
 public class PfFProxy implements IPfFProxy {
 
+    private String k;
+
     @Override
     public void print(String msg) {
-        FMLLog.info("[" + PfFTranslator.instance.translateKey("console.pff.name") + "]" + ": " + msg);
+        if (k == null) {
+            k = "[" + PfFTranslator.instance.translateKey("console.pff.name") + "]";
+        }
+        FMLLog.info(k + ": " + msg);
+    }
+
+    @Override
+    public void warning(String msg) {
+        FMLLog.warning(k + msg);
+    }
+
+    @Override
+    public void severe(String msg) {
+        FMLLog.severe(k + msg);
     }
 
     @Override

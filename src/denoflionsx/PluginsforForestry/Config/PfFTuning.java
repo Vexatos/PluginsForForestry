@@ -37,13 +37,20 @@ public class PfFTuning {
 
         public static String barrel_ItemID = String.valueOf(4100);
         public static String barrel_capacity = String.valueOf(10000);
+        public static String capsule_ItemID = String.valueOf(4101);
+        public static String redcapsule_ItemID = String.valueOf(4102);
+        public static String capsule_capacity = String.valueOf(1000);
+        public static String redcapsule_capacity = String.valueOf(1000);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_ItemID = String.valueOf(4101);
         public static String liquidpeat_ItemID = String.valueOf(4102);
+    }
+
+    @Tunable(category = "items.buckets", comment = "set id to 0 to disable")
+    public static class Buckets {
+
         // Buckets (+100 of normal ID range)
-        @Comment(comment = "Containers capable of placing custom liquids need their own item id. Sorry!")
-        public static String veggiejuice_IronBucket_ItemID = String.valueOf(4200);
-        public static String liquidpeat_IronBucket_ItemID = String.valueOf(4201);
+        public static String woodenbucket_ItemID = String.valueOf(4200);
     }
 
     @Tunable(category = "blocks", comment = "set id to 0 to disable")
@@ -52,5 +59,12 @@ public class PfFTuning {
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_BlockID = String.valueOf(3100);
         public static String liquidpeat_BlockID = String.valueOf(3101);
+    }
+    
+    public static class Rendering{
+        
+        @Comment(comment = "This causes the renderer to refresh from the txt file every time.")
+        public static String render_debugMode = String.valueOf(true);
+        
     }
 }

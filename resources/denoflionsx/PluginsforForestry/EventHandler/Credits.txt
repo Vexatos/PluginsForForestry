@@ -1,6 +1,0 @@
----------------
-PfF 3.X credits
----------------
-Bucket & Localization code from Minefactory Reloaded by powercrystals.
-Liquid Block code from King_Lemming.
----------------

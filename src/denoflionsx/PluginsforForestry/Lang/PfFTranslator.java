@@ -3,11 +3,12 @@ package denoflionsx.PluginsforForestry.Lang;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.HashMap;
+import net.minecraft.client.Minecraft;
 
 public class PfFTranslator {
 
     public static PfFTranslator instance;
-    private static final String defaultLang = "en_US";
+    private static final String defaultLang = Minecraft.getMinecraft().gameSettings.language;
 
     public static void createInstance() {
         instance = new PfFTranslator();

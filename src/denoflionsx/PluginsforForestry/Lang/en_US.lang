@@ -1,13 +1,14 @@
 console.pff.name = PfF
 
 item.pff.barrel.0.name = Barrel
+item.pff.capsule.0.name = Capsule
+item.pff.refractorycapsule.0.name = Capsule
 
 item.pff.veggiejuice.0.name = Veggie Juice
 item.pff.liquidpeat.0.name = Liquid Peat
 
 item.pff.woodenbucket.0.name = Wooden Bucket
-item.pff.veggiejuiceironbucket.0.name = Veggie Juice Bucket
-item.pff.liquidpeatironbucket.0.name = Liquid Peat Bucket
+item.pff.bucket = Bucket
 
 tile.pff.veggiejuice.name = Veggie Juice
 tile.pff.liquidpeat.name = Liquid Peat

@@ -7,6 +7,10 @@ public interface IPfFProxy {
     
     public void print(String msg);
     
+    public void warning(String msg);
+    
+    public void severe(String msg);
+    
     public void registerClientSide();
     
     public void registerLiquidBlock(String name, LRLiquidBlock b);

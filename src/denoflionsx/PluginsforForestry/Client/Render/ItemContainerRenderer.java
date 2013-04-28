@@ -17,11 +17,20 @@ import net.minecraftforge.liquids.LiquidStack;
 @SideOnly(Side.CLIENT)
 public class ItemContainerRenderer implements IItemRenderer {
 
+    protected String coordsFile;
     protected static RenderItem renderItem = new RenderItem();
     protected Icon container = null;
     protected ArrayList<RenderData> renderTargets = new ArrayList();
+    protected ItemStack nullContainerIcon;
 
-    public ItemContainerRenderer(String coordsFile) {
+    public ItemContainerRenderer(String coordsFile, ItemStack nullContainerIcon) {
+        this.nullContainerIcon = nullContainerIcon;
+        this.coordsFile = coordsFile;
+        this.debugRender();
+    }
+
+    private void debugRender() {
+        renderTargets.clear();
         String[] p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, coordsFile, this);
         for (String a : p) {
             String b[] = a.split(",");
@@ -36,13 +45,16 @@ public class ItemContainerRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        return ItemRenderType.INVENTORY == type;
+        return ItemRenderType.INVENTORY == type || ItemRenderType.EQUIPPED == type;
     }
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        if (PfFTuning.getBool(PfFTuning.Rendering.render_debugMode)) {
+            this.debugRender();
+        }
         if (container == null) {
-            container = new ItemStack(item.itemID, 1, 0).getIconIndex();
+            container = this.nullContainerIcon.getIconIndex();
         }
         Icon iconIndex = item.getIconIndex();
         LiquidStack l = LiquidContainerRegistry.getLiquidForFilledItem(item);
@@ -58,6 +70,8 @@ public class ItemContainerRenderer implements IItemRenderer {
             } else {
                 renderItem.renderIcon(0, 0, container, 16, 16);
             }
+        } else if (type == ItemRenderType.EQUIPPED) {
+            // Need rendering code!!!
         }
     }
 

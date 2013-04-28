@@ -10,6 +10,7 @@ public class LRLiquids {
 
     public static BiMap<String, LiquidStack> LRLiquids = HashBiMap.create();
     public static BiMap<String, ItemStack> bucketStacks = HashBiMap.create();
+    public static BiMap<String, ItemStack> woodenBucketstacks = HashBiMap.create();
 
     public static String getLiquidNameFromLiquidStack(LiquidStack l) {
         for (LiquidStack test : LRLiquids.values()){

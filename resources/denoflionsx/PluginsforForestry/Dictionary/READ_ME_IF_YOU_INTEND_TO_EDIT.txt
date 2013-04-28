@@ -5,10 +5,10 @@ You may create a new text file and list it in either OreDictionaryModules.txt or
 Optional Fields:
 # Title: <title here>
 # Author: <your name here>
+# Amount: <amount of liquid here. i.e. 1000>
 
 Required Fields:
 # Type: <type here>
-# Amount: <amount of liquid here. i.e. 1000>
 
 You can also leave comments in the file as long as the line starts with a #. All whitespaces are ignored during parsing.
 
