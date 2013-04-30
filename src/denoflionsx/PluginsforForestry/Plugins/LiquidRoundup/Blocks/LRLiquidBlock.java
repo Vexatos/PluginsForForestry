@@ -18,12 +18,14 @@ public class LRLiquidBlock extends BlockFluidClassic {
     public Icon iconFlowing;
     public String textureSheet;
     private String name;
+    private String perma;
 
-    public LRLiquidBlock(int id, String name) {
+    public LRLiquidBlock(int id, String perma, String name, String still) {
         super(id, Material.water);
         this.setUnlocalizedName("pff." + denLib.StringUtils.removeSpaces(name.toLowerCase()));
-        textureSheet = "PluginsforForestry:" + this.getUnlocalizedName() + ".still";
+        textureSheet = "PluginsforForestry:" + still;
         this.name = name;
+        this.perma = perma;
     }
 
     @Override
@@ -41,13 +43,17 @@ public class LRLiquidBlock extends BlockFluidClassic {
     public void registerIcons(IconRegister par1IconRegister) {
         iconStill = PfFProxyClient.registerIcon(par1IconRegister, textureSheet);
         iconFlowing = PfFProxyClient.registerIcon(par1IconRegister, textureSheet.replace(".still", ".flowing"));
-        LiquidStack l = LiquidDictionary.getCanonicalLiquid(this.name);
-        l.canonical().setTextureSheet("/terrain.png");
-        l.canonical().setRenderingIcon(iconStill);
+        LiquidStack l = LiquidDictionary.getCanonicalLiquid(this.perma);
+        l.setRenderingIcon(iconStill);
+        if (l.getRenderingIcon() != null){
+            PfF.Proxy.print("Liquid icons loaded successfully!");
+        }
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
+    public Icon getIcon(int par1, int par2) {
         return par1 <= 1 ? iconStill : iconFlowing;
     }
+    
+    
 }

@@ -12,7 +12,11 @@ public class PfFLib {
     public static class PffStringUtils {
 
         public static String cleanLiquidNameFromEvent(LiquidDictionary.LiquidRegisterEvent event) {
-            return Character.toUpperCase(event.Name.charAt(0)) + event.Name.substring(1);
+            return cleanName(event.Name);
+        }
+
+        public static String cleanName(String n) {
+            return Character.toUpperCase(n.charAt(0)) + n.substring(1);
         }
 
         public static String getTextureFromName(String liquid) {

@@ -13,8 +13,8 @@ public interface IPfFProxy {
     
     public void registerClientSide();
     
-    public void registerLiquidBlock(String name, LRLiquidBlock b);
+    public void registerLiquidBlock(String perma, String name, LRLiquidBlock b);
     
-    public void registerLiquidItem(String name, LRLiquidItem i);
+    public void registerLiquidItem(String perma, String name, LRLiquidItem i);
     
 }

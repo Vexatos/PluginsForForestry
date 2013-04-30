@@ -12,7 +12,7 @@ import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
-import denoflionsx.denLib.Mod.lang.LangManager;
+import denoflionsx.denLib.Mod.denLibMod;
 
 @Mod(modid = "PluginsforForestry", name = "PluginsforForestry", version = "@VERSION@")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
@@ -24,19 +24,17 @@ public class PfF {
     @SidedProxy(clientSide = proxyPath + "PfFProxyClient", serverSide = proxyPath + "PfFProxyCommon")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    public static LangManager lang;
     private boolean debug = true;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
-        
     }
 
     @Mod.PreInit
     public void preLoad(FMLPreInitializationEvent event) {
+        denLibMod.Proxy.registerForgeSubscribe(this);
         PfFAPI.instance = this;
         core = new PfFCore(event.getSourceFile());
-        lang = new LangManager("PluginsforForestry", event.getModConfigurationDirectory());
         core.setupConfig(event);
         PfFTranslator.createInstance();
         if (debug) {

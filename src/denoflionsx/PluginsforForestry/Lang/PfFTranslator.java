@@ -8,26 +8,39 @@ import net.minecraft.client.Minecraft;
 public class PfFTranslator {
 
     public static PfFTranslator instance;
-    private static final String defaultLang = Minecraft.getMinecraft().gameSettings.language;
+    private static final String defaultLang = "en_US";
+    private boolean notify = false;
+    private HashMap<String, String> trans = null;
 
     public static void createInstance() {
         instance = new PfFTranslator();
     }
 
     public String translateKey(String key) {
-        return this.translateKey(key, defaultLang);
+        return this.translateKey(key, Minecraft.getMinecraft().gameSettings.language);
     }
 
     public String translateKey(String key, String lang) {
-
-        String[] p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, lang + ".lang", this);
-        HashMap<String, String> l = new HashMap();
-        for (String a : p) {
-            String[] sp = a.split("=");
-            String key1 = denLib.StringUtils.removeSpaces(sp[0]);
-            String value1 = denLib.StringUtils.removeSpaces(sp[1]);
-            l.put(key1, value1);
+        if (trans == null) {
+            String[] p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, lang + ".lang", this);
+            if (p[0].equals(denLib.StringUtils.readError)) {
+                // No local available. Use default.
+                p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, defaultLang + ".lang", this);
+                if (!notify) {
+                    PfF.Proxy.warning("No localization data for language " + lang + ". Using en_US instead.");
+                    PfF.Proxy.print("Feel free to translate the en_US.lang file in the jar and submit it!");
+                    notify = true;
+                }
+            }
+            HashMap<String, String> l = new HashMap();
+            for (String a : p) {
+                String[] sp = a.split("=");
+                String key1 = denLib.StringUtils.removeSpaces(sp[0]);
+                String value1 = denLib.StringUtils.removeSpaces(sp[1]);
+                l.put(key1, value1);
+            }
+            trans = l;
         }
-        return l.get(key);
+        return trans.get(key);
     }
 }

@@ -13,6 +13,5 @@ public class PluginRegistry {
         PfFAPI.plugins.registerPlugin(new PluginLiquidRecipes());
         PfFAPI.plugins.registerPlugin(new PluginMFR());
         PfFAPI.plugins.registerPlugin(new PluginOmniPlant());
-        PfF.core.setupLocalization();
     }
 }

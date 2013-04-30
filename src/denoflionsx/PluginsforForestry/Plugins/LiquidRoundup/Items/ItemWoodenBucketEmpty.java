@@ -3,6 +3,7 @@ package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxyClient;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.util.Icon;
 
 public class ItemWoodenBucketEmpty extends ItemLRBucket {
 
@@ -12,11 +13,16 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket {
     }
 
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
         try {
-            this.iconIndex = PfFProxyClient.registerIcon(par1IconRegister, "PluginsforForestry:bucket_wood_birch");
+            this.itemIcon = PfFProxyClient.registerIcon(par1IconRegister, "PluginsforForestry:bucket_wood_birch");
         } catch (Exception ex) {
             // shh
         }
+    }
+
+    @Override
+    public Icon getIconFromDamage(int par1) {
+        return this.itemIcon;
     }
 }

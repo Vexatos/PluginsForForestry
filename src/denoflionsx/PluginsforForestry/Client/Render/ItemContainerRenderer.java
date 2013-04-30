@@ -6,6 +6,7 @@ import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.ArrayList;
+import net.minecraft.block.BlockFluid;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -19,12 +20,9 @@ public class ItemContainerRenderer implements IItemRenderer {
 
     protected String coordsFile;
     protected static RenderItem renderItem = new RenderItem();
-    protected Icon container = null;
     protected ArrayList<RenderData> renderTargets = new ArrayList();
-    protected ItemStack nullContainerIcon;
 
-    public ItemContainerRenderer(String coordsFile, ItemStack nullContainerIcon) {
-        this.nullContainerIcon = nullContainerIcon;
+    public ItemContainerRenderer(String coordsFile) {
         this.coordsFile = coordsFile;
         this.debugRender();
     }
@@ -45,7 +43,7 @@ public class ItemContainerRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        return ItemRenderType.INVENTORY == type || ItemRenderType.EQUIPPED == type;
+        return ItemRenderType.INVENTORY == type;
     }
 
     @Override
@@ -53,25 +51,19 @@ public class ItemContainerRenderer implements IItemRenderer {
         if (PfFTuning.getBool(PfFTuning.Rendering.render_debugMode)) {
             this.debugRender();
         }
-        if (container == null) {
-            container = this.nullContainerIcon.getIconIndex();
-        }
-        Icon iconIndex = item.getIconIndex();
+        Icon icon = item.getIconIndex();
+        renderItem.renderIcon(0, 0, icon, 16, 16);
         LiquidStack l = LiquidContainerRegistry.getLiquidForFilledItem(item);
-        if (type == ItemRenderType.INVENTORY) {
-            if (l == null) {
-                renderItem.renderIcon(0, 0, iconIndex, 16, 16);
-            } else if (l.canonical().getRenderingIcon() != null) {
-                renderItem.renderIcon(0, 0, container, 16, 16);
-                Minecraft.getMinecraft().renderEngine.bindTexture(l.canonical().getTextureSheet());
-                for (RenderData d : renderTargets) {
-                    renderItem.renderIcon(d.getX(), d.getY(), l.canonical().getRenderingIcon(), d.getHeight(), d.getWidth());
-                }
-            } else {
-                renderItem.renderIcon(0, 0, container, 16, 16);
-            }
-        } else if (type == ItemRenderType.EQUIPPED) {
-            // Need rendering code!!!
+        if (l == null){
+            return;
+        }
+        Icon liquid = l.canonical().getRenderingIcon();
+        if (liquid == null){
+            liquid = BlockFluid.func_94424_b("water");
+        }
+        Minecraft.getMinecraft().renderEngine.bindTexture(l.canonical().getTextureSheet());
+        for (RenderData t : renderTargets) {
+            renderItem.renderIcon(t.getX(), t.getY(), liquid, t.getHeight(), t.getWidth());
         }
     }
 

@@ -32,9 +32,11 @@ public class BlockTEPlant extends BlockContainer {
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int par2) {
-        return super.getBlockTextureFromSideAndMetadata(par1, par2);
+    public Icon getIcon(int par1, int par2) {
+        return super.getIcon(par1, par2);
     }
+
+    
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World par1World, int par2, int par3, int par4) {

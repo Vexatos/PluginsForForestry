@@ -3,6 +3,7 @@ package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 
@@ -14,7 +15,8 @@ public class ItemWoodenBucket extends ItemLRBucket {
     }
 
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
+        
     }
 
     @Override
@@ -25,4 +27,11 @@ public class ItemWoodenBucket extends ItemLRBucket {
         }
         return i;
     }
+
+    @Override
+    public Icon getIconFromDamage(int par1) {
+         return LRItems.ItemStackWoodenBucketEmpty.getIconIndex();
+    }
+    
+    
 }

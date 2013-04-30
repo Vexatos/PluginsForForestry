@@ -5,6 +5,7 @@ import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 
@@ -27,7 +28,7 @@ public class ItemLRBucket extends ItemBucket {
 
     @Override
     public boolean tryPlaceContainedLiquid(World world, double xOffset, double yOffset, double zOffset, int x, int y, int z) {
-        if (_liquidId > 4096){
+        if (_liquidId > 4096) {
             return false;
         }
         if (_liquidId <= 0) {
@@ -51,6 +52,13 @@ public class ItemLRBucket extends ItemBucket {
     }
 
     @Override
-    public void updateIcons(IconRegister par1IconRegister) {
+    public void registerIcons(IconRegister par1IconRegister) {
     }
+
+    @Override
+    public Icon getIconFromDamage(int par1) {
+         return LiquidContainerRegistry.EMPTY_BUCKET.getIconIndex();
+    }
+    
+    
 }

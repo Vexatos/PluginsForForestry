@@ -1,10 +1,7 @@
 package denoflionsx.PluginsforForestry.Core;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
-import denoflionsx.PluginsforForestry.Plugins.Localization.PluginLang;
 import denoflionsx.denLib.CoreMod.Updater.IDenUpdate;
 import denoflionsx.denLib.CoreMod.denLibCore;
 import denoflionsx.denLib.Mod.denLibMod;
@@ -23,13 +20,6 @@ public class PfFCore implements IDenUpdate {
     }
     
     public void setupContainers() {
-        PluginLR.containers.registerNewContainer("Barrel", new String[]{"PluginsforForestry:barrel"}, PfFTuning.getInt(PfFTuning.Items.barrel_ItemID), PfFTuning.getInt(PfFTuning.Items.barrel_capacity));
-        PluginLR.containers.registerNewContainer("Capsule", new String[]{"PluginsforForestry:empty_liquidcontainers_waxcapsule"}, PfFTuning.getInt(PfFTuning.Items.capsule_ItemID), PfFTuning.getInt(PfFTuning.Items.capsule_capacity));
-        PluginLR.containers.registerNewContainer("Refractory Capsule", new String[]{"PluginsforForestry:empty_liquidcontainers_refractorycapsule"}, PfFTuning.getInt(PfFTuning.Items.redcapsule_ItemID), PfFTuning.getInt(PfFTuning.Items.redcapsule_capacity));
-    }
-    
-    public void setupLocalization() {
-        PfFAPI.plugins.registerPlugin(new PluginLang());
     }
     
     public void setupConfig(FMLPreInitializationEvent event) {
