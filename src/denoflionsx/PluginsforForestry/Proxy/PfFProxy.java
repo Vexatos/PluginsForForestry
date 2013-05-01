@@ -10,6 +10,7 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
 import net.minecraft.block.Block;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
@@ -49,7 +50,7 @@ public class PfFProxy implements IPfFProxy {
         String local = PfFTranslator.instance.translateKey(name);
         i.createItemEntry(0, local);
         LRItems.liquids.put(perma, i);
-        LiquidStack stack = LiquidDictionary.getOrCreateLiquid(perma, new LiquidStack(i, 1000));
+        LiquidStack stack = LiquidDictionary.getOrCreateLiquid(perma, new LiquidStack(i, LiquidContainerRegistry.BUCKET_VOLUME));
         LRLiquids.LRLiquids.put(perma, stack);
     }
 }

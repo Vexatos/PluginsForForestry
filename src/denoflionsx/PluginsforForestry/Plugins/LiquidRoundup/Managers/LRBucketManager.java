@@ -5,6 +5,7 @@ import com.google.common.collect.HashBiMap;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemLRBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
@@ -22,7 +23,7 @@ import net.minecraftforge.liquids.LiquidStack;
 public class LRBucketManager {
 
     protected BiMap<String, Integer> bucketIDMap = HashBiMap.create();
-    protected File saveFile = new File(PfF.core.mappingsDir.getAbsolutePath() + "/DefaultBucketMappings.bin");
+    protected File saveFile = new File(PfF.core.mappingsDir.getAbsolutePath() + "/DefaultBucketMappings.BiMap");
     //--------------------------------------------------------------
     protected ReflectionHelper r = null;
     protected BucketType bucket = null;
@@ -38,6 +39,11 @@ public class LRBucketManager {
     public void processLiquid(LiquidDictionary.LiquidRegisterEvent event) {
         if (LiquidContainerRegistry.fillLiquidContainer(event.Liquid, bucket.empty) != null) {
             return;
+        }
+        if (event.Name.equals("Lava")){
+            if (this.bucket.madeOf.isDoesMelt()){
+                return;
+            }
         }
         String n = event.Liquid.asItemStack().getDisplayName();
         if (n.equals("")) {
@@ -60,7 +66,7 @@ public class LRBucketManager {
             LRItems.customBucketsFilled.put(r.getBucketItemID(n, id) ,this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfFTranslator.instance.translateKey("item.pff.bucket")));
             ItemStack i = r.getBucketItemStack(r.getBucketItemID(n, id));
             if (event.Liquid != null && i != null && bucket.empty != null) {
-                LiquidContainerRegistry.registerLiquid(new LiquidContainerData(event.Liquid, i, bucket.empty));
+                LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(event.Liquid, LiquidContainerRegistry.BUCKET_VOLUME), i, bucket.empty));
             } else {
                 if (event.Liquid == null) {
                     PfF.Proxy.severe("Liquid is null! Cancelling container!");
@@ -110,16 +116,18 @@ public class LRBucketManager {
 
     public static enum BucketType {
 
-        IRON("Bucket", "_IronBucket_ItemID", LiquidContainerRegistry.EMPTY_BUCKET),
-        WOODEN("WoodenBucket", "_WoodenBucket_ItemID", LRItems.ItemStackWoodenBucketEmpty);
+        IRON("Bucket", "_IronBucket_ItemID", LiquidContainerRegistry.EMPTY_BUCKET, ItemContainer.MATERIAL.iron),
+        WOODEN("WoodenBucket", "_WoodenBucket_ItemID", LRItems.ItemStackWoodenBucketEmpty, ItemContainer.MATERIAL.wood);
         public String bucketName;
         public String bucketParam;
         public ItemStack empty;
+        public ItemContainer.MATERIAL madeOf;
 
-        private BucketType(String bucketName, String bucketParam, ItemStack empty) {
+        private BucketType(String bucketName, String bucketParam, ItemStack empty, ItemContainer.MATERIAL madeOf) {
             this.bucketName = bucketName;
             this.bucketParam = bucketParam;
             this.empty = empty;
+            this.madeOf = madeOf;
         }
 
         public Item createNewBucket(int itemID, int liquidID, String name) {

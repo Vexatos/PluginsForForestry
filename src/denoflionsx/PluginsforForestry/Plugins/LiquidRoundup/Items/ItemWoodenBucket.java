@@ -11,7 +11,7 @@ public class ItemWoodenBucket extends ItemLRBucket {
 
     public ItemWoodenBucket(int par1, int par2, String local) {
         super(par1, par2, local);
-        this.setContainerItem(this);
+        this.setContainerItem(LRItems.itemWoodenBucketEmpty);
     }
 
     @Override

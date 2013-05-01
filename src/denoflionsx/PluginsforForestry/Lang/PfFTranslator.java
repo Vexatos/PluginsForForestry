@@ -36,7 +36,7 @@ public class PfFTranslator {
             for (String a : p) {
                 String[] sp = a.split("=");
                 String key1 = denLib.StringUtils.removeSpaces(sp[0]);
-                String value1 = denLib.StringUtils.removeSpaces(sp[1]);
+                String value1 = sp[1].trim();
                 l.put(key1, value1);
             }
             trans = l;
