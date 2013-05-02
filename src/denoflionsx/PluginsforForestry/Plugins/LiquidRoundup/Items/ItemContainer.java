@@ -29,7 +29,8 @@ public class ItemContainer extends ItemMeta {
         iron(false),
         wax(true),
         refractory(false),
-        glass(true);
+        glass(true),
+        tin(false);
         private boolean doesMelt;
 
         private MATERIAL(boolean doesMelt) {

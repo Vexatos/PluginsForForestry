@@ -3,13 +3,17 @@ package denoflionsx.PluginsforForestry.Proxy;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Interfaces.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRBlocks;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
+import java.lang.reflect.Field;
 import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
@@ -19,6 +23,11 @@ public class PfFProxy implements IPfFProxy {
     @Override
     public void print(String msg) {
         FMLLog.info("[" + PfFTranslator.instance.translateKey("console.pff.name") + "]" + ": " + msg);
+    }
+
+    @Override
+    public void registerRecipe(ItemStack i, Object[] o) {
+        GameRegistry.addRecipe(i, o);
     }
 
     @Override
@@ -52,5 +61,24 @@ public class PfFProxy implements IPfFProxy {
         LRItems.liquids.put(perma, i);
         LiquidStack stack = LiquidDictionary.getOrCreateLiquid(perma, new LiquidStack(i, LiquidContainerRegistry.BUCKET_VOLUME));
         LRLiquids.LRLiquids.put(perma, stack);
+    }
+
+    @Override
+    public void registerAllRecipes() {
+        try {
+            PfF.Proxy.print("Registering recipes.");
+            Class[] classes = new Class[]{LRItems.class};
+            for (Class c : classes) {
+                for (Field f : c.getDeclaredFields()) {
+                    Object o = f.get(null);
+                    if (o instanceof IRegisterRecipe) {
+                        IRegisterRecipe r = (IRegisterRecipe) o;
+                        r.registerRecipe();
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

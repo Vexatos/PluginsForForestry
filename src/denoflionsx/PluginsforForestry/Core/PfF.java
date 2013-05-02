@@ -55,5 +55,6 @@ public class PfF {
     public void modsLoaded(FMLPostInitializationEvent evt) {
         PfFAPI.plugins.runPluginLoadEvent(evt);
         core.setupRendering();
+        PfF.Proxy.registerAllRecipes();
     }
 }

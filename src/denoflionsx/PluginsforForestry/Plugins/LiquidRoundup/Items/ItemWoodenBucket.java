@@ -7,7 +7,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 
-public class ItemWoodenBucket extends ItemLRBucket {
+public class ItemWoodenBucket extends ItemLRBucket{
 
     public ItemWoodenBucket(int par1, int par2, String local) {
         super(par1, par2, local);
@@ -16,7 +16,6 @@ public class ItemWoodenBucket extends ItemLRBucket {
 
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        
     }
 
     @Override
@@ -30,8 +29,6 @@ public class ItemWoodenBucket extends ItemLRBucket {
 
     @Override
     public Icon getIconFromDamage(int par1) {
-         return LRItems.ItemStackWoodenBucketEmpty.getIconIndex();
+        return LRItems.ItemStackWoodenBucketEmpty.getIconIndex();
     }
-    
-    
 }

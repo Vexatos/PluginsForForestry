@@ -40,9 +40,10 @@ public class PfFTuning {
         public static String barrel_capacity = String.valueOf(10000);
         public static String capsule_ItemID = String.valueOf(4101);
         public static String redcapsule_ItemID = String.valueOf(4102);
+        public static String can_ItemID = String.valueOf(4103);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
-        public static String veggiejuice_ItemID = String.valueOf(4101);
-        public static String liquidpeat_ItemID = String.valueOf(4102);
+        public static String veggiejuice_ItemID = String.valueOf(4150);
+        public static String liquidpeat_ItemID = String.valueOf(4151);
     }
 
     @Tunable(category = "items.buckets", comment = "set id to 0 to disable")

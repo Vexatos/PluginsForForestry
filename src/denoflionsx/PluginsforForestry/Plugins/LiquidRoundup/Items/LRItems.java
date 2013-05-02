@@ -12,7 +12,7 @@ public class LRItems {
 
     public static HashMap<String, ItemMeta> liquids = new HashMap();
     //---------------------------------------------------------------------
-    public static Item itemWoodenBucketEmpty = null;
+    public static ItemWoodenBucketEmpty itemWoodenBucketEmpty = null;
     public static ItemStack ItemStackWoodenBucketEmpty = null;
     // Default RenderThis mode is bucket.
     @RenderThis
@@ -24,6 +24,8 @@ public class LRItems {
     public static ItemContainer capsule;
     @RenderThis(renderFile = "capsule.txt")
     public static ItemContainer rcapsule;
+    @RenderThis(renderFile = "capsule.txt")
+    public static ItemContainer can;
     //----------------------------------------------------------------------
     public static BiMap<Integer, ItemStack> bucketStacks = HashBiMap.create();
     public static BiMap<Integer, ItemStack> woodenBucketstacks = HashBiMap.create();

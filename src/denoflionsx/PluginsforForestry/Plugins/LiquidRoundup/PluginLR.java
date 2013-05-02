@@ -7,6 +7,7 @@ import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes.Fermentable;
 import denoflionsx.PluginsforForestry.EventHandler.LiquidDebug;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
+import denoflionsx.PluginsforForestry.Plugins.Forestry.PluginForestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.BucketEventRegistry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.LRBucketEvent;
@@ -22,11 +23,9 @@ import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
-import forestry.api.core.ItemInterface;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -75,6 +74,9 @@ public class PluginLR implements IPfFPlugin {
         if (PfFTuning.getInt(PfFTuning.Items.redcapsule_ItemID) > 0) {
             LRItems.rcapsule = new ItemContainer(PfFTuning.getInt(PfFTuning.Items.redcapsule_ItemID), "PluginsforForestry:rcapsule", ItemContainer.MATERIAL.refractory);
         }
+        if (PfFTuning.getInt(PfFTuning.Items.can_ItemID) > 0){
+            LRItems.can = new ItemContainer(PfFTuning.getInt(PfFTuning.Items.can_ItemID), "PluginsforForestry:can", ItemContainer.MATERIAL.tin);
+        }
         if (PfFTuning.getBool(PfFTuning.Liquids.liquid_asBlock)) {
             this.createLiquidBlockForm("Veggie Juice", "liquid.pff.veggiejuice.name", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
             this.createLiquidBlockForm("Liquid Peat", "liquid.pff.liquidpeat.name", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
@@ -101,10 +103,13 @@ public class PluginLR implements IPfFPlugin {
             containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfFTranslator.instance.translateKey("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity));
         }
         if (LRItems.capsule != null) {
-            containers.registerContainer(ItemInterface.getItem("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(PluginForestry.utils.getItemStack("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
         }
         if (LRItems.rcapsule != null) {
-            containers.registerContainer(ItemInterface.getItem("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(PluginForestry.utils.getItemStack("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+        }
+        if (LRItems.can != null){
+            containers.registerContainer(PluginForestry.utils.getItemStack("canEmpty"), LRItems.can, PfFTranslator.instance.translateKey("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME);
         }
         WorldEventHandler.registerHandler(new LiquidDebug());
     }
