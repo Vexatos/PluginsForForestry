@@ -18,9 +18,10 @@
 	<property name="mcpsrc.dir" value="${mcp.dir}/src"/>
         <property name="forgelib.dir" value="${mcp.dir}/lib"/>
 
-	<property name="mc.version" value="1.5.1"/>
-	<property name="forge.version" value="7.7.2.679"/>
-<!--	<property name="project.version" value="0.0.0"/>-->
+	<property name="mc.version" value="1.5.2"/>
+	<property name="forge.version" value="7.8.0.685"/>
+        <property name="project.version" value="3.0"/>
+        <buildnumber/>
 
 	<property name="forge.name" value="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
 
@@ -112,11 +113,12 @@
 			<fileset dir="${src.dir}"/>
 			<filterset>
 				<filter token="VERSION" value="${project.version.full}" />
-				<filter token="BUILD_NUMBER" value="${build.number}" />
+				<filter token="BUILD" value="${build.number}" />
 			</filterset>
 		</copy>
 
                 <unzip dest="${mcpsrc.dir}/minecraft" src="${lib.dir}/denLib-Src.zip"/>
+                <unzip dest="${mcpsrc.dir}/minecraft" src="${lib.dir}/APICollection.zip"/>
                 <copy todir="${forgelib.dir}">
                     <fileset dir="${lib.dir}"/>
                 </copy>
@@ -167,11 +169,22 @@
                 <copy todir="${classes.dir}/denoflionsx/PluginsforForestry/Lang">
 			<fileset dir="${src.dir}/denoflionsx/PluginsforForestry/Lang" />
 		</copy>
+                
+                <delete dir="${classes.dir}/forestry"/>
+                <delete dir="${classes.dir}/powercrystals"/>
+                <delete dir="${classes.dir}/cofh"/>
+                <delete dir="${classes.dir}/mods/Railcraft"/>
+                <delete dir="${classes.dir}/thermalexpansion"/>
+                <delete dir="${classes.dir}/buildcraft"/>
 
 		<!-- Reset src dir to post-forge-install state -->
 		<delete dir="${mcpsrc.dir}/minecraft/denoflionsx"/>
                 <delete dir="${mcpsrc.dir}/minecraft/forestry"/>
                 <delete dir="${mcpsrc.dir}/minecraft/powercrystals"/>
+                <delete dir="${mcpsrc.dir}/minecraft/cofh"/>
+                <delete dir="${mcpsrc.dir}/minecraft/mods"/>
+                <delete dir="${mcpsrc.dir}/minecraft/thermalexpansion"/>
+                <delete dir="${mcpsrc.dir}/minecraft/buildcraft"/>
 
 	</target>
 

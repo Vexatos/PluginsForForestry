@@ -5,9 +5,7 @@ import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes.Fermentable;
-import denoflionsx.PluginsforForestry.EventHandler.LiquidDebug;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
-import denoflionsx.PluginsforForestry.Plugins.Forestry.PluginForestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.BucketEventRegistry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Handlers.LRBucketEvent;
@@ -21,8 +19,8 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRContainer
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRLiquidManager;
 import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
-import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
+import forestry.api.core.ItemInterface;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -103,15 +101,14 @@ public class PluginLR implements IPfFPlugin {
             containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfFTranslator.instance.translateKey("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity));
         }
         if (LRItems.capsule != null) {
-            containers.registerContainer(PluginForestry.utils.getItemStack("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
         }
         if (LRItems.rcapsule != null) {
-            containers.registerContainer(PluginForestry.utils.getItemStack("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
         }
         if (LRItems.can != null){
-            containers.registerContainer(PluginForestry.utils.getItemStack("canEmpty"), LRItems.can, PfFTranslator.instance.translateKey("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("canEmpty"), LRItems.can, PfFTranslator.instance.translateKey("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME);
         }
-        WorldEventHandler.registerHandler(new LiquidDebug());
     }
 
     public void createLiquidBlockForm(String perma, String name, int blockID) {

@@ -6,3 +6,4 @@ build/
 bin/
 /forge/fml/eclipse/.metadata/
 download/
+*.number

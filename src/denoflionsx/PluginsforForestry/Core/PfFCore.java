@@ -62,7 +62,7 @@ public class PfFCore implements IDenUpdate {
     
     @Override
     public int getBuildNumber() {
-        return 3;
+        return Integer.valueOf("@BUILD@");
     }
     
     @Override

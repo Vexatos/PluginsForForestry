@@ -12,6 +12,7 @@ import denoflionsx.denLib.Mod.Client.Render.RenderBlockFluidClassic;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
@@ -52,4 +53,11 @@ public class PfFProxyClient extends PfFProxy {
         PfF.Proxy.print("Registering icon " + icon);
         return par1IconRegister.registerIcon(icon);
     }
+
+    @Override
+    public void sendMessageToPlayer(String msg) {
+        Minecraft.getMinecraft().thePlayer.sendChatToPlayer("[PfF]: " + msg);
+    }
+    
+    
 }

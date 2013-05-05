@@ -81,4 +81,8 @@ public class PfFProxy implements IPfFProxy {
             ex.printStackTrace();
         }
     }
+
+    @Override
+    public void sendMessageToPlayer(String msg) {
+    }
 }

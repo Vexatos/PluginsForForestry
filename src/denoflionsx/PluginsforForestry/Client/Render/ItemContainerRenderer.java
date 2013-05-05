@@ -27,7 +27,7 @@ public class ItemContainerRenderer implements IItemRenderer {
         this.debugRender();
     }
 
-    private void debugRender() {
+    protected void debugRender() {
         renderTargets.clear();
         String[] p = denLib.StringUtils.readFileContentsAutomated(PfF.core.configDir, coordsFile, this);
         for (String a : p) {

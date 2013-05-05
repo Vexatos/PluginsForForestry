@@ -22,4 +22,6 @@ public interface IPfFProxy {
     
     public void registerAllRecipes();
     
+    public void sendMessageToPlayer(String msg);
+    
 }
