@@ -11,12 +11,18 @@ public class PfFLib {
 
     public static class PffStringUtils {
 
+        public static final String error = "BROKEN LIQUID NAME";
+        
         public static String cleanLiquidNameFromEvent(LiquidDictionary.LiquidRegisterEvent event) {
             return cleanName(event.Name);
         }
 
         public static String cleanName(String n) {
-            return Character.toUpperCase(n.charAt(0)) + n.substring(1);
+            try {
+                return Character.toUpperCase(n.charAt(0)) + n.substring(1);
+            } catch (Exception ex) {
+            }
+            return error;
         }
 
         public static String getTextureFromName(String liquid) {

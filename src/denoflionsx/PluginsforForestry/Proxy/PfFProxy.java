@@ -4,7 +4,7 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import denoflionsx.PluginsforForestry.Core.PfF;
-import denoflionsx.PluginsforForestry.Interfaces.IRegisterRecipe;
+import denoflionsx.PluginsforForestry.API.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRBlocks;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;

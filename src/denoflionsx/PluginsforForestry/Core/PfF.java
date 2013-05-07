@@ -8,6 +8,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.EventHandler.ChangelogHandler;
+import denoflionsx.PluginsforForestry.EventHandler.LiquidDictionaryDebug;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
@@ -24,7 +25,7 @@ public class PfF {
     @SidedProxy(clientSide = proxyPath + "PfFProxyClient", serverSide = proxyPath + "PfFProxyCommon")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    private boolean debug = true;
+    private final boolean debug = false;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
@@ -40,6 +41,9 @@ public class PfF {
         PluginRegistry.register();
         PfFAPI.plugins.runPluginLoadEvent(event);
         core.registerWithUpdater();
+        if (debug){
+            WorldEventHandler.registerHandler(new LiquidDictionaryDebug());
+        }
     }
 
     @Mod.Init

@@ -31,4 +31,5 @@ public class ItemWoodenBucket extends ItemLRBucket{
     public Icon getIconFromDamage(int par1) {
         return LRItems.ItemStackWoodenBucketEmpty.getIconIndex();
     }
+
 }

@@ -14,6 +14,7 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBuck
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.Blacklists;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRBucketManager;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRContainerManager;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRLiquidManager;
@@ -98,16 +99,16 @@ public class PluginLR implements IPfFPlugin {
         bucketEvents.registerHandler(new LRBucketEvent());
         containers = new LRContainerManager();
         if (LRItems.barrel != null) {
-            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfFTranslator.instance.translateKey("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity));
+            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfFTranslator.instance.translateKey("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity), Blacklists.barrel);
         }
         if (LRItems.capsule != null) {
-            containers.registerContainer(ItemInterface.getItem("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("waxCapsule"), LRItems.capsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
         }
         if (LRItems.rcapsule != null) {
-            containers.registerContainer(ItemInterface.getItem("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("refractoryEmpty"), LRItems.rcapsule, PfFTranslator.instance.translateKey("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
         }
         if (LRItems.can != null){
-            containers.registerContainer(ItemInterface.getItem("canEmpty"), LRItems.can, PfFTranslator.instance.translateKey("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME);
+            containers.registerContainer(ItemInterface.getItem("canEmpty"), LRItems.can, PfFTranslator.instance.translateKey("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
         }
     }
 

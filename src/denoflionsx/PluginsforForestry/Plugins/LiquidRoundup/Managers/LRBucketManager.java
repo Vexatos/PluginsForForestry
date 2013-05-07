@@ -40,10 +40,14 @@ public class LRBucketManager {
         if (LiquidContainerRegistry.fillLiquidContainer(event.Liquid, bucket.empty) != null) {
             return;
         }
-        if (event.Name.equals("Lava")){
-            if (this.bucket.madeOf.isDoesMelt()){
+        if (event.Name.equals("Lava")) {
+            if (this.bucket.madeOf.isDoesMelt()) {
                 return;
             }
+        }
+        if (this.bucket.isBlacklisted(event)){
+            PfF.Proxy.print("Liquid " + event.Name + " skipped iron bucket due to blacklist.");
+            return;
         }
         String n = event.Liquid.asItemStack().getDisplayName();
         if (n.equals("")) {
@@ -63,7 +67,7 @@ public class LRBucketManager {
             PfF.Proxy.print("New default id assigned for bucket " + n + ": " + id);
         }
         if (r.getBucketItemID(n, id) > 0) {
-            LRItems.customBucketsFilled.put(r.getBucketItemID(n, id) ,this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfFTranslator.instance.translateKey("item.pff.bucket")));
+            LRItems.customBucketsFilled.put(r.getBucketItemID(n, id), this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfFTranslator.instance.translateKey("item.pff.bucket")));
             ItemStack i = r.getBucketItemStack(r.getBucketItemID(n, id));
             if (event.Liquid != null && i != null && bucket.empty != null) {
                 LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(event.Liquid, LiquidContainerRegistry.BUCKET_VOLUME), i, bucket.empty));
@@ -144,6 +148,23 @@ public class LRBucketManager {
             } else {
                 LRItems.woodenBucketstacks.put(l.itemID, b);
             }
+        }
+
+        public boolean isBlacklisted(LiquidDictionary.LiquidRegisterEvent event) {
+            if (this.equals(IRON)) {
+                for (String s : Blacklists.ironBucket) {
+                    if (s.equals(event.Name)) {
+                        return true;
+                    }
+                }
+            }else if (this.equals(WOODEN)){
+                for (String s : Blacklists.woodenBucket){
+                    if (s.equals(event.Name)){
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

@@ -11,6 +11,7 @@ import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import java.io.File;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -27,11 +28,22 @@ public class LRContainerManager {
         WorldEventHandler.registerHandler(new saveHandler());
     }
 
-    public void registerContainer(ItemStack empty, ItemContainer c, String name, int capacity) {
-        PfF.Proxy.print(PluginLR.events.size() + " liquids found.");
+    public void registerContainer(ItemStack empty, ItemContainer c, String name, int capacity, String[] blackList) {
         for (LiquidDictionary.LiquidRegisterEvent e : PluginLR.events) {
             //----
-            if (LiquidContainerRegistry.fillLiquidContainer(e.Liquid, empty) != null){
+            if (LiquidContainerRegistry.fillLiquidContainer(e.Liquid, empty) != null) {
+                continue;
+            }
+            boolean isBlacklisted = false;
+            if (blackList != null) {
+                for (String s : blackList) {
+                    if (s.equals(e.Name)) {
+                        PfF.Proxy.print("Liquid " + e.Name + " skipped on container " + name + " due to blacklist.");
+                        isBlacklisted = true;
+                    }
+                }
+            }
+            if (isBlacklisted) {
                 continue;
             }
             if (metaMap.get(e.Name) == null) {
@@ -49,7 +61,14 @@ public class LRContainerManager {
                     continue;
                 }
             }
-            LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(e.Liquid, capacity), c.createItemEntry(meta, lname + " " + name), empty));
+            ItemStack i = c.createItemEntry(meta, lname + " " + name);
+            if (lname.equals(PfFLib.PffStringUtils.error)) {
+                i.stackTagCompound = new NBTTagCompound();
+                NBTTagCompound t = new NBTTagCompound();
+                t.setString("ohshit", "Please contact denoflions on MCF");
+                i.stackTagCompound.setCompoundTag("info", t);
+            }
+            LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(e.Liquid, capacity), i, empty));
             PfF.Proxy.print("Container " + name + " for " + lname + " created on meta " + String.valueOf(meta));
         }
     }

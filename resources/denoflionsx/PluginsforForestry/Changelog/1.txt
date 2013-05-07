@@ -1,0 +1,5 @@
+Fixed a crash in the changelog reader.
+Added text file loading for engine fuels. (Ethanol, Biofuel, and Creosote defaults. See config)
+Added container blacklist (removes duplicated containers).
+Bog Earth is now craftable with Wooden Buckets. (Grydian).
+Attempted fix for crashing when encountering an unnamed liquid.

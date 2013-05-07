@@ -7,24 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleParser {
-
-    private String[] lines;
+public class ModuleParser extends ModuleParserTemplate {
 
     public ModuleParser(String[] lines) {
-        this.lines = lines;
-    }
-
-    public String getTitle() {
-        return findTagAndParse(lines, "# Title:");
-    }
-
-    public String getAuthor() {
-        return findTagAndParse(lines, "# Author:");
-    }
-
-    public String getType() {
-        return findTagAndParse(lines, "# Type:");
+        super(lines);
     }
 
     public int getAmount() {
@@ -39,15 +25,6 @@ public class ModuleParser {
             }
         }
         return l;
-    }
-
-    private static String findTagAndParse(String[] lines, String find) {
-        for (String s : lines) {
-            if (s.contains(find)) {
-                return denLib.StringUtils.removeSpaces(s.replace(find, ""));
-            }
-        }
-        return "";
     }
 
     public static class SqueezeObject {
