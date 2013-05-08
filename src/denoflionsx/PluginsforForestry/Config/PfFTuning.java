@@ -31,6 +31,7 @@ public class PfFTuning {
         //---------------------------------------------------------
         public static String veggiejuice_FermenterBonus = String.valueOf(1.5f);
         public static String liquidpeat_FermenterBonus = String.valueOf(1.5f);
+        public static String vanillaVeggies_SqueezeAmount = String.valueOf(100);
     }
 
     @Tunable(category = "items", comment = "set id to 0 to disable")
@@ -41,6 +42,8 @@ public class PfFTuning {
         public static String capsule_ItemID = String.valueOf(4101);
         public static String redcapsule_ItemID = String.valueOf(4102);
         public static String can_ItemID = String.valueOf(4103);
+        public static String hammer_ItemID = String.valueOf(4104);
+        public static String rings_ItemID = String.valueOf(4105);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_ItemID = String.valueOf(4150);
         public static String liquidpeat_ItemID = String.valueOf(4151);

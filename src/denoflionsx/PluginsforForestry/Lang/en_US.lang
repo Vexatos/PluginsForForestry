@@ -9,3 +9,6 @@ liquid.pff.liquidpeat.name = Liquid Peat
 item.pff.woodenbucket.name = Wooden Bucket
 item.pff.bucket = Bucket
 item.pff.can = Can
+
+item.pff.hammer.name = Blacksmithing Hammer
+item.pff.rings.name = Iron Ring

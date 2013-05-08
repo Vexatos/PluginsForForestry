@@ -24,7 +24,7 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
 
     @Override
     public void registerRecipe() {
-        PfF.Proxy.registerRecipe(new ItemStack(this), new Object[]{"XXX", "LLL", "XXX", Character.valueOf('L'), new ItemStack(Block.wood, 1, 2)});
+        PfF.Proxy.registerRecipe(new ItemStack(this), new Object[]{"XXX", "LXL", "XLX", Character.valueOf('L'), new ItemStack(Block.wood, 1, 2)});
         //----
         ItemStack bog = BlockInterface.getBlock("soil");
         bog.setItemDamage(1);

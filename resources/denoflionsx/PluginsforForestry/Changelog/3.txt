@@ -1,0 +1,5 @@
+Fixed Wooden Bucket recipe pattern.
+Fixed Wooden Bucket dumping for water.
+Added Blacksmithing Hammer and Iron rings.
+Barrel now has a recipe.
+Carrots and Potatos now squeeze into Veggie Juice.

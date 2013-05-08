@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
 import java.util.List;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemBucket;
@@ -36,7 +37,12 @@ public class ItemLRBucket extends ItemBucket {
         } else if (!world.isAirBlock(x, y, z) && world.getBlockMaterial(x, y, z).isSolid()) {
             return false;
         } else {
-            world.setBlock(x, y, z, _liquidId, 7, 3);
+            // 7, 3
+            if (_liquidId == Block.waterStill.blockID) {
+                world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
+            }else{
+                world.setBlock(x, y, z, _liquidId, 7, 3);
+            }
             return true;
         }
     }
@@ -57,8 +63,6 @@ public class ItemLRBucket extends ItemBucket {
 
     @Override
     public Icon getIconFromDamage(int par1) {
-         return LiquidContainerRegistry.EMPTY_BUCKET.getIconIndex();
+        return LiquidContainerRegistry.EMPTY_BUCKET.getIconIndex();
     }
-    
-    
 }

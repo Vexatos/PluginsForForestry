@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.API.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
+import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.BarrelItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRBlocks;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
@@ -67,10 +68,13 @@ public class PfFProxy implements IPfFProxy {
     public void registerAllRecipes() {
         try {
             PfF.Proxy.print("Registering recipes.");
-            Class[] classes = new Class[]{LRItems.class};
+            Class[] classes = new Class[]{LRItems.class, BarrelItems.class};
             for (Class c : classes) {
                 for (Field f : c.getDeclaredFields()) {
                     Object o = f.get(null);
+                    if (o == null){
+                        continue;
+                    }
                     if (o instanceof IRegisterRecipe) {
                         IRegisterRecipe r = (IRegisterRecipe) o;
                         r.registerRecipe();
