@@ -28,6 +28,7 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
         //----
         ItemStack bog = BlockInterface.getBlock("soil");
         bog.setItemDamage(1);
+        bog.stackSize = 6;
         ItemStack water = LiquidContainerRegistry.fillLiquidContainer(LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), LRItems.ItemStackWoodenBucketEmpty);
         PfF.Proxy.registerRecipe(bog, new Object[]{"DSD", "SBS", "DSD", Character.valueOf('D'), Block.dirt, Character.valueOf('S'), Block.sand, Character.valueOf('B'), water});
     }

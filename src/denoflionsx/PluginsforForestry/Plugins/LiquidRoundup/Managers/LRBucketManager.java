@@ -49,7 +49,7 @@ public class LRBucketManager {
             PfF.Proxy.print("Liquid " + event.Name + " skipped iron bucket due to blacklist.");
             return;
         }
-        String n = event.Liquid.asItemStack().getDisplayName();
+        String n = PfFLib.PffStringUtils.getItemName(event.Liquid.asItemStack());
         if (n.equals("")) {
             n = PfFLib.PffStringUtils.cleanLiquidNameFromEvent(event);
         }

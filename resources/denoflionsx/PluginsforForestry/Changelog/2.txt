@@ -1,0 +1,2 @@
+Bog Earth recipe gives the proper amount.
+Crash prevention for liquids that NPE on getDisplayName().

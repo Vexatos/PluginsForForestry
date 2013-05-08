@@ -52,7 +52,7 @@ public class LRContainerManager {
                 metaMap.put(e.Name, m);
             }
             int meta = metaMap.get(e.Name);
-            String lname = e.Liquid.asItemStack().getDisplayName();
+            String lname = PfFLib.PffStringUtils.getItemName(e.Liquid.asItemStack());
             if (lname.equals("")) {
                 lname = PfFLib.PffStringUtils.cleanLiquidNameFromEvent(e);
             }

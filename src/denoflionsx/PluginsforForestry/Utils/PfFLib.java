@@ -5,6 +5,7 @@ import denoflionsx.denLib.Lib.denLib;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidDictionary;
 
 public class PfFLib {
@@ -23,6 +24,14 @@ public class PfFLib {
             } catch (Exception ex) {
             }
             return error;
+        }
+        
+        public static String getItemName(ItemStack stack){
+            try{
+                return stack.getDisplayName();
+            }catch(Exception ex){
+                return "";
+            }
         }
 
         public static String getTextureFromName(String liquid) {
