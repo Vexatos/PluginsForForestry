@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.util.Arrays;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidContainerData;
+import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 
 public class PfFLib {
@@ -66,5 +68,18 @@ public class PfFLib {
             f++;
             return f;
         }
+    }
+    
+    public static class LiquidUtils{
+        
+        public static ItemStack getEmptyContainer(ItemStack s){
+            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()){
+                if (a.filled.isItemEqual(s)){
+                    return a.container;
+                }
+            }
+            return null;
+        }
+        
     }
 }

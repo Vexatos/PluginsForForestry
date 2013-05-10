@@ -1,6 +1,6 @@
 package denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items;
 
-import denoflionsx.PluginsforForestry.API.Recipe.IRegisterRecipe;
+import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import net.minecraft.block.Block;

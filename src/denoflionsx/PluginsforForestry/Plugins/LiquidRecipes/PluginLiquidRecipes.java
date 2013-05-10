@@ -8,7 +8,7 @@ import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Dictionary.ReflectionModuleParser;
 import denoflionsx.PluginsforForestry.Dictionary.Vanilla;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
-import forestry.api.recipes.RecipeManagers;
+import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -35,7 +35,7 @@ public class PluginLiquidRecipes implements IPfFPlugin {
                 for (ItemStack i : s2.getItemStackFromDictionary()) {
                     LiquidStack l = s2.getLiquidStack(s2.getAmount());
                     if (l != null) {
-                        RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{i}, l);
+                        Forestry.squeezer(5, new ItemStack[]{i}, l);
                     }
                 }
             }
@@ -45,14 +45,14 @@ public class PluginLiquidRecipes implements IPfFPlugin {
                 LiquidStack l = s2.getSqueezeobject().getLiquidStack(s2.getSqueezeobject().getAmount());
                 for (ItemStack i : PfFReflectionParser.instance.getEntriesAsItemStacksForType(s2.getSqueezeobject().getLiquidTag())) {
                     if (l != null) {
-                        RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{i}, l);
+                        Forestry.squeezer(5, new ItemStack[]{i}, l);
                     }
                 }
             }
         }
         for (ItemStack i : Vanilla.veggies) {
             LiquidStack l = LiquidDictionary.getLiquid("Veggie Juice", PfFTuning.getInt(PfFTuning.Liquids.vanillaVeggies_SqueezeAmount));
-            RecipeManagers.squeezerManager.addRecipe(5, new ItemStack[]{i}, l);
+            Forestry.squeezer(5, new ItemStack[]{i}, l);
         }
     }
 }

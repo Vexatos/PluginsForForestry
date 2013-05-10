@@ -1,7 +1,7 @@
 package denoflionsx.PluginsforForestry.Utils;
 
 import denoflionsx.PluginsforForestry.Core.PfF;
-import forestry.api.recipes.RecipeManagers;
+import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import net.minecraft.block.Block;
@@ -11,7 +11,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class FermenterUtils {
-    
+
     public static void registerFermenterBooster(LiquidStack liquid, float bonus) {
         try {
             ArrayList<FermenterRecipe> r = new ArrayList();
@@ -38,7 +38,7 @@ public class FermenterUtils {
             }
             PfF.Proxy.print("Adapting " + liquid.asItemStack().getItem().getLocalizedName(liquid.asItemStack()) + " to fermenter. " + r.size() + " recipes.");
             for (FermenterRecipe z : r) {
-                RecipeManagers.fermenterManager.addRecipe(z.getFermentable(), z.getAmount(), 1.5f, LiquidDictionary.getLiquid("biomass", LiquidContainerRegistry.BUCKET_VOLUME), liquid);
+                Forestry.fermenter(z, 1.5f, liquid, "biomass");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -63,5 +63,4 @@ public class FermenterUtils {
             return fermentable;
         }
     }
-    
 }

@@ -4,7 +4,7 @@ import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import denoflionsx.PluginsforForestry.Core.PfF;
-import denoflionsx.PluginsforForestry.API.Recipe.IRegisterRecipe;
+import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.BarrelItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRBlocks;
@@ -23,7 +23,7 @@ public class PfFProxy implements IPfFProxy {
 
     @Override
     public void print(String msg) {
-        FMLLog.info("[" + PfFTranslator.instance.translateKey("console.pff.name") + "]" + ": " + msg);
+        FMLLog.info("[PfF]" + ": " + msg);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class PfFProxy implements IPfFProxy {
 
     @Override
     public void warning(String msg) {
-        FMLLog.warning("[" + PfFTranslator.instance.translateKey("console.pff.name") + "]: " + msg);
+        FMLLog.warning("[PfF]: " + msg);
     }
 
     @Override
     public void severe(String msg) {
-        FMLLog.severe("[" + PfFTranslator.instance.translateKey("console.pff.name") + "]: " + msg);
+        FMLLog.severe("[PfF]: " + msg);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class PfFProxy implements IPfFProxy {
             for (Class c : classes) {
                 for (Field f : c.getDeclaredFields()) {
                     Object o = f.get(null);
-                    if (o == null){
+                    if (o == null) {
                         continue;
                     }
                     if (o instanceof IRegisterRecipe) {
@@ -88,5 +88,10 @@ public class PfFProxy implements IPfFProxy {
 
     @Override
     public void sendMessageToPlayer(String msg) {
+    }
+
+    @Override
+    public String translate(String key) {
+        return key;
     }
 }

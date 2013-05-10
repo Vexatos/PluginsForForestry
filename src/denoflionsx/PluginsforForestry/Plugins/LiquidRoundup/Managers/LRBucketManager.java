@@ -4,7 +4,6 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
-import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemLRBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucket;
@@ -67,7 +66,7 @@ public class LRBucketManager {
             PfF.Proxy.print("New default id assigned for bucket " + n + ": " + id);
         }
         if (r.getBucketItemID(n, id) > 0) {
-            LRItems.customBucketsFilled.put(r.getBucketItemID(n, id), this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfFTranslator.instance.translateKey("item.pff.bucket")));
+            LRItems.customBucketsFilled.put(r.getBucketItemID(n, id), this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfF.Proxy.translate("item.pff.bucket")));
             ItemStack i = r.getBucketItemStack(r.getBucketItemID(n, id));
             if (event.Liquid != null && i != null && bucket.empty != null) {
                 LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(event.Liquid, LiquidContainerRegistry.BUCKET_VOLUME), i, bucket.empty));

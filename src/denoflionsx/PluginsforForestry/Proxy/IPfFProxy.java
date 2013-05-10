@@ -24,4 +24,6 @@ public interface IPfFProxy {
     
     public void sendMessageToPlayer(String msg);
     
+    public String translate(String key);
+    
 }

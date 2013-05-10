@@ -6,6 +6,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import denoflionsx.PluginsforForestry.Client.Render.ItemContainerRenderer;
 import denoflionsx.PluginsforForestry.Client.Render.RenderThis;
 import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.denLib.Mod.Client.Render.RenderBlockFluidClassic;
@@ -57,6 +58,11 @@ public class PfFProxyClient extends PfFProxy {
     @Override
     public void sendMessageToPlayer(String msg) {
         Minecraft.getMinecraft().thePlayer.sendChatToPlayer("[PfF]: " + msg);
+    }
+
+    @Override
+    public String translate(String key) {
+        return PfFTranslator.instance.translateKey(key);
     }
     
     

@@ -1,4 +1,4 @@
-package denoflionsx.PluginsforForestry.API.Recipe;
+package denoflionsx.PluginsforForestry.Recipe;
 
 public interface IRegisterRecipe {
 

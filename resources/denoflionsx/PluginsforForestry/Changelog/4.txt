@@ -1,0 +1,2 @@
+PfF now works without Forestry installed.
+Localization is run through the client proxy.
