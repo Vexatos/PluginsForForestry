@@ -3,7 +3,6 @@ package denoflionsx.PluginsforForestry.Lang;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.HashMap;
-import net.minecraft.client.Minecraft;
 
 public class PfFTranslator {
 
@@ -17,7 +16,7 @@ public class PfFTranslator {
     }
 
     public String translateKey(String key) {
-        return this.translateKey(key, Minecraft.getMinecraft().gameSettings.language);
+        return this.translateKey(key, PfF.Proxy.getLang());
     }
 
     public String translateKey(String key, String lang) {

@@ -92,6 +92,11 @@ public class PfFProxy implements IPfFProxy {
 
     @Override
     public String translate(String key) {
-        return key;
+        return PfFTranslator.instance.translateKey(key);
+    }
+
+    @Override
+    public String getLang() {
+        return "en_US";
     }
 }

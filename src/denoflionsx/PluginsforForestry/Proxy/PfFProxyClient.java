@@ -61,9 +61,7 @@ public class PfFProxyClient extends PfFProxy {
     }
 
     @Override
-    public String translate(String key) {
-        return PfFTranslator.instance.translateKey(key);
+    public String getLang() {
+        return Minecraft.getMinecraft().gameSettings.language;
     }
-    
-    
 }

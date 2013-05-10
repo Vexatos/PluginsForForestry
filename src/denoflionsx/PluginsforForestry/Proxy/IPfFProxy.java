@@ -26,4 +26,6 @@ public interface IPfFProxy {
     
     public String translate(String key);
     
+    public String getLang();
+    
 }
