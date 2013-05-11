@@ -1,6 +1,6 @@
 # Title: Creosote Module
 # Author: denoflionsx
 # Type: biogas
-# MJt: 1
-# BurnTime: 5000
+# MJt: 2
+# BurnTime: 10000
 Creosote Oil

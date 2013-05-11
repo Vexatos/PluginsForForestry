@@ -1,0 +1,7 @@
+# Title: Meat Module
+# Author: denoflionsx
+# Type: biogas
+# MJt: 1
+# BurnTime: 5000
+# This was going to be a joke, but PC said I should leave it.
+meat

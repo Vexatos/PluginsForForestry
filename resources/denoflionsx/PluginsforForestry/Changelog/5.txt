@@ -1,0 +1,2 @@
+MFR meat is now a valid biogas fuel.
+Creosote oil default biogas engine values changed. (delete those values in your config to get updated ones)
