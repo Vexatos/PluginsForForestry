@@ -22,7 +22,8 @@ import net.minecraftforge.liquids.LiquidStack;
 public class LRBucketManager {
 
     protected BiMap<String, Integer> bucketIDMap = HashBiMap.create();
-    protected File saveFile = new File(PfF.core.mappingsDir.getAbsolutePath() + "/DefaultBucketMappings.BiMap");
+    protected File saveFile_OLD = new File(PfF.core.mappingsDir.getAbsolutePath() + "/DefaultBucketMappings.BiMap");
+    protected File saveFile = new File(PfF.core.mappingsDir.getAbsolutePath() + "/DefaultBucketMappings_fixed.BiMap");
     //--------------------------------------------------------------
     protected ReflectionHelper r = null;
     protected BucketType bucket = null;
@@ -44,7 +45,7 @@ public class LRBucketManager {
                 return;
             }
         }
-        if (this.bucket.isBlacklisted(event)){
+        if (this.bucket.isBlacklisted(event)) {
             PfF.Proxy.print("Liquid " + event.Name + " skipped iron bucket due to blacklist.");
             return;
         }
@@ -53,16 +54,15 @@ public class LRBucketManager {
             n = PfFLib.PffStringUtils.cleanLiquidNameFromEvent(event);
         }
         int id;
-        String hash = PfFLib.PffStringUtils.Hash(String.valueOf(event.Liquid.itemID + "|" + event.Liquid.itemMeta));
-        if (bucketIDMap.containsKey(hash)) {
-            id = bucketIDMap.get(hash);
+        if (bucketIDMap.containsKey(event.Name)) {
+            id = bucketIDMap.get(event.Name);
             PfF.Proxy.print("Found known default ID for bucket " + n + ": " + id);
         } else {
             id = PfFLib.MathUtils.getLastID(bucketIDMap.inverse());
             if (id == 1) {
                 id += PfFTuning.bucketIDRangeStart;
             }
-            bucketIDMap.put(hash, id);
+            bucketIDMap.put(event.Name, id);
             PfF.Proxy.print("New default id assigned for bucket " + n + ": " + id);
         }
         if (r.getBucketItemID(n, id) > 0) {
@@ -84,6 +84,7 @@ public class LRBucketManager {
     }
 
     public void processLiquids() {
+        this.oldFormat();
         for (LiquidDictionary.LiquidRegisterEvent event : PluginLR.events) {
             processLiquid(event);
         }
@@ -92,6 +93,22 @@ public class LRBucketManager {
         }
         denLib.FileUtils.saveBiMapToFile(bucketIDMap, saveFile);
         PfFTuning.config.save();
+    }
+
+    private void oldFormat() {
+        if (saveFile_OLD.exists()) {
+            PfF.Proxy.print("Converting old bucket mapping format to new one...");
+            BiMap<String, Integer> oldFile = denLib.FileUtils.readBiMapFromFile(saveFile_OLD);
+            for (LiquidDictionary.LiquidRegisterEvent event : PluginLR.events) {
+                String hash = PfFLib.PffStringUtils.Hash(String.valueOf(event.Liquid.itemID + "|" + event.Liquid.itemMeta));
+                if (oldFile.containsKey(hash)) {
+                    int id = oldFile.get(hash);
+                    bucketIDMap.put(event.Name, id);
+                    PfF.Proxy.print("Unscrambled " + hash + " to " + event.Name);
+                }
+            }
+            saveFile_OLD.deleteOnExit();
+        }
     }
 
     public class ReflectionHelper {
@@ -156,9 +173,9 @@ public class LRBucketManager {
                         return true;
                     }
                 }
-            }else if (this.equals(WOODEN)){
-                for (String s : Blacklists.woodenBucket){
-                    if (s.equals(event.Name)){
+            } else if (this.equals(WOODEN)) {
+                for (String s : Blacklists.woodenBucket) {
+                    if (s.equals(event.Name)) {
                         return true;
                     }
                 }
