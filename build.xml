@@ -55,12 +55,13 @@
 
     <!-- Set unknown build number -->
     <target name="version-not-provided" unless="env.BUILD_NUMBER">
-        <property name="build.number" value="unknown"/>
+        <buildnumber/>
     </target>
 
     <!-- Set build number from environment -->
     <target name="version-provided" if="env.BUILD_NUMBER">
         <property name="build.number" value="${env.BUILD_NUMBER}"/>
+        <echo message="Setting build number to ${build.number}"/>
     </target>
 	
     <target name="git.revision" if="git.present">
@@ -99,7 +100,7 @@
 
         <mkdir dir="${forge.dir}/accesstransformers"/>
         <copy todir="${forge.dir}/accesstransformers">
-             <fileset file="${download.dir}/denLib-3.X/denLib_at.cfg"/>
+            <fileset file="${download.dir}/denLib-3.X/denLib_at.cfg"/>
         </copy>
 
         <!-- Install forge -->
