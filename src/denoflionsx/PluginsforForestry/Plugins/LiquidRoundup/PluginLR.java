@@ -19,8 +19,6 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRContainer
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers.LRLiquidManager;
 import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
-import denoflionsx.denLib.Mod.Event.BucketDumpedEvent;
-import denoflionsx.denLib.Mod.Event.DenListen;
 import denoflionsx.denLib.Mod.denLibMod;
 import java.util.ArrayList;
 import net.minecraft.block.Block;
@@ -53,7 +51,6 @@ public class PluginLR implements IPfFPlugin {
             events.add(new LiquidDictionary.LiquidRegisterEvent(l.asItemStack().getDisplayName(), l));
         }
         denLibMod.Proxy.registerForgeSubscribe(this);
-        denLibMod.Proxy.registerDenListen(this);
     }
 
     @Override
@@ -141,9 +138,7 @@ public class PluginLR implements IPfFPlugin {
     public void onBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
         ItemStack f = null;
-        if (e.current.isItemEqual(LRItems.ItemStackWoodenBucketEmpty)) {
-            f = LRItems.woodenBucketstacks.get(id);
-        } else if (e.current.isItemEqual(LiquidContainerRegistry.EMPTY_BUCKET)) {
+        if (e.current.isItemEqual(LiquidContainerRegistry.EMPTY_BUCKET)) {
             f = LRItems.bucketStacks.get(id);
         }
         if (f != null) {
@@ -153,10 +148,18 @@ public class PluginLR implements IPfFPlugin {
         }
     }
 
-    @DenListen
-    public void onBucketDumped(BucketDumpedEvent e) {
-        if (PfFLib.LiquidUtils.getEmptyContainer(e.current).isItemEqual(LRItems.ItemStackWoodenBucketEmpty)) {
-            e.result = LRItems.ItemStackWoodenBucketEmpty.copy();
+    public static boolean onWoodenBucket(FillBucketEvent e) {
+        int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
+        ItemStack f = null;
+        if (e.current.isItemEqual(LRItems.ItemStackWoodenBucketEmpty)) {
+            f = LRItems.woodenBucketstacks.get(id);
         }
+        if (f != null) {
+            e.world.setBlockToAir(e.target.blockX, e.target.blockY, e.target.blockZ);
+            e.result = f.copy();
+            e.setResult(Event.Result.ALLOW);
+            return true;
+        }
+        return false;
     }
 }

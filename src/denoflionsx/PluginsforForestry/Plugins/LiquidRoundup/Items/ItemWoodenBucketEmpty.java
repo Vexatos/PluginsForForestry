@@ -4,12 +4,23 @@ import cpw.mods.fml.common.Loader;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxyClient;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.Event;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 
@@ -60,5 +71,32 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
             }
         }
         return this.itemIcon;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+        boolean flag = this.isFull == 0;
+        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
+        if (movingobjectposition == null) {
+            return par1ItemStack;
+        } else {
+            FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, par1ItemStack, par2World, movingobjectposition);
+            if (!PluginLR.onWoodenBucket(event)){
+                return par1ItemStack;
+            }
+            if (event.getResult() == Event.Result.ALLOW) {
+                if (par3EntityPlayer.capabilities.isCreativeMode) {
+                    return par1ItemStack;
+                }
+                if (--par1ItemStack.stackSize <= 0) {
+                    return event.result;
+                }
+                if (!par3EntityPlayer.inventory.addItemStackToInventory(event.result)) {
+                    par3EntityPlayer.dropPlayerItem(event.result);
+                }
+                return par1ItemStack;
+            }
+        }
+        return par1ItemStack;
     }
 }
