@@ -1,0 +1,8 @@
+Item Documentation
+Wooden Bucket: A bucket made of logs that can hold any liquid but lava.
+Barrel: A large liquid container. It can hold 10,000 mB.
+Blacksmithing Hammer: A hammer that is required to make iron rings.
+Iron Rings: Rings that are required to make barrels.
+Liquid Documentation
+Liquid Peat: Liquid made from peat in a squeezer. It can be used in a fermenter to boost biomass production.
+Veggie Juice: Liquid made from vegetables in a squeezer. It can be used in a fermenter to boost biomass production.

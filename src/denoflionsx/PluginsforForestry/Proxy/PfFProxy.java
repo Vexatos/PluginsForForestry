@@ -1,25 +1,33 @@
 package denoflionsx.PluginsforForestry.Proxy;
 
+import com.google.common.collect.BiMap;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Plugins.Wiki.Items.WikiBook;
 import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
-import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.BarrelItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRBlocks;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
+import denoflionsx.PluginsforForestry.Tab.PfFTab;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PfFProxy implements IPfFProxy {
+
+    public ArrayList<Class> ItemCollections = new ArrayList();
 
     @Override
     public void print(String msg) {
@@ -68,8 +76,7 @@ public class PfFProxy implements IPfFProxy {
     public void registerAllRecipes() {
         try {
             PfF.Proxy.print("Registering recipes.");
-            Class[] classes = new Class[]{LRItems.class, BarrelItems.class};
-            for (Class c : classes) {
+            for (Class c : ItemCollections) {
                 for (Field f : c.getDeclaredFields()) {
                     Object o = f.get(null);
                     if (o == null) {
@@ -98,5 +105,40 @@ public class PfFProxy implements IPfFProxy {
     @Override
     public String getLang() {
         return "en_US";
+    }
+
+    @Override
+    public void setTabs() {
+        PfFAPI.tab = new PfFTab();
+        try {
+            for (Class c : ItemCollections) {
+                for (Field f : c.getDeclaredFields()) {
+                    Object o = f.get(null);
+                    if (o instanceof Item) {
+                        Item i = (Item) o;
+                        i.setCreativeTab(PfFAPI.tab);
+                    } else if (o instanceof ItemStack) {
+                        ItemStack i = (ItemStack) o;
+                        i.getItem().setCreativeTab(PfFAPI.tab);
+                    } else if (o instanceof HashMap) {
+                        HashMap<Integer, Item> map = (HashMap) o;
+                        for (Item i : map.values()) {
+                            i.setCreativeTab(PfFAPI.tab);
+                        }
+                    } else if (o instanceof BiMap) {
+                        BiMap<Integer, ItemStack> map = (BiMap) o;
+                        for (ItemStack i : map.values()) {
+                            i.getItem().setCreativeTab(PfFAPI.tab);
+                        }
+                    } else if (o instanceof WikiBook) {
+                        WikiBook i = (WikiBook) o;
+
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

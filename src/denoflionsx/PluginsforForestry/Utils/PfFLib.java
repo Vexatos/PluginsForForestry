@@ -3,12 +3,14 @@ package denoflionsx.PluginsforForestry.Utils;
 import com.google.common.collect.BiMap;
 import denoflionsx.denLib.Lib.denLib;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerData;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.liquids.LiquidStack;
 
 public class PfFLib {
 
@@ -79,6 +81,16 @@ public class PfFLib {
                 }
             }
             return null;
+        }
+        
+        public static ArrayList<ItemStack> getAllContainersForLiquid(LiquidStack s){
+            ArrayList<ItemStack> containers = new ArrayList();
+            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()){
+                if (a.stillLiquid.isLiquidEqual(s)){
+                    containers.add(a.filled);
+                }
+            }
+            return containers;
         }
         
     }

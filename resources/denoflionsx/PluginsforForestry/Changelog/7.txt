@@ -1,0 +1,4 @@
+Fixed a crash when a mod with messed up liquids loads before PfF.
+Added feature: Filled Liquid Containers as vanilla furnace fuel. See config file.
+Added Creative Tab.
+Added documentation in the form of an in-game book. See creative tab.

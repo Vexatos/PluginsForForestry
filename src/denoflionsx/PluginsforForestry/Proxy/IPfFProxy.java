@@ -28,4 +28,6 @@ public interface IPfFProxy {
     
     public String getLang();
     
+    public void setTabs();
+    
 }

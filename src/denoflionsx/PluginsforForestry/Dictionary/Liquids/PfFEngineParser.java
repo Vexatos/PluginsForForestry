@@ -5,6 +5,8 @@ import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines.BiogasMapping;
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines.CombustionMapping;
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines.EngineFuel;
+import denoflionsx.PluginsforForestry.Events.EngineEvent;
+import denoflionsx.PluginsforForestry.Events.EngineEventHandler;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +45,7 @@ public class PfFEngineParser {
                 }
             }
         }
+        EngineEventHandler.instance.runEvent(new EngineEvent());
     }
     
     public static enum EngineMappings {

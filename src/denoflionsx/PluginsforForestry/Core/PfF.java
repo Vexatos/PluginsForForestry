@@ -7,11 +7,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
-import denoflionsx.PluginsforForestry.EventHandler.ChangelogHandler;
 import denoflionsx.PluginsforForestry.EventHandler.LiquidDictionaryDebug;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
+import denoflionsx.denLib.Mod.Changelog.ChangelogHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
 
@@ -25,7 +25,7 @@ public class PfF {
     @SidedProxy(clientSide = proxyPath + "PfFProxyClient", serverSide = proxyPath + "PfFProxyCommon")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    private final boolean debug = false;
+    public static final boolean debug = true;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
@@ -41,7 +41,7 @@ public class PfF {
         PluginRegistry.register();
         PfFAPI.plugins.runPluginLoadEvent(event);
         core.registerWithUpdater();
-        if (debug){
+        if (debug) {
             WorldEventHandler.registerHandler(new LiquidDictionaryDebug());
         }
     }
@@ -57,7 +57,8 @@ public class PfF {
         PfFAPI.plugins.runPluginLoadEvent(evt);
         core.setupRendering();
         PfF.Proxy.registerAllRecipes();
-        WorldEventHandler.registerHandler(new ChangelogHandler());
+        PfF.Proxy.setTabs();
+        ChangelogHandler.createNewHandler(PfF.core.getBuildNumber(), PfF.core.configDir, "Plugins for Forestry", "denoflionsx.PluginsforForestry.Changelog.".replace(".", "/"));
         PfF.Proxy.print("This is PfF version " + "@VERSION@");
     }
 }

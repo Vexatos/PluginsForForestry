@@ -5,10 +5,13 @@ import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
+import denoflionsx.PluginsforForestry.Plugins.Wiki.Items.WikiItems;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxyClient;
+import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -99,4 +102,13 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
         }
         return par1ItemStack;
     }
+
+    @Override
+    public void getSubItems(int itemId, CreativeTabs creativeTab, List subTypes) {
+        if (WikiItems.general != null){
+            subTypes.add(WikiItems.general.getBook());
+        }
+    }
+    
+    
 }

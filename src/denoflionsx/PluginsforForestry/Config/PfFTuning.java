@@ -63,12 +63,19 @@ public class PfFTuning {
         public static String veggiejuice_BlockID = String.valueOf(3100);
         public static String liquidpeat_BlockID = String.valueOf(3101);
     }
-    
+
     @Tunable(category = "rendering", comment = "These options are for development")
-    public static class Rendering{
-        
+    public static class Rendering {
+
         @Comment(comment = "This causes the renderer to refresh from the txt file every time.")
         public static String render_debugMode = String.valueOf(false);
-        
+    }
+
+    @Tunable(category = "furnace")
+    public static class Furnace {
+
+        public static String fuel_LiquidContainersForFurnace = String.valueOf(true);
+        @Comment(comment = "With default values biofuel/ethanol will be equivilant to lava in a vanilla furnace.")
+        public static String fuel_LiquidContainerForFurnace_NerfPercent = String.valueOf(50);
     }
 }

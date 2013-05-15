@@ -7,6 +7,7 @@ import forestry.api.core.ItemInterface;
 import forestry.api.fuels.EngineBronzeFuel;
 import forestry.api.fuels.FuelManager;
 import forestry.api.recipes.RecipeManagers;
+import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
@@ -19,8 +20,8 @@ public class Forestry {
         } catch (NoClassDefFoundError ex) {
         }
     }
-    
-    public static ItemStack items(String tag){
+
+    public static ItemStack items(String tag) {
         try {
             return ItemInterface.getItem(tag);
         } catch (NoClassDefFoundError ex) {
@@ -52,6 +53,23 @@ public class Forestry {
             }
         } catch (NoClassDefFoundError ex) {
         }
+    }
+
+    public static ArrayList<EngineFuel> getFuelMap() {
+        try {
+            ArrayList<EngineFuel> f = new ArrayList();
+            if (FuelManager.bronzeEngineFuel != null) {
+                for (EngineBronzeFuel value : FuelManager.bronzeEngineFuel.values()) {
+                    if (value.dissipationMultiplier == 1) {
+                        EngineFuel fuel = new EngineFuel(LiquidDictionary.findLiquidName(new LiquidStack(value.liquid.itemID, 1000, value.liquid.getItemDamage())), value.powerPerCycle, value.burnDuration);
+                        f.add(fuel);
+                    }
+                }
+            }
+            return f;
+        } catch (NoClassDefFoundError ex) {
+        }
+        return null;
     }
 
     public static void fermenter(FermenterRecipe z, float bonus, LiquidStack liquid, String target) {

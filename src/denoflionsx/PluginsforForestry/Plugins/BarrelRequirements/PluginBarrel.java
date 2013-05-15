@@ -2,6 +2,7 @@ package denoflionsx.PluginsforForestry.Plugins.BarrelRequirements;
 
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
+import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.BarrelItems;
 import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.BarrelRecipe;
 import denoflionsx.PluginsforForestry.Plugins.BarrelRequirements.Items.ItemHammer;
@@ -28,6 +29,7 @@ public class PluginBarrel implements IPfFPlugin {
         if (LRItems.barrelEmpty != null && BarrelItems.ItemStackHammer != null && BarrelItems.ItemStackRings != null){
             BarrelItems.barrelRecipe = new BarrelRecipe();
         }
+        PfF.Proxy.ItemCollections.add(BarrelItems.class);
     }
 
     @Override

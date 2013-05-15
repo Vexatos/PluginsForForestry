@@ -2,6 +2,7 @@ package denoflionsx.PluginsforForestry.Plugins.EngineRecipes;
 
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.PfFEngineParser;
+import denoflionsx.PluginsforForestry.Events.EngineEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 
@@ -10,6 +11,7 @@ public class PluginEngineRecipes implements IPfFPlugin, IdenWorldEventHandler {
     @Override
     public void onPreLoad() {
         PfFEngineParser.createInstance();
+        EngineEventHandler.create();
     }
 
     @Override
