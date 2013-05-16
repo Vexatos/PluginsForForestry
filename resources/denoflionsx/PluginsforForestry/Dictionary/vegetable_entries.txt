@@ -1,0 +1,27 @@
+# Title: Veggie Juice Module
+# Author: Jadedcat
+# Type: vegetable
+# Amount: 100
+cropCarrot
+cropPotato
+cropPumpkin
+cropAsparagus
+cropBean
+cropBeet
+cropBellpepper
+cropBroccoli
+cropCelery
+cropChilipepper
+cropCorn
+cropCucumber
+cropEggplant
+cropGarlic
+cropGinger
+cropLettuc
+cropOnion
+cropPeas
+cropRadish
+cropSweetpotato
+cropTomato
+cropTurnip
+cropZucchini

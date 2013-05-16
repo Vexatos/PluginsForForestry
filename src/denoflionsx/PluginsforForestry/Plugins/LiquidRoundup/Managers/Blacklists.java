@@ -10,4 +10,6 @@ public class Blacklists {
     public static final String[] capsule = new String[]{"Oil", "Fuel", "Steam", "Creosote Oil"};
     public static final String[] woodenBucket = new String[]{"Steam"};
     public static final String[] barrel = new String[]{"Steam"};
+    // These are liquids that are known to cause issues with the managers.
+    public static final String[] known_mismaps = new String[]{"Molten Iron"};
 }

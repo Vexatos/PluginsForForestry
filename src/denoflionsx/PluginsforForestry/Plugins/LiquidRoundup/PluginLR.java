@@ -33,7 +33,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PluginLR implements IPfFPlugin {
-    
+
     public static LRLiquidManager liquids = new LRLiquidManager();
     //---------------------------------------------------------------------
     public static LRBucketManager buckets;
@@ -41,12 +41,12 @@ public class PluginLR implements IPfFPlugin {
     public static LRContainerManager containers;
     //---------------------------------------------------------------------
     public static ArrayList<LiquidDictionary.LiquidRegisterEvent> events = new ArrayList();
-    
+
     @ForgeSubscribe
     public void onLiquidRegister(LiquidDictionary.LiquidRegisterEvent event) {
         events.add(event);
     }
-    
+
     @Override
     public void onPreLoad() {
         try {
@@ -67,7 +67,7 @@ public class PluginLR implements IPfFPlugin {
         }
         denLibMod.Proxy.registerForgeSubscribe(this);
     }
-    
+
     @Override
     public void onLoad() {
         if (PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID) > 0) {
@@ -91,21 +91,20 @@ public class PluginLR implements IPfFPlugin {
                 LRItems.can = new ItemContainer(PfFTuning.getInt(PfFTuning.Items.can_ItemID), "PluginsforForestry:can", ItemContainer.MATERIAL.tin);
             }
             if (PfFTuning.getBool(PfFTuning.Liquids.liquid_asBlock)) {
-                this.createLiquidBlockForm("Veggie Juice", "liquid.pff.veggiejuice.name", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
-                this.createLiquidBlockForm("Liquid Peat", "liquid.pff.liquidpeat.name", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
+                this.createLiquidBlockForm(LRLiquids.veggieJuice_Dictionary, "liquid.pff.veggiejuice.name", PfFTuning.getInt(PfFTuning.Blocks.veggiejuice_BlockID));
+                this.createLiquidBlockForm(LRLiquids.liquidPeat_Dictionary, "liquid.pff.liquidpeat.name", PfFTuning.getInt(PfFTuning.Blocks.liquidpeat_BlockID));
             } else {
-                this.createLiquidItemForm("Veggie Juice", "liquid.pff.veggiejuice.name", PfFTuning.getInt(PfFTuning.Items.veggiejuice_ItemID));
-                this.createLiquidItemForm("Liquid Peat", "liquid.pff.liquidpeat.name", PfFTuning.getInt(PfFTuning.Items.liquidpeat_ItemID));
-                
+                this.createLiquidItemForm(LRLiquids.veggieJuice_Dictionary, "liquid.pff.veggiejuice.name", PfFTuning.getInt(PfFTuning.Items.veggiejuice_ItemID));
+                this.createLiquidItemForm(LRLiquids.liquidPeat_Dictionary, "liquid.pff.liquidpeat.name", PfFTuning.getInt(PfFTuning.Items.liquidpeat_ItemID));
             }
-            this.registerAsFermentable(LRLiquids.LRLiquids.get("Veggie Juice"), PfFTuning.getFloat(PfFTuning.Liquids.veggiejuice_FermenterBonus));
-            this.registerAsFermentable(LRLiquids.LRLiquids.get("Liquid Peat"), PfFTuning.getFloat(PfFTuning.Liquids.liquidpeat_FermenterBonus));
+            this.registerAsFermentable(LRLiquids.LRLiquids.get(LRLiquids.veggieJuice_Dictionary), PfFTuning.getFloat(PfFTuning.Liquids.veggiejuice_FermenterBonus));
+            this.registerAsFermentable(LRLiquids.LRLiquids.get(LRLiquids.liquidPeat_Dictionary), PfFTuning.getFloat(PfFTuning.Liquids.liquidpeat_FermenterBonus));
         } else {
             PfF.Proxy.print("Disabling Veggie Juice, Liquid Peat, Capsules, and Cans because Forestry is not detected!");
         }
         PfF.Proxy.ItemCollections.add(LRItems.class);
     }
-    
+
     @Override
     public void onPostLoad() {
         for (LiquidDictionary.LiquidRegisterEvent e : events) {
@@ -129,27 +128,27 @@ public class PluginLR implements IPfFPlugin {
             containers.registerContainer(Forestry.items("canEmpty"), LRItems.can, PfF.Proxy.translate("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
         }
     }
-    
+
     public void createLiquidBlockForm(String perma, String name, int blockID) {
         if (blockID > 0) {
             Block b = new LRLiquidBlock(blockID, perma, name, denLib.StringUtils.removeSpaces(perma.toLowerCase()) + ".still");
             PfF.Proxy.registerLiquidBlock(perma, name, (LRLiquidBlock) b);
         }
     }
-    
+
     public void createLiquidItemForm(String perma, String name, int itemID) {
         if (itemID > 0) {
             LRLiquidItem liquid = new LRLiquidItem(new String[]{"PluginsforForestry:" + PfFLib.PffStringUtils.getTextureFromName(perma)}, itemID);
             PfF.Proxy.registerLiquidItem(perma, name, liquid);
         }
     }
-    
+
     public void registerAsFermentable(LiquidStack l, float bonus) {
         if (l != null) {
             FermenterRecipes.fermentables.add(new Fermentable(l, bonus));
         }
     }
-    
+
     @ForgeSubscribe
     public void onBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
@@ -163,7 +162,7 @@ public class PluginLR implements IPfFPlugin {
             e.setResult(Event.Result.ALLOW);
         }
     }
-    
+
     public static boolean onWoodenBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
         ItemStack f = null;

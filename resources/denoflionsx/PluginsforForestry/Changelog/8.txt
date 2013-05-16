@@ -1,0 +1,4 @@
+THIS UPDATE WILL BREAK CONTAINERS THAT HOLD LIQUID PEAT AND VEGGIE JUICE, SORRY!
+Changed Liquid Dictionary names for Liquid Peat and Veggie Juice to follow convention.
+Blacklisted a copy of Molten Iron that does not follow convention and causes issues.
+Added harvestcraft compat modules (JadedCat).

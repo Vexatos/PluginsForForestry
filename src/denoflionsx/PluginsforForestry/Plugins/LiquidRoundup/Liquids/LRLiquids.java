@@ -8,6 +8,9 @@ import net.minecraftforge.liquids.LiquidStack;
 public class LRLiquids {
 
     public static BiMap<String, LiquidStack> LRLiquids = HashBiMap.create();
+    
+    public static final String liquidPeat_Dictionary = "peat";
+    public static final String veggieJuice_Dictionary = "vegetable";
 
     public static String getLiquidNameFromLiquidStack(LiquidStack l) {
         for (LiquidStack test : LRLiquids.values()){

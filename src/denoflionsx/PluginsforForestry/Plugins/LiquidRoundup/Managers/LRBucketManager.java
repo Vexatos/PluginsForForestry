@@ -53,6 +53,9 @@ public class LRBucketManager {
         if (n.equals("")) {
             n = PfFLib.PffStringUtils.cleanLiquidNameFromEvent(event);
         }
+        if (n.equals(PfFLib.PffStringUtils.error)) {
+            n = event.Name;
+        }
         int id;
         if (bucketIDMap.containsKey(event.Name)) {
             id = bucketIDMap.get(event.Name);
@@ -65,10 +68,15 @@ public class LRBucketManager {
             bucketIDMap.put(event.Name, id);
             PfF.Proxy.print("New default id assigned for bucket " + n + ": " + id);
         }
-        if (r.getBucketItemID(n, id) > 0) {
-            LRItems.customBucketsFilled.put(r.getBucketItemID(n, id), this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfF.Proxy.translate("item.pff.bucket")));
-            ItemStack i = r.getBucketItemStack(r.getBucketItemID(n, id));
+        int cID = r.getBucketItemID(n, id);
+        if (cID != id) {
+            PfF.Proxy.print("ID Overwritten. Assigned ID for " + n + " : " + cID);
+        }
+        if (cID > 0) {
+            LRItems.customBucketsFilled.put(cID, this.bucket.createNewBucket(r.getBucketItemID(n, id), event.Liquid.itemID, n + " " + PfF.Proxy.translate("item.pff.bucket")));
+            ItemStack i = r.getBucketItemStack(cID);
             if (event.Liquid != null && i != null && bucket.empty != null) {
+                PfF.Proxy.print(n + ": " + i.getItem().toString().split("@")[1]);
                 LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(event.Liquid, LiquidContainerRegistry.BUCKET_VOLUME), i, bucket.empty));
             } else {
                 if (event.Liquid == null) {
@@ -108,6 +116,8 @@ public class LRBucketManager {
                 }
             }
             saveFile_OLD.deleteOnExit();
+
+
         }
     }
 
@@ -178,6 +188,11 @@ public class LRBucketManager {
                     if (s.equals(event.Name)) {
                         return true;
                     }
+                }
+            }
+            for (String s : Blacklists.known_mismaps) {
+                if (denLib.StringUtils.removeSpaces(event.Name.toLowerCase()).equals(s)) {
+                    return true;
                 }
             }
             return false;

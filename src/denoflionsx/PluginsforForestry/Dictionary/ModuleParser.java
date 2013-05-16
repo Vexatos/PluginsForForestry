@@ -4,6 +4,7 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -56,14 +57,7 @@ public class ModuleParser extends ModuleParserTemplate {
         }
 
         public LiquidStack getLiquidStack(int amount) {
-            // The parsing system removes whitespace so I need to find the proper tag that HAS spaces.
-            // I fucking love BiMaps.
-            for (String name : LRLiquids.LRLiquids.inverse().values()) {
-                if (denLib.StringUtils.removeSpaces(name).equals(this.getLiquidTag())) {
-                    return denLib.LiquidStackUtils.getNewStackCapacity(LRLiquids.LRLiquids.get(name), amount);
-                }
-            }
-            return null;
+            return LiquidDictionary.getLiquid(this.liquidTag, amount);
         }
     }
 }

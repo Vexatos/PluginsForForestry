@@ -4,14 +4,12 @@ import denoflionsx.PluginsforForestry.Dictionary.ModuleParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFDictionaryParser;
 import denoflionsx.PluginsforForestry.Dictionary.PfFReflectionParser;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
-import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Dictionary.ReflectionModuleParser;
 import denoflionsx.PluginsforForestry.Dictionary.Vanilla;
 import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PluginLiquidRecipes implements IPfFPlugin {
@@ -25,6 +23,7 @@ public class PluginLiquidRecipes implements IPfFPlugin {
 
     @Override
     public void onLoad() {
+        Vanilla.inject();
     }
 
     @Override
@@ -50,9 +49,6 @@ public class PluginLiquidRecipes implements IPfFPlugin {
                 }
             }
         }
-        for (ItemStack i : Vanilla.veggies) {
-            LiquidStack l = LiquidDictionary.getLiquid("Veggie Juice", PfFTuning.getInt(PfFTuning.Liquids.vanillaVeggies_SqueezeAmount));
-            Forestry.squeezer(5, new ItemStack[]{i}, l);
-        }
+
     }
 }

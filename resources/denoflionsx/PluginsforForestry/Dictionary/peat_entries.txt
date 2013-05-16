@@ -1,5 +1,5 @@
 # Title: Peat Module
 # Author: denoflionsx
-# Type: Liquid Peat
+# Type: peat
 # Amount: 250
 brickPeat
