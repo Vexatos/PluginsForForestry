@@ -15,7 +15,7 @@ import denoflionsx.denLib.Mod.Changelog.ChangelogHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
 
-@Mod(modid = "PluginsforForestry", name = "PluginsforForestry", version = "@VERSION@")
+@Mod(modid = "PluginsforForestry", name = "PluginsforForestry", version = "@VERSION@", dependencies = "required-after:denLib")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PfF {
 
