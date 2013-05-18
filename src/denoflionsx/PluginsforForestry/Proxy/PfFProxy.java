@@ -78,6 +78,7 @@ public class PfFProxy implements IPfFProxy {
             PfF.Proxy.print("Registering recipes.");
             for (Class c : ItemCollections) {
                 for (Field f : c.getDeclaredFields()) {
+                    f.setAccessible(true);
                     Object o = f.get(null);
                     if (o == null) {
                         continue;

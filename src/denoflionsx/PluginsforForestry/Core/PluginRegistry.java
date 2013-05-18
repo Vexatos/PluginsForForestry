@@ -6,6 +6,7 @@ import denoflionsx.PluginsforForestry.Plugins.EngineRecipes.PluginEngineRecipes;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRecipes.PluginLiquidRecipes;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import denoflionsx.PluginsforForestry.Plugins.Furnace.PluginFurnace;
+import denoflionsx.PluginsforForestry.Plugins.MFR.PluginMFR;
 import denoflionsx.PluginsforForestry.Plugins.Wiki.PluginWiki;
 
 public class PluginRegistry {
@@ -17,5 +18,6 @@ public class PluginRegistry {
         PfFAPI.plugins.registerPlugin(new PluginBarrel());
         PfFAPI.plugins.registerPlugin(new PluginFurnace());
         PfFAPI.plugins.registerPlugin(new PluginWiki());
+        PfFAPI.plugins.registerPlugin(new PluginMFR());
     }
 }

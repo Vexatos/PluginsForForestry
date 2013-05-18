@@ -78,4 +78,12 @@ public class PfFTuning {
         @Comment(comment = "With default values biofuel/ethanol will be equivilant to lava in a vanilla furnace.")
         public static String fuel_LiquidContainerForFurnace_NerfPercent = String.valueOf(50);
     }
+    
+    @Tunable(category = "recipereplacement")
+    public static class RecipeReplacement{
+        
+        @Comment(comment = "Replaces the Nether Star with an Ender Pearl.")
+        public static String recipeReplacement_MFR_PortableSpawner = String.valueOf(false);
+        
+    }
 }
