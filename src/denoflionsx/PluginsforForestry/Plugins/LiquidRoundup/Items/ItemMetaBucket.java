@@ -26,6 +26,7 @@ public class ItemMetaBucket extends Item {
         super(par1);
         this.empty = empty;
         this.setMaxStackSize(1);
+        this.setContainerItem(empty.getItem());
     }
 
     public ItemStack register(int meta, String name, LiquidStack liquid) {
@@ -58,7 +59,7 @@ public class ItemMetaBucket extends Item {
         int k = movingobjectposition.blockZ;
         if (movingobjectposition.typeOfHit == EnumMovingObjectType.TILE) {
             if (isFull < 0) {
-                return LRItems.ItemStackWoodenBucketEmpty.copy();
+                return this.empty.copy();
             }
             if (movingobjectposition.sideHit == 0) {
                 --j;
@@ -82,7 +83,7 @@ public class ItemMetaBucket extends Item {
                 return par1ItemStack;
             }
             if (this.tryPlaceContainedLiquid(par2World, d0, d1, d2, i, j, k, par1ItemStack)) {
-                return LRItems.ItemStackWoodenBucketEmpty.copy();
+                return this.empty.copy();
             }
         }
 
