@@ -1,5 +1,6 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -64,5 +65,10 @@ public class ItemLRBucket extends ItemBucket {
     @Override
     public Icon getIconFromDamage(int par1) {
         return LiquidContainerRegistry.EMPTY_BUCKET.getIconIndex();
+    }
+    
+    @Override
+    public CreativeTabs getCreativeTab() {
+         return PfFAPI.tab;
     }
 }

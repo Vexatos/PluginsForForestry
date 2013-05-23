@@ -7,14 +7,13 @@ import denoflionsx.PluginsforForestry.Client.Render.ItemContainerRenderer;
 import denoflionsx.PluginsforForestry.Client.Render.RenderThis;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemMetaBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.denLib.Mod.Client.Render.RenderBlockFluidClassic;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -31,11 +30,9 @@ public class PfFProxyClient extends PfFProxy {
                     if (a instanceof RenderThis) {
                         RenderThis r = (RenderThis) a;
                         Object o = f.get(null);
-                        if (o instanceof HashMap) {
-                            HashMap<Integer, Item> i = (HashMap) o;
-                            for (Item i2 : i.values()) {
-                                MinecraftForgeClient.registerItemRenderer(i2.itemID, new ItemContainerRenderer(r.renderFile()));
-                            }
+                        if (o instanceof ItemMetaBucket) {
+                            ItemMetaBucket c = (ItemMetaBucket) o;
+                            MinecraftForgeClient.registerItemRenderer(c.itemID, new ItemContainerRenderer(r.renderFile()));
                         } else if (o instanceof ItemContainer) {
                             ItemContainer c = (ItemContainer) o;
                             MinecraftForgeClient.registerItemRenderer(c.itemID, new ItemContainerRenderer(r.renderFile()));

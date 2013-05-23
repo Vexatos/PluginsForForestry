@@ -9,19 +9,14 @@ import denoflionsx.PluginsforForestry.Plugins.Wiki.Items.WikiItems;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxyClient;
 import java.util.List;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
@@ -42,9 +37,17 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
         //----
         if (Loader.isModLoaded("Forestry")) {
             ItemStack bog = Forestry.block("soil");
+            if (bog == null){
+                PfF.Proxy.warning("Failed to get bog earth from Forestry!");
+                return;
+            }
             bog.setItemDamage(1);
             bog.stackSize = 6;
             ItemStack water = LiquidContainerRegistry.fillLiquidContainer(LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), LRItems.ItemStackWoodenBucketEmpty);
+            if (water == null){
+                PfF.Proxy.warning("Failed to register bog earth recipe with Wooden Bucket!");
+                return;
+            }
             PfF.Proxy.registerRecipe(bog, new Object[]{"DSD", "SBS", "DSD", Character.valueOf('D'), Block.dirt, Character.valueOf('S'), Block.sand, Character.valueOf('B'), water});
         }
     }

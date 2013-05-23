@@ -10,6 +10,7 @@ import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes.Fermentable;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemMetaBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucketEmpty;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
@@ -36,9 +37,9 @@ public class PluginLR implements IPfFPlugin {
 
     public static LRLiquidManager liquids = new LRLiquidManager();
     //---------------------------------------------------------------------
-    public static LRBucketManager buckets;
-    public static LRBucketManager woodenBuckets;
     public static LRContainerManager containers;
+    public static LRBucketManager bucket;
+    public static LRBucketManager woodenBucket;
     //---------------------------------------------------------------------
     public static ArrayList<LiquidDictionary.LiquidRegisterEvent> events = new ArrayList();
 
@@ -70,12 +71,12 @@ public class PluginLR implements IPfFPlugin {
 
     @Override
     public void onLoad() {
+        LRItems.bucket = new ItemMetaBucket(PfFTuning.getInt(PfFTuning.Buckets.bucket_filled_ItemID), LiquidContainerRegistry.EMPTY_BUCKET);
         if (PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID) > 0) {
             LRItems.itemWoodenBucketEmpty = new ItemWoodenBucketEmpty(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 0, "item.pff.woodenbucket.name");
             LRItems.ItemStackWoodenBucketEmpty = new ItemStack(LRItems.itemWoodenBucketEmpty);
-            woodenBuckets = new LRBucketManager(LRBucketManager.BucketType.WOODEN);
+            LRItems.woodenBucket = new ItemMetaBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_filled_ItemID), LRItems.ItemStackWoodenBucketEmpty);
         }
-        buckets = new LRBucketManager(LRBucketManager.BucketType.IRON);
         if (PfFTuning.getInt(PfFTuning.Items.barrel_ItemID) > 0) {
             LRItems.barrel = new ItemContainer(PfFTuning.getInt(PfFTuning.Items.barrel_ItemID), "PluginsforForestry:barrel", ItemContainer.MATERIAL.wood);
             LRItems.barrelEmpty = LRItems.barrel.createItemEntry(0, PfF.Proxy.translate("item.pff.barrel.name"));
@@ -110,10 +111,6 @@ public class PluginLR implements IPfFPlugin {
         for (LiquidDictionary.LiquidRegisterEvent e : events) {
             liquids.processLiquidFromDictionary(e);
         }
-        buckets.processLiquids();
-        if (woodenBuckets != null) {
-            woodenBuckets.processLiquids();
-        }
         containers = new LRContainerManager();
         if (LRItems.barrel != null) {
             containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfF.Proxy.translate("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity), Blacklists.barrel);
@@ -126,6 +123,10 @@ public class PluginLR implements IPfFPlugin {
         }
         if (LRItems.can != null) {
             containers.registerContainer(Forestry.items("canEmpty"), LRItems.can, PfF.Proxy.translate("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
+        }
+        bucket = new LRBucketManager(LRItems.bucket, Blacklists.ironBucket);
+        if (LRItems.ItemStackWoodenBucketEmpty != null){
+            woodenBucket = new LRBucketManager(LRItems.woodenBucket, Blacklists.woodenBucket);
         }
     }
 

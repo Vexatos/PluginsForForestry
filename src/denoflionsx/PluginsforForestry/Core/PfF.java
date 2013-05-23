@@ -7,11 +7,11 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
+import denoflionsx.PluginsforForestry.Changelog.PfFChangelogHandler;
 import denoflionsx.PluginsforForestry.EventHandler.LiquidDictionaryDebug;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
 import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
-import denoflionsx.denLib.Mod.Changelog.ChangelogHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
 
@@ -33,12 +33,11 @@ public class PfF {
 
     @Mod.PreInit
     public void preLoad(FMLPreInitializationEvent event) {
-        denLibMod.Proxy.registerForgeSubscribe(this);
         PfFAPI.instance = this;
         core = new PfFCore(event.getSourceFile());
         core.setupConfig(event);
         PfFTranslator.createInstance();
-        PluginRegistry.register();
+        Proxy.findInternalAddons(event.getSourceFile());
         PfFAPI.plugins.runPluginLoadEvent(event);
         core.registerWithUpdater();
         if (debug) {
@@ -58,7 +57,7 @@ public class PfF {
         core.setupRendering();
         PfF.Proxy.registerAllRecipes();
         PfF.Proxy.setTabs();
-        ChangelogHandler.createNewHandler(PfF.core.getBuildNumber(), PfF.core.configDir, "Plugins for Forestry", "denoflionsx.PluginsforForestry.Changelog.".replace(".", "/"));
+        denLibMod.Proxy.registerChangelogHandler(new PfFChangelogHandler());
         PfF.Proxy.print("This is PfF version " + "@VERSION@");
     }
 }

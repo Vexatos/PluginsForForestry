@@ -1,6 +1,8 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.denLib.Mod.Items.ItemMeta;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 
@@ -21,6 +23,11 @@ public class ItemContainer extends ItemMeta {
     @Override
     public Icon getIcon(ItemStack stack, int pass) {
         return this.icons.get(0);
+    }
+
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return PfFAPI.tab;
     }
 
     public static enum MATERIAL {

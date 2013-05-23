@@ -5,7 +5,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPluginManager;
+import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PfFPluginManager implements IPfFPluginManager {
 
@@ -23,12 +26,25 @@ public class PfFPluginManager implements IPfFPluginManager {
 
     @Override
     public void runPluginLoadEvent(Object o) {
-        for (IPfFPlugin plugin : this.getPluginsList()){
-            if (o instanceof FMLPreInitializationEvent){
+        if (!(this.getPluginsList().get(0) instanceof PluginLR)) {
+            int index = 0;
+            for (IPfFPlugin plugin : this.getPluginsList()) {
+                if (plugin instanceof PluginLR) {
+                    index = this.getPluginsList().indexOf(plugin);
+                    break;
+                }
+            }
+            if (index != 0) {
+                Collections.swap(plugins, index, 0);
+                PfF.Proxy.print("Moved Liquid Roundup to top priority load slot.");
+            }
+        }
+        for (IPfFPlugin plugin : this.getPluginsList()) {
+            if (o instanceof FMLPreInitializationEvent) {
                 plugin.onPreLoad();
-            }else if (o instanceof FMLInitializationEvent){
+            } else if (o instanceof FMLInitializationEvent) {
                 plugin.onLoad();
-            }else if (o instanceof FMLPostInitializationEvent){
+            } else if (o instanceof FMLPostInitializationEvent) {
                 plugin.onPostLoad();
             }
         }

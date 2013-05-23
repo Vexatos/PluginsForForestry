@@ -5,7 +5,6 @@ import com.google.common.collect.HashBiMap;
 import denoflionsx.PluginsforForestry.Client.Render.RenderThis;
 import denoflionsx.denLib.Mod.Items.ItemMeta;
 import java.util.HashMap;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class LRItems {
@@ -16,7 +15,9 @@ public class LRItems {
     public static ItemStack ItemStackWoodenBucketEmpty = null;
     // Default RenderThis mode is bucket.
     @RenderThis
-    public static HashMap<Integer, Item> customBucketsFilled = new HashMap();
+    public static ItemMetaBucket bucket;
+    @RenderThis
+    public static ItemMetaBucket woodenBucket;
     @RenderThis(renderFile = "barrel.txt")
     public static ItemContainer barrel;
     public static ItemStack barrelEmpty;

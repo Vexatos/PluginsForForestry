@@ -18,7 +18,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 
 public class LRContainerManager {
 
-    private static BiMap<String, Integer> metaMap = HashBiMap.create();
+    public static BiMap<String, Integer> metaMap = HashBiMap.create();
     private static final File save = new File(PfF.core.mappingsDir.getAbsolutePath() + "/MetaMap.BiMap");
 
     public LRContainerManager() {
@@ -38,7 +38,6 @@ public class LRContainerManager {
             if (blackList != null) {
                 for (String s : blackList) {
                     if (s.equals(e.Name)) {
-                        PfF.Proxy.print("Liquid " + e.Name + " skipped on container " + name + " due to blacklist.");
                         isBlacklisted = true;
                     }
                 }
@@ -69,7 +68,6 @@ public class LRContainerManager {
                 i.stackTagCompound.setCompoundTag("info", t);
             }
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(e.Liquid, capacity), i, empty));
-            PfF.Proxy.print("Container " + name + " for " + lname + " created on meta " + String.valueOf(meta));
         }
     }
 

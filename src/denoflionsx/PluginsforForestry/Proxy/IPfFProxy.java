@@ -2,6 +2,7 @@ package denoflionsx.PluginsforForestry.Proxy;
 
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
+import java.io.File;
 import net.minecraft.item.ItemStack;
 
 public interface IPfFProxy {
@@ -29,5 +30,7 @@ public interface IPfFProxy {
     public String getLang();
     
     public void setTabs();
+    
+    public void findInternalAddons(File source);
     
 }

@@ -9,7 +9,7 @@ public class PfFTuning {
 
     @Config
     public static Configuration config;
-    public static final int bucketIDRangeStart = 4444;
+    public static int bucketIDRangeStart = 4444;
 
     public static int getInt(String s) {
         return Integer.valueOf(s);
@@ -54,6 +54,8 @@ public class PfFTuning {
 
         // Buckets (+100 of normal ID range)
         public static String woodenbucket_ItemID = String.valueOf(bucketIDRangeStart);
+        public static String woodenbucket_filled_ItemID = String.valueOf(bucketIDRangeStart++);
+        public static String bucket_filled_ItemID = String.valueOf(bucketIDRangeStart++);
     }
 
     @Tunable(category = "blocks", comment = "set id to 0 to disable")
