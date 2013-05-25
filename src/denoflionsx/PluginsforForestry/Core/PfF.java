@@ -24,7 +24,7 @@ public class PfF {
     @SidedProxy(clientSide = "@PROXYCLIENT@", serverSide = "@PROXYSERVER@")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    public static final boolean debug = true;
+    public static final boolean debug = false;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
