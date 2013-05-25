@@ -1,6 +1,8 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
@@ -73,5 +75,10 @@ public class ItemWoodenBucket extends ItemLRBucket {
     @Override
     public Icon getIconFromDamage(int par1) {
         return LRItems.ItemStackWoodenBucketEmpty.getIconIndex();
+    }
+    
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return PfFAPI.tab;
     }
 }

@@ -1,13 +1,11 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
 import denoflionsx.PluginsforForestry.API.PfFAPI;
-import java.util.ArrayList;
+import denoflionsx.denLib.Mod.Items.ItemMeta;
 import java.util.HashMap;
-import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumMovingObjectType;
 import net.minecraft.util.Icon;
@@ -15,33 +13,31 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidStack;
 
-public class ItemMetaBucket extends Item {
-
-    private HashMap<Integer, String> names = new HashMap();
+public class ItemMetaBucket extends ItemMeta {
+    
     private HashMap<Integer, LiquidStack> liquids = new HashMap();
-    private ArrayList<ItemStack> sub = new ArrayList();
     private ItemStack empty;
-
+    
     public ItemMetaBucket(int par1, ItemStack empty) {
         super(par1);
         this.empty = empty;
         this.setMaxStackSize(1);
         this.setContainerItem(empty.getItem());
     }
-
+    
     public ItemStack register(int meta, String name, LiquidStack liquid) {
         names.put(meta, name);
         liquids.put(meta, liquid);
         ItemStack s = new ItemStack(this, 1, meta);
-        sub.add(s);
+        this.stacks.add(s);
         return s;
     }
-
+    
     @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
         return this.names.get(par1ItemStack.getItemDamage());
     }
-
+    
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         int isFull = this.liquids.get(par1ItemStack.getItemDamage()).itemID;
@@ -86,10 +82,10 @@ public class ItemMetaBucket extends Item {
                 return this.empty.copy();
             }
         }
-
+        
         return par1ItemStack;
     }
-
+    
     public boolean tryPlaceContainedLiquid(World world, double xOffset, double yOffset, double zOffset, int x, int y, int z, ItemStack item) {
         int _liquidId = this.liquids.get(item.getItemDamage()).itemID;
         if (_liquidId > 4096) {
@@ -109,33 +105,24 @@ public class ItemMetaBucket extends Item {
             return true;
         }
     }
-
-    @Override
-    public void getSubItems(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-        par3List.addAll(sub);
-    }
-
+    
     @Override
     public CreativeTabs getCreativeTab() {
         return PfFAPI.tab;
     }
-
+    
     public HashMap<Integer, String> getNames() {
         return names;
     }
-
+    
     public HashMap<Integer, LiquidStack> getLiquids() {
         return liquids;
     }
-
-    public ArrayList<ItemStack> getSub() {
-        return sub;
-    }
-
+    
     public ItemStack getEmpty() {
         return empty;
     }
-
+    
     @Override
     public Icon getIconFromDamage(int par1) {
         return this.empty.getIconIndex();

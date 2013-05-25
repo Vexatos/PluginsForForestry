@@ -30,6 +30,10 @@ public class PluginMFR implements IPfFPlugin, IRegisterRecipe {
         if (!Loader.isModLoaded("MineFactoryReloaded")) {
             return;
         }
+        recipeReplacement();
+    }
+
+    private void recipeReplacement() {
         try {
             Property p = (Property) Class.forName("powercrystals.minefactoryreloaded.setup.MFRConfig").getField("vanillaRecipes").get(null);
             if (!p.getBoolean(true)) {

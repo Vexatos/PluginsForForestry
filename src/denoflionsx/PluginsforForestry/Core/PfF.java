@@ -15,14 +15,13 @@ import denoflionsx.PluginsforForestry.Proxy.PfFProxy;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
 
-@Mod(modid = "PluginsforForestry", name = "PluginsforForestry", version = "@VERSION@", dependencies = "required-after:denLib")
+@Mod(modid = "@NAME@", name = "@NAME@", version = "@VERSION@", dependencies = "@DEPENDS@")
 @NetworkMod(clientSideRequired = true, serverSideRequired = true)
 public class PfF {
 
-    @Mod.Instance("PluginsforForestry")
+    @Mod.Instance("@NAME@")
     public static Object instance;
-    private static final String proxyPath = "denoflionsx.PluginsforForestry.Proxy.";
-    @SidedProxy(clientSide = proxyPath + "PfFProxyClient", serverSide = proxyPath + "PfFProxyCommon")
+    @SidedProxy(clientSide = "@PROXYCLIENT@", serverSide = "@PROXYSERVER@")
     public static PfFProxy Proxy;
     public static PfFCore core;
     public static final boolean debug = true;

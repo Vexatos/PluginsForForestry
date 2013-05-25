@@ -88,4 +88,12 @@ public class PfFTuning {
         public static String recipeReplacement_MFR_PortableSpawner = String.valueOf(false);
         
     }
+    
+    @Tunable(category = "railcraft.items", comment = "Set ID to 0 to disable features")
+    public static class Railcraft{
+        
+        @Comment(comment = "Meta Item. Contains Sugar Charcoal, Sugar Coke, Cactus Charcoal, Cactus Coke.")
+        public static String plugin_railcraft_charcoal = String.valueOf(4152);
+        
+    }
 }

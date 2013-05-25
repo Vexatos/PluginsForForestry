@@ -10,3 +10,8 @@ item.pff.can = Can
 
 item.pff.hammer.name = Blacksmithing Hammer
 item.pff.rings.name = Iron Ring
+
+item.pff.sugarcharcoal.name = Sugar Charcoal
+item.pff.sugarcoke.name = Sugar Coke
+item.pff.cactuscharcoal.name = Cactus Charcoal
+item.pff.cactuscoke.name = Cactus Coke

@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
 import cpw.mods.fml.common.Loader;
+import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
@@ -113,5 +114,9 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
         }
     }
     
+    @Override
+    public CreativeTabs getCreativeTab() {
+        return PfFAPI.tab;
+    }
     
 }
