@@ -18,8 +18,10 @@ public class PluginRailcraft implements IPfFPlugin {
     @Override
     public void onLoad() {
         if (Loader.isModLoaded("Railcraft")) {
-            RCItems.itemCharCoke = new ItemCustomCoke(PfFTuning.getInt(PfFTuning.Railcraft.plugin_railcraft_charcoal));
-            PfF.Proxy.ItemCollections.add(RCItems.class);
+            if (PfFTuning.getInt(PfFTuning.Railcraft.plugin_railcraft_charcoal) > 0) {
+                RCItems.itemCharCoke = new ItemCustomCoke(PfFTuning.getInt(PfFTuning.Railcraft.plugin_railcraft_charcoal));
+                PfF.Proxy.ItemCollections.add(RCItems.class);
+            }
         }
     }
 
