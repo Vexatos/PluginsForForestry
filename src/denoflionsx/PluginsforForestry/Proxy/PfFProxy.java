@@ -116,9 +116,14 @@ public class PfFProxy implements IPfFProxy {
     public void findInternalAddons(File source) {
         this.print("Loading plugins...");
         ArrayList<Object> plugins = denLib.FileUtils.getClassesInJar(source, IPfFPlugin.class);
-        for (Object o : plugins){
+        for (Object o : plugins) {
             PfFAPI.plugins.registerPlugin((IPfFPlugin) o);
         }
         this.print("Done. " + plugins.size() + " plugins loaded.");
-    } 
+    }
+
+    @Override
+    public void registerShapelessRecipe(ItemStack i, ItemStack[] stacks) {
+        GameRegistry.addShapelessRecipe(i, (Object[]) stacks);
+    }
 }

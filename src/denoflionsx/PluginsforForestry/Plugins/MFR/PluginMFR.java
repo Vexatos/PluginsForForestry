@@ -4,6 +4,7 @@ import cpw.mods.fml.common.Loader;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import denoflionsx.PluginsforForestry.Recipe.IRegisterRecipe;
 import java.lang.reflect.Field;
 import net.minecraft.block.Block;
@@ -31,6 +32,22 @@ public class PluginMFR implements IPfFPlugin, IRegisterRecipe {
             return;
         }
         recipeReplacement();
+        apatite();
+    }
+
+    private void apatite() {
+        if (PfFTuning.getBool(PfFTuning.MFR.ForestryFertilizerFromMFRFertilizer)) {
+            try {
+                ItemStack fert;
+                fert = new ItemStack((Item) Class.forName("powercrystals.minefactoryreloaded.MineFactoryReloadedCore").getField("fertilizerItem").get(null));
+                ItemStack ap = Forestry.items("fertilizerCompound");
+                if (ap != null) {
+                    PfF.Proxy.registerShapelessRecipe(ap, new ItemStack[]{fert});
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     private void recipeReplacement() {

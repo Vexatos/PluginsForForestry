@@ -204,6 +204,7 @@
         <delete dir="${classes.dir}/mods/Railcraft"/>
         <delete dir="${classes.dir}/thermalexpansion"/>
         <delete dir="${classes.dir}/buildcraft"/>
+        <delete dir="${classes.dir}/dan200"/>
 
         <!-- Reset src dir to post-forge-install state -->
         <delete dir="${mcpsrc.dir}/minecraft/denoflionsx"/>
@@ -213,6 +214,7 @@
         <delete dir="${mcpsrc.dir}/minecraft/mods"/>
         <delete dir="${mcpsrc.dir}/minecraft/thermalexpansion"/>
         <delete dir="${mcpsrc.dir}/minecraft/buildcraft"/>
+        <delete dir="${mcpsrc.dir}/dan200"/>
 
     </target>
 

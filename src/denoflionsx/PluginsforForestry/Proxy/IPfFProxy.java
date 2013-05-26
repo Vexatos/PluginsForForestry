@@ -21,6 +21,8 @@ public interface IPfFProxy {
     
     public void registerRecipe(ItemStack i, Object[] o);
     
+    public void registerShapelessRecipe(ItemStack i, ItemStack[] stacks);
+    
     public void registerAllRecipes();
     
     public void sendMessageToPlayer(String msg);

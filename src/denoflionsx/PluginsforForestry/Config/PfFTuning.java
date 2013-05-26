@@ -80,20 +80,25 @@ public class PfFTuning {
         @Comment(comment = "With default values biofuel/ethanol will be equivilant to lava in a vanilla furnace.")
         public static String fuel_LiquidContainerForFurnace_NerfPercent = String.valueOf(50);
     }
-    
+
     @Tunable(category = "recipereplacement")
-    public static class RecipeReplacement{
-        
+    public static class RecipeReplacement {
+
         @Comment(comment = "Replaces the Nether Star with an Ender Pearl.")
         public static String recipeReplacement_MFR_PortableSpawner = String.valueOf(false);
-        
     }
-    
+
+    @Tunable(category = "mfr")
+    public static class MFR {
+
+        @Comment(comment = "Shapeless in the workbench.")
+        public static String ForestryFertilizerFromMFRFertilizer = String.valueOf(true);
+    }
+
     @Tunable(category = "railcraft.items", comment = "Set ID to 0 to disable features")
-    public static class Railcraft{
-        
+    public static class Railcraft {
+
         @Comment(comment = "Meta Item. Contains Sugar Charcoal, Sugar Coke, Cactus Charcoal, Cactus Coke.")
         public static String plugin_railcraft_charcoal = String.valueOf(4152);
-        
     }
 }
