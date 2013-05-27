@@ -11,17 +11,24 @@ public class Railcraft {
     public static void registerCokeOvenRecipe(ItemStack input, ItemStack output, LiquidStack l, int time) {
         try {
             if (RailcraftCraftingManager.cokeOven.getRecipe(input) != null) {
-                PfF.Proxy.print("Coke Oven Recipe input already registered! " + input.getItem().getItemDisplayName(input) + "(" + input.itemID + ", " + input.getItemDamage() + ")" + ".");
+                PfF.Proxy.print("Coke Oven Recipe input already registered! Expected Input: " + getItemInfo(input) + "Returned: " + getItemInfo(RailcraftCraftingManager.cokeOven.getRecipe(input).getInput()));
             } else {
-                PfF.Proxy.print("Coke Oven Recipe registered. Input: " + input.getItem().getItemDisplayName(input) + "(" + input.itemID + ", " + input.getItemDamage() + ")" + ". Output: " + output.getItem().getItemDisplayName(output) + "(" + output.itemID + ", " + output.getItemDamage() + ")" + ".");
+                PfF.Proxy.print("Coke Oven Recipe registered. Input: " + getItemInfo(input) + "Output: " + getItemInfo(output));
             }
             RailcraftCraftingManager.cokeOven.addRecipe(input, true, false, output, l, time);
             ICokeOvenRecipe r = RailcraftCraftingManager.cokeOven.getRecipe(input);
             if (!r.getOutput().isItemEqual(output)) {
-                PfF.Proxy.print("Coke Oven Recipe Malfunction!");
-                PfF.Proxy.print("Original: " + output.getItem().getItemDisplayName(output) + "(" + output.itemID + ", " + output.getItemDamage() + ")" + ". Returned: " + r.getOutput().getItem().getItemDisplayName(r.getOutput()) + "(" + r.getOutput().itemID + ", " + r.getOutput().getItemDamage() + ")" + ".");
+                PfF.Proxy.print("Expected Output: " + getItemInfo(output) + "Returned: " + getItemInfo(r.getOutput()));
             }
         } catch (NoClassDefFoundError ex) {
         }
+    }
+
+    private static String getItemInfo(ItemStack stack) {
+        String itemName = stack.getItem().getItemDisplayName(stack);
+        if (itemName.equals("")) {
+            itemName = stack.getItemName();
+        }
+        return itemName + "(" + stack.itemID + ", " + stack.getItemDamage() + "). ";
     }
 }
