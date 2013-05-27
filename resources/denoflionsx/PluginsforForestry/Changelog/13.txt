@@ -1,1 +1,2 @@
 MFR Fertilizer to Forestry Fertilizer recipe.
+Fixed recipe bugs with Sugar and Cactus Coke.
