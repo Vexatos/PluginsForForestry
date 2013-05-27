@@ -17,56 +17,92 @@ import net.minecraftforge.liquids.LiquidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemCustomCoke extends ItemMeta implements IFuelHandler, IRegisterRecipe {
-    
+
     public ItemCustomCoke(int par1) {
         super(par1);
-        RCItems.sugarCharcoal = this.createItemEntry(0, PfF.Proxy.translate("item.pff.sugarcharcoal.name"));
-        RCItems.sugarCoke = this.createItemEntry(1, PfF.Proxy.translate("item.pff.sugarcoke.name"));
-        RCItems.cactusCharcoal = this.createItemEntry(2, PfF.Proxy.translate("item.pff.cactuscharcoal.name"));
-        RCItems.cactusCoke = this.createItemEntry(3, PfF.Proxy.translate("item.pff.cactuscoke.name"));
+        for (fuels f : fuels.values()) {
+            f.setStack(this.createItemEntry(f.ordinal(), PfF.Proxy.translate(f.getUnlocalized())));
+        }
     }
-    
+
     @Override
     public CreativeTabs getCreativeTab() {
         return PfFAPI.tab;
     }
-    
+
     @Override
     public void registerIcons(IconRegister par1IconRegister) {
-        this.icons.put(0, par1IconRegister.registerIcon("@NAME@:railcraft/sugar_charcoal"));
-        this.icons.put(1, par1IconRegister.registerIcon("@NAME@:railcraft/sugar_coke"));
-        this.icons.put(2, par1IconRegister.registerIcon("@NAME@:railcraft/cactus_charcoal"));
-        this.icons.put(3, par1IconRegister.registerIcon("@NAME@:railcraft/cactus_coke"));
+        for (fuels f : fuels.values()) {
+            this.icons.put(f.ordinal(), par1IconRegister.registerIcon(f.getTexture()));
+        }
     }
-    
+
     @Override
     public int getBurnTime(ItemStack fuel) {
-        if (fuel.isItemEqual(RCItems.sugarCharcoal)) {
+        if (fuel.isItemEqual(fuels.sugar_charcoal.getStack())) {
             return 400;
-        } else if (fuel.isItemEqual(RCItems.cactusCharcoal)) {
+        } else if (fuel.isItemEqual(fuels.cactus_charcoal.getStack())) {
             return 400;
-        } else if (fuel.isItemEqual(RCItems.sugarCoke)) {
+        } else if (fuel.isItemEqual(fuels.sugar_coke.getStack())) {
             return 800;
-        } else if (fuel.isItemEqual(RCItems.cactusCoke)) {
+        } else if (fuel.isItemEqual(fuels.cactus_coke.getStack())) {
             return 800;
         }
         return 0;
     }
-    
+
     @Override
     public void registerRecipe() {
         LiquidStack s = LiquidDictionary.getLiquid("Creosote Oil", 30);
-        Railcraft.registerCokeOvenRecipe(new ItemStack(Item.sugar), RCItems.sugarCharcoal, s, (3000 / 4));
-        Railcraft.registerCokeOvenRecipe(new ItemStack(Block.cactus), RCItems.cactusCharcoal, s, (3000 / 4));
-        Railcraft.registerCokeOvenRecipe(RCItems.cactusCharcoal, RCItems.cactusCoke, s, (3000 / 4));
-        Railcraft.registerCokeOvenRecipe(RCItems.sugarCharcoal, RCItems.sugarCoke, s, (3000 / 4));
+        int burn = (3000 / 4);
+        OreDictionary.registerOre("itemCharcoalSugar", fuels.sugar_charcoal.getStack());
+        OreDictionary.registerOre("itemCokeSugar", fuels.sugar_coke.getStack());
+        OreDictionary.registerOre("itemCharcoalCactus", fuels.cactus_charcoal.getStack());
+        OreDictionary.registerOre("itemCokeCactus", fuels.cactus_coke.getStack());
+        Railcraft.registerCokeOvenRecipe(new ItemStack(Item.sugar), fuels.sugar_charcoal.getStack(), s, burn);
+        Railcraft.registerCokeOvenRecipe(new ItemStack(Block.cactus), fuels.cactus_charcoal.getStack(), s, burn);
         for (ItemStack i : OreDictionary.getOres("itemCharcoalSugar")) {
-            Railcraft.registerCokeOvenRecipe(i, RCItems.sugarCoke, s, (3000 / 4));
+            for (ItemStack i2 : OreDictionary.getOres("itemCokeSugar")) {
+                Railcraft.registerCokeOvenRecipe(i, i2, s, burn);
+            }
         }
-        OreDictionary.registerOre("itemCharcoalSugar", RCItems.sugarCharcoal);
-        OreDictionary.registerOre("itemCokeSugar", RCItems.sugarCoke);
-        OreDictionary.registerOre("itemCharcoalCactus", RCItems.cactusCharcoal);
-        OreDictionary.registerOre("itemCokeCactus", RCItems.cactusCoke);
+        for (ItemStack i : OreDictionary.getOres("itemCharcoalCactus")) {
+            for (ItemStack i2 : OreDictionary.getOres("itemCokeCactus")) {
+                Railcraft.registerCokeOvenRecipe(i, i2, s, burn);
+            }
+        }
         GameRegistry.registerFuelHandler(this);
+    }
+
+    public static enum fuels {
+
+        sugar_charcoal("item.pff.sugarcharcoal.name", "@NAME@:railcraft/sugar_charcoal"),
+        sugar_coke("item.pff.sugarcoke.name", "@NAME@:railcraft/sugar_coke"),
+        cactus_charcoal("item.pff.cactuscharcoal.name", "@NAME@:railcraft/cactus_charcoal"),
+        cactus_coke("item.pff.cactuscoke.name", "@NAME@:railcraft/cactus_coke");
+        private String unlocalized;
+        private String texture;
+        private ItemStack stack;
+
+        private fuels(String unlocalized, String texture) {
+            this.unlocalized = unlocalized;
+            this.texture = texture;
+        }
+
+        public String getUnlocalized() {
+            return unlocalized;
+        }
+
+        public String getTexture() {
+            return texture;
+        }
+
+        public ItemStack getStack() {
+            return stack;
+        }
+
+        public void setStack(ItemStack stack) {
+            this.stack = stack;
+        }
     }
 }
