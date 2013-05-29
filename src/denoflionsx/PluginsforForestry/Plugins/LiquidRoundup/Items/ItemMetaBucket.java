@@ -14,17 +14,17 @@ import net.minecraft.world.World;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class ItemMetaBucket extends ItemMeta {
-    
+
     private HashMap<Integer, LiquidStack> liquids = new HashMap();
     private ItemStack empty;
-    
+
     public ItemMetaBucket(int par1, ItemStack empty) {
         super(par1);
         this.empty = empty;
         this.setMaxStackSize(1);
         this.setContainerItem(empty.getItem());
     }
-    
+
     public ItemStack register(int meta, String name, LiquidStack liquid) {
         names.put(meta, name);
         liquids.put(meta, liquid);
@@ -32,19 +32,18 @@ public class ItemMetaBucket extends ItemMeta {
         this.stacks.add(s);
         return s;
     }
-    
+
     @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
         return this.names.get(par1ItemStack.getItemDamage());
     }
-    
+
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
         int isFull = this.liquids.get(par1ItemStack.getItemDamage()).itemID;
         double d0 = par3EntityPlayer.prevPosX + (par3EntityPlayer.posX - par3EntityPlayer.prevPosX) * (double) 1.0F;
         double d1 = par3EntityPlayer.prevPosY + (par3EntityPlayer.posY - par3EntityPlayer.prevPosY) * (double) 1.0F + 1.62D - (double) par3EntityPlayer.yOffset;
         double d2 = par3EntityPlayer.prevPosZ + (par3EntityPlayer.posZ - par3EntityPlayer.prevPosZ) * (double) 1.0F;
-        // Access Transformer makes isFull public so we can use it here.
         boolean flag = isFull == 0;
         MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(par2World, par3EntityPlayer, flag);
         if (movingobjectposition == null) {
@@ -82,10 +81,9 @@ public class ItemMetaBucket extends ItemMeta {
                 return this.empty.copy();
             }
         }
-        
         return par1ItemStack;
     }
-    
+
     public boolean tryPlaceContainedLiquid(World world, double xOffset, double yOffset, double zOffset, int x, int y, int z, ItemStack item) {
         int _liquidId = this.liquids.get(item.getItemDamage()).itemID;
         if (_liquidId > 4096) {
@@ -105,24 +103,24 @@ public class ItemMetaBucket extends ItemMeta {
             return true;
         }
     }
-    
+
     @Override
     public CreativeTabs getCreativeTab() {
         return PfFAPI.tab;
     }
-    
+
     public HashMap<Integer, String> getNames() {
         return names;
     }
-    
+
     public HashMap<Integer, LiquidStack> getLiquids() {
         return liquids;
     }
-    
+
     public ItemStack getEmpty() {
         return empty;
     }
-    
+
     @Override
     public Icon getIconFromDamage(int par1) {
         return this.empty.getIconIndex();

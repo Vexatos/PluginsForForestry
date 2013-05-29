@@ -47,6 +47,7 @@
     <target name="-prepackage"/>
     <target name="-preresources"/>
     <target name="-postbuild"/>
+    <target name="-downloads"/>
 
     <!-- Clear build directory -->
     <target name="clean" depends="-preclean">
@@ -98,6 +99,7 @@
         <get src="https://github.com/denoflionsx/denLib/archive/3.X.zip" dest="${download.dir}/denLib-3.X.zip" usetimestamp="True"/>
         <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/APICollection.zip" dest="${download.dir}/APICollection.zip" usetimestamp="True"/>
         <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/SpriteSheetConverter.jar" dest="${download.dir}/SpriteSheetConverter.jar"/>
+        <antcall target="-downloads"/>
     </target>
 
     <!-- Setup mcp and forge -->

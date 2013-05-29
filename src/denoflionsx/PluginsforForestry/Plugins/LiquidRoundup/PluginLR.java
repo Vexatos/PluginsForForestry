@@ -125,7 +125,7 @@ public class PluginLR implements IPfFPlugin {
             containers.registerContainer(Forestry.items("canEmpty"), LRItems.can, PfF.Proxy.translate("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
         }
         bucket = new LRBucketManager(LRItems.bucket, Blacklists.ironBucket);
-        if (LRItems.ItemStackWoodenBucketEmpty != null){
+        if (LRItems.ItemStackWoodenBucketEmpty != null) {
             woodenBucket = new LRBucketManager(LRItems.woodenBucket, Blacklists.woodenBucket);
         }
     }
@@ -174,6 +174,17 @@ public class PluginLR implements IPfFPlugin {
             e.world.setBlockToAir(e.target.blockX, e.target.blockY, e.target.blockZ);
             e.result = f.copy();
             e.setResult(Event.Result.ALLOW);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean onVoidBucket(FillBucketEvent e) {
+        int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
+        if (id == LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME).itemID) {
+            e.result = e.current;
+            e.setResult(Event.Result.ALLOW);
+            e.world.setBlockToAir(e.target.blockX, e.target.blockY, e.target.blockZ);
             return true;
         }
         return false;

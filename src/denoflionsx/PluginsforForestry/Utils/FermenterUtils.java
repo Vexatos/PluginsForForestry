@@ -25,6 +25,9 @@ public class FermenterUtils {
                                 ItemStack resource = (ItemStack) c3.getField("resource").get(c3.cast(o));
                                 int value = Integer.valueOf(String.valueOf(c3.getField("fermentationValue").get(c3.cast(o))));
                                 LiquidStack l = (LiquidStack) c3.getField("liquid").get(c3.cast(o));
+                                if (l == null){
+                                    continue;
+                                }
                                 LiquidStack output = (LiquidStack) c3.getField("output").get(c3.cast(o));
                                 if (output.isLiquidEqual(LiquidDictionary.getLiquid("biomass", LiquidContainerRegistry.BUCKET_VOLUME))) {
                                     if (l.isLiquidEqual(new LiquidStack(Block.waterStill, LiquidContainerRegistry.BUCKET_VOLUME))) {
