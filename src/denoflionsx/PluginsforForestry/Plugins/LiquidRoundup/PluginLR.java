@@ -113,7 +113,7 @@ public class PluginLR implements IPfFPlugin {
         }
         containers = new LRContainerManager();
         if (LRItems.barrel != null) {
-            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfF.Proxy.translate("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Items.barrel_capacity), Blacklists.barrel);
+            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfF.Proxy.translate("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Barrel.barrel_capacity), Blacklists.barrel);
         }
         if (LRItems.capsule != null) {
             containers.registerContainer(Forestry.items("waxCapsule"), LRItems.capsule, PfF.Proxy.translate("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);

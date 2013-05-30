@@ -6,10 +6,13 @@ import denoflionsx.denLib.Config.Annotations.Tunable;
 import net.minecraftforge.common.Configuration;
 
 public class PfFTuning {
-
+    
+    private static int normalIDRange = 4344;
+    private static int bucketIDRangeStart = 4444;
+    private static int blockIDRange = 3100;
+    
     @Config
     public static Configuration config;
-    public static int bucketIDRangeStart = 4444;
 
     public static int getInt(String s) {
         return Integer.valueOf(s);
@@ -37,23 +40,28 @@ public class PfFTuning {
     @Tunable(category = "items", comment = "set id to 0 to disable")
     public static class Items {
 
-        public static String barrel_ItemID = String.valueOf(4100);
-        public static String barrel_capacity = String.valueOf(10000);
-        public static String capsule_ItemID = String.valueOf(4101);
-        public static String redcapsule_ItemID = String.valueOf(4102);
-        public static String can_ItemID = String.valueOf(4103);
-        public static String hammer_ItemID = String.valueOf(4104);
-        public static String rings_ItemID = String.valueOf(4105);
+        public static String barrel_ItemID = String.valueOf(normalIDRange++);
+        public static String capsule_ItemID = String.valueOf(normalIDRange++);
+        public static String redcapsule_ItemID = String.valueOf(normalIDRange++);
+        public static String can_ItemID = String.valueOf(normalIDRange++);
+        public static String hammer_ItemID = String.valueOf(normalIDRange++);
+        public static String rings_ItemID = String.valueOf(normalIDRange++);
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
-        public static String veggiejuice_ItemID = String.valueOf(4150);
-        public static String liquidpeat_ItemID = String.valueOf(4151);
+        public static String veggiejuice_ItemID = String.valueOf(normalIDRange++);
+        public static String liquidpeat_ItemID = String.valueOf(normalIDRange++);
+    }
+
+    @Tunable(category = "barrel")
+    public static class Barrel {
+
+        public static String barrel_capacity = String.valueOf(10000);
     }
 
     @Tunable(category = "items.buckets", comment = "set id to 0 to disable")
     public static class Buckets {
 
         // Buckets (+100 of normal ID range)
-        public static String woodenbucket_ItemID = String.valueOf(bucketIDRangeStart);
+        public static String woodenbucket_ItemID = String.valueOf(bucketIDRangeStart++);
         public static String woodenbucket_filled_ItemID = String.valueOf(bucketIDRangeStart++);
         public static String bucket_filled_ItemID = String.valueOf(bucketIDRangeStart++);
     }
@@ -62,8 +70,8 @@ public class PfFTuning {
     public static class Blocks {
 
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
-        public static String veggiejuice_BlockID = String.valueOf(3100);
-        public static String liquidpeat_BlockID = String.valueOf(3101);
+        public static String veggiejuice_BlockID = String.valueOf(blockIDRange++);
+        public static String liquidpeat_BlockID = String.valueOf(blockIDRange++);
     }
 
     @Tunable(category = "rendering", comment = "These options are for development")
@@ -99,6 +107,6 @@ public class PfFTuning {
     public static class Railcraft {
 
         @Comment(comment = "Meta Item. Contains Sugar Charcoal, Sugar Coke, Cactus Charcoal, Cactus Coke.")
-        public static String plugin_railcraft_charcoal = String.valueOf(4152);
+        public static String plugin_railcraft_charcoal = String.valueOf(normalIDRange++);
     }
 }
