@@ -49,6 +49,8 @@ public class PfFTuning {
         @Comment(comment = "Liquids only consume one item or block id depending on mode.")
         public static String veggiejuice_ItemID = String.valueOf(normalIDRange++);
         public static String liquidpeat_ItemID = String.valueOf(normalIDRange++);
+        @Comment(comment = "Void bucket is incomplete and forcefully disabled.")
+        public static String voidbucket_ItemID = String.valueOf(normalIDRange++);
     }
 
     @Tunable(category = "barrel")

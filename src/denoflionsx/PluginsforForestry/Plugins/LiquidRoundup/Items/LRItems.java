@@ -27,6 +27,7 @@ public class LRItems {
     public static ItemContainer rcapsule;
     @RenderThis(renderFile = "capsule.txt")
     public static ItemContainer can;
+    public static ItemVoidBucket voidbucket;
     //----------------------------------------------------------------------
     public static BiMap<Integer, ItemStack> bucketStacks = HashBiMap.create();
     public static BiMap<Integer, ItemStack> woodenBucketstacks = HashBiMap.create();

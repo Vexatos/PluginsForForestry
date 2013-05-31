@@ -11,6 +11,7 @@ import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemMetaBucket;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemVoidBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucketEmpty;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
@@ -103,6 +104,9 @@ public class PluginLR implements IPfFPlugin {
         } else {
             PfF.Proxy.print("Disabling Veggie Juice, Liquid Peat, Capsules, and Cans because Forestry is not detected!");
         }
+//        if (PfFTuning.getInt(PfFTuning.Items.voidbucket_ItemID) > 0) {
+//            LRItems.voidbucket = new ItemVoidBucket(new String[]{"@NAME@:void_bucket"}, PfFTuning.getInt(PfFTuning.Items.voidbucket_ItemID));
+//        }
         PfF.Proxy.ItemCollections.add(LRItems.class);
     }
 
@@ -182,9 +186,14 @@ public class PluginLR implements IPfFPlugin {
     public static boolean onVoidBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
         if (id == LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME).itemID) {
-            e.result = e.current;
+            e.result = e.current.copy();
             e.setResult(Event.Result.ALLOW);
-            e.world.setBlockToAir(e.target.blockX, e.target.blockY, e.target.blockZ);
+            ItemVoidBucket.VoidLevels level = ItemVoidBucket.VoidLevels.values()[e.current.getItemDamage()];
+            for (int x = 0; x < level.getArea(); x++) {
+                for (int y = 0; y < level.getArea(); y++) {
+                    e.world.setBlockToAir(e.target.blockX + x, e.target.blockY + y, e.target.blockZ);
+                }
+            }
             return true;
         }
         return false;
