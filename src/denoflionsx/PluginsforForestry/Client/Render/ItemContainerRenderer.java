@@ -52,13 +52,15 @@ public class ItemContainerRenderer implements IItemRenderer {
             this.debugRender();
         }
         Icon icon = item.getIconIndex();
-        renderItem.renderIcon(0, 0, icon, 16, 16);
+        if (icon != null) {
+            renderItem.renderIcon(0, 0, icon, 16, 16);
+        }
         LiquidStack l = LiquidContainerRegistry.getLiquidForFilledItem(item);
-        if (l == null){
+        if (l == null) {
             return;
         }
         Icon liquid = l.canonical().getRenderingIcon();
-        if (liquid == null){
+        if (liquid == null) {
             liquid = BlockFluid.func_94424_b("water");
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(l.canonical().getTextureSheet());

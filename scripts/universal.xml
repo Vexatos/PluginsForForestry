@@ -43,6 +43,7 @@
     <!-- override these in the main script for custom stuff -->
     <target name="-preclean"/>
     <target name="-preforge"/>
+	<target name="-postforge"/>
     <target name="-precompile"/>
     <target name="-prepackage"/>
     <target name="-preresources"/>
@@ -126,7 +127,7 @@
         <exec dir="${forge.dir}" executable="sh" osfamily="unix">
             <arg value="install.sh"/>
         </exec>
-
+		<antcall target="-postforge"/>
     </target>
 
     <target name="copy-src">

@@ -4,7 +4,7 @@
     <import file="scripts/universal.xml"/>
     <property name="split.dir" value="${resources.dir}/mods/${ant.project.name}/textures/items/railcraft"/>
     <property name="spritesheets.dir" value="old_spritesheets"/>
-    
+	
     <target name="-preresources">
         <echo message="Installing lang files..."/>
         <copy todir="${classes.dir}/denoflionsx/PluginsforForestry/Lang">
