@@ -1,0 +1,2 @@
+Attempted fix for render crash.
+Added null checks during container generation.
