@@ -30,6 +30,10 @@ public class LRContainerManager {
 
     public void registerContainer(ItemStack empty, ItemContainer c, String name, int capacity, String[] blackList) {
         for (LiquidDictionary.LiquidRegisterEvent e : PluginLR.events) {
+            if (e.Liquid == null) {
+                PfF.Proxy.severe("A null liquid was found in the dictionary. Name: " + e.Name);
+                continue;
+            }
             //----
             if (LiquidContainerRegistry.fillLiquidContainer(e.Liquid, empty) != null) {
                 continue;
@@ -66,6 +70,19 @@ public class LRContainerManager {
                 NBTTagCompound t = new NBTTagCompound();
                 t.setString("ohshit", "Please contact denoflions on MCF");
                 i.stackTagCompound.setCompoundTag("info", t);
+            }
+            // Check data before registering.
+            if (i == null) {
+                PfF.Proxy.severe("Failed to create container!");
+                continue;
+            }
+            if (empty == null) {
+                PfF.Proxy.severe("Empty container is null!");
+                continue;
+            }
+            if (capacity <= 0) {
+                PfF.Proxy.severe("Capacity is invalid!");
+                continue;
             }
             LiquidContainerRegistry.registerLiquid(new LiquidContainerData(denLib.LiquidStackUtils.getNewStackCapacity(e.Liquid, capacity), i, empty));
         }

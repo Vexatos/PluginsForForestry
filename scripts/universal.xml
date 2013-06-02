@@ -12,6 +12,7 @@
     <property name="forge.dir" value="${build.dir}/forge"/>
     <property name="mcp.dir" value="${forge.dir}/mcp"/>
     <property name="mcpsrc.dir" value="${mcp.dir}/src"/>
+    <property name="coremod.srg" value="true"/>
     <!-- import from file -->
     <loadproperties srcFile="mod.properties"/>
     <property name="forge.name" value="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
@@ -28,22 +29,22 @@
         </not>
     </condition>
     
-    <condition property="should-download-ant-contrib">
-        <or>
-            <available file="${download.dir}/ant-contrib/ant-contrib-1.0b3.jar"/>
-            <available file="${download.dir}/minecraftforge-src-${forge.version}.zip"/>
-        </or>
+    <condition property="doessignjar">
+        <available file="keystore.properties"/>
+    </condition>
+    
+    <condition property="isCoreMod">
+        <available file="coremod.properties"/>
     </condition>
 
     <mkdir dir="${download.dir}"/>
 
     <!-- Targets -->
 
-
     <!-- override these in the main script for custom stuff -->
     <target name="-preclean"/>
     <target name="-preforge"/>
-	<target name="-postforge"/>
+    <target name="-postforge"/>
     <target name="-precompile"/>
     <target name="-prepackage"/>
     <target name="-preresources"/>
@@ -104,7 +105,7 @@
     </target>
 
     <!-- Setup mcp and forge -->
-    <target name="setup" depends="download-files,download-ant-contrib,-preforge" if="out-of-date">
+    <target name="setup" depends="download-files,-preforge" if="out-of-date">
 
         <delete dir="${forge.dir}" failonerror="false"/>
 
@@ -127,7 +128,7 @@
         <exec dir="${forge.dir}" executable="sh" osfamily="unix">
             <arg value="install.sh"/>
         </exec>
-		<antcall target="-postforge"/>
+        <antcall target="-postforge"/>
     </target>
 
     <target name="copy-src">
@@ -156,6 +157,26 @@
         </copy>
         <unzip dest="${mcpsrc.dir}/minecraft" src="${download.dir}/APICollection.zip"/>
     </target>
+    
+    <target name="reobf_srg" if="coremod.srg">
+        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
+            <arg line="/c reobfuscate_srg.bat"/>
+        </exec>
+
+        <exec dir="${mcp.dir}" executable="sh" osfamily="unix">
+            <arg value="reobfuscate_srg.sh"/>
+        </exec>
+    </target>
+    
+    <target name="reobf" unless="coremod.srg">
+        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
+            <arg line="/c reobfuscate.bat"/>
+        </exec>
+
+        <exec dir="${mcp.dir}" executable="sh" osfamily="unix">
+            <arg value="reobfuscate.sh"/>
+        </exec>
+    </target>
 
     <target name="compile" depends="initialize-version,setup,copy-src,-precompile">
 
@@ -179,13 +200,8 @@
         </fail>
 		
         <!-- Reobfuscate -->
-        <exec dir="${mcp.dir}" executable="cmd" osfamily="windows">
-            <arg line="/c reobfuscate_srg.bat"/>
-        </exec>
-
-        <exec dir="${mcp.dir}" executable="sh" osfamily="unix">
-            <arg value="reobfuscate_srg.sh"/>
-        </exec>
+        <antcall target="reobf_srg"/>
+        <antcall target="reobf"/>
 
         <!-- Copy classes -->
         <copy todir="${classes.dir}">
@@ -226,32 +242,33 @@
         <delete dir="${classes.dir}/denoflionsx/denLib"/>
         <delete dir="${jar.dir}"/>
         <mkdir dir="${jar.dir}"/>
-        <jar destfile="${jar.dir}/${ant.project.name}-${mc.version}-${project.version.full}.jar" basedir="${classes.dir}"/>
+        <antcall target="CoreMod"/>
+        <antcall target="Mod"/>
+        <jar manifest="MANIFEST.MF" destfile="${jar.dir}/${ant.project.name}-${mc.version}-${project.version.full}.jar" basedir="${classes.dir}"/>
     </target>
-	
-    <target name="download-ant-contrib" unless="should-download-ant-contrib">
-        <echo message="Getting: ant-contrib"/>
-        <mkdir dir="${download.dir}/tmp"/>
-        <mkdir dir="${download.dir}/ant-contrib/lib" />
-        <get src="http://sourceforge.net/projects/ant-contrib/files/ant-contrib/1.0b3/ant-contrib-1.0b3-bin.zip/download" dest="${download.dir}/tmp/ant-contrib-1.0b3-bin.zip"/>
-        <get src="http://archive.apache.org/dist/commons/codec/binaries/commons-codec-1.6-bin.zip" dest="${download.dir}/tmp/commons-codec-1.6-bin.zip"/>
-
-        <unzip src="${download.dir}/tmp/ant-contrib-1.0b3-bin.zip" dest="${download.dir}"/>
-        <unzip src="${download.dir}/tmp/commons-codec-1.6-bin.zip" dest="${download.dir}/tmp"/>
-
-        <move todir="${download.dir}/ant-contrib/lib">
-            <fileset file="${download.dir}/tmp/commons-codec-1.6/commons-codec-1.6.jar"/>
-        </move>
-
-        <!-- Delete useless files -->
-        <delete dir="${download.dir}/ant-contrib/docs"/>
-        <delete dir="${download.dir}/tmp"/>
-
+    
+    <target name="sign" if="doessignjar">
+        <loadproperties srcFile="keystore.properties"/>
+        <signjar jar="${jar.dir}/${ant.project.name}-${mc.version}-${project.version.full}.jar" keystore="${keystore.file}" alias="${keystore.alias}" storepass="${keystore.password}" keypass="${keystore.password}" verbose="true"/>
+    </target>
+    
+    <target name="CoreMod" if="isCoreMod">
+        <loadproperties srcFile="coremod.properties"/>
+        <manifest file="MANIFEST.MF">
+            <attribute name="FMLCorePlugin" value="${coremod.plugin}"/>
+        </manifest>
+    </target>
+    
+    <target name="Mod" unless="isCoreMod">
+        <manifest file="MANIFEST.MF">
+            <attribute name="Mod" value="${ant.project.name}"/>
+        </manifest>
     </target>
 
     <!-- Default target to run -->
     <target name="main" depends="package">
         <antcall target="-postbuild"/>
+        <antcall target="sign"/>
     </target>
         
     <target name="jar" depends="main"/>
