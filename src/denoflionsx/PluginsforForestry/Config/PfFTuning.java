@@ -6,11 +6,10 @@ import denoflionsx.denLib.Config.Annotations.Tunable;
 import net.minecraftforge.common.Configuration;
 
 public class PfFTuning {
-    
+
     private static int normalIDRange = 4344;
     private static int bucketIDRangeStart = 4444;
     private static int blockIDRange = 3100;
-    
     @Config
     public static Configuration config;
 
@@ -110,5 +109,12 @@ public class PfFTuning {
 
         @Comment(comment = "Meta Item. Contains Sugar Charcoal, Sugar Coke, Cactus Charcoal, Cactus Coke.")
         public static String plugin_railcraft_charcoal = String.valueOf(normalIDRange++);
+    }
+
+    @Tunable(category = "railcraft")
+    public static class Railcraft_ {
+
+        public static String plugin_railcraft_CreosoteOilForImpregnatedSticks = String.valueOf(true);
+        public static String plugin_railcraft_CreosoteOilForImpregnatedSticks_Amount = String.valueOf(10);
     }
 }

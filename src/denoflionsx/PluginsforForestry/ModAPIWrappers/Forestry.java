@@ -80,4 +80,11 @@ public class Forestry {
         } catch (NoClassDefFoundError ex) {
         }
     }
+
+    public static void carpenter(ItemStack output, Object[] grid, LiquidStack liquid) {
+        try {
+            RecipeManagers.carpenterManager.addRecipe(5, liquid, null, output, grid);
+        } catch (NoClassDefFoundError ex) {
+        }
+    }
 }
