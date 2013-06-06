@@ -20,16 +20,16 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
-    
+
     public static Item itemCharCoke;
     public static LiquidStack creosote;
-    
+
     @Override
     public void onPreLoad() {
         if (Loader.isModLoaded("Railcraft")) {
         }
     }
-    
+
     @Override
     public void onLoad() {
         if (Loader.isModLoaded("Railcraft")) {
@@ -39,7 +39,7 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
             }
         }
     }
-    
+
     @Override
     public void onPostLoad() {
         // Welcome to reflection hell.
@@ -90,13 +90,14 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
             WorldEventHandler.registerHandler(this);
         }
     }
-    
+
     @Override
     public void onWorldLoaded() {
-        FermenterUtils.registerFermenterBooster(creosote, 1.5f);
+        LiquidStack copy = denLib.LiquidStackUtils.getNewStackCapacity(creosote, 1);
+        FermenterUtils.registerFermenterBooster(copy, 1.5f);
         WorldEventHandler.unregisterHandler(this);
     }
-    
+
     @Override
     public void onWorldEnded() {
     }

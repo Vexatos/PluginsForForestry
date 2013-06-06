@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.EventHandler;
 
 import denoflionsx.PluginsforForestry.Utils.FermenterUtils;
+import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ public class FermenterRecipes implements IdenWorldEventHandler {
     @Override
     public void onWorldLoaded() {
         for (Fermentable l : fermentables) {
-            FermenterUtils.registerFermenterBooster(l.getLiquid(), l.getBonus());
+            LiquidStack copy = denLib.LiquidStackUtils.getNewStackCapacity(l.getLiquid(), 1);
+            FermenterUtils.registerFermenterBooster(copy, l.getBonus());
         }
         WorldEventHandler.unregisterHandler(this);
     }
