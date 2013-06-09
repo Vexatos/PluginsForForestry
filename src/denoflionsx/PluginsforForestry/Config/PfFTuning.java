@@ -116,5 +116,7 @@ public class PfFTuning {
 
         public static String plugin_railcraft_CreosoteOilForImpregnatedSticks = String.valueOf(true);
         public static String plugin_railcraft_CreosoteOilForImpregnatedSticks_Amount = String.valueOf(10);
+        public static String plugin_railcraft_CreosoteOilForImpregnatedCasings = String.valueOf(true);
+        public static String plugin_railcraft_CreosoteOilForImpregnatedCasings_Amount = String.valueOf(250);
     }
 }
