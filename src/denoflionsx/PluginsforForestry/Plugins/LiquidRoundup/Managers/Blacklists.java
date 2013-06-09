@@ -1,7 +1,7 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Managers;
 
 public class Blacklists {
-    
+
     /*
      * Due to mostly load order issues, LR will sometimes create duplicates.
      * So this blacklist prevents that.

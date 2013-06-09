@@ -35,7 +35,7 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PluginLR implements IPfFPlugin {
-
+    
     public static LRLiquidManager liquids = new LRLiquidManager();
     //---------------------------------------------------------------------
     public static LRContainerManager containers;
@@ -43,12 +43,12 @@ public class PluginLR implements IPfFPlugin {
     public static LRBucketManager woodenBucket;
     //---------------------------------------------------------------------
     public static ArrayList<LiquidDictionary.LiquidRegisterEvent> events = new ArrayList();
-
+    
     @ForgeSubscribe
     public void onLiquidRegister(LiquidDictionary.LiquidRegisterEvent event) {
         events.add(event);
     }
-
+    
     @Override
     public void onPreLoad() {
         try {
@@ -68,8 +68,9 @@ public class PluginLR implements IPfFPlugin {
             PfF.Proxy.print("Fail to reflect Forge!");
         }
         denLibMod.Proxy.registerForgeSubscribe(this);
+        PfF.core.IMC.setupBanList(Blacklists.class);
     }
-
+    
     @Override
     public void onLoad() {
         LRItems.bucket = new ItemMetaBucket(PfFTuning.getInt(PfFTuning.Buckets.bucket_filled_ItemID), LiquidContainerRegistry.EMPTY_BUCKET);
@@ -109,7 +110,7 @@ public class PluginLR implements IPfFPlugin {
 //        }
         PfF.Proxy.ItemCollections.add(LRItems.class);
     }
-
+    
     @Override
     public void onPostLoad() {
         for (LiquidDictionary.LiquidRegisterEvent e : events) {
@@ -117,43 +118,43 @@ public class PluginLR implements IPfFPlugin {
         }
         containers = new LRContainerManager();
         if (LRItems.barrel != null) {
-            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfF.Proxy.translate("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Barrel.barrel_capacity), Blacklists.barrel);
+            containers.registerContainer(LRItems.barrelEmpty, LRItems.barrel, PfF.Proxy.translate("item.pff.barrel.name"), PfFTuning.getInt(PfFTuning.Barrel.barrel_capacity), PfF.core.IMC.getBanListAsArray("barrel"));
         }
         if (LRItems.capsule != null) {
-            containers.registerContainer(Forestry.items("waxCapsule"), LRItems.capsule, PfF.Proxy.translate("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
+            containers.registerContainer(Forestry.items("waxCapsule"), LRItems.capsule, PfF.Proxy.translate("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, PfF.core.IMC.getBanListAsArray("capsule"));
         }
         if (LRItems.rcapsule != null) {
-            containers.registerContainer(Forestry.items("refractoryEmpty"), LRItems.rcapsule, PfF.Proxy.translate("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
+            containers.registerContainer(Forestry.items("refractoryEmpty"), LRItems.rcapsule, PfF.Proxy.translate("item.pff.capsule.name"), LiquidContainerRegistry.BUCKET_VOLUME, PfF.core.IMC.getBanListAsArray("capsule"));
         }
         if (LRItems.can != null) {
-            containers.registerContainer(Forestry.items("canEmpty"), LRItems.can, PfF.Proxy.translate("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, Blacklists.capsule);
+            containers.registerContainer(Forestry.items("canEmpty"), LRItems.can, PfF.Proxy.translate("item.pff.can"), LiquidContainerRegistry.BUCKET_VOLUME, PfF.core.IMC.getBanListAsArray("capsule"));
         }
-        bucket = new LRBucketManager(LRItems.bucket, Blacklists.ironBucket);
+        bucket = new LRBucketManager(LRItems.bucket, PfF.core.IMC.getBanListAsArray("ironBucket"));
         if (LRItems.ItemStackWoodenBucketEmpty != null) {
-            woodenBucket = new LRBucketManager(LRItems.woodenBucket, Blacklists.woodenBucket);
+            woodenBucket = new LRBucketManager(LRItems.woodenBucket, PfF.core.IMC.getBanListAsArray("woodenBucket"));
         }
     }
-
+    
     public void createLiquidBlockForm(String perma, String name, int blockID) {
         if (blockID > 0) {
             Block b = new LRLiquidBlock(blockID, perma, name, denLib.StringUtils.removeSpaces(perma.toLowerCase()) + ".still");
             PfF.Proxy.registerLiquidBlock(perma, name, (LRLiquidBlock) b);
         }
     }
-
+    
     public void createLiquidItemForm(String perma, String name, int itemID) {
         if (itemID > 0) {
             LRLiquidItem liquid = new LRLiquidItem(new String[]{"PluginsforForestry:" + PfFLib.PffStringUtils.getTextureFromName(perma)}, itemID);
             PfF.Proxy.registerLiquidItem(perma, name, liquid);
         }
     }
-
+    
     public void registerAsFermentable(LiquidStack l, float bonus) {
         if (l != null) {
             FermenterRecipes.fermentables.add(new Fermentable(l, bonus));
         }
     }
-
+    
     @ForgeSubscribe
     public void onBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
@@ -167,7 +168,7 @@ public class PluginLR implements IPfFPlugin {
             e.setResult(Event.Result.ALLOW);
         }
     }
-
+    
     public static boolean onWoodenBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
         ItemStack f = null;
@@ -182,7 +183,7 @@ public class PluginLR implements IPfFPlugin {
         }
         return false;
     }
-
+    
     public static boolean onVoidBucket(FillBucketEvent e) {
         int id = e.world.getBlockId(e.target.blockX, e.target.blockY, e.target.blockZ);
         if (id == LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME).itemID) {

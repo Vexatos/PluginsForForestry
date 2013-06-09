@@ -20,16 +20,16 @@ import net.minecraftforge.liquids.LiquidDictionary;
 import net.minecraftforge.liquids.LiquidStack;
 
 public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
-
+    
     public static Item itemCharCoke;
     public static LiquidStack creosote;
-
+    
     @Override
     public void onPreLoad() {
         if (Loader.isModLoaded("Railcraft")) {
         }
     }
-
+    
     @Override
     public void onLoad() {
         if (Loader.isModLoaded("Railcraft")) {
@@ -39,7 +39,7 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
             }
         }
     }
-
+    
     @Override
     public void onPostLoad() {
         // Welcome to reflection hell.
@@ -47,7 +47,8 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
             creosote = LiquidDictionary.getLiquid("Creosote Oil", LiquidContainerRegistry.BUCKET_VOLUME);
             if (PfFTuning.getBool(PfFTuning.Railcraft_.plugin_railcraft_CreosoteOilForImpregnatedSticks)) {
                 ItemStack impSticks = Forestry.items("stickImpregnated");
-                if (impSticks != null) {
+                ItemStack pregCase = Forestry.items("impregnatedCasing");
+                if (impSticks != null && pregCase != null) {
                     impSticks.stackSize = 2;
                     try {
                         Class c = Class.forName("forestry.factory.gadgets.MachineCarpenter");
@@ -67,7 +68,7 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
                             LiquidStack oil = denLib.LiquidStackUtils.getNewStackCapacity(creosote, PfFTuning.getInt(PfFTuning.Railcraft_.plugin_railcraft_CreosoteOilForImpregnatedSticks_Amount));
                             for (Object o : list) {
                                 ItemStack i = (ItemStack) Recipe.getMethod("getCraftingResult", new Class[0]).invoke(o, new Object[0]);
-                                if (i.isItemEqual(impSticks)) {
+                                if (i.isItemEqual(impSticks) || i.isItemEqual(pregCase)) {
                                     // Recipe found!
                                     Field temp = Recipe.getDeclaredField("internal");
                                     temp.setAccessible(true);
@@ -90,14 +91,14 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler {
             WorldEventHandler.registerHandler(this);
         }
     }
-
+    
     @Override
     public void onWorldLoaded() {
         LiquidStack copy = denLib.LiquidStackUtils.getNewStackCapacity(creosote, 1);
         FermenterUtils.registerFermenterBooster(copy, 1.5f);
         WorldEventHandler.unregisterHandler(this);
     }
-
+    
     @Override
     public void onWorldEnded() {
     }
