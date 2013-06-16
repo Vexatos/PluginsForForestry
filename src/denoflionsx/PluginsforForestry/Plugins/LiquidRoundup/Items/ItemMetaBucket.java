@@ -1,9 +1,11 @@
 package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
 import denoflionsx.PluginsforForestry.API.PfFAPI;
+import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.denLib.Mod.Items.ItemMeta;
 import java.util.HashMap;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFluid;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,6 +19,17 @@ public class ItemMetaBucket extends ItemMeta {
 
     private HashMap<Integer, LiquidStack> liquids = new HashMap();
     private ItemStack empty;
+    public static Class forgeLiquid;
+
+    static {
+        try {
+            if (Class.forName("net.minecraftforge.fluids.BlockFluidClassic") != null) {
+                forgeLiquid = Class.forName("net.minecraftforge.fluids.BlockFluidClassic");
+                PfF.Proxy.print("Forge Liquid Block implementation detected.");
+            }
+        } catch (Throwable s) {
+        }
+    }
 
     public ItemMetaBucket(int par1, ItemStack empty) {
         super(par1);
@@ -95,10 +108,16 @@ public class ItemMetaBucket extends ItemMeta {
             return false;
         } else {
             // 7, 3
-            if (_liquidId == Block.waterStill.blockID) {
-                world.setBlock(x, y, z, Block.waterMoving.blockID, 0, 3);
+            if (Block.blocksList[_liquidId] instanceof BlockFluid) {
+                world.setBlock(x, y, z, _liquidId, 0, 3);
             } else {
-                world.setBlock(x, y, z, _liquidId, 7, 3);
+                if (forgeLiquid != null) {
+                    if (forgeLiquid.isInstance(Block.blocksList[_liquidId])) {
+                        world.setBlock(x, y, z, _liquidId, 0, 3);
+                    } else {
+                        world.setBlock(x, y, z, _liquidId, 7, 3);
+                    }
+                }
             }
             return true;
         }

@@ -1,0 +1,4 @@
+IMC access to liquid container banlist (for other modders).
+Impregnated Casing w/ creosote oil recipe.
+Fermenter no longer idles with > 1k mB of a booster.
+All known implementations of liquid blocks now work correctly with meta buckets.
