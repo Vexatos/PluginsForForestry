@@ -22,6 +22,7 @@ import net.minecraftforge.event.Event;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.liquids.LiquidContainerRegistry;
 import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterRecipe {
 
@@ -34,18 +35,20 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
 
     @Override
     public void registerRecipe() {
-        PfF.Proxy.registerRecipe(new ItemStack(this), new Object[]{"XXX", "LXL", "XLX", Character.valueOf('L'), new ItemStack(Block.wood, 1, 2)});
+        for (ItemStack i : OreDictionary.getOres("logWood")) {
+            PfF.Proxy.registerRecipe(new ItemStack(this), new Object[]{"XXX", "LXL", "XLX", Character.valueOf('L'), i});
+        }
         //----
         if (Loader.isModLoaded("Forestry")) {
             ItemStack bog = Forestry.block("soil");
-            if (bog == null){
+            if (bog == null) {
                 PfF.Proxy.warning("Failed to get bog earth from Forestry!");
                 return;
             }
             bog.setItemDamage(1);
             bog.stackSize = 6;
             ItemStack water = LiquidContainerRegistry.fillLiquidContainer(LiquidDictionary.getLiquid("Water", LiquidContainerRegistry.BUCKET_VOLUME), LRItems.ItemStackWoodenBucketEmpty);
-            if (water == null){
+            if (water == null) {
                 PfF.Proxy.warning("Failed to register bog earth recipe with Wooden Bucket!");
                 return;
             }
@@ -88,7 +91,7 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
             return par1ItemStack;
         } else {
             FillBucketEvent event = new FillBucketEvent(par3EntityPlayer, par1ItemStack, par2World, movingobjectposition);
-            if (!PluginLR.onWoodenBucket(event)){
+            if (!PluginLR.onWoodenBucket(event)) {
                 return par1ItemStack;
             }
             if (event.getResult() == Event.Result.ALLOW) {
@@ -109,14 +112,13 @@ public class ItemWoodenBucketEmpty extends ItemLRBucket implements IRegisterReci
 
     @Override
     public void getSubItems(int itemId, CreativeTabs creativeTab, List subTypes) {
-        if (WikiItems.general != null){
+        if (WikiItems.general != null) {
             subTypes.add(WikiItems.general.getBook());
         }
     }
-    
+
     @Override
     public CreativeTabs getCreativeTab() {
         return PfFAPI.tab;
     }
-    
 }
