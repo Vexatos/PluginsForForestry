@@ -103,6 +103,13 @@ public class PfFTuning {
         @Comment(comment = "Shapeless in the workbench.")
         public static String ForestryFertilizerFromMFRFertilizer = String.valueOf(true);
     }
+    
+    @Tunable(category = "mfr.items")
+    public static class MFR_Items{
+        
+        public static String MFR_poopFrames_ItemID = String.valueOf(normalIDRange++);
+        
+    }
 
     @Tunable(category = "railcraft.items", comment = "Set ID to 0 to disable features")
     public static class Railcraft {
