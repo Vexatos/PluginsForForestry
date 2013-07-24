@@ -1,0 +1,50 @@
+Princesses and Queens are discarded from the math
+
+1000 MJ used per run of the Genepool
+
+
+20000 MJ used not-identified drones per bucket of DNA
+10000 MJ used 	  identified drones per bucket of DNA
+
+
+10000 MJ produced per bucket of honey in engine
+
+
+1 Honey drop = 64 identified drones (Beealyzer)
+
+1 Bucket of Honey = 64x10 = 640 identified drones (Analyzer | automatic)
+
+Total output should be at least 10000 MJ for the Liquid Honey used
++ 10000 MJ used to liquify the bees
++ Some gain to justify doing the whole proccess, otherwise we could store the honey and void the drones
+
+
+If we burn 6.4 buckets of DNA we would use
+
+64 drones
+1 honey drops
+64000 MJ from the Genepool
+1000 MJ from the theoritical burn from honey
+
+Then burning 1 bucket of DNA we use
+
+10 drones
+1/(64/10) honey drop
+10000 MJ from the Genepool
+1000/(64/10) MJ from the theoritical burn from honey
+
+...
+
+10000 + 156.25 = 10156.25 total MJ used for 1 bucket of DNA
+
+Admiting a 10% gain, we end up with 11171.875 MJ that should be produced
+
+For having a 4MJ/t production in the Biogas engine, we would want it to burn for 2792.96875 ticks
+
+Rounding up, we have 2800 ticks for 4 MJ/t, for a total of 11200 MJ being produced (this only works with default energy consumption, Forestry in Easy Mode!)
+
+If we can setup different levels of config (grabbing this from Forestry diff), then:
+
+Easy: previous settings
+Normal: We would actually consume 15156.25 MJ, so we should get 16671.875 MJ, rounding up, we have 16800 MJ produced for 4200 ticks
+Hard: 40156.25 MJ consumption, we should get 44171.875, rounding up, we have 44200 MJ produced for 11050 ticks
