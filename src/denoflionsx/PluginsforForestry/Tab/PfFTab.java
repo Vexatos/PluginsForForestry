@@ -19,7 +19,7 @@ public class PfFTab extends CreativeTabs{
             return LiquidContainerRegistry.EMPTY_BUCKET;
         }
     }
-    
-    
-    
+           public String getTranslatedTabLabel(){
+		   return "Plugins for Forestry";
+	   }
 }
