@@ -1,0 +1,7 @@
+# Title: Liquid DNA Module
+# Author: Shirkit
+# Type: biogas
+# MJt: 4
+# BurnTime: 2800
+liquidDNA
+Liquid DNA
