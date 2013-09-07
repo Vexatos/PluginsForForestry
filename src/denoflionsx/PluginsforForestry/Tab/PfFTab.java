@@ -1,25 +1,24 @@
 package denoflionsx.PluginsforForestry.Tab;
 
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRItems;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
 
-public class PfFTab extends CreativeTabs{
+public class PfFTab extends CreativeTabs {
+
+    private ItemStack icon;
 
     public PfFTab() {
         super("Plugins for Forestry");
+        icon = new ItemStack(PluginLR.woodenBucket);
     }
 
     @Override
     public ItemStack getIconItemStack() {
-        if (LRItems.ItemStackWoodenBucketEmpty != null){
-            return LRItems.ItemStackWoodenBucketEmpty;
-        }else{
-            return LiquidContainerRegistry.EMPTY_BUCKET;
-        }
+        return icon;
     }
-           public String getTranslatedTabLabel(){
-		   return "Plugins for Forestry";
-	   }
+
+    public String getTranslatedTabLabel() {
+        return "Plugins for Forestry";
+    }
 }

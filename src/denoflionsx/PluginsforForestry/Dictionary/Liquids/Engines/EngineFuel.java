@@ -3,9 +3,8 @@ package denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.denLib.Lib.denLib;
 import net.minecraftforge.common.Property;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class EngineFuel {
 
@@ -23,8 +22,8 @@ public class EngineFuel {
         return liquidTag;
     }
 
-    public LiquidStack getLiquidStack() {
-        return LiquidDictionary.getLiquid(this.liquidTag, LiquidContainerRegistry.BUCKET_VOLUME);
+    public Fluid getFluid() {
+        return FluidRegistry.getFluid(this.liquidTag);
     }
 
     public int getMJt() {

@@ -1,11 +1,10 @@
 package denoflionsx.PluginsforForestry.Dictionary;
 
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Liquids.LRLiquids;
 import denoflionsx.denLib.Lib.denLib;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleParser extends ModuleParserTemplate {
@@ -56,8 +55,8 @@ public class ModuleParser extends ModuleParserTemplate {
             return liquidTag;
         }
 
-        public LiquidStack getLiquidStack(int amount) {
-            return LiquidDictionary.getLiquid(this.liquidTag, amount);
+        public FluidStack getFluidStack(int amount) {
+            return FluidRegistry.getFluidStack(this.liquidTag, amount);
         }
     }
 }

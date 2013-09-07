@@ -1,9 +1,11 @@
 forge/
-*.mf
 nbproject/
-*.class
 build/
 bin/
+*.class
 /forge/fml/eclipse/.metadata/
 download/
 *.number
+build.zip
+download.zip
+originals.zip

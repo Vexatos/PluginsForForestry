@@ -10,7 +10,7 @@ import denoflionsx.PluginsforForestry.EventHandler.FermenterRecipes;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class PluginLiquidRecipes implements IPfFPlugin {
 
@@ -32,7 +32,7 @@ public class PluginLiquidRecipes implements IPfFPlugin {
         for (ArrayList<ModuleParser.SqueezeObject> s : PfFDictionaryParser.instance.getLists().values()) {
             for (ModuleParser.SqueezeObject s2 : s) {
                 for (ItemStack i : s2.getItemStackFromDictionary()) {
-                    LiquidStack l = s2.getLiquidStack(s2.getAmount());
+                    FluidStack l = s2.getFluidStack(s2.getAmount());
                     if (l != null) {
                         Forestry.squeezer(5, new ItemStack[]{i}, l);
                     }
@@ -41,7 +41,7 @@ public class PluginLiquidRecipes implements IPfFPlugin {
         }
         for (ArrayList<ReflectionModuleParser.ClassAndField> s : PfFReflectionParser.instance.map.values()) {
             for (ReflectionModuleParser.ClassAndField s2 : s) {
-                LiquidStack l = s2.getSqueezeobject().getLiquidStack(s2.getSqueezeobject().getAmount());
+                FluidStack l = s2.getSqueezeobject().getFluidStack(s2.getSqueezeobject().getAmount());
                 for (ItemStack i : PfFReflectionParser.instance.getEntriesAsItemStacksForType(s2.getSqueezeobject().getLiquidTag())) {
                     if (l != null) {
                         Forestry.squeezer(5, new ItemStack[]{i}, l);

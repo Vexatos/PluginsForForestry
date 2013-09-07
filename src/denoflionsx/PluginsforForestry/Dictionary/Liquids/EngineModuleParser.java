@@ -4,7 +4,7 @@ import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines.EngineFuel;
 import denoflionsx.PluginsforForestry.Dictionary.ModuleParserTemplate;
 import java.util.ArrayList;
-import net.minecraftforge.liquids.LiquidDictionary;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class EngineModuleParser extends ModuleParserTemplate {
 
@@ -24,7 +24,7 @@ public class EngineModuleParser extends ModuleParserTemplate {
         ArrayList<EngineFuel> fuels = new ArrayList();
         for (String s : lines) {
             if (!s.contains("#")) {
-                if (LiquidDictionary.getLiquid(s, 1) != null) {
+                if (FluidRegistry.getFluidStack(s, 1) != null) {
                     fuels.add(new EngineFuel(s, this.getMJt(), this.getBurnTime()));
                 }else{
                     PfF.Proxy.warning("Skipped EngineFuel mapping " + s + ". Reason: Liquid does not exist.");

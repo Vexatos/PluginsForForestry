@@ -17,7 +17,7 @@ public class PfFLib {
     public static class PffStringUtils {
 
         public static final String error = "BROKEN LIQUID NAME";
-        
+
         public static String cleanLiquidNameFromEvent(LiquidDictionary.LiquidRegisterEvent event) {
             return cleanName(event.Name);
         }
@@ -29,11 +29,11 @@ public class PfFLib {
             }
             return error;
         }
-        
-        public static String getItemName(ItemStack stack){
-            try{
+
+        public static String getItemName(ItemStack stack) {
+            try {
                 return stack.getDisplayName();
-            }catch(Exception ex){
+            } catch (Exception ex) {
                 return "";
             }
         }
@@ -71,27 +71,41 @@ public class PfFLib {
             return f;
         }
     }
-    
-    public static class LiquidUtils{
-        
-        public static ItemStack getEmptyContainer(ItemStack s){
-            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()){
-                if (a.filled.isItemEqual(s)){
+
+    public static class LiquidUtils {
+
+        public static ItemStack getEmptyContainer(ItemStack s) {
+            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()) {
+                if (a.filled.isItemEqual(s)) {
                     return a.container;
                 }
             }
             return null;
         }
-        
-        public static ArrayList<ItemStack> getAllContainersForLiquid(LiquidStack s){
+
+        public static ArrayList<ItemStack> getAllContainersForLiquid(LiquidStack s) {
             ArrayList<ItemStack> containers = new ArrayList();
-            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()){
-                if (a.stillLiquid.isLiquidEqual(s)){
+            for (LiquidContainerData a : LiquidContainerRegistry.getRegisteredLiquidContainerData()) {
+                if (a.stillLiquid.isLiquidEqual(s)) {
                     containers.add(a.filled);
                 }
             }
             return containers;
         }
-        
+    }
+
+    public static class FluidUtils {
+
+        public static String fixName(String n) {
+            // This is for random Forestry and Mystcraft stuff that has dots in the name for whatever reason.
+            if (n.contains(".")) {
+                n = n.replace(".", " ");
+            }
+            // Wtf Sengir, bioethanol?
+            if (n.equals("bioethanol")) {
+                n = "biofuel";
+            }
+            return Character.toUpperCase(n.charAt(0)) + n.substring(1);
+        }
     }
 }

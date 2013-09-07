@@ -7,7 +7,7 @@ public class Buildcraft {
 
     public static void engine(EngineFuel fuel) {
         try {
-            IronEngineFuel.fuels.add(new IronEngineFuel(fuel.getLiquidStack().itemID, (float) fuel.getMJt(), fuel.getBurnTime()));
+            IronEngineFuel.addFuel(fuel.getFluid(), fuel.getMJt(), fuel.getBurnTime());
         } catch (NoClassDefFoundError ex) {
         }
     }

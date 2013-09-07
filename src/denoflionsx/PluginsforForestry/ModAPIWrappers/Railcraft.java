@@ -4,11 +4,11 @@ import denoflionsx.PluginsforForestry.Core.PfF;
 import mods.railcraft.api.crafting.ICokeOvenRecipe;
 import mods.railcraft.api.crafting.RailcraftCraftingManager;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class Railcraft {
 
-    public static void registerCokeOvenRecipe(ItemStack input, ItemStack output, LiquidStack l, int time) {
+    public static void registerCokeOvenRecipe(ItemStack input, ItemStack output, FluidStack l, int time) {
         try {
             if (RailcraftCraftingManager.cokeOven.getRecipe(input) != null) {
                 PfF.Proxy.print("Coke Oven Recipe input already registered! Expected Input: " + getItemInfo(input) + "Returned: " + getItemInfo(RailcraftCraftingManager.cokeOven.getRecipe(input).getInput()));

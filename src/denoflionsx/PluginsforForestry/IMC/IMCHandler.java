@@ -1,55 +1,25 @@
 package denoflionsx.PluginsforForestry.IMC;
 
-import cpw.mods.fml.common.event.FMLInterModComms.IMCEvent;
 import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
-import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Core.PfF;
-import java.lang.reflect.Field;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class IMCHandler {
     
-    public HashMap<String, ArrayList<String>> banLists = new HashMap();
-    
-    public IMCHandler() {
-        String[] s = PfFAPI.getContainerTagsForBanRequest();
-        for (String list : s) {
-            banLists.put(list, new ArrayList());
-        }
-    }
-    
-    public void onIMC(IMCEvent event) {
-        for (IMCMessage msg : event.getMessages()) {
-            if (msg.isStringMessage()) {
-                if (banLists.get(msg.key) == null) {
-                    PfF.Proxy.warning("Recieved an invalid IMC message from " + msg.getSender() + ".");
-                    return;
+    public void onIMCMessage(IMCMessage m) {
+        if (m.key.equals("blacklist")) {
+            String[] parse = m.getStringValue().split("@");
+            if (parse.length < 1) {
+                PfF.Proxy.severe("Recieved an invalid IMC message: " + m.getStringValue() + " from " + m.getSender());
+            } else {
+                if (PluginLR.blackLists.get(parse[0]) == null) {
+                    PluginLR.blackLists.put(parse[0], new ArrayList());
+                    PfF.Proxy.print("Created new blacklist: " + parse[0]);
                 }
-                banLists.get(msg.key).add(msg.getStringValue());
-                PfF.Proxy.print("Recieved blacklist request from " + msg.getSender() + ". Banning " + msg.getStringValue() + " from " + msg.key + ".");
+                PluginLR.blackLists.get(parse[0]).add(parse[1]);
+                PfF.Proxy.print("Processed blacklist request: " + m.getStringValue());
             }
         }
-    }
-
-    // This just wraps the old blacklists to the new IMC system.
-    public void setupBanList(Class c) {
-        try {
-            for (Field f : c.getDeclaredFields()) {
-                Object o = f.get(null);
-                String[] list = (String[]) o;
-                for (String s : list) {
-                    PfFAPI.sendLiquidBanRequest(f.getName(), s);
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    // This wraps the lists to arrays so they work with the current manager code.
-    public String[] getBanListAsArray(String key) {
-        ArrayList<String> list = banLists.get(key);
-        return list.toArray(new String[list.size()]);
     }
 }

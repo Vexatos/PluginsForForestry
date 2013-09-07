@@ -1,7 +1,5 @@
 package denoflionsx.PluginsforForestry.Proxy;
 
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Blocks.LRLiquidBlock;
-import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.LRLiquidItem;
 import java.io.File;
 import net.minecraft.item.ItemStack;
 
@@ -13,11 +11,9 @@ public interface IPfFProxy {
     
     public void severe(String msg);
     
+    public void registerRenderable(Object o);
+    
     public void registerClientSide();
-    
-    public void registerLiquidBlock(String perma, String name, LRLiquidBlock b);
-    
-    public void registerLiquidItem(String perma, String name, LRLiquidItem i);
     
     public void registerRecipe(ItemStack i, Object[] o);
     

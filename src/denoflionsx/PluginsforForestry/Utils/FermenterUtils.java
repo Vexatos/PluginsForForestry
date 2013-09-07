@@ -2,17 +2,27 @@ package denoflionsx.PluginsforForestry.Utils;
 
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
+import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.liquids.LiquidContainerRegistry;
-import net.minecraftforge.liquids.LiquidDictionary;
-import net.minecraftforge.liquids.LiquidStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
-public class FermenterUtils {
+public class FermenterUtils implements IDictionaryListener {
 
-    public static void registerFermenterBooster(LiquidStack liquid, float bonus) {
+    public static FluidStack biomass;
+
+    @Override
+    public void onEvent(String tag, short channel, Object o) {
+        if (tag.equals("biomass")) {
+            biomass = new FluidStack((Fluid) o, FluidContainerRegistry.BUCKET_VOLUME);
+        }
+    }
+
+    public static void registerFermenterBooster(FluidStack liquid, float bonus) {
         try {
             ArrayList<FermenterRecipe> r = new ArrayList();
             Class c = Class.forName("forestry.factory.gadgets.MachineFermenter");
@@ -24,13 +34,17 @@ public class FermenterUtils {
                             for (Object o : recipes) {
                                 ItemStack resource = (ItemStack) c3.getField("resource").get(c3.cast(o));
                                 int value = Integer.valueOf(String.valueOf(c3.getField("fermentationValue").get(c3.cast(o))));
-                                LiquidStack l = (LiquidStack) c3.getField("liquid").get(c3.cast(o));
-                                if (l == null){
+                                FluidStack l = (FluidStack) c3.getField("liquid").get(c3.cast(o));
+                                if (l == null) {
                                     continue;
                                 }
-                                LiquidStack output = (LiquidStack) c3.getField("output").get(c3.cast(o));
-                                if (output.isLiquidEqual(LiquidDictionary.getLiquid("biomass", LiquidContainerRegistry.BUCKET_VOLUME))) {
-                                    if (l.isLiquidEqual(new LiquidStack(Block.waterStill, LiquidContainerRegistry.BUCKET_VOLUME))) {
+                                FluidStack output = (FluidStack) c3.getField("output").get(c3.cast(o));
+                                if (output == null) {
+                                    PfF.Proxy.severe("Found null in Forestry Fermenter!");
+                                    continue;
+                                }
+                                if (output.isFluidEqual(biomass)) {
+                                    if (l.isFluidEqual(new FluidStack(FluidRegistry.WATER, 1000))) {
                                         r.add(new FermenterRecipe(resource, value));
                                     }
                                 }
@@ -39,7 +53,7 @@ public class FermenterUtils {
                     }
                 }
             }
-            PfF.Proxy.print("Adapting " + liquid.asItemStack().getItem().getLocalizedName(liquid.asItemStack()) + " to fermenter. " + r.size() + " recipes.");
+            PfF.Proxy.print("Adapting " + liquid.getFluid().getName() + " to fermenter. " + r.size() + " recipes.");
             for (FermenterRecipe z : r) {
                 Forestry.fermenter(z, 1.5f, liquid, "biomass");
             }

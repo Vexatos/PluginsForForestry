@@ -38,12 +38,12 @@ public class PluginMFR implements IPfFPlugin, IRegisterRecipe {
     }
 
     private void bees() {
-        try {
-            if (Loader.isModLoaded("Forestry")) {
-                poopFrame = (Item) Class.forName("denoflionsx.PluginsforForestry.Plugins.MFR.BeeAddon.Frames.ItemFrameBase").newInstance();
-            }
-        } catch (Throwable ex) {
-        }
+//        try {
+//            if (Loader.isModLoaded("Forestry")) {
+//                poopFrame = (Item) Class.forName("denoflionsx.PluginsforForestry.Plugins.MFR.BeeAddon.Frames.ItemFrameBase").newInstance();
+//            }
+//        } catch (Throwable ex) {
+//        }
     }
 
     private void apatite() {
