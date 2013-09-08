@@ -78,6 +78,13 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
 
     public void setIsBucket(boolean isBucket) {
         this.isBucket = isBucket;
+        if (this.isBucket) {
+            this.setContainerItem(this);
+            this.setMaxStackSize(1);
+        } else {
+            this.setContainerItem(null);
+            this.setMaxStackSize(64);
+        }
     }
 
     public void setUnloc(String unloc) {

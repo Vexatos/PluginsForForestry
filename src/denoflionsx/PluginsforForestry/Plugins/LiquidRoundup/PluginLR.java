@@ -5,6 +5,8 @@ import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
 import denoflionsx.PluginsforForestry.Client.Render.RenderThis;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Fluid.FluidIconHandler;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Fluid.PfFFluid;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.BarrelRecipeManager;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemBarrel;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemContainerBase;
@@ -12,6 +14,7 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemHammer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemRings;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.WoodenBucketRecipeManager;
+import denoflionsx.PluginsforForestry.Utils.FermenterUtils;
 import denoflionsx.denLib.Mod.Handlers.DictionaryHandler;
 import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class PluginLR implements IPfFPlugin {
@@ -37,6 +41,10 @@ public class PluginLR implements IPfFPlugin {
     public static WoodenBucketRecipeManager woodenBucketRecipes;
     public static BarrelRecipeManager barrelRecipes;
     public static HashMap<String, ItemStack> stacks = new HashMap();
+    public static Fluid veggie;
+    public static Fluid peat;
+    public static Fluid melon;
+    public static FluidIconHandler iconHandler;
 
     @Override
     public void onPreLoad() {
@@ -47,6 +55,7 @@ public class PluginLR implements IPfFPlugin {
 
     @Override
     public void onLoad() {
+        this.registerFluids();
         woodenBucket = new ItemWoodenBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 1000, "item.pff.woodenbucket.name", "woodenBucket", "bucket_wood_birch");
         woodenBucketRecipes = new WoodenBucketRecipeManager();
         hammer = new ItemHammer(PfFTuning.getInt(PfFTuning.Items.hammer_ItemID));
@@ -71,6 +80,35 @@ public class PluginLR implements IPfFPlugin {
         } catch (Throwable t) {
             t.printStackTrace();
         }
+        FermenterUtils.registerFermenterBooster(FluidRegistry.getFluidStack(peat.getName(), 1), 1.5f);
+        FermenterUtils.registerFermenterBooster(FluidRegistry.getFluidStack(veggie.getName(), 1), 1.5f);
         PfF.Proxy.print("If anyone knows how to make my containers render properly in the player's hand please see me on Github. https://github.com/denoflionsx");
+    }
+
+    public void registerFluids() {
+        PfF.Proxy.print("Setting up fluids...");
+        //------------------------------------------------------
+        // Init
+        //------------------------------------------------------
+        peat = new PfFFluid("peat");
+        //melon = new PfFFluid("melon");
+        veggie = new PfFFluid("vegetable");
+        //-------------------------------------------------------
+        // Localization
+        //-------------------------------------------------------
+        peat.setUnlocalizedName("liquid.pff.liquidpeat.name");
+        //melon.setUnlocalizedName("liquid.pff.melonjuice.name");
+        veggie.setUnlocalizedName("liquid.pff.veggiejuice.name");
+        //-------------------------------------------------------
+        // Icons
+        //-------------------------------------------------------
+        iconHandler = new FluidIconHandler();
+        //-------------------------------------------------------
+        // Register
+        //-------------------------------------------------------
+        FluidRegistry.registerFluid(peat);
+        //FluidRegistry.registerFluid(melon);
+        FluidRegistry.registerFluid(veggie);
+        //-------------------------------------------------------
     }
 }

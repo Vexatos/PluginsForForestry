@@ -4,7 +4,6 @@
 # Amount: 100
 cropCarrot
 cropPotato
-cropPumpkin
 cropAsparagus
 cropBean
 cropBeet

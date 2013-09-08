@@ -1,0 +1,6 @@
+# Title: Melon Module
+# Author: denoflionsx
+# Type: melon
+# Amount: 100
+cropMelon
+cropPumpkin

@@ -108,7 +108,7 @@
         <get src="http://files.minecraftforge.net/${forge.name}" dest="${download.dir}" usetimestamp="True"/>
         <get src="https://github.com/denoflionsx/denLib/archive/master.zip" dest="${download.dir}/denLib-3.X.zip" usetimestamp="True"/>
         <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/SpriteSheetConverter.jar" dest="${download.dir}/SpriteSheetConverter.jar"/>
-        
+        <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/AnimationConverter.jar" dest="${download.dir}/AnimationConverter.jar"/>
         <antcall target="-downloads"/>
         <delete dir="${forge.dir}" failonerror="false"/>
 
