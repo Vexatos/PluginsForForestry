@@ -88,6 +88,12 @@ public class PfFTuning {
     @Tunable(category = "railcraft")
     public static class Railcraft_ {
 
+        public static String plugin_railcraft_charcoal_smelttime = String.valueOf((3000 / 4));
+        public static String plugin_railcraft_charcoal_sugar_burn = String.valueOf(400);
+        public static String plugin_railcraft_charcoal_cactus_burn = String.valueOf(400);
+        public static String plugin_railcraft_coke_sugar_burn = String.valueOf(800);
+        public static String plugin_railcraft_coke_cactus_burn = String.valueOf(800);
+        public static String plugin_railcraft_charcoal_creosote_amount = String.valueOf(30);
         public static String plugin_railcraft_CreosoteOilForImpregnatedSticks = String.valueOf(true);
         public static String plugin_railcraft_CreosoteOilForImpregnatedSticks_Amount = String.valueOf(10);
         public static String plugin_railcraft_CreosoteOilForImpregnatedCasings = String.valueOf(true);

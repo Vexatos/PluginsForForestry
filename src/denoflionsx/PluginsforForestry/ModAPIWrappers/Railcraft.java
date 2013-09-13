@@ -27,7 +27,7 @@ public class Railcraft {
     private static String getItemInfo(ItemStack stack) {
         String itemName = stack.getItem().getItemDisplayName(stack);
         if (itemName.equals("")) {
-            itemName = stack.getItemName();
+            itemName = stack.getUnlocalizedName();
         }
         return itemName + "(" + stack.itemID + ", " + stack.getItemDamage() + "). ";
     }

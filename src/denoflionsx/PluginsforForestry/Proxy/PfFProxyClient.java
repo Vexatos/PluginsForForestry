@@ -51,7 +51,7 @@ public class PfFProxyClient extends PfFProxy {
 
     @Override
     public void sendMessageToPlayer(String msg) {
-        Minecraft.getMinecraft().thePlayer.sendChatToPlayer(ChatMessageComponent.func_111066_d("[PfF]: " + msg));
+        Minecraft.getMinecraft().thePlayer.sendChatToPlayer(ChatMessageComponent.createFromText("[PfF]: " + msg));
     }
 
     @Override

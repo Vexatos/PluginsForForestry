@@ -37,6 +37,7 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
 
     public ItemContainerBase(int itemID, int capacity, String unloc, String tag, String icon) {
         super(itemID, capacity);
+        this.setCreativeTab(PfFAPI.tab);
         this.setUnloc(unloc);
         this.setTag(tag);
         this.setIcon(icon);
