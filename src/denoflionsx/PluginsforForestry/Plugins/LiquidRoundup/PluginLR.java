@@ -56,12 +56,20 @@ public class PluginLR implements IPfFPlugin {
     @Override
     public void onLoad() {
         this.registerFluids();
-        woodenBucket = new ItemWoodenBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 1000, "item.pff.woodenbucket.name", "woodenBucket", "bucket_wood_birch");
-        woodenBucketRecipes = new WoodenBucketRecipeManager();
-        hammer = new ItemHammer(PfFTuning.getInt(PfFTuning.Items.hammer_ItemID));
-        rings = new ItemRings(PfFTuning.getInt(PfFTuning.Items.rings_ItemID));
-        barrel = new ItemBarrel(PfFTuning.getInt(PfFTuning.Items.barrel_ItemID), PfFTuning.getInt(PfFTuning.Barrel.barrel_capacity), "item.pff.barrel.name", "barrel", "barrel");
-        barrelRecipes = new BarrelRecipeManager();
+        if (PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID) > 0) {
+            woodenBucket = new ItemWoodenBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 1000, "item.pff.woodenbucket.name", "woodenBucket", "bucket_wood_birch");
+            woodenBucketRecipes = new WoodenBucketRecipeManager();
+        }
+        if (PfFTuning.getInt(PfFTuning.Items.hammer_ItemID) > 0) {
+            hammer = new ItemHammer(PfFTuning.getInt(PfFTuning.Items.hammer_ItemID));
+        }
+        if (PfFTuning.getInt(PfFTuning.Items.rings_ItemID) > 0) {
+            rings = new ItemRings(PfFTuning.getInt(PfFTuning.Items.rings_ItemID));
+        }
+        if (PfFTuning.getInt(PfFTuning.Items.barrel_ItemID) > 0) {
+            barrel = new ItemBarrel(PfFTuning.getInt(PfFTuning.Items.barrel_ItemID), PfFTuning.getInt(PfFTuning.Barrel.barrel_capacity), "item.pff.barrel.name", "barrel", "barrel");
+            barrelRecipes = new BarrelRecipeManager();
+        }
     }
 
     @Override
