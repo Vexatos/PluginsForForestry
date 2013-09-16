@@ -1,7 +1,7 @@
 <project name="PluginsforForestry" default="main">
     <property environment="env"/>
     <!-- imports -->
-    <import file="scripts/universal.xml"/>
+    <import file="UniversalBuildScript/scripts/universal.xml"/>
     <property name="split.dir" value="${resources.dir}/assets/pluginsforforestry/textures/items/railcraft"/>
     <property name="spritesheets.dir" value="old_spritesheets"/>
 	
