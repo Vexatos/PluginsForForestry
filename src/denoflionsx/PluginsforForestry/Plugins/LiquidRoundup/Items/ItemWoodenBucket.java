@@ -49,18 +49,9 @@ public class ItemWoodenBucket extends ItemContainerBase {
                 int id = par2World.getBlockId(event.target.blockX, event.target.blockY, event.target.blockZ);
                 event.result = this.filledMap.get(id);
                 if (event.result != null) {
-                    PfF.Proxy.print(event.result.toString());
                     event.result = event.result.copy();
                     event.setResult(Event.Result.ALLOW);
                 } else {
-                    PfF.Proxy.print("Result failed. Printing target and table");
-                    PfF.Proxy.print("Target: " + String.valueOf(id));
-                    String s = "";
-                    for (Integer i : this.filledMap.keySet()) {
-                        s += String.valueOf(i).concat(", ");
-                    }
-                    s = s.substring(0, s.length() - ", ".length());
-                    PfF.Proxy.print("Valid Targets: " + s);
                     event.setResult(Event.Result.DENY);
                 }
                 if (event.getResult() == Event.Result.ALLOW && event.result != null) {

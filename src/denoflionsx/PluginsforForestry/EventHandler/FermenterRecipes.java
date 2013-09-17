@@ -6,7 +6,6 @@ import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import java.util.ArrayList;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.liquids.LiquidStack;
 
 public class FermenterRecipes implements IdenWorldEventHandler {
     
