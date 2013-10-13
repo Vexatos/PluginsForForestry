@@ -2,3 +2,4 @@ ethanol_module.txt
 creosote_module.txt
 meat_module.txt
 liquiddna_module.txt
+fuel_module.txt

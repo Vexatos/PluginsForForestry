@@ -1,7 +1,7 @@
 # Title: Ethanol Module
 # Author: denoflionsx
 # Type: biogas
-# MJt: 5
+# MJt: 4
 # BurnTime: 40000
 ethanol
 biofuel

@@ -13,6 +13,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class PfFProxy implements IPfFProxy {
 
@@ -100,5 +101,10 @@ public class PfFProxy implements IPfFProxy {
     @Override
     public void registerShapelessRecipe(ItemStack i, ItemStack[] stacks) {
         GameRegistry.addShapelessRecipe(i, (Object[]) stacks);
+    }
+
+    @Override
+    public void registerOreRecipe(ItemStack i, Object[] o) {
+        GameRegistry.addRecipe(new ShapedOreRecipe(i, o));
     }
 }

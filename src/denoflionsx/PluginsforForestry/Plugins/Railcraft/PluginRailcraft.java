@@ -13,6 +13,7 @@ import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.WorldEventHandler;
 import denoflionsx.denLib.Mod.denLibMod;
+import denoflionsx.denLib.NewConfig.ConfigField;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -26,6 +27,8 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler, IDict
 
     public static Item itemCharCoke;
     public static FluidStack creosote;
+    @ConfigField(category = "railcraft.fermenter")
+    public static boolean creosote_fermentation = false;
 
     @Override
     public void onPreLoad() {
@@ -120,7 +123,9 @@ public class PluginRailcraft implements IPfFPlugin, IdenWorldEventHandler, IDict
     @Override
     public void onWorldLoaded() {
         FluidStack copy = denLib.LiquidStackUtils.getNewStackCapacity(creosote, 1);
-        FermenterUtils.registerFermenterBooster(copy, 1.5f);
+        if (PluginRailcraft.creosote_fermentation) {
+            FermenterUtils.registerFermenterBooster(copy, 1.5f);
+        }
         WorldEventHandler.unregisterHandler(this);
     }
 

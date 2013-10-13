@@ -6,6 +6,7 @@ import denoflionsx.PluginsforForestry.API.Interfaces.IPfFContainer;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
+import denoflionsx.PluginsforForestry.ModAPIWrappers.Forestry;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.PluginLR;
 import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
@@ -123,6 +124,7 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
             filled.stackTagCompound.setTag("Fluid", fluidTag);
             stacks.add(filled);
             FluidContainerRegistry.registerFluidContainer(new FluidContainerData(f, filled, empty, isBucket));
+            Forestry.squeezer(5, new ItemStack[]{filled}, f);
             if (f.getFluid().canBePlacedInWorld() && this.isBucket) {
                 filledMap.put(f.getFluid().getBlockID(), filled);
                 PfF.Proxy.print(f.getFluid().getName() + " is placable. Registering as such.");

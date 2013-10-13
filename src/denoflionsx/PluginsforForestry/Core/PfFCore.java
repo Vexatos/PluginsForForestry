@@ -34,6 +34,7 @@ public class PfFCore implements IDenUpdate {
         if (!mappingsDir.exists()) {
             mappingsDir.mkdirs();
         }
+        denLibMod.configManager.setup(sourceFile, new File(configDir.getAbsolutePath() + "/PluginsforForestry.cfg"));
     }
 
     public void setupRendering() {

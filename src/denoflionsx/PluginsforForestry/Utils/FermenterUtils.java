@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 public class FermenterUtils implements IDictionaryListener {
 
     public static FluidStack biomass;
+    public static final String[] forestryFermenterBoosters = new String[]{"juice", "honey", "water"};
 
     @Override
     public void onEvent(String tag, short channel, Object o) {
@@ -22,6 +23,10 @@ public class FermenterUtils implements IDictionaryListener {
         }
     }
 
+    public static void registerFermentable(ItemStack item, int amount){
+        Forestry.fermentable(item, amount);
+    }
+    
     public static void registerFermenterBooster(FluidStack liquid, float bonus) {
         try {
             ArrayList<FermenterRecipe> r = new ArrayList();

@@ -1,6 +1,7 @@
 package denoflionsx.PluginsforForestry.ModAPIWrappers;
 
 import denoflionsx.PluginsforForestry.Dictionary.Liquids.Engines.EngineFuel;
+import denoflionsx.PluginsforForestry.Utils.FermenterUtils;
 import denoflionsx.PluginsforForestry.Utils.FermenterUtils.FermenterRecipe;
 import forestry.api.core.BlockInterface;
 import forestry.api.core.ItemInterface;
@@ -75,6 +76,18 @@ public class Forestry {
         try {
             if (RecipeManagers.fermenterManager != null) {
                 RecipeManagers.fermenterManager.addRecipe(z.getFermentable(), z.getAmount(), 1.5f, FluidRegistry.getFluidStack(target, 1), liquid);
+            }
+        } catch (NoClassDefFoundError ex) {
+        }
+    }
+
+    public static void fermentable(ItemStack i, int amount) {
+        try {
+            for (String s : FermenterUtils.forestryFermenterBoosters) {
+                FluidStack in = FluidRegistry.getFluidStack(s, 1);
+                if (in != null){
+                    RecipeManagers.fermenterManager.addRecipe(i, amount, 1.5f, in, FermenterUtils.biomass);
+                }
             }
         } catch (NoClassDefFoundError ex) {
         }
