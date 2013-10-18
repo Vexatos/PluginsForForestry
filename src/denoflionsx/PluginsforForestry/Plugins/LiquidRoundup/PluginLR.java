@@ -2,7 +2,6 @@ package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup;
 
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.API.Plugin.IPfFPlugin;
-import denoflionsx.PluginsforForestry.Client.Render.RenderThis;
 import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Fluid.FluidIconHandler;
@@ -14,6 +13,7 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemHammer;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemRings;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.ItemWoodenBucket;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items.WoodenBucketRecipeManager;
+import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.client.IconConstants;
 import denoflionsx.PluginsforForestry.Utils.FermenterUtils;
 import denoflionsx.denLib.Mod.Handlers.DictionaryHandler;
 import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
@@ -32,9 +32,7 @@ public class PluginLR implements IPfFPlugin {
 
     public static HashMap<String, ArrayList<String>> blackLists = new HashMap();
     //-----
-    @RenderThis
     public static Item woodenBucket;
-    @RenderThis(renderFile = "barrel.txt")
     public static Item barrel;
     public static Item hammer;
     public static Item rings;
@@ -57,7 +55,7 @@ public class PluginLR implements IPfFPlugin {
     public void onLoad() {
         this.registerFluids();
         if (PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID) > 0) {
-            woodenBucket = new ItemWoodenBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 1000, "item.pff.woodenbucket.name", "woodenBucket", "bucket_wood_birch");
+            woodenBucket = new ItemWoodenBucket(PfFTuning.getInt(PfFTuning.Buckets.woodenbucket_ItemID), 1000, "item.pff.woodenbucket.name", "woodenBucket", IconConstants.woodenBucket);
             woodenBucketRecipes = new WoodenBucketRecipeManager();
         }
         if (PfFTuning.getInt(PfFTuning.Items.hammer_ItemID) > 0) {
@@ -90,7 +88,6 @@ public class PluginLR implements IPfFPlugin {
         }
         FermenterUtils.registerFermenterBooster(FluidRegistry.getFluidStack(peat.getName(), 1), 1.5f);
         FermenterUtils.registerFermenterBooster(FluidRegistry.getFluidStack(veggie.getName(), 1), 1.5f);
-        PfF.Proxy.print("If anyone knows how to make my containers render properly in the player's hand please see me on Github. https://github.com/denoflionsx");
     }
 
     public void registerFluids() {
@@ -98,9 +95,9 @@ public class PluginLR implements IPfFPlugin {
         //------------------------------------------------------
         // Init
         //------------------------------------------------------
-        peat = new PfFFluid("peat");
+        peat = new PfFFluid("peat", 0xFF4D2C02);
         //melon = new PfFFluid("melon");
-        veggie = new PfFFluid("vegetable");
+        veggie = new PfFFluid("vegetable", 0xFFFF2131);
         //-------------------------------------------------------
         // Localization
         //-------------------------------------------------------

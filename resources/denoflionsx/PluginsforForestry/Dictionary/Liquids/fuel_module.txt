@@ -1,0 +1,6 @@
+# Title: Fuel Module
+# Author: denoflionsx
+# Type: biogas
+# MJt: 6
+# BurnTime: 80000
+fuel

@@ -1,7 +1,8 @@
 Manifest-Version: 1.0
 Ant-Version: Apache Ant 1.8.4
 Created-By: 1.7.0_21-b11 (Oracle Corporation)
-Mod: PluginsforForestry
+FMLCorePlugin: denoflionsx.PluginsforForestry.Core.CoreMod.PfFCoreMod
+FMLCorePluginContainsFMLMod: true
 GitCommitBuiltFrom: a3d9302df60169dc3466c72ed877c3bb816b857e
 
 

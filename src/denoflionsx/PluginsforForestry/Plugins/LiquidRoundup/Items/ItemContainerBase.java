@@ -2,6 +2,8 @@ package denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.Items;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import denoflionsx.PluginsforForestry.API.Interfaces.IPfFContainer;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Core.PfF;
@@ -12,36 +14,43 @@ import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
+import denoflionsx.denLib.NewConfig.ConfigField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidContainerRegistry.FluidContainerData;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ItemFluidContainer;
 
-public class ItemContainerBase extends ItemFluidContainer implements IPfFContainer, IDictionaryListener, IdenWorldEventHandler {
+public class ItemContainerBase extends Item implements IPfFContainer, IDictionaryListener, IdenWorldEventHandler {
 
     private String unloc;
     private String tag;
-    private String icon;
     protected BiMap<Integer, String> fluids = HashBiMap.create();
-    protected ArrayList<ItemStack> stacks = new ArrayList();
     protected HashMap<Integer, ItemStack> filledMap = new HashMap();
+    protected ArrayList<ItemStack> stacks = new ArrayList();
     private ItemStack empty;
     private boolean isBucket = false;
+    private int capacity;
+    private Icon overlay;
+    private String[] iconStrings = new String[2];
+    @ConfigField(category = "rendering.colors", comment = "The 0x before the values aren't required. They are stripped off anyways.")
+    public static String[] colorArray = new String[]{"water:0xFF2C3EF4", "lava:0xFFDA6717", "milk:0xFFFFFF"};
+    public static HashMap<String, Integer> colorMap = new HashMap();
+    public HashMap<Integer, Integer> colorMapMeta = new HashMap();
 
     public ItemContainerBase(int itemID, int capacity, String unloc, String tag, String icon) {
-        super(itemID, capacity);
+        super(itemID);
         this.setCreativeTab(PfFAPI.tab);
         this.setUnloc(unloc);
         this.setTag(tag);
-        this.setIcon(icon);
+        this.capacity = capacity;
         if (PfF.core.getMappingFile(this.getContainerTag()).exists()) {
             fluids = denLib.FileUtils.readBiMapFromFile(PfF.core.getMappingFile(this.getContainerTag()));
         }
@@ -49,20 +58,22 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
         stacks.add(empty);
         this.setCreativeTab(PfFAPI.tab);
         PluginLR.stacks.put(tag, empty);
-    }
-
-    @Override
-    public int fill(ItemStack container, FluidStack resource, boolean doFill) {
-        if (PluginLR.blackLists.get(tag) != null) {
-            if (!PluginLR.blackLists.get(tag).contains(resource.getFluid().getName())) {
-                return super.fill(container, resource, doFill);
+        iconStrings[0] = icon;
+        iconStrings[1] = icon.concat("_overlay");
+        for (String s : colorArray) {
+            String[] parse = s.split(":");
+            if (parse.length == 2) {
+                colorMap.put(parse[0], parseInt(parse[1]));
             }
         }
-        return 0;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    private int parseInt(String s) {
+        if (s == null) {
+            return -1;
+        }
+        PfF.Proxy.print("Parsing " + s);
+        return (int) Long.parseLong(s.replace("0x", ""), 16);
     }
 
     public void setTag(String tag) {
@@ -94,11 +105,16 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister par1IconRegister) {
+        this.itemIcon = par1IconRegister.registerIcon("@NAME@:".toLowerCase().concat(iconStrings[0]));
+        this.overlay = par1IconRegister.registerIcon("@NAME@:".toLowerCase().concat(iconStrings[1]));
+    }
+
+    @Override
     public String getItemDisplayName(ItemStack par1ItemStack) {
-        if (par1ItemStack.stackTagCompound != null) {
-            NBTTagCompound fluid = par1ItemStack.stackTagCompound.getCompoundTag("Fluid");
-            FluidStack f = FluidStack.loadFluidStackFromNBT(fluid);
-            return PfFLib.FluidUtils.fixName(f.getFluid().getName()) + " " + PfFTranslator.instance.translateKey(unloc);
+        if (par1ItemStack.getItemDamage() > 0) {
+            return PfFLib.FluidUtils.fixName(fluids.get(par1ItemStack.getItemDamage())).concat(" ").concat(PfFTranslator.instance.translateKey(unloc));
         }
         return PfFTranslator.instance.translateKey(unloc);
     }
@@ -119,9 +135,6 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
             fluids.put(id, tag);
             PfF.Proxy.print("Generating " + this.tag + " for " + tag);
             ItemStack filled = new ItemStack(this, 1, id);
-            filled.stackTagCompound = new NBTTagCompound();
-            NBTTagCompound fluidTag = f.writeToNBT(new NBTTagCompound());
-            filled.stackTagCompound.setTag("Fluid", fluidTag);
             stacks.add(filled);
             FluidContainerRegistry.registerFluidContainer(new FluidContainerData(f, filled, empty, isBucket));
             Forestry.squeezer(5, new ItemStack[]{filled}, f);
@@ -142,9 +155,62 @@ public class ItemContainerBase extends ItemFluidContainer implements IPfFContain
     }
 
     @Override
-    public void registerIcons(IconRegister par1IconRegister) {
-        super.registerIcons(par1IconRegister);
-        this.itemIcon = par1IconRegister.registerIcon("@NAME@".toLowerCase() + ":".concat(icon));
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
+        if (par2 > 0) {
+            if (colorMapMeta.containsKey(par1ItemStack.getItemDamage())) {
+                return colorMapMeta.get(par1ItemStack.getItemDamage());
+            } else {
+                colorMapMeta.put(par1ItemStack.getItemDamage(), this.getColorForMeta(par1ItemStack));
+            }
+        }
+        return 0xFFFFFF;
+    }
+
+    private int getColorForMeta(ItemStack par1ItemStack) {
+        if (par1ItemStack.getItemDamage() == 0) {
+            return 0xFFFFFF;
+        }
+        FluidStack fluid = FluidContainerRegistry.getFluidForFilledItem(par1ItemStack);
+        if (fluid == null) {
+            return 0xFFFFFF;
+        }
+        if (fluid.getFluid().getColor() == 0xFFFFFF) {
+            if (!colorMap.containsKey(fluid.getFluid().getName())) {
+                int db = tryDB(fluid.getFluid().getName());
+                if (db != -1) {
+                    PfF.Proxy.print("Valid overlay color for " + fluid.getFluid().getName() + " found in ColorOverlayValues.db");
+                    return db;
+                }
+                String a = "";
+                if (fluid.getFluid().getIcon() != null) {
+                    a = fluid.getFluid().getIcon().getIconName();
+                }
+                PfF.Proxy.print("Fluid " + fluid.getFluid().getName() + " does not have a valid color assigned to it! Please report this to the author of the mod the fluid came from! (" + a.split(":")[0] + "). You can also manually assign a color in the config file.");
+            } else {
+                return colorMap.get(fluid.getFluid().getName());
+            }
+        }
+        return fluid.getFluid().getColor();
+    }
+
+    private int tryDB(String fluidName) {
+        return parseInt(denLib.SQLHelper.getStringInDB(new String[]{"./mods/denLib/ColorOverlayValues.db", "ColorValues"}, fluidName));
+    }
+
+    @Override
+    public boolean requiresMultipleRenderPasses() {
+        return true;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public Icon getIconFromDamageForRenderPass(int par1, int par2) {
+        if (par2 > 0 && par1 > 0) {
+            return this.overlay;
+        } else {
+            return this.itemIcon;
+        }
     }
 
     @Override
