@@ -1,0 +1,6 @@
+Halloween mode!
+Creosote is no longer a fermenter booster by default. See config.
+Changed rendering system for containers.
+Added BC plugin. Fixes Wooden Gear oredict recipe.
+Fixed barrel oredict recipe.
+Fixed stacking issue with barrels. New barrels won't stack with old ones. Sorry!
