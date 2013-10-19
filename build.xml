@@ -9,7 +9,7 @@
     <target name="-downloads">
         <get src="http://forestry.sengir.net/files/forestry/releases/2.3.0.0/forestry-api-2.3.0.0.zip" dest="${download.dir}" usetimestamp="True"/>
         <get src="https://github.com/denoflionsx/BuildCraft/archive/master.zip" dest="${download.dir}/BuildCraft-master.zip" usetimestamp="True"/>
-        <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/Railcraft_API_1.6.2-8.0.0.0.zip" dest="${download.dir}/Railcraft.zip" useTimeStamp="true"/>
+        <get src="https://dl.dropboxusercontent.com/u/23892866/Downloads/Railcraft_API_1.6.2-8.1.0.0.zip" dest="${download.dir}/Railcraft.zip" useTimeStamp="true"/>
         <unzip dest="${download.dir}/Forestry" src="${download.dir}/forestry-api-2.3.0.0.zip"/>
         <unzip dest="${download.dir}/BuildCraft" src="${download.dir}/BuildCraft-master.zip"/>
         <unzip dest="${download.dir}/Railcraft" src="${download.dir}/Railcraft.zip"/>
