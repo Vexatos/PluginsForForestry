@@ -29,7 +29,7 @@ public class PfF {
     @SidedProxy(clientSide = "@PROXYCLIENT@", serverSide = "@PROXYSERVER@")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    public static final boolean generate_color_db_from_internals = true;
+    public static final boolean generate_color_db_from_internals = false;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
