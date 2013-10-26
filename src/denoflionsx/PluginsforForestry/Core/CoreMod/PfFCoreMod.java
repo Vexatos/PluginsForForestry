@@ -1,7 +1,7 @@
 package denoflionsx.PluginsforForestry.Core.CoreMod;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-import denoflionsx.PluginsforForestry.Core.CoreMod.ASM.ColorDBRequest;
+import java.io.File;
 import java.util.Map;
 
 public class PfFCoreMod implements IFMLLoadingPlugin {
@@ -13,7 +13,7 @@ public class PfFCoreMod implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{ColorDBRequest.class.getName()};
+        return null;
     }
 
     @Override
@@ -28,5 +28,9 @@ public class PfFCoreMod implements IFMLLoadingPlugin {
 
     @Override
     public void injectData(Map<String, Object> data) {
+        File del = new File("./mods/denLib/ColorOverlayValues.db");
+        if (del.exists()){
+            del.deleteOnExit();
+        }
     }
 }

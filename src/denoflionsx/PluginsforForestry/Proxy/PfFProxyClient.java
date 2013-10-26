@@ -3,12 +3,24 @@ package denoflionsx.PluginsforForestry.Proxy;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import denoflionsx.PluginsforForestry.Core.PfF;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.resources.Resource;
+import net.minecraft.client.resources.ResourceManager;
 import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 public class PfFProxyClient extends PfFProxy {
+
+    private static ResourceManager resourcemanager;
+
+    static {
+        resourcemanager = Minecraft.getMinecraft().getResourceManager();
+    }
 
     @Override
     public void registerClientSide() {
@@ -16,6 +28,37 @@ public class PfFProxyClient extends PfFProxy {
 
     @Override
     public void registerRenderable(Object o) {
+    }
+
+    @Override
+    public String getIconCode(Icon icon) {
+        try {
+            String t = icon.getIconName();
+            String s1 = "minecraft";
+            String s2 = t;
+            int i = t.indexOf(':');
+
+            if (i >= 0) {
+                s2 = t.substring(i + 1, t.length());
+
+                if (i > 1) {
+                    s1 = t.substring(0, i);
+                }
+            }
+
+            s1 = s1.toLowerCase();
+            s2 = "textures/blocks/" + s2 + ".png";
+
+            Resource resource = resourcemanager.getResource(new ResourceLocation(s1, s2));
+
+            InputStream inputstream = resource.getInputStream();
+            BufferedImage bufferedimage = ImageIO.read(inputstream);
+            String hex = "0x" + Integer.toHexString(bufferedimage.getRGB(1, 1)).toUpperCase();
+            return hex;
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
+        return "0xFFFFFF";
     }
 
     @SideOnly(Side.CLIENT)

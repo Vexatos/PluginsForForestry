@@ -9,7 +9,6 @@ import cpw.mods.fml.common.event.FMLInterModComms.IMCMessage;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
-import denoflionsx.ColorDBGenerator.ColorDBGenerator;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Changelog.PfFChangelogHandler;
 import denoflionsx.PluginsforForestry.IMC.IMCHandler;
@@ -29,7 +28,6 @@ public class PfF {
     @SidedProxy(clientSide = "@PROXYCLIENT@", serverSide = "@PROXYSERVER@")
     public static PfFProxy Proxy;
     public static PfFCore core;
-    public static final boolean generate_color_db_from_internals = false;
 
     public PfF() {
         PfFAPI.plugins = new PfFPluginManager();
@@ -61,10 +59,6 @@ public class PfF {
         PfF.Proxy.setTabs();
         denLibMod.Proxy.registerChangelogHandler(new PfFChangelogHandler());
         PfF.Proxy.print("This is PfF version " + "@VERSION@");
-        if (generate_color_db_from_internals) {
-            ColorDBGenerator.main(new String[]{"biomass", "0xFF58C136"});
-            ColorDBGenerator.main(new String[]{"bioethanol", "0xFFDF6707"});
-        }
     }
 
     @EventHandler

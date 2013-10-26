@@ -13,6 +13,7 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class PfFProxy implements IPfFProxy {
@@ -22,6 +23,11 @@ public class PfFProxy implements IPfFProxy {
     @Override
     public void print(String msg) {
         FMLLog.info("[PfF]" + ": " + msg);
+    }
+
+    @Override
+    public String getIconCode(Icon icon) {
+        return String.valueOf(0);
     }
 
     @Override

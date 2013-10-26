@@ -2,6 +2,7 @@ package denoflionsx.PluginsforForestry.Proxy;
 
 import java.io.File;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 
 public interface IPfFProxy {
     
@@ -32,5 +33,7 @@ public interface IPfFProxy {
     public void setTabs();
     
     public void findInternalAddons(File source);
+    
+    public String getIconCode(Icon icon);
     
 }

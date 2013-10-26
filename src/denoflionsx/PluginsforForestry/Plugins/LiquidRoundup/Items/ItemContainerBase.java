@@ -14,7 +14,6 @@ import denoflionsx.PluginsforForestry.Utils.PfFLib;
 import denoflionsx.denLib.Lib.denLib;
 import denoflionsx.denLib.Mod.Handlers.IDictionaryListener;
 import denoflionsx.denLib.Mod.Handlers.WorldHandler.IdenWorldEventHandler;
-import denoflionsx.denLib.NewConfig.ConfigField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,10 +39,7 @@ public class ItemContainerBase extends Item implements IPfFContainer, IDictionar
     private int capacity;
     private Icon overlay;
     private String[] iconStrings = new String[2];
-    @ConfigField(category = "rendering.colors", comment = "The 0x before the values aren't required. They are stripped off anyways.")
-    public static String[] colorArray = new String[]{"water:0xFF2C3EF4", "lava:0xFFDA6717", "milk:0xFFFFFF"};
-    public static HashMap<String, Integer> colorMap = new HashMap();
-    public HashMap<Integer, Integer> colorMapMeta = new HashMap();
+    public static HashMap<Integer, Integer> colorMapMeta = new HashMap();
 
     public ItemContainerBase(int itemID, int capacity, String unloc, String tag, String icon) {
         super(itemID);
@@ -60,12 +56,6 @@ public class ItemContainerBase extends Item implements IPfFContainer, IDictionar
         PluginLR.stacks.put(tag, empty);
         iconStrings[0] = icon;
         iconStrings[1] = icon.concat("_overlay");
-        for (String s : colorArray) {
-            String[] parse = s.split(":");
-            if (parse.length == 2) {
-                colorMap.put(parse[0], parseInt(parse[1]));
-            }
-        }
     }
 
     private int parseInt(String s) {
@@ -176,26 +166,10 @@ public class ItemContainerBase extends Item implements IPfFContainer, IDictionar
             return 0xFFFFFF;
         }
         if (fluid.getFluid().getColor() == 0xFFFFFF) {
-            if (!colorMap.containsKey(fluid.getFluid().getName())) {
-                int db = tryDB(fluid.getFluid().getName());
-                if (db != -1) {
-                    PfF.Proxy.print("Valid overlay color for " + fluid.getFluid().getName() + " found in ColorOverlayValues.db");
-                    return db;
-                }
-                String a = "";
-                if (fluid.getFluid().getIcon() != null) {
-                    a = fluid.getFluid().getIcon().getIconName();
-                }
-                PfF.Proxy.print("Fluid " + fluid.getFluid().getName() + " does not have a valid color assigned to it! Please report this to the author of the mod the fluid came from! (" + a.split(":")[0] + "). You can also manually assign a color in the config file.");
-            } else {
-                return colorMap.get(fluid.getFluid().getName());
-            }
+            String hex = PfF.Proxy.getIconCode(fluid.getFluid().getIcon());
+            return this.parseInt(hex);
         }
         return fluid.getFluid().getColor();
-    }
-
-    private int tryDB(String fluidName) {
-        return parseInt(denLib.SQLHelper.getStringInDB(new String[]{"./mods/denLib/ColorOverlayValues.db", "ColorValues"}, fluidName));
     }
 
     @Override
