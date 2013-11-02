@@ -14,7 +14,8 @@ public class Holiday implements IPfFPlugin {
         new HolidayObject("Christmas", new DateObject(Calendar.DECEMBER).setWholeMonth(true), "holiday/christmas_bucket", "item.pff.woodenbucket.christmas.name"),
         new HolidayObject("Valentines", new DateObject(Calendar.FEBRUARY, 14, 14), "holiday/love_bucket", "item.pff.woodenbucket.valentine.name"),
         // Spring is a special snowflake due to random sprites.
-        new Spring()
+        new Spring(),
+        new HolidayObject("Independence Day (US)", new DateObject(Calendar.JULY, 4, 4), "holiday/murica_bucket", "item.pff.woodenbucket.murica.name")
     };
 
     @Override
