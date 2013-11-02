@@ -11,6 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import denoflionsx.PluginsforForestry.API.PfFAPI;
 import denoflionsx.PluginsforForestry.Changelog.PfFChangelogHandler;
+import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.IMC.IMCHandler;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Managers.PfFPluginManager;
@@ -59,6 +60,7 @@ public class PfF {
         PfF.Proxy.setTabs();
         denLibMod.Proxy.registerChangelogHandler(new PfFChangelogHandler());
         PfF.Proxy.print("This is PfF version " + "@VERSION@");
+        PfFTuning.config.save();
     }
 
     @EventHandler
