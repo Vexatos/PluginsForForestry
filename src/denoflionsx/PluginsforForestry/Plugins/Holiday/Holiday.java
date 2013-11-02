@@ -21,7 +21,7 @@ public class Holiday implements IPfFPlugin {
     @Override
     public void onPreLoad() {
         for (HolidayObject o : days) {
-            if (o.getRunningDate().isValidDate()) {
+            if (o.isHolidayValid()) {
                 o.setupHolidayContent();
             }
         }

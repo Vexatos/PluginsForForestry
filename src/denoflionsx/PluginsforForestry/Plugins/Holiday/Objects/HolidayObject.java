@@ -1,5 +1,6 @@
 package denoflionsx.PluginsforForestry.Plugins.Holiday.Objects;
 
+import denoflionsx.PluginsforForestry.Config.PfFTuning;
 import denoflionsx.PluginsforForestry.Core.PfF;
 import denoflionsx.PluginsforForestry.Lang.PfFTranslator;
 import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.client.IconConstants;
@@ -30,6 +31,10 @@ public class HolidayObject {
         IconConstants.woodenBucket = icon;
         PfFTranslator.instance.overrideKey("item.pff.woodenbucket.name", key);
         PfF.Proxy.print(name.concat(" mode activated!"));
+    }
+    
+    public boolean isHolidayValid(){
+        return this.getRunningDate().isValidDate() || PfFTuning.config.get("holiday", "force".concat(name), false).getBoolean(false);
     }
 
     public String getIcon() {
