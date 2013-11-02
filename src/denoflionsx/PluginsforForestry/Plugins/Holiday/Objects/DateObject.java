@@ -1,4 +1,4 @@
-package denoflionsx.PluginsforForestry.Plugins.Holiday;
+package denoflionsx.PluginsforForestry.Plugins.Holiday.Objects;
 
 import java.util.Calendar;
 
