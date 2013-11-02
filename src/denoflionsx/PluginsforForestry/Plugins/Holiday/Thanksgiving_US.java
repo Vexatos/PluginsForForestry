@@ -7,18 +7,18 @@ import denoflionsx.PluginsforForestry.Plugins.LiquidRoundup.client.IconConstants
 import denoflionsx.denLib.NewConfig.ConfigField;
 import java.util.Calendar;
 
-public class Halloween implements IPfFPlugin {
-
+public class Thanksgiving_US implements IPfFPlugin {
+    
     @ConfigField(category = "holiday")
-    public static boolean forceHalloween = false;
-    public static final DateObject date = new DateObject(Calendar.OCTOBER).setWholeMonth(true);
+    public static boolean forceThanksgiving_US = false;
+    public static final DateObject date = new DateObject(Calendar.NOVEMBER, 21, 28);
 
     @Override
     public void onPreLoad() {
-        if (date.isValidDate() || forceHalloween) {
-            IconConstants.woodenBucket = "holiday/wooden_bucket_spooky";
-            PfFTranslator.instance.overrideKey("item.pff.woodenbucket.name", "item.pff.woodenbucket.halloween.name");
-            PfF.Proxy.print("Halloween mode activated!");
+        if (date.isValidDate() || forceThanksgiving_US){
+            IconConstants.woodenBucket = "holiday/pilgrim_bucket";
+            PfFTranslator.instance.overrideKey("item.pff.woodenbucket.name", "item.pff.woodenbucket.thanksgiving.name");
+            PfF.Proxy.print("Thanksgiving (US) mode activated!");
         }
     }
 
