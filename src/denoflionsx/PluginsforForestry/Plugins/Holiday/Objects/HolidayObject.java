@@ -25,10 +25,26 @@ public class HolidayObject {
     public DateObject getRunningDate() {
         return runningDate;
     }
-    
-    public void setupHolidayContent(){
+
+    public void setupHolidayContent() {
         IconConstants.woodenBucket = icon;
         PfFTranslator.instance.overrideKey("item.pff.woodenbucket.name", key);
         PfF.Proxy.print(name.concat(" mode activated!"));
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
