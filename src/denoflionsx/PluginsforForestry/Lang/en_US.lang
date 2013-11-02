@@ -7,6 +7,7 @@ liquid.pff.melonjuice.name = Melon Juice
 item.pff.woodenbucket.name = Wooden Bucket
 item.pff.woodenbucket.halloween.name = Pumpkin Bucket
 item.pff.woodenbucket.thanksgiving.name = Pilgrim Bucket
+item.pff.woodenbucket.christmas.name = Christmas Bucket
 
 item.pff.hammer.name = Blacksmithing Hammer
 item.pff.rings.name = Iron Ring
