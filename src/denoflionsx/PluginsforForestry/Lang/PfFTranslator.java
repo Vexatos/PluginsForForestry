@@ -18,9 +18,16 @@ public class PfFTranslator {
     public String translateKey(String key) {
         return this.translateKey(key, PfF.Proxy.getLang());
     }
-    
-    public void overrideKey(String key, String overrideKey){
-        trans.put(key, this.translateKey(overrideKey));
+
+    public void overrideKey(String key, String overrideKey) {
+        try {
+            String s = this.translateKey(overrideKey);
+            if (trans.containsKey(key)) {
+                trans.put(key, s);
+            }
+        } catch (Throwable t) {
+            t.printStackTrace();
+        }
     }
 
     public String translateKey(String key, String lang) {
