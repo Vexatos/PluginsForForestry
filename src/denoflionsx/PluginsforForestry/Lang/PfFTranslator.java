@@ -22,7 +22,7 @@ public class PfFTranslator {
     public void overrideKey(String key, String overrideKey) {
         try {
             String s = this.translateKey(overrideKey);
-            if (trans.containsKey(key)) {
+            if (trans.containsKey(key) && s != null) {
                 trans.put(key, s);
             }
         } catch (Throwable t) {
