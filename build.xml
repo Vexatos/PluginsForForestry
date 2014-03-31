@@ -16,7 +16,7 @@
     </target>
     
     <target name="-precompile">
-        <copy todir="${mcpsrc.dir}/minecraft">
+        <copy todir="${api.dir}">
             <fileset dir="${download.dir}/BuildCraft/BuildCraft-master/common"/>
             <fileset dir="${download.dir}/Forestry"/>
             <fileset dir="${download.dir}/Railcraft"/>
@@ -24,46 +24,15 @@
     </target>
     
     <target name="-preresources">
-        <echo message="Installing lang files..."/>
-        <copy todir="${classes.dir}/denoflionsx/PluginsforForestry/Lang">
-            <fileset dir="${src.dir}/denoflionsx/PluginsforForestry/Lang" />
-        </copy>
-        <!--=================-->
-        <echo message="Splitting old spritesheet..."/>
-        <java jar="${download.dir}/SpriteSheetConverter.jar" fork="true">
-            <arg value="${spritesheets.dir}/plugin_railcraft.png"/>
-            <arg value="${split.dir}"/>
-        </java>
-        <delete file="${split.dir}/Sprite-0_0.png"/>
-        <delete file="${split.dir}/Sprite-16_0.png"/>
-        <delete file="${split.dir}/Sprite-32_0.png"/>
-        <delete file="${split.dir}/Sprite-80_0.png"/>
-        <delete file="${split.dir}/Sprite-96_0.png"/>
-        <delete file="${split.dir}/Sprite-144_0.png"/>
-        <move file="${split.dir}/Sprite-48_0.png" tofile="${split.dir}/sugar_charcoal.png"/>
-        <move file="${split.dir}/Sprite-64_0.png" tofile="${split.dir}/sugar_coke.png"/>
-        <move file="${split.dir}/Sprite-112_0.png" tofile="${split.dir}/cactus_charcoal.png"/>
-        <move file="${split.dir}/Sprite-128_0.png" tofile="${split.dir}/cactus_coke.png"/>
+
     </target>
     
     <target name="-prepackage">
-        <echo message="Converting old animations..."/>
-        <java jar="${download.dir}/AnimationConverter.jar" fork="true" output="${classes.dir}/assets/pluginsforforestry/textures/blocks/fluid/peat.flowing.png.mcmeta">
-            <arg value="${resources.dir}/assets/pluginsforforestry/textures/blocks/fluid/peat.flowing.txt"/>
-        </java> 
-        <java jar="${download.dir}/AnimationConverter.jar" fork="true" output="${classes.dir}/assets/pluginsforforestry/textures/blocks/fluid/peat.still.png.mcmeta">
-            <arg value="${resources.dir}/assets/pluginsforforestry/textures/blocks/fluid/peat.still.txt"/>
-        </java>
-        <java jar="${download.dir}/AnimationConverter.jar" fork="true" output="${classes.dir}/assets/pluginsforforestry/textures/blocks/fluid/vegetable.flowing.png.mcmeta">
-            <arg value="${resources.dir}/assets/pluginsforforestry/textures/blocks/fluid/vegetable.flowing.txt"/>
-        </java> 
-        <java jar="${download.dir}/AnimationConverter.jar" fork="true" output="${classes.dir}/assets/pluginsforforestry/textures/blocks/fluid/vegetable.still.png.mcmeta">
-            <arg value="${resources.dir}/assets/pluginsforforestry/textures/blocks/fluid/vegetable.still.txt"/>
-        </java> 
+
     </target>
     
     <target name="-postbuild">
-        <delete dir="${split.dir}"/>
+       
     </target>
               
 </project>
