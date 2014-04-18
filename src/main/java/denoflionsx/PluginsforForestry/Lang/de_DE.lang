@@ -1,13 +1,16 @@
 item.pff.barrel.name = Fass
-item.pff.capsule.name = Kapsel
 
 liquid.pff.veggiejuice.name = Gem\u00fcsesaft
 liquid.pff.liquidpeat.name = Fl\u00fcssigtorf
 liquid.pff.melonjuice.name = Melonensaft
 
 item.pff.woodenbucket.name = Holzeimer
-item.pff.bucket = Eimer
-item.pff.can = Kanne
+item.pff.woodenbucket.halloween.name = K\u00fcrbiseimer
+item.pff.woodenbucket.thanksgiving.name = Pilgereimer
+item.pff.woodenbucket.christmas.name = Weihnachtseimer
+item.pff.woodenbucket.valentine.name = Liebeseimer
+item.pff.woodenbucket.spring.name = Fr\u00fchlingseimer
+item.pff.woodenbucket.murica.name = Freiheitseimer
 
 item.pff.hammer.name = Schmiedehammer
 item.pff.rings.name = Eisenring
@@ -16,5 +19,3 @@ item.pff.sugarcharcoal.name = Zuckerkohle
 item.pff.sugarcoke.name = Zuckerkoks
 item.pff.cactuscharcoal.name = Kaktuskohle
 item.pff.cactuscoke.name = Kaktuskoks
-
-item.pff.mfr.poopframe.name = Poop Frame
